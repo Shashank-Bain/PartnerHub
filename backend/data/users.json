@@ -6,7 +6,7 @@
       "email": "admin@pulseph.com",
       "firstName": "Admin",
       "lastName": "User",
-      "mustChangePassword": true,
+      "mustChangePassword": false,
       "isAdmin": true,
       "sectors": [
         "Consumer Products",
@@ -22,7 +22,7 @@
       "email": "martha.moreau@bain.com",
       "firstName": "Martha",
       "lastName": "Moreau",
-      "mustChangePassword": true,
+      "mustChangePassword": false,
       "isAdmin": false,
       "sectors": [
         "Construction Materials",
@@ -38,7 +38,7 @@
       "email": "shashank.yadav@bain.com",
       "firstName": "Shashank",
       "lastName": "Yadav",
-      "mustChangePassword": true,
+      "mustChangePassword": false,
       "isAdmin": true,
       "sectors": [
         "Construction Materials",

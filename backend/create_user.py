@@ -9,7 +9,7 @@ def parse_sector_list(sector_csv):
     return sorted({item.strip() for item in sector_csv.split(",") if item.strip()})
 
 
-def create_user(email, password, first_name, last_name, sectors, is_admin=False, must_change_password=True):
+def create_user(email, password, first_name, last_name, sectors, is_admin=False):
     normalized_email = email.lower().strip()
     if get_user_by_email(normalized_email):
         print(f"User with email {email} already exists.")
@@ -27,7 +27,6 @@ def create_user(email, password, first_name, last_name, sectors, is_admin=False,
         last_name=last_name.strip(),
         sector_names=valid_sectors,
         is_admin=is_admin,
-        must_change_password=must_change_password,
     )
 
     if not created_user:
@@ -44,11 +43,6 @@ if __name__ == "__main__":
     parser.add_argument("--first-name", required=True)
     parser.add_argument("--last-name", required=True)
     parser.add_argument(
-        "--skip-force-password-change",
-        action="store_true",
-        help="Do not force password change on first login",
-    )
-    parser.add_argument(
         "--sectors",
         default="",
         help="Comma separated sectors, e.g. 'Consumer Products,Mining'",
@@ -64,5 +58,4 @@ if __name__ == "__main__":
         last_name=args.last_name,
         sectors=parse_sector_list(args.sectors),
         is_admin=args.is_admin,
-        must_change_password=not args.skip_force_password_change,
     )

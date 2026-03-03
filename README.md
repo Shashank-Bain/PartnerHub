@@ -2,7 +2,6 @@
 
 Simple login application with:
 - Email/password authentication
-- First-login forced password change
 - Default seeded admin user (`admin@pulseph.com` / `admin123`)
 - Per-user sector assignment (single or multiple sectors)
 - Sector-based company dropdown (companies change when sector changes)
@@ -67,7 +66,7 @@ Frontend runs on `http://127.0.0.1:5173` and proxies `/api` to Flask.
 - Email: `admin@pulseph.com`
 - Password: `admin123`
 
-On first login, password change is mandatory.
+Users can change passwords from Settings.
 
 ## Manually Add Users
 
@@ -75,14 +74,6 @@ Use this script from `backend/` while backend dependencies are installed:
 
 ```powershell
 python create_user.py --email user@pulseph.com --password temp123 --first-name Jane --last-name Doe --sectors "Consumer Products,Mining,Construction Materials"
-```
-
-By default, new users must change password on first login.
-
-If you want to skip forced change:
-
-```powershell
-python create_user.py --email user2@pulseph.com --password temp123 --first-name John --last-name Doe --skip-force-password-change
 ```
 
 To create an admin user:

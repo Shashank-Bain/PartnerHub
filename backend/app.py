@@ -62,7 +62,7 @@ class UserRecord:
         self.password_hash = str(payload.get("passwordHash") or "")
         self.first_name = str(payload.get("firstName") or "").strip()
         self.last_name = str(payload.get("lastName") or "").strip()
-        self.must_change_password = bool(payload.get("mustChangePassword", True))
+        self.must_change_password = False
         self.is_admin = bool(payload.get("isAdmin", False))
         self.created_at = str(payload.get("createdAt") or datetime.now(timezone.utc).isoformat())
         self.sectors = sorted({
@@ -114,7 +114,7 @@ def _default_admin_record(user_id=1):
         "passwordHash": generate_password_hash("admin123"),
         "firstName": "Admin",
         "lastName": "User",
-        "mustChangePassword": True,
+        "mustChangePassword": False,
         "isAdmin": True,
         "sectors": list(SECTOR_COMPANY_MAP.keys()),
         "createdAt": datetime.now(timezone.utc).isoformat(),
@@ -272,7 +272,7 @@ def delete_user(user_id):
     return True
 
 
-def create_user_record(email, password, first_name, last_name, sector_names, is_admin=False, must_change_password=True):
+def create_user_record(email, password, first_name, last_name, sector_names, is_admin=False):
     store = read_user_store()
     users = store.get("users", [])
     normalized_email = email.strip().lower()
@@ -288,7 +288,7 @@ def create_user_record(email, password, first_name, last_name, sector_names, is_
             "passwordHash": generate_password_hash(password),
             "firstName": first_name.strip(),
             "lastName": last_name.strip(),
-            "mustChangePassword": bool(must_change_password),
+            "mustChangePassword": False,
             "isAdmin": bool(is_admin),
             "sectors": [sector for sector in sector_names if sector in SECTOR_COMPANY_MAP],
             "createdAt": datetime.now(timezone.utc).isoformat(),
@@ -1624,7 +1624,6 @@ def change_password():
         return jsonify({"message": "Current password is incorrect."}), 400
 
     user.password_hash = generate_password_hash(new_password)
-    user.must_change_password = False
     save_user(user)
 
     return jsonify({"message": "Password changed successfully.", "user": user.to_dict()})
@@ -1942,8 +1941,9 @@ def admin_users():
         last_name=last_name,
         sector_names=sectors,
         is_admin=is_admin,
-        must_change_password=True,
     )
+    if not new_user:
+        return jsonify({"message": "User with this email already exists."}), 400
 
     response = {
         "message": "User created successfully.",
@@ -1998,7 +1998,6 @@ def admin_user_by_id(user_id):
         if len(password) < 6:
             return jsonify({"message": "Password must be at least 6 characters."}), 400
         target_user.password_hash = generate_password_hash(password)
-        target_user.must_change_password = True
 
     if sector_names is not None:
         sectors, missing_sectors = resolve_sector_names(sector_names)

@@ -414,10 +414,6 @@ function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [firstLoginCurrentPassword, setFirstLoginCurrentPassword] = useState('')
-  const [firstLoginNewPassword, setFirstLoginNewPassword] = useState('')
-  const [firstLoginConfirmPassword, setFirstLoginConfirmPassword] = useState('')
-
   const [sectors, setSectors] = useState([])
   const [sectorCompanyMap, setSectorCompanyMap] = useState({})
   const [selectedSector, setSelectedSector] = useState('')
@@ -821,49 +817,6 @@ function App() {
     setMessage('Logged out successfully.')
   }
 
-  const handleFirstLoginPasswordChange = async (event) => {
-    event.preventDefault()
-    clearAlerts()
-
-    if (firstLoginNewPassword !== firstLoginConfirmPassword) {
-      setError('New password and confirm password must match.')
-      return
-    }
-
-    try {
-      const res = await fetch('/api/auth/change-password', {
-        method: 'POST',
-        credentials: 'include',
-        headers: apiHeaders,
-        body: JSON.stringify({
-          currentPassword: firstLoginCurrentPassword,
-          newPassword: firstLoginNewPassword,
-        }),
-      })
-      const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.message || 'Unable to change password.')
-        return
-      }
-
-      setUser(data.user)
-      setFirstName(data.user.firstName)
-      setLastName(data.user.lastName)
-      setFirstLoginCurrentPassword('')
-      setFirstLoginNewPassword('')
-      setFirstLoginConfirmPassword('')
-      setMessage('Password changed successfully. Welcome!')
-
-      await loadOptions()
-      if (data.user.isAdmin) {
-        await loadAdminData()
-      }
-    } catch {
-      setError('Unable to change password right now.')
-    }
-  }
-
   const handleSaveProfile = async (event) => {
     event.preventDefault()
     clearAlerts()
@@ -1073,47 +1026,6 @@ function App() {
           />
 
           <button type="submit" className="btn-primary">Login</button>
-        </form>
-      </div>
-    )
-  }
-
-  if (user.mustChangePassword) {
-    return (
-      <div className="screen-center app-bg">
-        <form className="card auth-card" onSubmit={handleFirstLoginPasswordChange}>
-          <h1>Change Password</h1>
-          <div className="gradient-line" />
-          <p className="subtitle">This is your first login. Please set a new password to continue.</p>
-
-          {error && <div className="alert error">{error}</div>}
-          {message && <div className="alert success">{message}</div>}
-
-          <label>Current Password</label>
-          <input
-            type="password"
-            value={firstLoginCurrentPassword}
-            onChange={(event) => setFirstLoginCurrentPassword(event.target.value)}
-            required
-          />
-
-          <label>New Password</label>
-          <input
-            type="password"
-            value={firstLoginNewPassword}
-            onChange={(event) => setFirstLoginNewPassword(event.target.value)}
-            required
-          />
-
-          <label>Confirm New Password</label>
-          <input
-            type="password"
-            value={firstLoginConfirmPassword}
-            onChange={(event) => setFirstLoginConfirmPassword(event.target.value)}
-            required
-          />
-
-          <button type="submit" className="btn-primary">Save New Password</button>
         </form>
       </div>
     )
