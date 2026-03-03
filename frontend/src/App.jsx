@@ -1289,7 +1289,7 @@ function App() {
               </article>
 
               <article
-                className="card home-insight-card interactive-card"
+                className="card home-insight-card interactive-card investment-intelligence-card"
                 role="button"
                 tabIndex={0}
                 onClick={() => setActiveModal('investment')}

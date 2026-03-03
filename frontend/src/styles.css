@@ -985,6 +985,16 @@ button {
   overflow-x: auto;
 }
 
+.investment-intelligence-card {
+  min-height: auto;
+}
+
+.investment-intelligence-card .investment-intel-layout {
+  min-height: 0;
+  height: auto;
+  grid-template-rows: auto auto;
+}
+
 .investment-intel-focus-table {
   width: 100%;
   border-collapse: collapse;
