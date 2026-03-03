@@ -160,5 +160,15 @@ Set these in Project Settings → Environment Variables:
 - `SECRET_KEY`
 - `OPENAI_API_KEY` (optional; if omitted, fallback text is used)
 - `OPENAI_MODEL` (optional, default `gpt-4o-mini`)
+- `APP_VERSION` (recommended; use the same value for frontend build + backend runtime, e.g. commit SHA)
 
 After setting env vars, trigger a fresh deploy.
+
+### Free alternative to paid skew protection
+
+To reduce client/server version mismatch issues (e.g., chunk 404s after deploy):
+- Frontend build embeds `APP_VERSION` (or `VERCEL_GIT_COMMIT_SHA` when available)
+- Backend exposes `/api/version`
+- Client compares versions at startup and performs a one-time hard reload on mismatch
+- Client also performs one-time hard reload if dynamic chunk load fails
+- Vercel is configured to serve `/` and `/index.html` with `Cache-Control: no-store`

@@ -14,6 +14,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
+APP_VERSION = os.getenv("APP_VERSION") or os.getenv("VERCEL_GIT_COMMIT_SHA") or "dev"
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = os.path.join(BASE_DIR, "app.db")
 
@@ -1746,6 +1748,11 @@ def investment_insights():
 
     insights = build_investment_insights(sector_name, matched_company, sector_companies)
     return jsonify(insights)
+
+
+@app.route("/api/version", methods=["GET"])
+def app_version():
+    return jsonify({"version": APP_VERSION})
 
 
 @app.route("/api/admin/metadata", methods=["GET"])
