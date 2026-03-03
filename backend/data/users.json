@@ -1,5 +1,5 @@
 {
-  "nextUserId": 2,
+  "nextUserId": 4,
   "users": [
     {
       "id": 1,
@@ -14,8 +14,40 @@
         "Construction Materials",
         "Private Equity"
       ],
-      "passwordHash": "scrypt:32768:8:1$kj95kcC6dyBF4o4x$a26b1d62ad81038a6021dbfa2d440b1ca4367d7430fd279d47a15f17c280b162e5962140716781131335851f5c8a6e71521d79068c7afd62cb24722048cdc06b",
-      "createdAt": "2026-03-03T11:03:24.334955+00:00"
+      "passwordHash": "scrypt:32768:8:1$Q9AejCCD8QyuZrIG$1bfeadda0bcf3579807ee40d47e8f4fdd44dfeff7a044286a7171c38509e877a09da056bbc5d662e04fc37c3719819c7fad006a8885212206841a3a538816260",
+      "createdAt": "2026-03-03T11:52:07.501509+00:00"
+    },
+    {
+      "id": 3,
+      "email": "martha.moreau@bain.com",
+      "firstName": "Martha",
+      "lastName": "Moreau",
+      "mustChangePassword": true,
+      "isAdmin": false,
+      "sectors": [
+        "Construction Materials",
+        "Consumer Products",
+        "Mining",
+        "Private Equity"
+      ],
+      "passwordHash": "scrypt:32768:8:1$lhwiBFUtZYbWomkH$188753383f8ab732047ad9b16367dd016fc43a39e9b39afa200d0711b86c0fee2d5a8aafaeade31f9d7d0cef1449be696c552659c243677e3cf66a549e796c9b",
+      "createdAt": "2026-03-03T11:53:42.519671+00:00"
+    },
+    {
+      "id": 2,
+      "email": "shashank.yadav@bain.com",
+      "firstName": "Shashank",
+      "lastName": "Yadav",
+      "mustChangePassword": true,
+      "isAdmin": true,
+      "sectors": [
+        "Construction Materials",
+        "Consumer Products",
+        "Mining",
+        "Private Equity"
+      ],
+      "passwordHash": "scrypt:32768:8:1$JCs613YxHw4c2O51$99a849192c3350424a1a67072c83e64b3b0033a48957522f76853c4391b2a34629699b4eeade8bbfa5274f70357401aaa65c9fe72630f2f04da32cd629aca0bc",
+      "createdAt": "2026-03-03T11:52:48.315811+00:00"
     }
   ]
 }

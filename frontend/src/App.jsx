@@ -994,7 +994,9 @@ function App() {
 
       await loadAdminData()
       await loadOptions()
-      setMessage(editingUserId ? 'User updated successfully.' : 'User created successfully.')
+      const successMessage = editingUserId ? 'User updated successfully.' : 'User created successfully.'
+      const warningSuffix = data.storageWarning ? ` ${data.storageWarning}` : ''
+      setMessage(`${successMessage}${warningSuffix}`)
       resetAdminForm()
     } catch {
       setError('Unable to save user right now.')
@@ -1023,7 +1025,8 @@ function App() {
 
       await loadAdminData()
       await loadOptions()
-      setMessage('User deleted successfully.')
+      const warningSuffix = data.storageWarning ? ` ${data.storageWarning}` : ''
+      setMessage(`User deleted successfully.${warningSuffix}`)
       if (editingUserId === targetUser.id) {
         resetAdminForm()
       }

@@ -181,6 +181,11 @@ def write_user_store(store):
     _atomic_write_json(USERS_DATA_PATH, store)
 
 
+def is_ephemeral_user_store():
+    normalized_path = USERS_DATA_PATH.replace("\\", "/").lower()
+    return normalized_path.startswith("/tmp/")
+
+
 def list_users():
     store = read_user_store()
     return [UserRecord(user) for user in store.get("users", [])]
@@ -1870,7 +1875,13 @@ def admin_metadata():
         return error
 
     all_sectors = list(SECTOR_COMPANY_MAP.keys())
-    return jsonify({"sectors": all_sectors})
+    return jsonify({
+        "sectors": all_sectors,
+        "userStore": {
+            "path": USERS_DATA_PATH,
+            "ephemeral": is_ephemeral_user_store(),
+        },
+    })
 
 
 @app.route("/api/admin/users", methods=["GET", "POST"])
@@ -1914,7 +1925,14 @@ def admin_users():
         must_change_password=True,
     )
 
-    return jsonify({"message": "User created successfully.", "user": new_user.to_admin_dict()})
+    response = {
+        "message": "User created successfully.",
+        "user": new_user.to_admin_dict(),
+    }
+    if is_ephemeral_user_store():
+        response["storageWarning"] = "User data is stored in ephemeral serverless storage and may not persist across instances/deployments."
+
+    return jsonify(response)
 
 
 @app.route("/api/admin/users/<int:user_id>", methods=["PUT", "DELETE"])
@@ -1933,7 +1951,10 @@ def admin_user_by_id(user_id):
         if target_user.id == admin_user.id:
             return jsonify({"message": "You cannot delete your own account."}), 400
         delete_user(target_user.id)
-        return jsonify({"message": "User deleted successfully."})
+        response = {"message": "User deleted successfully."}
+        if is_ephemeral_user_store():
+            response["storageWarning"] = "User data is stored in ephemeral serverless storage and may not persist across instances/deployments."
+        return jsonify(response)
 
     payload = request.get_json(silent=True) or {}
     first_name = (payload.get("firstName") or "").strip()
@@ -1967,7 +1988,11 @@ def admin_user_by_id(user_id):
 
     save_user(target_user)
 
-    return jsonify({"message": "User updated successfully.", "user": target_user.to_admin_dict()})
+    response = {"message": "User updated successfully.", "user": target_user.to_admin_dict()}
+    if is_ephemeral_user_store():
+        response["storageWarning"] = "User data is stored in ephemeral serverless storage and may not persist across instances/deployments."
+
+    return jsonify(response)
 
 
 ensure_user_store()
