@@ -1,0 +1,152 @@
+[
+    {
+        "Sector": "Consumer Products",
+    "Company": "Nestlé",
+    "Material Topics": [
+            "Human rights",
+  "Water stewardship",
+  "Customer safety and engagement",
+  "Biodiversity & ecological welfare",
+  "Diversity, equity & inclusion (DEI)",
+  "GHG emissions",
+  "Customer health and wellness",
+  "Third-party relationships"
+        ]
+    },
+    {
+        "Sector": "Consumer Products",
+    "Company": "Unilever",
+    "Material Topics": [
+            "Labor practices",
+  "Biodiversity & ecological welfare",
+  "Customer safety and engagement",
+  "GHG emissions",
+  "Human rights",
+  "Water stewardship",
+  "Customer health and wellness",
+  "Third-party relationships"
+        ]
+    },
+    {
+        "Sector": "Consumer Products",
+    "Company": "Danone",
+    "Material Topics": [
+            "Labor practices",
+  "Third-party relationships",
+  "GHG",
+  "Water Stewardship",
+  "Customer safety & engagement",
+  "Customer health & wellness"
+        ]
+    },
+    {
+        "Sector": "Consumer Products",
+    "Company": "Kraft Heinz",
+    "Material Topics": [
+            "Customer safety and engagement",
+  "Transparency & risk management",
+  "Labor practices",
+  "GHG emissions",
+  "Material use, waste & circularity",
+  "GHG",
+  "Water Stewardship",
+  "Customer safety & engagement",
+  "Customer health & wellness",
+  "Third-party relationships"
+        ]
+    },
+    {
+        "Sector": "Consumer Products",
+    "Company": "Pepsi",
+    "Material Topics": [
+            "GHG emissions",
+  "Water stewardship",
+  "Customer safety and engagement",
+  "Customer health and wellness",
+  "Third-party relationships"
+        ]
+    },
+    {
+        "Sector": "Mining",
+    "Company": "Anglo American",
+    "Material Topics": [
+            "Human rights",
+  "Labor practices",
+  "Community partnership",
+  "Indirect economic impacts",
+  "Hazardous substances",
+  "GHG emissions",
+  "Air quality",
+  "Water stewardship",
+  "Material use, waste & circularity",
+  "Transparency & risk management"
+        ]
+    },
+    {
+        "Sector": "Mining",
+    "Company": "BHP",
+    "Material Topics": [
+            "Biodiversity & ecological welfare",
+  "Business ethics",
+  "Community partnership",
+  "Customer health and wellness",
+  "GHG emissions",
+  "Air quality",
+  "Water stewardship",
+  "Material use, waste & circularity",
+  "Labor practices",
+  "Human rights",
+  "Indirect economic impacts",
+  "Transparency & risk management"
+        ]
+    },
+    {
+        "Sector": "Mining",
+    "Company": "Rio Tinto",
+    "Material Topics": [
+            "Community partnership",
+  "Labor practices",
+  "Transparency & risk management",
+  "Unmapped",
+  "Digital rights and responsibilities",
+  "GHG emissions",
+  "Air quality",
+  "Water stewardship",
+  "Material use, waste & circularity",
+  "Human rights",
+  "Indirect economic impacts"
+        ]
+    },
+    {
+        "Sector": "Mining",
+    "Company": "Teck",
+    "Material Topics": [
+            "Labor practices",
+  "Human rights",
+  "Community partnership",
+  "GHG emissions",
+  "Water stewardship",
+  "Air quality",
+  "Material use, waste & circularity",
+  "Indirect economic impacts",
+  "Transparency & risk management"
+        ]
+    },
+    {
+        "Sector": "Mining",
+    "Company": "Glencore",
+    "Material Topics": [
+            "Human rights",
+  "Labor practices",
+  "Biodiversity & ecological welfare",
+  "Business ethics",
+  "Diversity, equity & inclusion (DEI)",
+  "GHG emissions",
+  "Air quality",
+  "Water stewardship",
+  "Material use, waste & circularity",
+  "Indirect economic impacts",
+  "Transparency & risk management"
+        ]
+    }
+]

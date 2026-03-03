@@ -1,0 +1,411 @@
+[
+  {
+    "Sector": "Consumer Products",
+    "Company": "Nestlé",
+    "Strategic Actions": [
+      {
+        "Topic": "Prepare for EU policy shifts on virgin plastics",
+        "Details": [
+          "Stress-test packaging portfolio against PPWR exposure and EPR cost impact",
+          "Redesign high-volume SKUs to reduce virgin plastic and secure PCR supply"
+        ]
+      },
+      {
+        "Topic": "Reposition portfolio toward sustainable proteins",
+        "Details": [
+          "Accelerate plant-based and hybrid innovation in priority markets",
+          "Link protein shift to measurable Scope 3 reduction story"
+        ]
+      },
+      {
+        "Topic": "Build circular packaging roadmap",
+        "Details": [
+          "Prioritize top 10 SKUs for lightweighting and recyclability redesign",
+          "Develop scalable reuse/refill pilots with retail partners"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Unilever",
+    "Strategic Actions": [
+      {
+        "Topic": "Accelerate plastic reduction and refill economics",
+        "Details": [
+          "Scale refill formats in categories where unit economics work",
+          "Standardize packaging platforms to reduce material complexity"
+        ]
+      },
+      {
+        "Topic": "Decarbonize Scope 3 through supplier programs",
+        "Details": [
+          "Embed decarbonization levers into procurement contracts",
+          "Prioritize high-emission ingredient categories"
+        ]
+      },
+      {
+        "Topic": "Premiumize sustainable brands",
+        "Details": [
+          "Clarify sustainability-led brand positioning",
+          "Capture price premium through credible claims"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "PepsiCo",
+    "Strategic Actions": [
+      {
+        "Topic": "Scale regenerative agriculture",
+        "Details": [
+          "Expand regenerative acreage in water-stressed regions",
+          "Tie farmer incentives to measurable emission reductions"
+        ]
+      },
+      {
+        "Topic": "Advance circular packaging roadmap",
+        "Details": [
+          "Increase PCR content in beverage bottles",
+          "Develop returnable packaging in select markets"
+        ]
+      },
+      {
+        "Topic": "Renovate portfolio for health trends",
+        "Details": [
+          "Accelerate sugar reduction in core brands",
+          "Expand better-for-you product lines"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Kraft Heinz",
+    "Strategic Actions": [
+      {
+        "Topic": "Renovate portfolio toward healthier offerings",
+        "Details": [
+          "Reformulate high-volume SKUs to meet retailer standards",
+          "Align innovation with health-forward categories"
+        ]
+      },
+      {
+        "Topic": "Reduce food waste across value chain",
+        "Details": [
+          "Optimize demand planning to cut write-offs",
+          "Improve plant yield and by-product valorization"
+        ]
+      },
+      {
+        "Topic": "Prepare for EU packaging regulation",
+        "Details": [
+          "Assess recyclability gaps in European portfolio",
+          "Mitigate EPR fee exposure through material redesign"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Danone",
+    "Strategic Actions": [
+      {
+        "Topic": "Scale regenerative dairy sourcing",
+        "Details": [
+          "Reduce methane intensity in core milk sheds",
+          "Link regenerative practices to product premium story"
+        ]
+      },
+      {
+        "Topic": "Strengthen water stewardship",
+        "Details": [
+          "Prioritize high-risk basins for efficiency investments",
+          "Build community-based water replenishment programs"
+        ]
+      },
+      {
+        "Topic": "Accelerate circular packaging",
+        "Details": [
+          "Increase PCR content in bottles and yogurt cups",
+          "Test reusable packaging models in key markets"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Anglo American",
+    "Strategic Actions": [
+      {
+        "Topic": "Enhance tailings risk governance",
+        "Details": [
+          "Benchmark facilities against global best practice",
+          "Increase transparency and independent oversight"
+        ]
+      },
+      {
+        "Topic": "Accelerate operational decarbonization",
+        "Details": [
+          "Electrify haul fleets in priority mines",
+          "Secure renewable PPAs for key operations"
+        ]
+      },
+      {
+        "Topic": "Advance biodiversity strategy",
+        "Details": [
+          "Set measurable nature-positive targets",
+          "Integrate biodiversity into project approvals"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Mining",
+    "Company": "BHP",
+    "Strategic Actions": [
+      {
+        "Topic": "Accelerate decarbonization roadmap",
+        "Details": [
+          "Develop asset-level abatement curves",
+          "Shift power mix toward renewables"
+        ]
+      },
+      {
+        "Topic": "Strengthen Indigenous and community partnerships",
+        "Details": [
+          "Formalize long-term benefit-sharing agreements",
+          "Improve grievance and engagement mechanisms"
+        ]
+      },
+      {
+        "Topic": "Position as supplier of green transition metals",
+        "Details": [
+          "Prioritize capex toward future-facing commodities",
+          "Develop low-carbon product differentiation strategy"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Rio Tinto",
+    "Strategic Actions": [
+      {
+        "Topic": "Rebuild cultural heritage governance",
+        "Details": [
+          "Embed heritage risk in project approval processes",
+          "Increase transparency with Indigenous stakeholders"
+        ]
+      },
+      {
+        "Topic": "Scale low-carbon aluminum and iron products",
+        "Details": [
+          "Invest in breakthrough smelting technologies",
+          "Capture premium from green materials demand"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Teck",
+    "Strategic Actions": [
+      {
+        "Topic": "Strengthen water management in mining regions",
+        "Details": [
+          "Improve water treatment and monitoring systems",
+          "Reduce freshwater withdrawal intensity"
+        ]
+      },
+      {
+        "Topic": "Advance copper growth strategy",
+        "Details": [
+          "Position assets to meet EV demand growth",
+          "Differentiate through responsible sourcing credentials"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Glencore",
+    "Strategic Actions": [
+      {
+        "Topic": "Enhance governance and compliance systems",
+        "Details": [
+          "Strengthen anti-corruption controls",
+          "Increase transparency in high-risk jurisdictions"
+        ]
+      },
+      {
+        "Topic": "Clarify coal transition strategy",
+        "Details": [
+          "Define managed decline pathway",
+          "Balance cash generation with decarbonization narrative"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Construction Materials",
+    "Company": "Heidelberg Materials",
+    "Strategic Actions": [
+      {
+        "Topic": "Scale low-carbon cement commercialization",
+        "Details": [
+          "Increase clinker substitution rates",
+          "Secure green public procurement contracts"
+        ]
+      },
+      {
+        "Topic": "Optimize alternative fuels usage",
+        "Details": [
+          "Increase waste-derived fuel share",
+          "Reduce fossil fuel dependency"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Construction Materials",
+    "Company": "Holcim",
+    "Strategic Actions": [
+      {
+        "Topic": "Accelerate net-zero cement roadmap",
+        "Details": [
+          "Invest in carbon capture pilots",
+          "Expand green product portfolio"
+        ]
+      },
+      {
+        "Topic": "Monetize circular construction solutions",
+        "Details": [
+          "Scale recycled aggregates business",
+          "Partner with cities on demolition-to-reuse models"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Construction Materials",
+    "Company": "Cemex",
+    "Strategic Actions": [
+      {
+        "Topic": "Drive decarbonization through innovation",
+        "Details": [
+          "Pilot alternative binders",
+          "Improve energy efficiency across kilns"
+        ]
+      },
+      {
+        "Topic": "Strengthen community engagement",
+        "Details": [
+          "Improve local air quality performance",
+          "Enhance transparency in operations"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Construction Materials",
+    "Company": "CRH",
+    "Strategic Actions": [
+      {
+        "Topic": "Expand sustainable infrastructure portfolio",
+        "Details": [
+          "Grow recycled materials business",
+          "Align with green infrastructure spending"
+        ]
+      },
+      {
+        "Topic": "Reduce operational carbon intensity",
+        "Details": [
+          "Improve plant energy efficiency",
+          "Increase renewable energy sourcing"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Private Equity",
+    "Company": "CVC",
+    "Strategic Actions": [
+      {
+        "Topic": "Standardize ESG integration across portfolio",
+        "Details": [
+          "Implement consistent ESG value creation playbooks",
+          "Embed ESG KPIs in management incentives"
+        ]
+      },
+      {
+        "Topic": "Prepare for SFDR and disclosure evolution",
+        "Details": [
+          "Improve portfolio data quality",
+          "Align fund classification with regulatory expectations"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Private Equity",
+    "Company": "EQT",
+    "Strategic Actions": [
+      {
+        "Topic": "Embed climate value creation in portfolio companies",
+        "Details": [
+          "Identify EBITDA upside from decarbonization",
+          "Integrate climate strategy into 100-day plans"
+        ]
+      },
+      {
+        "Topic": "Strengthen exit premium narrative",
+        "Details": [
+          "Quantify ESG-driven valuation uplift",
+          "Standardize sustainability reporting at exit"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Private Equity",
+    "Company": "Blackstone",
+    "Strategic Actions": [
+      {
+        "Topic": "Scale portfolio-wide decarbonization",
+        "Details": [
+          "Set fund-level emission reduction pathways",
+          "Drive renewable procurement across assets"
+        ]
+      },
+      {
+        "Topic": "Strengthen ESG data architecture",
+        "Details": [
+          "Standardize portfolio data collection",
+          "Enhance transparency for LP reporting"
+        ]
+      }
+    ]
+  },
+  {
+    "Sector": "Private Equity",
+    "Company": "KKR",
+    "Strategic Actions": [
+      {
+        "Topic": "Advance impact investing strategy",
+        "Details": [
+          "Define measurable impact KPIs",
+          "Align capital allocation with transition themes"
+        ]
+      },
+      {
+        "Topic": "Operationalize ESG in value creation plans",
+        "Details": [
+          "Embed ESG metrics in portfolio dashboards",
+          "Link management incentives to sustainability outcomes"
+        ]
+      }
+    ]
+  }
+]

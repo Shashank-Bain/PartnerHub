@@ -1,0 +1,112 @@
+[
+  {
+    "Sector": "Consumer Products",
+    "Company": "Danone",
+    "Performance Breakdown": {
+      "On track": 7,
+      "Achieved": 2,
+      "Off track": 3,
+      "No-target": 5,
+      "Not Reporting": 0
+    }
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Kraft-Heinz",
+    "Performance Breakdown": {
+      "On track": 1,
+      "Achieved": 1,
+      "Off track": 9,
+      "No-target": 1,
+      "Not Reporting": 5
+    }
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Nestlé",
+    "Performance Breakdown": {
+      "On track": 6,
+      "Achieved": 3,
+      "Off track": 10,
+      "No-target": 4,
+      "Not Reporting": 2
+    }
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Pepsi",
+    "Performance Breakdown": {
+      "On track": 9,
+      "Achieved": 1,
+      "Off track": 3,
+      "No-target": 4,
+      "Not Reporting": 3
+    }
+  },
+  {
+    "Sector": "Consumer Products",
+    "Company": "Unilever",
+    "Performance Breakdown": {
+      "On track": 5,
+      "Achieved": 1,
+      "Off track": 8,
+      "No-target": 11,
+      "Not Reporting": 1
+    }
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Anglo-American",
+    "Performance Breakdown": {
+      "On track": 0,
+      "Achieved": 0,
+      "Off track": 7,
+      "No-target": 7,
+      "Not Reporting": 5
+    }
+  },
+  {
+    "Sector": "Mining",
+    "Company": "BHP",
+    "Performance Breakdown": {
+      "On track": 3,
+      "Achieved": 5,
+      "Off track": 9,
+      "No-target": 25,
+      "Not Reporting": 23
+    }
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Glencore",
+    "Performance Breakdown": {
+      "On track": 3,
+      "Achieved": 1,
+      "Off track": 1,
+      "No-target": 4,
+      "Not Reporting": 1
+    }
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Rio-Tinto",
+    "Performance Breakdown": {
+      "On track": 3,
+      "Achieved": 1,
+      "Off track": 5,
+      "No-target": 16,
+      "Not Reporting": 5
+    }
+  },
+  {
+    "Sector": "Mining",
+    "Company": "Teck",
+    "Performance Breakdown": {
+      "On track": 2,
+      "Achieved": 0,
+      "Off track": 1,
+      "No-target": 13,
+      "Not Reporting": 7
+    }
+  }
+]

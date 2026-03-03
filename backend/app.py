@@ -1,0 +1,1870 @@
+import os
+import json
+import unicodedata
+from datetime import datetime, timezone
+
+from flask import Flask, jsonify, request, session
+from flask_cors import CORS
+from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect, text
+from werkzeug.security import check_password_hash, generate_password_hash
+
+load_dotenv()
+
+app = Flask(__name__)
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, "app.db")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "pulse-partner-hub-dev-secret")
+
+CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+db = SQLAlchemy(app)
+
+
+SECTOR_COMPANY_MAP = {
+    "Consumer Products": ["Nestlé", "Unilever", "PepsiCo", "Kraft Heinz", "Danone"],
+    "Mining": ["Anglo American", "BHP", "Rio Tinto", "Teck", "Glencore"],
+    "Construction Materials": ["Heidelberg Materials", "Holcim", "Cemex", "CRH"],
+    "Private Equity": ["CVC", "EQT", "Blackstone", "KKR"],
+}
+
+COMPANY_ALIASES = {
+    "pepsico": "pepsi",
+    "kraftheinz": "kraftheinz",
+    "kraft-heinz": "kraftheinz",
+    "nestle": "nestle",
+    "nestlé": "nestle",
+}
+
+BUCKET_BASE = {
+    "X": 0,
+    "A": 20,
+    "P": 40,
+    "L": 60,
+    "D": 80,
+}
+
+
+user_sectors = db.Table(
+    "user_sectors",
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("sector_id", db.Integer, db.ForeignKey("sector.id"), primary_key=True),
+)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password_hash = db.Column(db.String(512), nullable=False)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    must_change_password = db.Column(db.Boolean, default=True, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    sectors = db.relationship("Sector", secondary=user_sectors, back_populates="users")
+
+    def to_dict(self):
+        sector_names = sorted([sector.name for sector in self.sectors])
+        return {
+            "id": self.id,
+            "email": self.email,
+            "firstName": self.first_name,
+            "lastName": self.last_name,
+            "mustChangePassword": self.must_change_password,
+            "isAdmin": self.is_admin,
+            "sectors": sector_names,
+        }
+
+    def to_admin_dict(self):
+        data = self.to_dict()
+        data["maskedPassword"] = "********"
+        return data
+
+
+class Sector(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    users = db.relationship("User", secondary=user_sectors, back_populates="sectors")
+    companies = db.relationship("Company", back_populates="sector", cascade="all, delete-orphan")
+
+
+class Company(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    sector_id = db.Column(db.Integer, db.ForeignKey("sector.id"), nullable=False)
+    sector = db.relationship("Sector", back_populates="companies")
+
+
+def get_current_user():
+    user_id = session.get("user_id")
+    if not user_id:
+        return None
+    return db.session.get(User, user_id)
+
+
+def get_admin_user_or_error():
+    user = get_current_user()
+    if not user:
+        return None, (jsonify({"message": "Unauthorized."}), 401)
+    if not user.is_admin:
+        return None, (jsonify({"message": "Admin access required."}), 403)
+    return user, None
+
+
+def migrate_schema_if_needed():
+    inspector = inspect(db.engine)
+    tables = inspector.get_table_names()
+    if "user" in tables:
+        columns = [column["name"] for column in inspector.get_columns("user")]
+        if "is_admin" not in columns:
+            db.session.execute(text("ALTER TABLE user ADD COLUMN is_admin BOOLEAN NOT NULL DEFAULT 0"))
+            db.session.commit()
+
+
+def seed_sectors_and_companies():
+    allowed_sector_names = set(SECTOR_COMPANY_MAP.keys())
+
+    existing_sectors = Sector.query.all()
+    for sector in existing_sectors:
+        if sector.name not in allowed_sector_names:
+            for user in list(sector.users):
+                user.sectors.remove(sector)
+            db.session.delete(sector)
+
+    db.session.flush()
+
+    for sector_name, company_names in SECTOR_COMPANY_MAP.items():
+        sector = Sector.query.filter_by(name=sector_name).first()
+        if not sector:
+            sector = Sector(name=sector_name)
+            db.session.add(sector)
+            db.session.flush()
+
+        company_name_set = set(company_names)
+        for company in list(sector.companies):
+            if company.name not in company_name_set:
+                db.session.delete(company)
+
+        existing_company_names = {company.name for company in sector.companies}
+        for company_name in company_names:
+            if company_name not in existing_company_names:
+                db.session.add(Company(name=company_name, sector=sector))
+
+    db.session.commit()
+
+
+def seed_admin_user():
+    admin_email = "admin@pulseph.com"
+    existing_admin = User.query.filter_by(email=admin_email).first()
+    if not existing_admin:
+        existing_admin = User(
+            email=admin_email,
+            password_hash=generate_password_hash("admin123"),
+            first_name="Admin",
+            last_name="User",
+            must_change_password=True,
+            is_admin=True,
+        )
+        db.session.add(existing_admin)
+    else:
+        existing_admin.is_admin = True
+
+    all_sectors = Sector.query.order_by(Sector.name.asc()).all()
+    existing_admin.sectors = all_sectors
+    db.session.commit()
+
+
+def resolve_sector_names(sector_names):
+    clean_sector_names = sorted({(name or "").strip() for name in (sector_names or []) if (name or "").strip()})
+    if not clean_sector_names:
+        return [], []
+
+    sectors = Sector.query.filter(Sector.name.in_(clean_sector_names)).all()
+    found_names = {sector.name for sector in sectors}
+    missing = [name for name in clean_sector_names if name not in found_names]
+    return sectors, missing
+
+
+def get_user_available_sectors(user):
+    sector_order = {sector_name: index for index, sector_name in enumerate(SECTOR_COMPANY_MAP.keys())}
+
+    if user.is_admin:
+        sectors = Sector.query.all()
+    else:
+        sectors = list(user.sectors)
+
+    return sorted(sectors, key=lambda sector: (sector_order.get(sector.name, 999), sector.name.lower()))
+
+
+def get_ordered_company_names(sector):
+    configured_order = {company_name: index for index, company_name in enumerate(SECTOR_COMPANY_MAP.get(sector.name, []))}
+    company_names = [company.name for company in sector.companies]
+    return sorted(company_names, key=lambda company_name: (configured_order.get(company_name, 999), company_name.lower()))
+
+
+def load_material_topics_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "material_topics.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def load_recommendations_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "recommendations.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def load_commitment_breakdown_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "commitment_breakdown.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def load_scorecard_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "scorecard.json")
+    if not os.path.exists(data_path):
+        return {}
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, dict):
+        return parsed
+    return {}
+
+
+def load_investment_deals_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "Investment_Deals.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def load_green_capex_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "Green_Capex_Deals.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def load_investment_rationals_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "Investment_Deal_Rationals.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
+def normalize_company_name(company_name):
+    text_value = unicodedata.normalize("NFKD", (company_name or ""))
+    ascii_value = "".join(character for character in text_value if not unicodedata.combining(character))
+    normalized = "".join(character.lower() for character in ascii_value if character.isalnum())
+    return COMPANY_ALIASES.get(normalized, normalized)
+
+
+def normalize_text_token(value):
+    text_value = unicodedata.normalize("NFKD", (value or ""))
+    ascii_value = "".join(character for character in text_value if not unicodedata.combining(character))
+    return "".join(character.lower() for character in ascii_value if character.isalnum())
+
+
+def company_text_matches(candidate_value, selected_company):
+    candidate_token = normalize_text_token(candidate_value)
+    selected_token = normalize_text_token(selected_company)
+    if not candidate_token or not selected_token:
+        return False
+
+    if candidate_token == selected_token:
+        return True
+
+    if candidate_token.startswith(selected_token):
+        return True
+
+    return selected_token in candidate_token
+
+
+def parse_numeric_value(raw_value):
+    text_value = str(raw_value or "").strip()
+    if not text_value:
+        return None
+
+    normalized = text_value.lower()
+    if normalized in {"-", "na", "n/a", "not disclosed", "undisclosed"}:
+        return None
+
+    filtered = "".join(character for character in text_value if character.isdigit() or character in {".", "-"})
+    if not filtered:
+        return None
+
+    try:
+        return float(filtered)
+    except ValueError:
+        return None
+
+
+def parse_flexible_date(raw_value):
+    text_value = str(raw_value or "").strip()
+    if not text_value or text_value.lower() in {"na", "n/a", "-"}:
+        return None
+
+    supported_formats = [
+        "%Y-%m-%dT%H:%M:%S.%f",
+        "%Y-%m-%d",
+        "%B %Y",
+        "%Y",
+    ]
+
+    for date_format in supported_formats:
+        try:
+            return datetime.strptime(text_value, date_format)
+        except ValueError:
+            continue
+
+    return None
+
+
+def parse_year(raw_value):
+    parsed = parse_flexible_date(raw_value)
+    if parsed:
+        return parsed.year
+
+    text_value = str(raw_value or "").strip()
+    if not text_value:
+        return None
+
+    digits = "".join(character for character in text_value if character.isdigit())
+    if len(digits) >= 4:
+        try:
+            year = int(digits[:4])
+            if 1900 <= year <= 2100:
+                return year
+        except ValueError:
+            return None
+    return None
+
+
+def truncate_text(value, limit=180):
+    text_value = str(value or "").strip()
+    if len(text_value) <= limit:
+        return text_value
+    return f"{text_value[:max(0, limit - 1)].rstrip()}…"
+
+
+def to_max_words(value, max_words=8):
+    text_value = " ".join(str(value or "").strip().split())
+    if not text_value:
+        return ""
+    words = text_value.split(" ")
+    return " ".join(words[:max_words])
+
+
+def normalize_short_focus_line(value, max_words=8):
+    text_value = " ".join(str(value or "").strip().split())
+    if not text_value:
+        return ""
+    words = text_value.split(" ")
+    if len(words) > max_words:
+        return ""
+    return text_value
+
+
+def build_strategy_fallback(selected_company, combined_events, topic_counts, region_counts):
+    if not combined_events:
+        return {
+            "investmentFocus": "Prioritize high-conviction sustainability deal themes",
+            "strategicDirection": [
+                f"{selected_company} has sparse recent deal signal, suggesting potential white space in themes where peers are scaling faster.",
+                f"Priority is to convert selective activity into a tighter thesis linked to where {selected_company} is under-indexed versus peers.",
+            ],
+            "majorDeals": [],
+            "yearlySummaries": {},
+        }
+
+    sorted_topics = sorted(topic_counts.items(), key=lambda item: (-item[1], item[0].lower()))
+    sorted_regions = sorted(region_counts.items(), key=lambda item: (-item[1], item[0].lower()))
+    primary_topic = sorted_topics[0][0] if sorted_topics else "sustainability-aligned themes"
+    primary_region = sorted_regions[0][0] if sorted_regions else "core regions"
+
+    strategy_lines = [
+        f"{selected_company} is concentrating deals in {primary_topic}, but may be leaving value on the table in adjacent sustainability themes where peers are more active.",
+        f"Regional concentration in {primary_region} suggests disciplined focus, but also indicates potential missed optionality outside the core footprint.",
+        f"Near-term upside is likely from sharper deal selection tied to execution gaps, not simply higher deal volume.",
+    ]
+
+    major_deals = []
+    sorted_events = sorted(
+        combined_events,
+        key=lambda item: (item.get("year") or 0, item.get("date") or ""),
+        reverse=True,
+    )
+    for event in sorted_events[:2]:
+        major_deals.append(
+            {
+                "title": event.get("title") or "Key transaction",
+                "date": event.get("date") or "NA",
+                "source": event.get("source") or "Investment",
+                "why": truncate_text(event.get("headline") or event.get("theme") or "Strategically relevant deal."),
+            }
+        )
+
+    yearly = {}
+    events_by_year = {}
+    for event in combined_events:
+        year = event.get("year")
+        if not year:
+            continue
+        events_by_year.setdefault(year, []).append(event)
+
+    for year, events in sorted(events_by_year.items()):
+        year_topics = {}
+        year_regions = {}
+        for event in events:
+            topic = str(event.get("theme") or "Unspecified").strip() or "Unspecified"
+            region = str(event.get("region") or "Other").strip() or "Other"
+            year_topics[topic] = year_topics.get(topic, 0) + 1
+            year_regions[region] = year_regions.get(region, 0) + 1
+
+        top_topic = sorted(year_topics.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
+        top_region = sorted(year_regions.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
+        yearly[str(year)] = truncate_text(
+            f"In {year}, {selected_company} concentrated on {top_topic} in {top_region}; potential value remains in under-covered themes and regions.",
+            190,
+        )
+
+    return {
+        "investmentFocus": "Prioritize high-conviction sustainability deal themes",
+        "strategicDirection": strategy_lines,
+        "majorDeals": major_deals,
+        "yearlySummaries": yearly,
+    }
+
+
+def generate_investment_ai_summary(selected_company, combined_events, topic_counts, region_counts):
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
+
+    fallback = build_strategy_fallback(selected_company, combined_events, topic_counts, region_counts)
+    if not api_key or not combined_events:
+        return fallback
+
+    try:
+        from openai import OpenAI
+
+        compact_events = []
+        for event in combined_events[:50]:
+            compact_events.append(
+                {
+                    "date": event.get("date"),
+                    "year": event.get("year"),
+                    "title": event.get("title"),
+                    "theme": event.get("theme"),
+                    "driver": event.get("primaryDriver"),
+                    "region": event.get("region"),
+                    "source": event.get("source"),
+                    "headline": event.get("headline"),
+                }
+            )
+
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model=model_name,
+            temperature=0.2,
+            response_format={"type": "json_object"},
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert ESG investment strategy advisor. Focus on where the company is leaving value on the table vs peers. Keep outputs concise, pithy, and consulting-ready.",
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {
+                            "selectedCompany": selected_company,
+                            "events": compact_events,
+                            "required": {
+                                "investmentFocus": "single line, max 8 words, punchy and specific to current investment direction, no trailing conjunctions",
+                                "strategicDirection": "array of exactly 2-3 concise strings about missed value opportunities and strategic focus",
+                                "majorDeals": "array of 1-2 objects with title,date,source,why where why explains strategy significance without using deal value",
+                                "yearlySummaries": "object of year->1 concise sentence on strategy and value-left-on-table",
+                            },
+                        },
+                        ensure_ascii=False,
+                    ),
+                },
+            ],
+        )
+
+        content = response.choices[0].message.content or "{}"
+        parsed = json.loads(content)
+
+        investment_focus = normalize_short_focus_line(parsed.get("investmentFocus") or "", 8)
+        if not investment_focus:
+            investment_focus = fallback["investmentFocus"]
+
+        strategic_direction = [
+            truncate_text(item, 200)
+            for item in (parsed.get("strategicDirection") or [])
+            if str(item or "").strip()
+        ]
+
+        major_deals = []
+        for item in (parsed.get("majorDeals") or []):
+            if not isinstance(item, dict):
+                continue
+            title = str(item.get("title") or "").strip()
+            why = str(item.get("why") or "").strip()
+            if not title or not why:
+                continue
+            major_deals.append(
+                {
+                    "title": truncate_text(title, 90),
+                    "date": str(item.get("date") or "NA").strip(),
+                    "source": str(item.get("source") or "Investment").strip(),
+                    "why": truncate_text(why, 220),
+                }
+            )
+
+        yearly_summaries_raw = parsed.get("yearlySummaries") or {}
+        yearly_summaries = {}
+        if isinstance(yearly_summaries_raw, dict):
+            for year_key, summary in yearly_summaries_raw.items():
+                year_text = str(year_key or "").strip()
+                summary_text = str(summary or "").strip()
+                if year_text and summary_text:
+                    yearly_summaries[year_text] = truncate_text(summary_text, 220)
+
+        if len(strategic_direction) < 2:
+            strategic_direction = fallback["strategicDirection"]
+        if not major_deals:
+            major_deals = fallback["majorDeals"]
+        if not yearly_summaries:
+            yearly_summaries = fallback["yearlySummaries"]
+
+        return {
+            "investmentFocus": investment_focus,
+            "strategicDirection": strategic_direction[:3],
+            "majorDeals": major_deals[:2],
+            "yearlySummaries": yearly_summaries,
+        }
+    except Exception:
+        return fallback
+
+
+def build_peer_focus_bullets(selected_company, selected_topic_totals, peer_topic_totals, peer_count):
+    safe_peer_count = max(1, int(peer_count or 1))
+
+    selected_sorted = sorted(
+        selected_topic_totals.items(),
+        key=lambda item: (-item[1], item[0].lower()),
+    )
+    peer_avg_map = {
+        topic: (float(count) / safe_peer_count)
+        for topic, count in peer_topic_totals.items()
+    }
+    peer_sorted = sorted(peer_avg_map.items(), key=lambda item: (-item[1], item[0].lower()))
+
+    selected_top = selected_sorted[0][0] if selected_sorted else "sustainable operations"
+    peer_top = peer_sorted[0][0] if peer_sorted else "diversified sustainability themes"
+
+    bullets = []
+    if selected_top.lower() == peer_top.lower():
+        bullets.append(
+            truncate_text(
+                f"{selected_company}: stay focused on {selected_top}, but tighten the deal filter to fewer, higher-impact bets with clear delivery owners.",
+                220,
+            )
+        )
+    else:
+        bullets.append(
+            truncate_text(
+                f"{selected_company}: keep {selected_top} as core, and launch 1-2 pilot deals in {peer_top} to close strategic white space.",
+                220,
+            )
+        )
+
+    union_topics = sorted(set(selected_topic_totals.keys()) | set(peer_avg_map.keys()))
+    positive_gaps = []
+    for topic in union_topics:
+        selected_value = float(selected_topic_totals.get(topic, 0))
+        peer_value = float(peer_avg_map.get(topic, 0))
+        gap = peer_value - selected_value
+        positive_gaps.append((topic, gap))
+
+    positive_gaps.sort(key=lambda item: item[1], reverse=True)
+    top_gap_topic, top_gap_value = positive_gaps[0] if positive_gaps else ("", 0)
+    if top_gap_topic and top_gap_value > 0:
+        bullets.append(
+            truncate_text(
+                f"Build a 12-month target list in {top_gap_topic} and pursue one partnership or bolt-on to close the peer gap quickly.",
+                220,
+            )
+        )
+    else:
+        bullets.append(
+            truncate_text(
+                f"Convert focus into outcomes: require every deal to pass value gates on growth, risk reduction, and sustainability impact.",
+                220,
+            )
+        )
+
+    bullets.append(
+        truncate_text(
+            f"Set quarterly execution reviews so {selected_company} can rebalance capital faster when themes underperform.",
+            220,
+        )
+    )
+
+    return bullets[:3]
+
+
+def build_investment_insights(sector_name, selected_company, sector_companies):
+    investment_deals = load_investment_deals_dataset()
+    green_capex_deals = load_green_capex_dataset()
+    rationals_dataset = load_investment_rationals_dataset()
+
+    def matches_selected_company(row):
+        master_company = row.get("Master Company") or ""
+        buyers = row.get("Buyers/Investors") or ""
+        return company_text_matches(master_company, selected_company) or company_text_matches(buyers, selected_company)
+
+    selected_deals = [row for row in investment_deals if isinstance(row, dict) and matches_selected_company(row)]
+
+    selected_capex = [
+        row
+        for row in green_capex_deals
+        if isinstance(row, dict)
+        and (
+            company_text_matches(row.get("Buyers/Investors") or "", selected_company)
+            or company_text_matches(row.get("Master Company") or "", selected_company)
+        )
+    ]
+
+    closed_deal_count = sum(
+        1
+        for row in selected_deals
+        if str(row.get("Transaction Status") or "").strip().lower() == "closed"
+    )
+
+    def top_counts(rows, field_name, limit=5):
+        counter = {}
+        for row in rows:
+            value = str(row.get(field_name) or "").strip()
+            if not value:
+                continue
+            counter[value] = counter.get(value, 0) + 1
+        return [
+            {"label": item[0], "count": item[1]}
+            for item in sorted(counter.items(), key=lambda pair: (-pair[1], pair[0].lower()))[:limit]
+        ]
+
+    def aggregate_theme_counts(deals, capex):
+        counter = {}
+        for row in deals:
+            theme = str(row.get("classification") or "").strip()
+            if not theme:
+                continue
+            counter[theme] = counter.get(theme, 0) + 1
+
+        for row in capex:
+            theme = str(row.get("classification") or "").strip()
+            if not theme:
+                continue
+            counter[theme] = counter.get(theme, 0) + 1
+        return counter
+
+    def aggregate_region_counts(deals, capex):
+        counter = {}
+        for row in deals:
+            region = str(row.get("Master Target Region") or "").strip() or "Other"
+            counter[region] = counter.get(region, 0) + 1
+
+        for row in capex:
+            region = str(row.get("Master Target Region") or "").strip() or "Other"
+            counter[region] = counter.get(region, 0) + 1
+        return counter
+
+    recent_deals = []
+    for row in selected_deals:
+        announced_date_raw = row.get("All Transactions Announced Date")
+        announced_date = parse_flexible_date(announced_date_raw)
+        announced_year = parse_year(announced_date_raw)
+
+        why_items = row.get("Why_The_Deal_Happened") or []
+        headline = ""
+        if isinstance(why_items, list) and why_items:
+            headline = str(why_items[0] or "").strip()
+        if not headline:
+            headline = str(row.get("Primary Driver Justification") or "").strip()
+        if not headline:
+            headline = str(row.get("Transaction Comments") or "").strip().split("\n")[0]
+
+        recent_deals.append(
+            {
+                "date": announced_date.strftime("%Y-%m-%d") if announced_date else str(announced_date_raw or "NA"),
+                "_sortDate": announced_date or datetime.min,
+                "year": announced_year,
+                "target": str(row.get("Target/Issuer") or row.get("Master Target") or "Unknown target").strip(),
+                "transactionType": str(row.get("Transaction Types") or "").strip(),
+                "classification": str(row.get("classification") or "").strip(),
+                "primaryDriver": str(row.get("Primary Driver") or "").strip(),
+                "region": str(row.get("Master Target Region") or "").strip() or "Other",
+                "headline": headline,
+            }
+        )
+
+    recent_deals.sort(key=lambda item: item["_sortDate"], reverse=True)
+    for item in recent_deals:
+        item.pop("_sortDate", None)
+
+    peer_benchmark = []
+    peer_topic_totals = {}
+    peer_region_totals = {}
+    selected_topic_totals = aggregate_theme_counts(selected_deals, selected_capex)
+    selected_region_totals = aggregate_region_counts(selected_deals, selected_capex)
+
+    for company_name in sector_companies:
+        company_deals = [
+            row
+            for row in investment_deals
+            if isinstance(row, dict)
+            and (
+                company_text_matches(row.get("Master Company") or "", company_name)
+                or company_text_matches(row.get("Buyers/Investors") or "", company_name)
+            )
+        ]
+        company_capex = [
+            row
+            for row in green_capex_deals
+            if isinstance(row, dict)
+            and (
+                company_text_matches(row.get("Buyers/Investors") or "", company_name)
+                or company_text_matches(row.get("Master Company") or "", company_name)
+            )
+        ]
+        company_theme_totals = aggregate_theme_counts(company_deals, company_capex)
+        company_region_totals = aggregate_region_counts(company_deals, company_capex)
+
+        if normalize_company_name(company_name) != normalize_company_name(selected_company):
+            for key, value in company_theme_totals.items():
+                peer_topic_totals[key] = peer_topic_totals.get(key, 0) + value
+            for key, value in company_region_totals.items():
+                peer_region_totals[key] = peer_region_totals.get(key, 0) + value
+
+        peer_benchmark.append(
+            {
+                "company": company_name,
+                "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+                "dealCount": len(company_deals),
+                "greenCapexCount": len(company_capex),
+            }
+        )
+
+    peer_benchmark.sort(key=lambda item: (-item["dealCount"], item["company"].lower()))
+    selected_benchmark = next((item for item in peer_benchmark if item.get("isSelected")), None)
+    sorted_peers = [item for item in peer_benchmark if not item.get("isSelected")]
+    if selected_benchmark:
+        peer_benchmark = [selected_benchmark, *sorted_peers]
+
+    capex_highlights = []
+    for row in selected_capex:
+        capex_date_raw = row.get("All Transactions Announced Date")
+        capex_date = parse_flexible_date(capex_date_raw)
+        capex_year = parse_year(capex_date_raw)
+        capex_highlights.append(
+            {
+                "date": capex_date.strftime("%Y-%m-%d") if capex_date else str(capex_date_raw or "NA"),
+                "_sortDate": capex_date or datetime.min,
+                "year": capex_year,
+                "initiative": str(row.get("Target/Issuer") or "").strip(),
+                "category": str(row.get("Green Investment Category") or "").strip(),
+                "classification": str(row.get("classification") or "").strip(),
+                "region": str(row.get("Master Target Region") or "").strip() or "Other",
+                "excerpt": str(row.get("Source Excerpt") or row.get("AI Interpretation") or "").strip(),
+                "value": str(row.get("Transaction Value") or "").strip(),
+                "unit": str(row.get("Transaction Unit") or "").strip(),
+            }
+        )
+
+    capex_highlights.sort(key=lambda item: item["_sortDate"], reverse=True)
+    for item in capex_highlights:
+        item.pop("_sortDate", None)
+
+    selected_rationale = next(
+        (
+            row for row in rationals_dataset
+            if isinstance(row, dict) and company_text_matches(row.get("Focus Company") or "", selected_company)
+        ),
+        None,
+    )
+
+    all_regions_selected = aggregate_region_counts(selected_deals, selected_capex)
+    total_region_events_selected = sum(all_regions_selected.values())
+    top_region = None
+    top_region_share_pct = 0.0
+    if total_region_events_selected > 0:
+        top_region = sorted(all_regions_selected.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
+        top_region_count = all_regions_selected[top_region]
+        top_region_share_pct = round((top_region_count / total_region_events_selected) * 100, 1)
+
+    filtered_2526_topics = {}
+    for deal in recent_deals:
+        year = deal.get("year")
+        theme = str(deal.get("classification") or "").strip()
+        if year in {2025, 2026} and theme:
+            filtered_2526_topics[theme] = filtered_2526_topics.get(theme, 0) + 1
+
+    for capex in capex_highlights:
+        year = capex.get("year")
+        theme = str(capex.get("classification") or "").strip()
+        if year in {2025, 2026} and theme:
+            filtered_2526_topics[theme] = filtered_2526_topics.get(theme, 0) + 1
+
+    top_topics_2526 = [
+        {"label": key, "count": value}
+        for key, value in sorted(filtered_2526_topics.items(), key=lambda item: (-item[1], item[0].lower()))[:3]
+    ]
+
+    all_topic_keys = sorted([key for key in selected_topic_totals.keys() if str(key or "").strip()])
+    all_region_keys = sorted([key for key in selected_region_totals.keys() if str(key or "").strip()])
+
+    selected_peer_count = max(1, len([name for name in sector_companies if normalize_company_name(name) != normalize_company_name(selected_company)]))
+
+    topic_spider = [
+        {
+            "theme": topic_key,
+            "companyScore": float(selected_topic_totals.get(topic_key, 0)),
+            "peerAvg": round(float(peer_topic_totals.get(topic_key, 0)) / selected_peer_count, 2),
+        }
+        for topic_key in all_topic_keys
+    ]
+    topic_spider.sort(key=lambda item: item["companyScore"], reverse=True)
+
+    region_spider = [
+        {
+            "theme": region_key,
+            "companyScore": float(selected_region_totals.get(region_key, 0)),
+            "peerAvg": round(float(peer_region_totals.get(region_key, 0)) / selected_peer_count, 2),
+        }
+        for region_key in all_region_keys
+    ]
+    region_spider.sort(key=lambda item: item["companyScore"], reverse=True)
+
+    top_topic_keys = [item["theme"] for item in topic_spider[:3]]
+    if not top_topic_keys:
+        top_topic_keys = ["Unspecified"]
+
+    top_region_keys = [item["theme"] for item in region_spider[:4]]
+    if not top_region_keys:
+        top_region_keys = ["Other"]
+
+    topic_breakdown_rows = []
+    region_breakdown_rows = []
+
+    for company_name in sector_companies:
+        company_deals = [
+            row
+            for row in investment_deals
+            if isinstance(row, dict)
+            and (
+                company_text_matches(row.get("Master Company") or "", company_name)
+                or company_text_matches(row.get("Buyers/Investors") or "", company_name)
+            )
+        ]
+        company_capex = [
+            row
+            for row in green_capex_deals
+            if isinstance(row, dict)
+            and (
+                company_text_matches(row.get("Buyers/Investors") or "", company_name)
+                or company_text_matches(row.get("Master Company") or "", company_name)
+            )
+        ]
+        company_theme_counts = aggregate_theme_counts(company_deals, company_capex)
+        company_region_counts = aggregate_region_counts(company_deals, company_capex)
+
+        topic_row = {
+            "company": company_name,
+            "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+        }
+        topic_other = 0
+        for key, value in company_theme_counts.items():
+            if key in top_topic_keys:
+                topic_row[key] = value
+            else:
+                topic_other += value
+        topic_row["Other"] = topic_other
+        topic_breakdown_rows.append(topic_row)
+
+        region_row = {
+            "company": company_name,
+            "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+        }
+        region_other = 0
+        for key, value in company_region_counts.items():
+            if key in top_region_keys:
+                region_row[key] = value
+            else:
+                region_other += value
+        region_row["Other"] = region_other
+        region_breakdown_rows.append(region_row)
+
+    topic_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
+    region_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
+
+    timeline_events = []
+    for deal in recent_deals:
+        timeline_events.append(
+            {
+                "source": "Investment Deal",
+                "date": deal.get("date"),
+                "year": deal.get("year"),
+                "title": deal.get("target"),
+                "theme": deal.get("classification") or "Unspecified",
+                "region": deal.get("region") or "Other",
+                "primaryDriver": deal.get("primaryDriver"),
+                "headline": deal.get("headline"),
+            }
+        )
+
+    for capex in capex_highlights:
+        timeline_events.append(
+            {
+                "source": "Green Capex",
+                "date": capex.get("date"),
+                "year": capex.get("year"),
+                "title": capex.get("initiative") or "Capex initiative",
+                "theme": capex.get("classification") or capex.get("category") or "Unspecified",
+                "region": capex.get("region") or "Other",
+                "primaryDriver": "Sustainability / operations",
+                "headline": capex.get("excerpt"),
+            }
+        )
+
+    timeline_events = [event for event in timeline_events if event.get("year")]
+    timeline_events.sort(key=lambda item: (item.get("year") or 0, item.get("date") or ""))
+
+    all_timeline_events_for_strategy = list(timeline_events)
+
+    years_sorted = sorted({event["year"] for event in timeline_events})
+    if years_sorted:
+        latest_year = years_sorted[-1]
+        recent_years = {year for year in years_sorted if year >= latest_year - 2}
+        timeline_events = [event for event in timeline_events if event["year"] in recent_years]
+
+    ai_strategy = generate_investment_ai_summary(selected_company, all_timeline_events_for_strategy, selected_topic_totals, selected_region_totals)
+    difference_bullets = build_peer_focus_bullets(
+        selected_company,
+        selected_topic_totals,
+        peer_topic_totals,
+        selected_peer_count,
+    )
+
+    region_shares = []
+    if total_region_events_selected > 0:
+        sorted_regions = sorted(all_regions_selected.items(), key=lambda item: (-item[1], item[0].lower()))
+        for region_name, region_count in sorted_regions:
+            region_shares.append(
+                {
+                    "region": region_name,
+                    "sharePct": round((region_count / total_region_events_selected) * 100, 1),
+                }
+            )
+
+    top_topics_labels = [item["label"] for item in top_topics_2526[:2]]
+
+    timeline_by_year = {}
+    for event in timeline_events:
+        year_key = str(event.get("year"))
+        timeline_by_year.setdefault(year_key, []).append(event)
+
+    timeline_years = []
+    for year_key in sorted(timeline_by_year.keys()):
+        events = sorted(timeline_by_year[year_key], key=lambda item: item.get("date") or "")
+        timeline_years.append(
+            {
+                "year": year_key,
+                "summary": ai_strategy.get("yearlySummaries", {}).get(year_key, "No yearly strategy summary available."),
+                "events": events,
+            }
+        )
+
+    latest_date = None
+    if recent_deals:
+        latest_date = recent_deals[0].get("date")
+
+    return {
+        "sector": sector_name,
+        "selectedCompany": selected_company,
+        "summary": {
+            "dealCount": len(selected_deals),
+            "closedDealCount": closed_deal_count,
+            "greenCapexCount": len(selected_capex),
+            "latestDealDate": latest_date,
+            "topRegion": top_region,
+            "topRegionSharePct": top_region_share_pct,
+        },
+        "topClassifications": top_counts(selected_deals, "classification", limit=4),
+        "topDrivers": top_counts(selected_deals, "Primary Driver", limit=4),
+        "topBuckets": top_counts(selected_deals, "Primary Bucket", limit=4),
+        "investmentFocus": ai_strategy.get("investmentFocus") or "Refocus portfolio toward resilient sustainability bets",
+        "regionShares": region_shares,
+        "topSustainabilityTopics": top_topics_labels,
+        "topTopics2025_26": top_topics_2526,
+        "greenCapexCategories": top_counts(selected_capex, "Green Investment Category", limit=5),
+        "peerBenchmark": peer_benchmark,
+        "recentDeals": recent_deals[:10],
+        "greenCapexHighlights": capex_highlights[:8],
+        "differenceBullets": difference_bullets[:3],
+        "strategicDirection": {
+            "summaryLines": ai_strategy.get("strategicDirection", []),
+            "majorDeals": ai_strategy.get("majorDeals", []),
+        },
+        "spider": {
+            "topics": topic_spider[:8],
+            "regions": region_spider[:8],
+        },
+        "charts": {
+            "topics": {
+                "keys": [*top_topic_keys, "Other"],
+                "rows": topic_breakdown_rows,
+            },
+            "regions": {
+                "keys": [*top_region_keys, "Other"],
+                "rows": region_breakdown_rows,
+            },
+        },
+        "timeline": {
+            "years": timeline_years,
+        },
+        "narrative": {
+            "focusCompanyInsights": (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else [],
+            "peerInsights": (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else [],
+        },
+    }
+
+
+def find_matching_company_name(requested_name, available_names):
+    requested_normalized = normalize_company_name(requested_name)
+    for available_name in available_names:
+        if normalize_company_name(available_name) == requested_normalized:
+            return available_name
+    return None
+
+
+def compute_theme_score(bucket, parameter_scores):
+    bucket_key = (bucket or "X").strip().upper()
+    bucket_base = BUCKET_BASE.get(bucket_key, 0)
+
+    score_values = [float(value) for value in (parameter_scores or {}).values()]
+    average_score = (sum(score_values) / len(score_values)) if score_values else 0.0
+    final_score = max(0.0, min(100.0, bucket_base + (average_score * 2)))
+    return {
+        "bucket": bucket_key,
+        "averageScore": round(average_score, 2),
+        "finalScore": round(final_score, 2),
+    }
+
+
+def resolve_sector_and_company_or_error(user, sector_name, selected_company):
+    if not sector_name or not selected_company:
+        return None, None, (jsonify({"message": "Sector and company are required."}), 400)
+
+    available_sectors = get_user_available_sectors(user)
+    available_sector_names = {sector.name for sector in available_sectors}
+    if sector_name not in available_sector_names:
+        return None, None, (jsonify({"message": "You do not have access to this sector."}), 403)
+
+    sector_companies = SECTOR_COMPANY_MAP.get(sector_name, [])
+    matched_selected_company = find_matching_company_name(selected_company, sector_companies)
+    if not matched_selected_company:
+        return None, None, (jsonify({"message": "Selected company is invalid for this sector."}), 400)
+
+    return sector_companies, matched_selected_company, None
+
+
+def build_scorecard_context(sector_name, selected_company, sector_companies):
+    dataset = load_scorecard_dataset()
+    matched_selected_company = find_matching_company_name(selected_company, list(dataset.keys()))
+    if not matched_selected_company:
+        return None
+
+    selected_company_data = dataset.get(matched_selected_company, {})
+    if not isinstance(selected_company_data, dict) or not selected_company_data:
+        return None
+
+    peer_company_names = []
+    for company_name in sector_companies:
+        if normalize_company_name(company_name) == normalize_company_name(selected_company):
+            continue
+        matched_peer = find_matching_company_name(company_name, list(dataset.keys()))
+        if matched_peer:
+            peer_company_names.append(matched_peer)
+
+    theme_names = sorted(selected_company_data.keys())
+    rows = []
+    radar_themes = []
+    lagging_candidates = []
+
+    for theme_name in theme_names:
+        selected_theme_data = selected_company_data.get(theme_name, {})
+        selected_bucket = str(selected_theme_data.get("bucket", "X") or "X").strip().upper()
+        if selected_bucket == "X":
+            continue
+
+        selected_score = compute_theme_score(
+            selected_bucket,
+            selected_theme_data.get("scores", {}),
+        )
+
+        peer_scores = []
+        best_score_value = selected_score["finalScore"]
+        best_player = matched_selected_company
+        best_practice_source = selected_theme_data.get("rationale", {})
+
+        for peer_company in peer_company_names:
+            peer_theme_data = dataset.get(peer_company, {}).get(theme_name)
+            if not isinstance(peer_theme_data, dict):
+                continue
+
+            peer_theme_score = compute_theme_score(
+                peer_theme_data.get("bucket", "X"),
+                peer_theme_data.get("scores", {}),
+            )
+            peer_scores.append(peer_theme_score["finalScore"])
+
+            if peer_theme_score["finalScore"] > best_score_value:
+                best_score_value = peer_theme_score["finalScore"]
+                best_player = peer_company
+                best_practice_source = peer_theme_data.get("rationale", {})
+
+        peer_average = round((sum(peer_scores) / len(peer_scores)), 2) if peer_scores else selected_score["finalScore"]
+
+        gap_vs_peer = round(selected_score["finalScore"] - peer_average, 2)
+        lagging_candidates.append({"theme": theme_name, "gap": gap_vs_peer})
+
+        rows.append(
+            {
+                "theme": theme_name,
+                "overallStatus": selected_score,
+                "peerAverage": peer_average,
+                "bestScore": round(best_score_value, 2),
+                "bestPlayer": best_player,
+                "bestPractice": "",
+                "bestPracticeSource": best_practice_source,
+                "progress": "Pending logic",
+            }
+        )
+
+        radar_themes.append(
+            {
+                "theme": theme_name,
+                "companyScore": selected_score["finalScore"],
+                "peerAvg": peer_average,
+            }
+        )
+
+    sorted_by_gap_ascending = sorted(lagging_candidates, key=lambda item: item["gap"])
+    sorted_by_gap_descending = sorted(lagging_candidates, key=lambda item: item["gap"], reverse=True)
+
+    lagging_themes = [item["theme"] for item in sorted_by_gap_ascending[:3]]
+    leading_themes = []
+    for item in sorted_by_gap_descending:
+        theme_name = item["theme"]
+        if theme_name in lagging_themes:
+            continue
+        leading_themes.append(theme_name)
+        if len(leading_themes) == 3:
+            break
+
+    return {
+        "selectedCompany": matched_selected_company,
+        "peerCompanies": peer_company_names,
+        "rows": rows,
+        "radarThemes": radar_themes,
+        "leadingThemes": leading_themes,
+        "laggingThemes": lagging_themes,
+    }
+
+
+def build_fallback_priority_moves(selected_company, lagging_themes):
+    if not lagging_themes:
+        return [
+            f"Prioritize a focused sustainability value-creation agenda for {selected_company} with clear ownership and quarterly milestones.",
+            "Tie top initiatives to measurable financial and commercial outcomes to strengthen partner conversations.",
+            "Increase transparency on delivery trajectory with externally-facing milestone updates.",
+        ]
+
+    moves = [
+        f"Launch a 12-month gap-close sprint in {lagging_themes[0]} with explicit KPI targets and operating owners.",
+        f"Translate peer-leading practices from {lagging_themes[min(1, len(lagging_themes)-1)]} into a practical execution roadmap.",
+        "Build a board-level narrative linking commitment execution to growth, risk resilience, and valuation upside.",
+    ]
+    return moves
+
+
+def summarize_best_practice_from_rationale(best_player, rationale, theme_name):
+    if isinstance(rationale, dict) and rationale:
+        rationale_snippets = [str(value).strip() for value in rationale.values() if str(value).strip()]
+        if rationale_snippets:
+            return f"{best_player}: {rationale_snippets[0]}"
+    return f"{best_player}: Demonstrates comparatively stronger execution signals in {theme_name}."
+
+
+def generate_openai_insights(selected_company, sector_name, rows, lagging_themes):
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
+
+    default_best_practices = [
+        {
+            "theme": row["theme"],
+            "bestPlayer": row["bestPlayer"],
+            "bestPractice": summarize_best_practice_from_rationale(row["bestPlayer"], row.get("bestPracticeSource"), row["theme"]),
+        }
+        for row in rows
+    ]
+
+    if not api_key:
+        return {
+            "priorityMoves": build_fallback_priority_moves(selected_company, lagging_themes),
+            "bestPractices": default_best_practices,
+        }
+
+    try:
+        from openai import OpenAI
+
+        client = OpenAI(api_key=api_key)
+
+        compact_rows = []
+        for row in rows:
+            compact_rows.append(
+                {
+                    "theme": row["theme"],
+                    "selectedScore": row["overallStatus"].get("finalScore"),
+                    "peerAverage": row["peerAverage"],
+                    "bestPlayer": row["bestPlayer"],
+                    "bestScore": row["bestScore"],
+                    "bestPracticeSource": row.get("bestPracticeSource", {}),
+                }
+            )
+
+        prompt_payload = {
+            "sector": sector_name,
+            "selectedCompany": selected_company,
+            "rows": compact_rows,
+            "instruction": "Return JSON only with keys: priorityMoves (3 concise strings), bestPractices (array of objects with theme, bestPlayer, bestPractice).",
+        }
+
+        response = client.chat.completions.create(
+            model=model_name,
+            temperature=0.2,
+            response_format={"type": "json_object"},
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert sustainability strategy advisor for consulting partners. Keep outputs concise, practical, and deal-oriented.",
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(prompt_payload, ensure_ascii=False),
+                },
+            ],
+        )
+
+        content = response.choices[0].message.content or "{}"
+        parsed = json.loads(content)
+
+        priority_moves = [str(item).strip() for item in (parsed.get("priorityMoves") or []) if str(item).strip()]
+        if len(priority_moves) < 2:
+            priority_moves = build_fallback_priority_moves(selected_company, lagging_themes)
+
+        best_practices_raw = parsed.get("bestPractices") or []
+        best_practices = []
+        for item in best_practices_raw:
+            if not isinstance(item, dict):
+                continue
+            theme = str(item.get("theme") or "").strip()
+            best_player = str(item.get("bestPlayer") or "").strip()
+            best_practice = str(item.get("bestPractice") or "").strip()
+            if theme and best_player and best_practice:
+                best_practices.append(
+                    {
+                        "theme": theme,
+                        "bestPlayer": best_player,
+                        "bestPractice": best_practice,
+                    }
+                )
+
+        if not best_practices:
+            best_practices = default_best_practices
+
+        return {
+            "priorityMoves": priority_moves,
+            "bestPractices": best_practices,
+        }
+    except Exception:
+        return {
+            "priorityMoves": build_fallback_priority_moves(selected_company, lagging_themes),
+            "bestPractices": default_best_practices,
+        }
+
+
+def build_commitment_summary(sector_name, selected_company, sector_companies, scorecard_context):
+    breakdown_dataset = load_commitment_breakdown_dataset()
+    sector_rows = [
+        row for row in breakdown_dataset
+        if (row.get("Sector") or "").strip() == sector_name
+    ]
+
+    def compute_row_metrics(company_name):
+        def read_breakdown_metric(breakdown_obj, aliases):
+            if not isinstance(breakdown_obj, dict):
+                return 0.0
+
+            normalized_lookup = {}
+            for key, value in breakdown_obj.items():
+                normalized_key = "".join(character.lower() for character in str(key or "") if character.isalnum())
+                normalized_lookup[normalized_key] = value
+
+            for alias in aliases:
+                normalized_alias = "".join(character.lower() for character in str(alias or "") if character.isalnum())
+                if normalized_alias in normalized_lookup:
+                    try:
+                        return float(normalized_lookup[normalized_alias] or 0)
+                    except (TypeError, ValueError):
+                        return 0.0
+            return 0.0
+
+        matched = next(
+            (
+                row for row in sector_rows
+                if normalize_company_name(row.get("Company") or "") == normalize_company_name(company_name)
+            ),
+            None,
+        )
+        breakdown = (matched or {}).get("Performance Breakdown") or {}
+        achieved = read_breakdown_metric(breakdown, ["Achieved"])
+        on_track = read_breakdown_metric(breakdown, ["On track", "On-Track", "OnTrack"])
+        off_track = read_breakdown_metric(breakdown, ["Off track", "Off-Track", "OffTrack"])
+        no_reporting = read_breakdown_metric(breakdown, ["Not Reporting", "No Reporting", "No-reporting", "NoReporting"])
+        no_target = read_breakdown_metric(breakdown, ["No-target", "No target", "NoTarget", "Others"])
+        total = achieved + on_track + off_track + no_reporting + no_target
+        achieved_on_track = achieved + on_track
+
+        achieved_on_track_pct = round((achieved_on_track / total) * 100, 2) if total else 0.0
+        off_track_pct = round((off_track / total) * 100, 2) if total else 0.0
+        return {
+            "company": company_name,
+            "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+            "totalCommitments": int(total),
+            "achievedOnTrackPct": achieved_on_track_pct,
+            "offTrackPct": off_track_pct,
+            "breakdown": {
+                "achieved": achieved,
+                "onTrack": on_track,
+                "offTrack": off_track,
+                "noReporting": no_reporting,
+                "noTarget": no_target,
+                "others": no_target,
+            },
+        }
+
+    selected_metrics = compute_row_metrics(selected_company)
+    peer_metrics = [
+        compute_row_metrics(company_name)
+        for company_name in sector_companies
+        if normalize_company_name(company_name) != normalize_company_name(selected_company)
+    ]
+    peer_metrics.sort(key=lambda item: item["achievedOnTrackPct"], reverse=True)
+
+    ranking = [selected_metrics, *peer_metrics]
+
+    return {
+        "sector": sector_name,
+        "selectedCompany": selected_company,
+        "totalCommitments": selected_metrics["totalCommitments"],
+        "achievedOnTrackPct": selected_metrics["achievedOnTrackPct"],
+        "offTrackPct": selected_metrics["offTrackPct"],
+        "leadingThemes": scorecard_context.get("leadingThemes", []),
+        "laggingThemes": scorecard_context.get("laggingThemes", []),
+        "ranking": ranking,
+        "themeScores": scorecard_context.get("radarThemes", []),
+    }
+
+
+@app.route("/api/auth/login", methods=["POST"])
+def login():
+    payload = request.get_json(silent=True) or {}
+    email = (payload.get("email") or "").strip().lower()
+    password = payload.get("password") or ""
+
+    if not email or not password:
+        return jsonify({"message": "Email and password are required."}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password_hash, password):
+        return jsonify({"message": "Invalid credentials."}), 401
+
+    session["user_id"] = user.id
+
+    return jsonify({
+        "message": "Login successful.",
+        "user": user.to_dict(),
+    })
+
+
+@app.route("/api/auth/logout", methods=["POST"])
+def logout():
+    session.clear()
+    return jsonify({"message": "Logged out."})
+
+
+@app.route("/api/auth/me", methods=["GET"])
+def me():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    return jsonify({"user": user.to_dict()})
+
+
+@app.route("/api/auth/change-password", methods=["POST"])
+def change_password():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    payload = request.get_json(silent=True) or {}
+    current_password = payload.get("currentPassword") or ""
+    new_password = payload.get("newPassword") or ""
+
+    if not current_password or not new_password:
+        return jsonify({"message": "Current and new passwords are required."}), 400
+
+    if len(new_password) < 6:
+        return jsonify({"message": "New password must be at least 6 characters."}), 400
+
+    if not check_password_hash(user.password_hash, current_password):
+        return jsonify({"message": "Current password is incorrect."}), 400
+
+    user.password_hash = generate_password_hash(new_password)
+    user.must_change_password = False
+    db.session.commit()
+
+    return jsonify({"message": "Password changed successfully.", "user": user.to_dict()})
+
+
+@app.route("/api/profile", methods=["GET", "PUT"])
+def profile():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    if request.method == "GET":
+        return jsonify({"user": user.to_dict()})
+
+    payload = request.get_json(silent=True) or {}
+    first_name = (payload.get("firstName") or "").strip()
+    last_name = (payload.get("lastName") or "").strip()
+
+    if not first_name or not last_name:
+        return jsonify({"message": "First name and last name are required."}), 400
+
+    user.first_name = first_name
+    user.last_name = last_name
+    db.session.commit()
+
+    return jsonify({"message": "Profile updated successfully.", "user": user.to_dict()})
+
+
+@app.route("/api/options", methods=["GET"])
+def options():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    available_sectors = get_user_available_sectors(user)
+    sector_names = [sector.name for sector in available_sectors]
+    sector_company_map = {
+        sector.name: get_ordered_company_names(sector)
+        for sector in available_sectors
+    }
+
+    return jsonify({"sectors": sector_names, "sectorCompanyMap": sector_company_map})
+
+
+@app.route("/api/material-topics/comparison", methods=["GET"])
+def material_topics_comparison():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    if not sector_name or not selected_company:
+        return jsonify({"message": "Sector and company are required."}), 400
+
+    available_sector_names = {sector.name for sector in get_user_available_sectors(user)}
+    if sector_name not in available_sector_names:
+        return jsonify({"message": "You do not have access to this sector."}), 403
+
+    dataset = load_material_topics_dataset()
+    sector_rows = [row for row in dataset if (row.get("Sector") or "").strip() == sector_name]
+    if not sector_rows:
+        return jsonify({"message": "No material topic data found for the selected sector."}), 404
+
+    selected_row = next(
+        (row for row in sector_rows if (row.get("Company") or "").strip() == selected_company),
+        None,
+    )
+    if not selected_row:
+        return jsonify({"message": "No material topic data found for the selected company."}), 404
+
+    competitor_rows = [row for row in sector_rows if (row.get("Company") or "").strip() != selected_company]
+    competitor_companies = [(row.get("Company") or "").strip() for row in competitor_rows]
+
+    competitor_topic_sets = {
+        company_name: {
+            (topic or "").strip()
+            for topic in ((row.get("Material Topics") or []))
+            if (topic or "").strip()
+        }
+        for company_name, row in zip(competitor_companies, competitor_rows)
+    }
+
+    selected_topics = [
+        (topic or "").strip()
+        for topic in (selected_row.get("Material Topics") or [])
+        if (topic or "").strip()
+    ]
+
+    rows = []
+    for topic in selected_topics:
+        competitor_matches = {
+            company_name: topic in competitor_topic_sets.get(company_name, set())
+            for company_name in competitor_companies
+        }
+        match_count = sum(1 for value in competitor_matches.values() if value)
+        rows.append(
+            {
+                "materialTopic": topic,
+                "matchCount": match_count,
+                "competitorMatches": competitor_matches,
+            }
+        )
+
+    rows.sort(key=lambda row: (-row["matchCount"], row["materialTopic"].lower()))
+
+    return jsonify(
+        {
+            "sector": sector_name,
+            "selectedCompany": selected_company,
+            "competitorCompanies": competitor_companies,
+            "rows": rows,
+        }
+    )
+
+
+@app.route("/api/recommendations", methods=["GET"])
+def recommendations():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    if not sector_name or not selected_company:
+        return jsonify({"message": "Sector and company are required."}), 400
+
+    available_sector_names = {sector.name for sector in get_user_available_sectors(user)}
+    if sector_name not in available_sector_names:
+        return jsonify({"message": "You do not have access to this sector."}), 403
+
+    dataset = load_recommendations_dataset()
+    selected_row = next(
+        (
+            row for row in dataset
+            if (row.get("Sector") or "").strip() == sector_name
+            and (row.get("Company") or "").strip() == selected_company
+        ),
+        None,
+    )
+
+    if not selected_row:
+        return jsonify({"message": "No recommendations found for this company."}), 404
+
+    actions = []
+    for action in selected_row.get("Strategic Actions") or []:
+        topic = (action.get("Topic") or "").strip()
+        details = [
+            (detail or "").strip()
+            for detail in (action.get("Details") or [])
+            if (detail or "").strip()
+        ]
+        if topic:
+            actions.append({"topic": topic, "details": details})
+
+    return jsonify({
+        "sector": sector_name,
+        "selectedCompany": selected_company,
+        "actions": actions,
+    })
+
+
+@app.route("/api/commitments/overview", methods=["GET"])
+def commitments_overview():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    sector_companies, matched_company, error = resolve_sector_and_company_or_error(user, sector_name, selected_company)
+    if error:
+        return error
+
+    scorecard_context = build_scorecard_context(sector_name, matched_company, sector_companies)
+    if not scorecard_context:
+        return jsonify({"message": "Scorecard data not available for selected company."}), 404
+
+    summary = build_commitment_summary(sector_name, matched_company, sector_companies, scorecard_context)
+    return jsonify(summary)
+
+
+@app.route("/api/scorecard", methods=["GET"])
+def scorecard():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    sector_companies, matched_company, error = resolve_sector_and_company_or_error(user, sector_name, selected_company)
+    if error:
+        return error
+
+    scorecard_context = build_scorecard_context(sector_name, matched_company, sector_companies)
+    if not scorecard_context:
+        return jsonify({"message": "Scorecard data not available for selected company."}), 404
+
+    ai_insights = generate_openai_insights(
+        matched_company,
+        sector_name,
+        scorecard_context["rows"],
+        scorecard_context.get("laggingThemes", []),
+    )
+
+    best_practice_map = {
+        item["theme"]: item
+        for item in ai_insights.get("bestPractices", [])
+        if isinstance(item, dict) and item.get("theme")
+    }
+
+    rows = []
+    for row in scorecard_context["rows"]:
+        best_item = best_practice_map.get(row["theme"])
+        rows.append(
+            {
+                "theme": row["theme"],
+                "overallStatus": row["overallStatus"],
+                "peerAverage": row["peerAverage"],
+                "bestScore": row["bestScore"],
+                "bestPlayer": best_item.get("bestPlayer") if best_item else row["bestPlayer"],
+                "bestPractice": best_item.get("bestPractice") if best_item else summarize_best_practice_from_rationale(row["bestPlayer"], row.get("bestPracticeSource"), row["theme"]),
+                "progress": row["progress"],
+            }
+        )
+
+    return jsonify(
+        {
+            "sector": sector_name,
+            "selectedCompany": matched_company,
+            "priorityMoves": ai_insights.get("priorityMoves", []),
+            "radarThemes": scorecard_context["radarThemes"],
+            "rows": rows,
+        }
+    )
+
+
+@app.route("/api/investments/insights", methods=["GET"])
+def investment_insights():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    sector_companies, matched_company, error = resolve_sector_and_company_or_error(user, sector_name, selected_company)
+    if error:
+        return error
+
+    insights = build_investment_insights(sector_name, matched_company, sector_companies)
+    return jsonify(insights)
+
+
+@app.route("/api/admin/metadata", methods=["GET"])
+def admin_metadata():
+    _, error = get_admin_user_or_error()
+    if error:
+        return error
+
+    all_sectors = [sector.name for sector in Sector.query.order_by(Sector.name.asc()).all()]
+    return jsonify({"sectors": all_sectors})
+
+
+@app.route("/api/admin/users", methods=["GET", "POST"])
+def admin_users():
+    _, error = get_admin_user_or_error()
+    if error:
+        return error
+
+    if request.method == "GET":
+        users = User.query.order_by(User.email.asc()).all()
+        return jsonify({"users": [user.to_admin_dict() for user in users]})
+
+    payload = request.get_json(silent=True) or {}
+    email = (payload.get("email") or "").strip().lower()
+    password = payload.get("password") or ""
+    first_name = (payload.get("firstName") or "").strip()
+    last_name = (payload.get("lastName") or "").strip()
+    sector_names = payload.get("sectors") or []
+    is_admin = bool(payload.get("isAdmin", False))
+
+    if not email or not password or not first_name or not last_name:
+        return jsonify({"message": "Email, password, first name and last name are required."}), 400
+
+    if len(password) < 6:
+        return jsonify({"message": "Password must be at least 6 characters."}), 400
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"message": "User with this email already exists."}), 400
+
+    sectors, missing_sectors = resolve_sector_names(sector_names)
+    if missing_sectors:
+        return jsonify({"message": f"Invalid sectors: {', '.join(missing_sectors)}"}), 400
+
+    new_user = User(
+        email=email,
+        password_hash=generate_password_hash(password),
+        first_name=first_name,
+        last_name=last_name,
+        must_change_password=True,
+        is_admin=is_admin,
+    )
+    new_user.sectors = sectors
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "User created successfully.", "user": new_user.to_admin_dict()})
+
+
+@app.route("/api/admin/users/<int:user_id>", methods=["PUT", "DELETE"])
+def admin_user_by_id(user_id):
+    admin_user, error = get_admin_user_or_error()
+    if error:
+        return error
+    if not admin_user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    target_user = db.session.get(User, user_id)
+    if not target_user:
+        return jsonify({"message": "User not found."}), 404
+
+    if request.method == "DELETE":
+        if target_user.id == admin_user.id:
+            return jsonify({"message": "You cannot delete your own account."}), 400
+        db.session.delete(target_user)
+        db.session.commit()
+        return jsonify({"message": "User deleted successfully."})
+
+    payload = request.get_json(silent=True) or {}
+    first_name = (payload.get("firstName") or "").strip()
+    last_name = (payload.get("lastName") or "").strip()
+    password = (payload.get("password") or "").strip()
+    sector_names = payload.get("sectors")
+    is_admin = payload.get("isAdmin")
+
+    if not first_name or not last_name:
+        return jsonify({"message": "First name and last name are required."}), 400
+
+    target_user.first_name = first_name
+    target_user.last_name = last_name
+
+    if isinstance(is_admin, bool):
+        if target_user.id == admin_user.id and not is_admin:
+            return jsonify({"message": "You cannot remove your own admin access."}), 400
+        target_user.is_admin = is_admin
+
+    if password:
+        if len(password) < 6:
+            return jsonify({"message": "Password must be at least 6 characters."}), 400
+        target_user.password_hash = generate_password_hash(password)
+        target_user.must_change_password = True
+
+    if sector_names is not None:
+        sectors, missing_sectors = resolve_sector_names(sector_names)
+        if missing_sectors:
+            return jsonify({"message": f"Invalid sectors: {', '.join(missing_sectors)}"}), 400
+        target_user.sectors = sectors
+
+    db.session.commit()
+
+    return jsonify({"message": "User updated successfully.", "user": target_user.to_admin_dict()})
+
+
+with app.app_context():
+    migrate_schema_if_needed()
+    db.create_all()
+    seed_sectors_and_companies()
+    seed_admin_user()
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

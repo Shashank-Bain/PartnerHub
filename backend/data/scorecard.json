@@ -1,0 +1,922 @@
+{
+  "Danone": {
+    "Air Quality": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No specific air pollutant reduction commitment is disclosed.",
+        "Ambition": "There is no defined ambition beyond regulatory compliance in the evidence.",
+        "Coverage": "The scope of the air quality commitments is not defined.",
+        "Credibility & Transparency": "No pollutant data has been disclosed.",
+        "Delivery/Status": "There is no reporting on air pollutant performance."
+      }
+    },
+    "Land & Ocean Use": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts is provided.",
+        "Ambition": "There is no ambition beyond regulatory compliance evident from the data provided.",
+        "Coverage": "No scope is defined in the evidence provided.",
+        "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact given.",
+        "Delivery/Status": "No reporting on land or marine impact is available."
+      }
+    },
+    "Hazardous Substances": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "The evidence states 'No Step 3 data found,' indicating no public commitment regarding hazardous chemicals.",
+        "Ambition": "The absence of data suggests no ambition beyond regulatory compliance.",
+        "Coverage": "The lack of evidence indicates that no scope is defined.",
+        "Credibility & Transparency": "With no data available, there is no public ingredient or chemical disclosure.",
+        "Delivery/Status": "The absence of reporting means there is no documentation on chemical phase-out progress."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 9,
+        "Coverage": 3,
+        "Credibility & Transparency": 7,
+        "Delivery/Status": 6
+      },
+      "overall": 6.6,
+      "rationale": {
+        "Existence & Specificity": "The company has a clear quantified target with a baseline and target year provided.",
+        "Ambition": "The ambition is strong with a target of 100% by 2030 using an absolute approach.",
+        "Coverage": "The coverage only mentions Danone’s production sites without identifying high water-stress areas.",
+        "Credibility & Transparency": "A recognized framework (4R approach) is used, though methodology details are limited.",
+        "Delivery/Status": "There is year-on-year reporting with a 99.3% achievement noted."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "L",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 6,
+        "Coverage": 5,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 5
+      },
+      "overall": 5.0,
+      "rationale": {
+        "Existence & Specificity": "The company has clear targets for 2050 and 2025, but specific 2030 milestones for Scope 3 are not detailed.",
+        "Ambition": "The targets include interim and long-term ambitions, but lack explicit alignment with a 1.5°C trajectory across all scopes.",
+        "Coverage": "Scope 1, 2, and some Scope 3 targets are mentioned, but there is no detailed breakdown for majority Scope 3 categories.",
+        "Credibility & Transparency": "A specific third-party validation is not mentioned, and the methodology is not clearly outlined.",
+        "Delivery/Status": "There is measurable progress reported against interim targets for Scope 1 and 2, but not for Scope 3."
+      }
+    },
+    "Biodiversity & Ecological Welfare": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 4,
+        "Coverage": 3,
+        "Credibility & Transparency": 4,
+        "Delivery/Status": 3
+      },
+      "overall": 4.0,
+      "rationale": {
+        "Existence & Specificity": "The company has clear, time-bound commitments with specific target years (2025) for deforestation-free and regenerative agriculture targets.",
+        "Ambition": "The ambition appears to be aligned with industry norms, but the scope and definitions are not fully detailed or provided for all areas.",
+        "Coverage": "Coverage is partially satisfied as key commodities and geographic coverage details are largely marked as N/A or not disclosed.",
+        "Credibility & Transparency": "Methodology, framework alignment, and other supporting details are not fully disclosed publicly, lowering transparency.",
+        "Delivery/Status": "The delivery status shows some progress in regenerative agriculture (39%), but other areas lack reporting data."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 9,
+        "Ambition": 8,
+        "Coverage": 6,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 6
+      },
+      "overall": 6.8,
+      "rationale": {
+        "Existence & Specificity": "Quantified and timebound targets exist for both recyclable packaging and virgin plastic reduction with clear baselines and target years.",
+        "Ambition": "Targets like 100% recyclable packaging by 2030 and a 30% reduction in virgin plastic align well with strong industry ambitions.",
+        "Coverage": "While targets cover general packaging, geographic and asset coverage details are not available, leading to partial satisfaction.",
+        "Credibility & Transparency": "There is alignment with some framework for packaging goals, but details on methodology validation and comprehensive reporting are lacking.",
+        "Delivery/Status": "Data shows substantial progress on some targets (85% recyclability), but virgin plastic reduction is off-track and other commitments lack reporting."
+      }
+    }
+  },
+  "Kraft-Heinz": {
+    "Land & Ocean Use": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "There is no public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+        "Ambition": "There is no defined ambition beyond regulatory compliance.",
+        "Coverage": "There is no scope defined for this theme.",
+        "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
+        "Delivery/Status": "There is no reporting on land or marine impact."
+      }
+    },
+    "Air Quality": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No detailed air pollutant reduction commitment is disclosed.",
+        "Ambition": "There is no defined ambition beyond regulatory compliance.",
+        "Coverage": "No scope is defined for the commitments.",
+        "Credibility & Transparency": "No pollutant data is disclosed.",
+        "Delivery/Status": "There is no reporting on air pollutant performance."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public water target or specific commitments are disclosed.",
+        "Ambition": "No quantified ambition is provided in the evidence.",
+        "Coverage": "There is no defined scope or details on coverage in the evidence.",
+        "Credibility & Transparency": "There is no baseline or reporting framework disclosed.",
+        "Delivery/Status": "No water data or status updates are disclosed in the evidence."
+      }
+    },
+    "Hazardous Substances": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "Commitment not disclosed in provided data.",
+        "Ambition": "Commitment not disclosed in provided data.",
+        "Coverage": "Commitment not disclosed in provided data.",
+        "Credibility & Transparency": "Commitment not disclosed in provided data.",
+        "Delivery/Status": "Commitment not disclosed in provided data."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "L",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 7,
+        "Coverage": 7,
+        "Credibility & Transparency": 4,
+        "Delivery/Status": 5
+      },
+      "overall": 6.2,
+      "rationale": {
+        "Existence & Specificity": "The company has multiple quantified targets with timelines, such as 100% recyclable packaging by 2025 and 20% virgin plastic reduction by 2030.",
+        "Ambition": "The targets are ambitious with high percentages and absolute values, but they do not exceed industry norms significantly.",
+        "Coverage": "The initiatives cover global packaging and include programs like TerraCycle, though details on some commitments are sparse.",
+        "Credibility & Transparency": "There is limited methodology or validation mentioned, and not all targets are transparently reported.",
+        "Delivery/Status": "The company is on track with its packaging target, but lacks progress reporting on virgin plastic and other areas."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "A",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 5,
+        "Coverage": 5,
+        "Credibility & Transparency": 2,
+        "Delivery/Status": 1
+      },
+      "overall": 3.8,
+      "rationale": {
+        "Existence & Specificity": "There is a high-level target for net zero emissions by 2050 with intensity and absolute targets defined.",
+        "Ambition": "The ambition includes a long-term net zero goal by 2050 and a 50% reduction by 2030, but lacks near-term detailed plans.",
+        "Coverage": "Targets mention Scope 1, 2, and 3 emissions, but lack geographical and categorical breakdowns.",
+        "Credibility & Transparency": "There is no specified methodology, validation, or framework alignment for the commitments.",
+        "Delivery/Status": "There is no available data on current progress, milestones, or trajectory against targets."
+      }
+    },
+    "Biodiversity & Ecological Welfare": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 9,
+        "Ambition": 6,
+        "Coverage": 5,
+        "Credibility & Transparency": 4,
+        "Delivery/Status": 5
+      },
+      "overall": 5.8,
+      "rationale": {
+        "Existence & Specificity": "The company sets a clear, time-bound target of 100% deforestation-free supply chain by 2025 with a baseline year and metric.",
+        "Ambition": "The ambition is absolute and aligns with industry norms, but lacks interim targets.",
+        "Coverage": "The commitment covers major deforestation-linked commodities but lacks geographic specification.",
+        "Credibility & Transparency": "The policy is detailed, but lacks framework alignment and validation status disclosure.",
+        "Delivery/Status": "Reporting shows 64% progress, indicating some measurable advancement, but the initiative is off-track."
+      }
+    }
+  },
+  "Nestle": {
+    "Air Quality": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "The evidence shows no air pollutant reduction commitment beyond general statements.",
+        "Ambition": "No defined ambition beyond regulatory compliance is present in the evidence.",
+        "Coverage": "There is no scope defined according to the evidence provided.",
+        "Credibility & Transparency": "The evidence indicates no pollutant data is disclosed.",
+        "Delivery/Status": "There is no reporting on air pollutant performance according to the provided data."
+      }
+    },
+    "Land & Ocean Use": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No Step 3 data found, indicating no public commitment.",
+        "Ambition": "No Step 3 data found, showing no defined ambition beyond compliance.",
+        "Coverage": "No Step 3 data found, indicating no scope defined.",
+        "Credibility & Transparency": "No Step 3 data found, meaning no sourcing or impact disclosure.",
+        "Delivery/Status": "No Step 3 data found, reflecting no reporting on impact."
+      }
+    },
+    "Hazardous Substances": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "Commitment not disclosed in provided data.",
+        "Ambition": "Commitment not disclosed in provided data.",
+        "Coverage": "Commitment not disclosed in provided data.",
+        "Credibility & Transparency": "Commitment not disclosed in provided data.",
+        "Delivery/Status": "Commitment not disclosed in provided data."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "L",
+      "scores": {
+        "Existence & Specificity": 7,
+        "Ambition": 8,
+        "Coverage": 9,
+        "Credibility & Transparency": 9,
+        "Delivery/Status": 7
+      },
+      "overall": 8.0,
+      "rationale": {
+        "Existence & Specificity": "The company has a fully defined net-zero target for 2050 with a clear 2030 milestone.",
+        "Ambition": "The ambition is aligned with a 1.5°C target, aiming for a 50% reduction by 2030, indicating substantial near-term reductions.",
+        "Coverage": "The commitment covers Scope 1, 2, and 3 with total geographic and value chain inclusion.",
+        "Credibility & Transparency": "The targets are approved by the SBTi, with a clear baseline and recalculation policy.",
+        "Delivery/Status": "There is consistent reporting against milestones, with a 20.38% reduction achieved from the 2018 baseline."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 7,
+        "Coverage": 8,
+        "Credibility & Transparency": 4,
+        "Delivery/Status": 6
+      },
+      "overall": 6.6,
+      "rationale": {
+        "Existence & Specificity": "Quantified targets with clear baselines and target years are provided, covering major areas like recyclability and virgin plastic use.",
+        "Ambition": "Ambitious targets, such as 95% reusable packaging by 2025, are set in line with industry norms.",
+        "Coverage": "The commitments cover the entire packaging portfolio and all relevant geographic and asset aspects.",
+        "Credibility & Transparency": "Disclosure lacks validation status and framework alignment, although methodologies such as transformation projects are mentioned.",
+        "Delivery/Status": "Substantial progress reported on key targets, but not all milestones are on track."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 8,
+        "Coverage": 7,
+        "Credibility & Transparency": 8,
+        "Delivery/Status": 5
+      },
+      "overall": 6.8,
+      "rationale": {
+        "Existence & Specificity": "A clear target for AWS certification with a baseline and target year, but lacks specifics for overall water reduction/replenishment.",
+        "Ambition": "The target of AWS certification by 2025 is meaningful with interim goals identified, showing ambition.",
+        "Coverage": "Targets are specifically for Nestlé Waters sites, indicating good coverage but limited to a specific asset category.",
+        "Credibility & Transparency": "The use of the AWS certification process aligns with recognized frameworks, providing strong transparency and credibility.",
+        "Delivery/Status": "Reporting indicates 39.8% completion, but overall progress is off-track with significant commitments not reported."
+      }
+    },
+    "Biodiversity & Ecological Welfare": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 9,
+        "Ambition": 8,
+        "Coverage": 9,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 8
+      },
+      "overall": 7.8,
+      "rationale": {
+        "Existence & Specificity": "The company sets a clear, time-bound ambition for a deforestation-free supply chain (100% by 2025) and regenerative agriculture targets (20% by 2025, 50% by 2030).",
+        "Ambition": "The targets are ambitious with 100% deforestation-free by 2025 and sizable regenerative goals, but lack interim milestones for deforestation.",
+        "Coverage": "The commitments cover all primary supply chains and include key commodities such as palm oil, soy, and cocoa with total geographic and asset coverage.",
+        "Credibility & Transparency": "The methodology for verification is internal, and there is no disclosed alignment with recognized frameworks or external validation.",
+        "Delivery/Status": "The company is making progress with 93.5% achievement towards deforestation targets and has reached its 2025 regenerative agriculture target."
+      }
+    }
+  },
+  "Pepsi": {
+    "Air Quality": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "Commitment not disclosed in provided data, indicating no specificity on air pollutant reduction commitment.",
+        "Ambition": "There is no defined ambition beyond regulatory compliance due to lack of disclosed commitments.",
+        "Coverage": "No scope is defined as commitments are not disclosed.",
+        "Credibility & Transparency": "No pollutant data is disclosed, affecting credibility and transparency.",
+        "Delivery/Status": "There is no reporting on air pollutant performance as per the provided data."
+      }
+    },
+    "Hazardous Substances": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public commitment regarding hazardous chemicals; only general compliance statements found.",
+        "Ambition": "There is no ambition beyond regulatory compliance.",
+        "Coverage": "No scope is defined.",
+        "Credibility & Transparency": "No public ingredient or chemical disclosure available.",
+        "Delivery/Status": "There is no reporting on chemical phase-out progress."
+      }
+    },
+    "Land & Ocean Use": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "There is no evidence of a public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+        "Ambition": "There is no evidence of any ambition defined beyond regulatory compliance.",
+        "Coverage": "There is no evidence showing a defined scope.",
+        "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
+        "Delivery/Status": "There is no reporting on land or marine impact."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 7,
+        "Ambition": 7,
+        "Coverage": 5,
+        "Credibility & Transparency": 2,
+        "Delivery/Status": 6
+      },
+      "overall": 5.4,
+      "rationale": {
+        "Existence & Specificity": "The company has set quantified, time-bound reduction targets for Scopes 1, 2, and 3 with defined baselines.",
+        "Ambition": "Targets include a 50% reduction by 2030, which aligns with sector norms, though the specific alignment with norms is not detailed.",
+        "Coverage": "Scope 1 and 2 are fully covered, but material Scope 3 categories are included without geographic or detailed value chain coverage.",
+        "Credibility & Transparency": "There is no reference to any recognized standards or validation, severely impacting credibility.",
+        "Delivery/Status": "There is evidence of progress with current reductions reported, but without detailed annual milestones."
+      }
+    },
+    "Biodiversity & Ecological Welfare": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 7,
+        "Ambition": 8,
+        "Coverage": 4,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 5
+      },
+      "overall": 5.4,
+      "rationale": {
+        "Existence & Specificity": "The company has clear, time-bound deforestation-free supply chain and regenerative agriculture targets with specified years.",
+        "Ambition": "Targets include 100% deforestation-free by 2025 and widespread regenerative practices by 2030, showing strong ambition.",
+        "Coverage": "Coverage is partially satisfied as high-risk commodities are addressed, but geographic details and some value chain specifics are missing.",
+        "Credibility & Transparency": "The commitment lacks public disclosure of frameworks or validation details, and framework alignment is absent.",
+        "Delivery/Status": "More than 90% progress is reported for deforestation-free targets, but regenerative agriculture shows 66% with no milestones reported."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 5,
+        "Ambition": 5,
+        "Coverage": 3,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 3
+      },
+      "overall": 4.2,
+      "rationale": {
+        "Existence & Specificity": "There are clear quantified targets for 2025 and 2030 with baselines, although details are inconsistent.",
+        "Ambition": "Targets are ambitious for 2030, but lack detailed numerical values for some commitments.",
+        "Coverage": "Commitments partially cover high-risk areas but lack geographic and value chain specifics.",
+        "Credibility & Transparency": "Alignment with AWS Standard provides some credibility but lacks evidence of complete implementation.",
+        "Delivery/Status": "There is a lack of reporting on progress and achievements, with minimal data provided."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 8,
+        "Coverage": 5,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 5
+      },
+      "overall": 5.8,
+      "rationale": {
+        "Existence & Specificity": "There is a quantified target with 97% recyclable packaging by 2030, with a baseline set in 2022.",
+        "Ambition": "The ambition target of 97% recyclability by 2030 aligns well with industry norms of significant improvement.",
+        "Coverage": "The targets cover primary and secondary packaging, but geographic scope and value chain coverage are not specified.",
+        "Credibility & Transparency": "There is no mention of recognized standards or methodologies, reducing transparency.",
+        "Delivery/Status": "Progress is measurable with recyclability at 93% by 2024 but lacks detailed milestone reporting."
+      }
+    }
+  },
+  "Unilever": {
+    "Air Quality": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "There is no specific commitment disclosed in the provided data.",
+        "Ambition": "There is no ambition defined beyond general compliance since no specific goals are disclosed.",
+        "Coverage": "The scope of the air quality initiatives is not defined in the evidence provided.",
+        "Credibility & Transparency": "No pollutant data has been disclosed in the provided evidence.",
+        "Delivery/Status": "There is no reporting on the air quality commitments or performance."
+      }
+    },
+    "Land & Ocean Use": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No Step 3 data found, indicating no public commitment related to land use or marine ecosystems.",
+        "Ambition": "No information provided, signifying no ambition beyond regulatory compliance.",
+        "Coverage": "Lack of evidence indicates no defined scope in the documentation.",
+        "Credibility & Transparency": "Absence of data reflects no disclosure of sourcing footprint or ecosystem impact.",
+        "Delivery/Status": "No reporting on land or marine impact is evident from the data."
+      }
+    },
+    "Hazardous Substances": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "Commitment not disclosed in provided data.",
+        "Ambition": "Commitment not disclosed in provided data.",
+        "Coverage": "Commitment not disclosed in provided data.",
+        "Credibility & Transparency": "Commitment not disclosed in provided data.",
+        "Delivery/Status": "Commitment not disclosed in provided data."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 3,
+        "Ambition": 4,
+        "Coverage": 3,
+        "Credibility & Transparency": 4,
+        "Delivery/Status": 1
+      },
+      "overall": 3.0,
+      "rationale": {
+        "Existence & Specificity": "The evidence shows some quantified targets, but not consistently across all commitments.",
+        "Ambition": "There are specific percentages and timelines in the targets, but these are not comprehensive.",
+        "Coverage": "Scope 3 is defined for some targets, but not all scopes are addressed, nor is geographic coverage specified.",
+        "Credibility & Transparency": "Some methodology is mentioned, but transparency is lacking in baseline details and validation status.",
+        "Delivery/Status": "There is no emissions reporting or clear progress data provided for most commitments."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 5,
+        "Coverage": 6,
+        "Credibility & Transparency": 2,
+        "Delivery/Status": 3
+      },
+      "overall": 4.4,
+      "rationale": {
+        "Existence & Specificity": "A clear quantified target is given for 100 locations by 2030 with a baseline in 2021.",
+        "Ambition": "While targets are absolute and for water-stressed areas, there are no interim targets or specific percentages beyond the number of locations.",
+        "Coverage": "Scope includes water-stressed areas but only partial asset coverage and no categorical breakdowns.",
+        "Credibility & Transparency": "There's no alignment with recognized frameworks or specified methodology, reducing credibility.",
+        "Delivery/Status": "Progress is poorly detailed with significant gaps, showing 21% achieved without further status reporting."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "L",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 6,
+        "Coverage": 5,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 3
+      },
+      "overall": 5.0,
+      "rationale": {
+        "Existence & Specificity": "The company has multiple quantified targets with clear definitions and timelines for recyclable and virgin plastic reduction.",
+        "Ambition": "The ambition meets industry norms with clear absolute percentage targets but does not significantly exceed typical expectations.",
+        "Coverage": "The commitments cover a significant portion of sales and are geographically widespread but do not extend globally across all assets and materials.",
+        "Credibility & Transparency": "Limited transparency is evident as methodologies are not specified and there are no external assurances or framework alignments.",
+        "Delivery/Status": "Progress is on-track for recyclable packaging but off-track for virgin plastic reduction, with no evidence of consistent multi-year progress."
+      }
+    },
+    "Biodiversity & Ecological Welfare": {
+      "bucket": "L",
+      "scores": {
+        "Existence & Specificity": 6,
+        "Ambition": 5,
+        "Coverage": 4,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 5
+      },
+      "overall": 4.6,
+      "rationale": {
+        "Existence & Specificity": "The company provides multiple quantified, time-bound commitments but lacks clear specificity for some targets.",
+        "Ambition": "There is evidence of ambition aligned with global biodiversity goals, but some commitments lack detail and timelines.",
+        "Coverage": "The commitments cover various high-risk areas but lack global geographical specificity in their definitions.",
+        "Credibility & Transparency": "There is insufficient transparency regarding methodologies and third-party validation.",
+        "Delivery/Status": "There is demonstrated progress in some areas, but not across all commitments, indicating partial achievement."
+      }
+    }
+  },
+  "Anglo-American": {
+    "Material Use, Waste & Circularity": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "The evidence shows no public commitment regarding waste rock, tailings reduction, or material efficiency.",
+        "Ambition": "There is no ambition beyond regulatory compliance as no commitments are disclosed.",
+        "Coverage": "No scope is defined for the commitments in the provided evidence.",
+        "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
+        "Delivery/Status": "There is no reporting on waste or material efficiency performance."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 6,
+        "Coverage": 5,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 4
+      },
+      "overall": 5.2,
+      "rationale": {
+        "Existence & Specificity": "The company has a quantified target for 50% freshwater withdrawal reduction by 2030 with specified baseline and target years.",
+        "Ambition": "The ambition shows a specific percentage reduction target but lacks interim and intensity targets.",
+        "Coverage": "The coverage mentions 19 sites in water-scarce areas but lacks full information on all operated sites.",
+        "Credibility & Transparency": "There is no clear methodology or validation status disclosed, and alignment is only mentioned with the Sustainability-Linked Financing Framework.",
+        "Delivery/Status": "There is reporting of 27% progress but the trajectory is off-track, with no detailed milestones."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 7,
+        "Ambition": 5,
+        "Coverage": 6,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 4
+      },
+      "overall": 5.0,
+      "rationale": {
+        "Existence & Specificity": "The company provides quantified targets for Scope 1, 2, and 3 with defined baseline and target years, meeting basic specificity requirements.",
+        "Ambition": "While absolute targets are mentioned, the ambition is moderate with clear numbers but no interim milestones, and current trajectories are off-track.",
+        "Coverage": "Scope 1, 2, and 3 are partially covered across assets, though value chain details are lacking, indicating moderate coverage.",
+        "Credibility & Transparency": "Reporting lacks methodology and standards alignment details, though some target verification is noted, indicating low transparency.",
+        "Delivery/Status": "Annual reporting shows off-track progress with Scope 1+2 achieving only 14% reduction, lacking complete tracking against interim milestones."
+      }
+    }
+  },
+  "BHP": {
+    "Material Use, Waste & Circularity": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "There is no public commitment regarding waste rock, tailings reduction, or material efficiency; only regulatory compliance statements noted.",
+        "Ambition": "There is no ambition beyond regulatory compliance as no targets are disclosed.",
+        "Coverage": "No scope is defined as commitments are not disclosed in the provided data.",
+        "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
+        "Delivery/Status": "There is no reporting on waste or material efficiency performance."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 9,
+        "Ambition": 7,
+        "Coverage": 8,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 8
+      },
+      "overall": 7.0,
+      "rationale": {
+        "Existence & Specificity": "The company has clear quantified absolute reduction targets with a defined baseline year and target year, including interim milestones.",
+        "Ambition": "The ambition aligns with sector pathways for Scope 1 & 2 but has less clarity and ambition for Scope 3 targets.",
+        "Coverage": "Scope 1 & 2 are fully covered across operated assets, although Scope 3 coverage lacks detail.",
+        "Credibility & Transparency": "There is no reporting aligned with recognized standards and limited information on methodology and framework alignment.",
+        "Delivery/Status": "The company shows measurable reductions in operational emissions with annual reporting exceeding baseline expectations."
+      }
+    },
+    "Water Stewardship": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 7,
+        "Ambition": 6,
+        "Coverage": 5,
+        "Credibility & Transparency": 3,
+        "Delivery/Status": 2
+      },
+      "overall": 4.6,
+      "rationale": {
+        "Existence & Specificity": "Quantified water reduction targets are provided with a defined baseline year and target year.",
+        "Ambition": "The targets include specific percentages and timelines, though interim targets are lacking.",
+        "Coverage": "Targets are defined for specific operations, but only cover segments of operations without inclusion of water-stressed regions.",
+        "Credibility & Transparency": "Lack of alignment with recognized standards and absence of methodology or validation reduces transparency.",
+        "Delivery/Status": "There is no reported year-on-year progress or measurable improvements, indicating substantial gaps."
+      }
+    }
+  },
+  "Glencore": {
+    "Water Stewardship": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public water-related commitment is disclosed in the provided data.",
+        "Ambition": "No ambition beyond compliance with permits is indicated in the provided data.",
+        "Coverage": "No scope is defined for water commitments in the provided data.",
+        "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data.",
+        "Delivery/Status": "No reporting on water performance is available in the provided data."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "The evidence indicates no public commitment regarding waste rock, tailings reduction, or material efficiency.",
+        "Ambition": "The evidence shows no ambition beyond regulatory compliance.",
+        "Coverage": "There is no defined scope in the commitments provided.",
+        "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
+        "Delivery/Status": "There is no reporting on waste or material efficiency performance."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 7,
+        "Coverage": 6,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 4
+      },
+      "overall": 6.0,
+      "rationale": {
+        "Existence & Specificity": "Quantified targets are provided for both Scope 1, 2, and 3 emissions with interim milestones and a defined baseline and target year.",
+        "Ambition": "The absolute reduction targets for various years show ambition but only somewhat align with sector pathways.",
+        "Coverage": "Targets cover Scope 1, 2, and 3 including a stated geographic and asset coverage, but lack detailed evidence for full value chain inclusion.",
+        "Credibility & Transparency": "Methodology and alignment are mentioned but lack full disclosure of a recalculation approach or robust validation status.",
+        "Delivery/Status": "While some progress in reductions is noted, reporting against the baseline and achievement status is inconsistent and not fully transparent."
+      }
+    }
+  },
+  "Rio-Tinto": {
+    "Water Stewardship": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "The commitment is not disclosed in the provided data.",
+        "Ambition": "There is no ambition beyond compliance disclosed.",
+        "Coverage": "No scope is defined in the provided evidence.",
+        "Credibility & Transparency": "No data on water withdrawal, consumption, or discharge is disclosed.",
+        "Delivery/Status": "There is no reporting on water performance."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "There is no public commitment regarding waste rock, tailings reduction, or material efficiency.",
+        "Ambition": "The evidence shows no ambition beyond regulatory compliance.",
+        "Coverage": "No scope is defined in the evidence provided.",
+        "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
+        "Delivery/Status": "There is no reporting on waste or material efficiency performance."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 7,
+        "Coverage": 8,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 4
+      },
+      "overall": 6.4,
+      "rationale": {
+        "Existence & Specificity": "The company has clear quantified targets with defined baseline and target years for Scope 1 and 2, Scope 3, and net zero by 2050.",
+        "Ambition": "The targets show substantial ambition with long-term goals aligned with significant reductions by 2025 and 2050, although some targets are off-track.",
+        "Coverage": "Scope 1 and 2 are almost fully covered across operations, but there is partial coverage for Scope 3, focusing on specific elements.",
+        "Credibility & Transparency": "While methodology aligns with 1.5°C pathways, lack of validation and framework alignment details reduces the score.",
+        "Delivery/Status": "There are measurable reductions in operational emissions, but progress is behind the set trajectory and reporting is incomplete for some scopes."
+      }
+    }
+  },
+  "Teck": {
+    "Water Stewardship": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public water-related commitment is disclosed, only compliance statements are missing.",
+        "Ambition": "There is no indication of ambition beyond compliance with permits.",
+        "Coverage": "There is no defined scope for water stewardship commitments.",
+        "Credibility & Transparency": "No data on water withdrawal, consumption, or discharge is disclosed.",
+        "Delivery/Status": "There is no reporting on water performance available."
+      }
+    },
+    "Material Use, Waste & Circularity": {
+      "bucket": "X",
+      "scores": {
+        "Existence & Specificity": 1,
+        "Ambition": 1,
+        "Coverage": 1,
+        "Credibility & Transparency": 1,
+        "Delivery/Status": 1
+      },
+      "overall": 1.0,
+      "rationale": {
+        "Existence & Specificity": "No public commitments regarding waste rock, tailings reduction, or material efficiency are disclosed.",
+        "Ambition": "No evidence of ambition beyond regulatory compliance is disclosed.",
+        "Coverage": "No defined scope for commitments is provided in the evidence.",
+        "Credibility & Transparency": "No disclosure of waste volumes or tailings data is available.",
+        "Delivery/Status": "No reporting on waste or material efficiency performance is present."
+      }
+    },
+    "GHG Emissions": {
+      "bucket": "P",
+      "scores": {
+        "Existence & Specificity": 8,
+        "Ambition": 7,
+        "Coverage": 6,
+        "Credibility & Transparency": 5,
+        "Delivery/Status": 5
+      },
+      "overall": 6.2,
+      "rationale": {
+        "Existence & Specificity": "The company has a quantified absolute reduction target with a defined baseline and target year as well as interim milestones.",
+        "Ambition": "The targets have specific percentages and timelines, showing meaningful ambition for Scope 1 & 2.",
+        "Coverage": "Scope 1 & 2 are covered, but there is limited information on Scope 3 and geographic coverage details.",
+        "Credibility & Transparency": "There is some method and framework alignment but limited evidence on reporting standards and validation.",
+        "Delivery/Status": "There is annual tracking against the baseline, with progress reported, but more detailed reductions would strengthen this dimension."
+      }
+    }
+  }
+}
