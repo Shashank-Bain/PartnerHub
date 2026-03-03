@@ -609,22 +609,13 @@ function App() {
     }
   }, [kpiInsights])
   const investmentTrendData = useMemo(() => {
-    const baseYear = new Date().getFullYear()
-    const years = [baseYear - 2, baseYear - 1, baseYear]
-    const seed = hashString(`${selectedSector || ''}-${selectedCompany || ''}-investment-trend`)
+    const trendRows = investmentInsights?.sustainabilityTrend || []
+    if (trendRows.length) {
+      return trendRows
+    }
 
-    return years.map((year, index) => {
-      const drift = ((seed + index * 13) % 21) - 10
-      const sustainabilityPct = Math.max(20, Math.min(88, 50 + drift + index * 4))
-      const peerAvgPct = Math.max(18, Math.min(90, sustainabilityPct + ((seed + index * 7) % 9) - 4))
-
-      return {
-        year: String(year),
-        sustainabilityPct,
-        peerAvgPct,
-      }
-    })
-  }, [selectedSector, selectedCompany])
+    return []
+  }, [investmentInsights])
   const investmentFocusMatrix = useMemo(() => {
     const fallbackTopics = ['Energy Efficiency', 'Circularity', 'Low-Carbon Supply Chain']
 
@@ -1714,8 +1705,19 @@ function App() {
                   {(investmentInsights.timeline?.years || []).map((yearBlock) => (
                     <section key={yearBlock.year} className="timeline-year-column">
                       <header className="timeline-year-head">
-                        <h4>{yearBlock.year}</h4>
-                        <p>{yearBlock.summary}</p>
+                        <div className="timeline-year-head-top">
+                          <h4>{yearBlock.year}</h4>
+                          <span className="timeline-year-count-pill">{yearBlock.dealCount ?? (yearBlock.events || []).length} Deals</span>
+                        </div>
+                        <ul className="timeline-year-insight-list">
+                          {((yearBlock.insightPoints || []).length
+                            ? (yearBlock.insightPoints || [])
+                            : [yearBlock.summary || 'No yearly strategy summary available.'])
+                            .slice(0, 3)
+                            .map((point, pointIndex) => (
+                              <li key={`${yearBlock.year}-insight-${pointIndex}`}>{point}</li>
+                            ))}
+                        </ul>
                       </header>
 
                       <div className="timeline-event-list">
@@ -2112,10 +2114,19 @@ function App() {
                     </section>
 
                     <section className="investment-strategy-block tone-neutral">
-                      <h4>Top Sustainability Topics</h4>
+                      <h4>{selectedCompany} Insights</h4>
                       <ul className="investment-simple-list">
-                        {(investmentInsights.topSustainabilityTopics || []).slice(0, 2).map((topic) => (
-                          <li key={topic}>{topic}</li>
+                        {(investmentInsights.narrative?.focusCompanyInsights || []).slice(0, 3).map((line, index) => (
+                          <li key={`fc-insight-${index}`}>{line}</li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section className="investment-strategy-block tone-neutral">
+                      <h4>Peer Insights</h4>
+                      <ul className="investment-simple-list">
+                        {(investmentInsights.narrative?.peerInsights || []).slice(0, 3).map((line, index) => (
+                          <li key={`peer-insight-${index}`}>{line}</li>
                         ))}
                       </ul>
                     </section>

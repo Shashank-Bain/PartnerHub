@@ -555,6 +555,7 @@ def build_strategy_fallback(selected_company, combined_events, topic_counts, reg
             ],
             "majorDeals": [],
             "yearlySummaries": {},
+            "yearlyInsights": {},
         }
 
     sorted_topics = sorted(topic_counts.items(), key=lambda item: (-item[1], item[0].lower()))
@@ -585,6 +586,7 @@ def build_strategy_fallback(selected_company, combined_events, topic_counts, reg
         )
 
     yearly = {}
+    yearly_insights = {}
     events_by_year = {}
     for event in combined_events:
         year = event.get("year")
@@ -603,16 +605,23 @@ def build_strategy_fallback(selected_company, combined_events, topic_counts, reg
 
         top_topic = sorted(year_topics.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
         top_region = sorted(year_regions.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
-        yearly[str(year)] = truncate_text(
+        year_key = str(year)
+        yearly[year_key] = truncate_text(
             f"In {year}, {selected_company} concentrated on {top_topic} in {top_region}; potential value remains in under-covered themes and regions.",
             190,
         )
+        yearly_insights[year_key] = [
+            truncate_text(f"{len(events)} sustainability deals executed.", 120),
+            truncate_text(f"Theme concentration favored {top_topic}.", 120),
+            truncate_text(f"Regional focus centered on {top_region}.", 120),
+        ]
 
     return {
         "investmentFocus": "Prioritize high-conviction sustainability deal themes",
         "strategicDirection": strategy_lines,
         "majorDeals": major_deals,
         "yearlySummaries": yearly,
+        "yearlyInsights": yearly_insights,
     }
 
 
@@ -663,6 +672,7 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
                                 "strategicDirection": "array of exactly 2-3 concise strings about missed value opportunities and strategic focus",
                                 "majorDeals": "array of 1-2 objects with title,date,source,why where why explains strategy significance without using deal value",
                                 "yearlySummaries": "object of year->1 concise sentence on strategy and value-left-on-table",
+                                "yearlyInsights": "object of year->array of exactly 3 short, pithy bullet points (max 12 words each)",
                             },
                         },
                         ensure_ascii=False,
@@ -710,18 +720,36 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
                 if year_text and summary_text:
                     yearly_summaries[year_text] = truncate_text(summary_text, 220)
 
+        yearly_insights_raw = parsed.get("yearlyInsights") or {}
+        yearly_insights = {}
+        if isinstance(yearly_insights_raw, dict):
+            for year_key, points in yearly_insights_raw.items():
+                year_text = str(year_key or "").strip()
+                if not year_text or not isinstance(points, list):
+                    continue
+                cleaned_points = [
+                    truncate_text(str(point or "").strip(), 120)
+                    for point in points
+                    if str(point or "").strip()
+                ][:3]
+                if cleaned_points:
+                    yearly_insights[year_text] = cleaned_points
+
         if len(strategic_direction) < 2:
             strategic_direction = fallback["strategicDirection"]
         if not major_deals:
             major_deals = fallback["majorDeals"]
         if not yearly_summaries:
             yearly_summaries = fallback["yearlySummaries"]
+        if not yearly_insights:
+            yearly_insights = fallback.get("yearlyInsights", {})
 
         return {
             "investmentFocus": investment_focus,
             "strategicDirection": strategic_direction[:3],
             "majorDeals": major_deals[:2],
             "yearlySummaries": yearly_summaries,
+            "yearlyInsights": yearly_insights,
         }
     except Exception:
         return fallback
@@ -816,6 +844,10 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         )
     ]
 
+    def is_sustainability_classification(theme_value):
+        theme_text = str(theme_value or "").strip()
+        return bool(theme_text) and theme_text.lower() != "none"
+
     closed_deal_count = sum(
         1
         for row in selected_deals
@@ -844,13 +876,13 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         counter = {}
         for row in deals:
             theme = get_row_theme(row)
-            if not theme:
+            if not is_sustainability_classification(theme):
                 continue
             counter[theme] = counter.get(theme, 0) + 1
 
         for row in capex:
             theme = str(row.get("classification") or row.get("classification_L1") or "").strip()
-            if not theme:
+            if not is_sustainability_classification(theme):
                 continue
             counter[theme] = counter.get(theme, 0) + 1
         return counter
@@ -858,16 +890,28 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     def aggregate_region_counts(deals, capex):
         counter = {}
         for row in deals:
+            if not is_sustainability_classification(get_row_theme(row)):
+                continue
             region = str(row.get("Master Target Region") or "").strip() or "Other"
             counter[region] = counter.get(region, 0) + 1
 
         for row in capex:
+            capex_theme = str(row.get("classification") or row.get("classification_L1") or "").strip()
+            if not is_sustainability_classification(capex_theme):
+                continue
             region = str(row.get("Master Target Region") or "").strip() or "Other"
             counter[region] = counter.get(region, 0) + 1
         return counter
 
+    selected_sustainability_deals = [row for row in selected_deals if is_sustainability_classification(get_row_theme(row))]
+    selected_sustainability_capex = [
+        row
+        for row in selected_capex
+        if is_sustainability_classification(str(row.get("classification") or row.get("classification_L1") or "").strip())
+    ]
+
     recent_deals = []
-    for row in selected_deals:
+    for row in selected_sustainability_deals:
         announced_date_raw = row.get("All Transactions Announced Date") or row.get("Year")
         announced_date = parse_flexible_date(announced_date_raw)
         announced_year = parse_year(announced_date_raw)
@@ -959,7 +1003,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         peer_benchmark = [selected_benchmark, *sorted_peers]
 
     capex_highlights = []
-    for row in selected_capex:
+    for row in selected_sustainability_capex:
         capex_date_raw = row.get("All Transactions Announced Date")
         capex_date = parse_flexible_date(capex_date_raw)
         capex_year = parse_year(capex_date_raw)
@@ -1006,14 +1050,87 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     for deal in recent_deals:
         year = deal.get("year")
         theme = str(deal.get("classification") or "").strip()
-        if year in {2025, 2026} and theme:
+        if year in {2025, 2026} and is_sustainability_classification(theme):
             filtered_2526_topics[theme] = filtered_2526_topics.get(theme, 0) + 1
 
     for capex in capex_highlights:
         year = capex.get("year")
         theme = str(capex.get("classification") or "").strip()
-        if year in {2025, 2026} and theme:
+        if year in {2025, 2026} and is_sustainability_classification(theme):
             filtered_2526_topics[theme] = filtered_2526_topics.get(theme, 0) + 1
+
+    def build_sustainability_trend(selected_name, peers):
+        selected_trend_counts = {}
+        peer_trend_counts_by_company = {}
+
+        def update_counts(bucket, year, total_increment, sustainability_increment):
+            year_key = int(year)
+            if year_key not in bucket:
+                bucket[year_key] = {"total": 0, "sustainability": 0}
+            bucket[year_key]["total"] += total_increment
+            bucket[year_key]["sustainability"] += sustainability_increment
+
+        peer_names = [
+            peer_name
+            for peer_name in peers
+            if normalize_company_name(peer_name) != normalize_company_name(selected_name)
+        ]
+
+        for row in investment_deals:
+            if not isinstance(row, dict):
+                continue
+
+            year = parse_year(row.get("All Transactions Announced Date") or row.get("Year"))
+            if not year:
+                continue
+
+            row_company = str(row.get("Master Company") or "")
+            row_buyers = str(row.get("Buyers/Investors") or "")
+            is_selected = company_text_matches(row_company, selected_name) or company_text_matches(row_buyers, selected_name)
+            sustainability_flag = 1 if is_sustainability_classification(get_row_theme(row)) else 0
+
+            if is_selected:
+                update_counts(selected_trend_counts, year, 1, sustainability_flag)
+
+            for peer_name in peer_names:
+                if company_text_matches(row_company, peer_name) or company_text_matches(row_buyers, peer_name):
+                    peer_bucket = peer_trend_counts_by_company.setdefault(peer_name, {})
+                    update_counts(peer_bucket, year, 1, sustainability_flag)
+
+        all_peer_years = set()
+        for peer_year_map in peer_trend_counts_by_company.values():
+            all_peer_years.update(peer_year_map.keys())
+
+        all_years = sorted(set(selected_trend_counts.keys()) | all_peer_years)
+        if all_years:
+            all_years = all_years[-3:]
+
+        trend_rows = []
+        for year in all_years:
+            selected_totals = selected_trend_counts.get(year, {"total": 0, "sustainability": 0})
+            selected_pct = 0.0
+            if selected_totals["total"] > 0:
+                selected_pct = (selected_totals["sustainability"] / selected_totals["total"]) * 100
+
+            peer_pcts = []
+            for peer_year_map in peer_trend_counts_by_company.values():
+                peer_year_totals = peer_year_map.get(year, {"total": 0, "sustainability": 0})
+                if peer_year_totals["total"] > 0:
+                    peer_pcts.append((peer_year_totals["sustainability"] / peer_year_totals["total"]) * 100)
+
+            peer_pct = (sum(peer_pcts) / len(peer_pcts)) if peer_pcts else 0.0
+
+            trend_rows.append(
+                {
+                    "year": str(year),
+                    "sustainabilityPct": round(selected_pct, 1),
+                    "peerAvgPct": round(peer_pct, 1),
+                }
+            )
+
+        return trend_rows
+
+    sustainability_trend = build_sustainability_trend(selected_company, sector_companies)
 
     top_topics_2526 = [
         {"label": key, "count": value}
@@ -1203,10 +1320,10 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             return "the year leaned toward option-value bets and capability scouting"
         return "the year maintained a mixed portfolio posture"
 
-    def build_year_overview(events, previous_events=None):
+    def build_year_overview_points(events, previous_events=None):
         event_count = len(events)
         if event_count == 0:
-            return "No yearly strategy summary available."
+            return ["No yearly strategy summary available."]
 
         deal_type_counts = {}
         theme_counts = {}
@@ -1229,8 +1346,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         top_region, _, _ = _top_with_share(region_counts)
         top_industry, _, _ = _top_with_share(industry_counts)
 
-        opening = f"{event_count} total deals"
-        mix_phrase = f"{top_deal_type} led the mix ({round(top_deal_type_share * 100)}% by count)"
+        opening = f"{event_count} total sustainability deals"
+        mix_phrase = f"{top_deal_type} led mix ({round(top_deal_type_share * 100)}% by count)"
 
         concentration_parts = []
         if top_industry and top_industry.lower() not in {"other", "-"}:
@@ -1259,25 +1376,53 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 else:
                     yoy_phrase = "volume was flat vs prior year"
 
-        parts = [opening, mix_phrase]
+        concentration_phrase = ""
         if concentration_parts:
-            parts.append("; ".join(concentration_parts))
-        if focus_phrase:
-            parts.append(focus_phrase)
-        parts.append(strategy_phrase)
-        if yoy_phrase:
-            parts.append(yoy_phrase)
+            concentration_phrase = "; ".join(concentration_parts)
+            if focus_phrase:
+                concentration_phrase = f"{concentration_phrase}; {focus_phrase}"
+        elif focus_phrase:
+            concentration_phrase = focus_phrase
 
-        return truncate_text(". ".join(parts) + ".", 260)
+        strategy_line = strategy_phrase
+        if yoy_phrase:
+            strategy_line = f"{strategy_phrase}; {yoy_phrase}"
+
+        points = [truncate_text(opening, 120), truncate_text(mix_phrase, 120)]
+        if concentration_phrase:
+            points.append(truncate_text(concentration_phrase, 140))
+        else:
+            points.append(truncate_text(strategy_line, 140))
+
+        if len(points) < 3:
+            points.append(truncate_text(strategy_line, 140))
+
+        return points[:3]
 
     timeline_years = []
     previous_year_events = None
     for year_key in sorted(timeline_by_year.keys()):
         events = sorted(timeline_by_year[year_key], key=lambda item: item.get("date") or "")
+        ai_points = ai_strategy.get("yearlyInsights", {}).get(str(year_key), []) if isinstance(ai_strategy, dict) else []
+        fallback_points = build_year_overview_points(events, previous_year_events)
+        year_points = [
+            truncate_text(str(point or "").strip(), 140)
+            for point in (ai_points if isinstance(ai_points, list) else [])
+            if str(point or "").strip()
+        ][:3]
+        if len(year_points) < 3:
+            for point in fallback_points:
+                if len(year_points) >= 3:
+                    break
+                if point not in year_points:
+                    year_points.append(point)
+
         timeline_years.append(
             {
                 "year": year_key,
-                "summary": build_year_overview(events, previous_year_events),
+                "dealCount": len(events),
+                "summary": " ".join(year_points),
+                "insightPoints": year_points[:3],
                 "events": events,
             }
         )
@@ -1291,25 +1436,27 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         "sector": sector_name,
         "selectedCompany": selected_company,
         "summary": {
-            "dealCount": len(selected_deals),
+            "dealCount": len(selected_sustainability_deals),
             "closedDealCount": closed_deal_count,
-            "greenCapexCount": len(selected_capex),
+            "greenCapexCount": len(selected_sustainability_capex),
+            "totalCompanyDeals": len(selected_deals),
             "latestDealDate": latest_date,
             "topRegion": top_region,
             "topRegionSharePct": top_region_share_pct,
         },
         "topClassifications": top_counts(
-            [{**row, "classification": get_row_theme(row)} for row in selected_deals],
+            [{**row, "classification": get_row_theme(row)} for row in selected_sustainability_deals],
             "classification",
             limit=4,
         ),
-        "topDrivers": top_counts(selected_deals, "Primary Driver", limit=4),
-        "topBuckets": top_counts(selected_deals, "Primary Bucket", limit=4),
+        "topDrivers": top_counts(selected_sustainability_deals, "Primary Driver", limit=4),
+        "topBuckets": top_counts(selected_sustainability_deals, "Primary Bucket", limit=4),
         "investmentFocus": ai_strategy.get("investmentFocus") or "Refocus portfolio toward resilient sustainability bets",
         "regionShares": region_shares,
         "topSustainabilityTopics": top_topics_labels,
         "topTopics2025_26": top_topics_2526,
-        "greenCapexCategories": top_counts(selected_capex, "Green Investment Category", limit=5),
+        "greenCapexCategories": top_counts(selected_sustainability_capex, "Green Investment Category", limit=5),
+        "sustainabilityTrend": sustainability_trend,
         "peerBenchmark": peer_benchmark,
         "recentDeals": recent_deals[:10],
         "greenCapexHighlights": capex_highlights[:8],

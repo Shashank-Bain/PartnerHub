@@ -1453,9 +1453,16 @@ button {
 .timeline-year-head {
   display: grid;
   gap: 8px;
-  min-height: 118px;
+  min-height: 132px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(104, 70, 218, 0.14);
+}
+
+.timeline-year-head-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .timeline-year-head h4 {
@@ -1464,7 +1471,29 @@ button {
   color: #2a2f4f;
 }
 
-.timeline-year-head p {
+.timeline-year-count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 70, 218, 0.24);
+  background: rgba(129, 58, 163, 0.12);
+  color: #4f3f95;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.timeline-year-insight-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.timeline-year-insight-list li {
   margin: 0;
   color: #495271;
   font-size: 13px;
