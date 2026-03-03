@@ -130,12 +130,16 @@ def _normalize_user_payload(raw_user):
 
 def ensure_user_store():
     store = _safe_read_json(USERS_DATA_PATH, {"nextUserId": 1, "users": []})
+    needs_write = not os.path.exists(USERS_DATA_PATH)
+
     if not isinstance(store, dict):
         store = {"nextUserId": 1, "users": []}
+        needs_write = True
 
     users = store.get("users")
     if not isinstance(users, list):
         users = []
+        needs_write = True
 
     normalized_users = []
     seen_emails = set()
@@ -143,10 +147,14 @@ def ensure_user_store():
 
     for raw_user in users:
         if not isinstance(raw_user, dict):
+            needs_write = True
             continue
         normalized = _normalize_user_payload(raw_user)
+        if normalized != raw_user:
+            needs_write = True
         email = normalized["email"]
         if not email or email in seen_emails:
+            needs_write = True
             continue
         seen_emails.add(email)
         normalized_users.append(normalized)
@@ -157,24 +165,36 @@ def ensure_user_store():
         admin_payload = _default_admin_record(max_user_id + 1 if max_user_id else 1)
         normalized_users.append(admin_payload)
         max_user_id = max(max_user_id, admin_payload["id"])
+        needs_write = True
     else:
+        original_is_admin = bool(admin_user.get("isAdmin", False))
+        original_sectors = list(admin_user.get("sectors") or [])
         admin_user["isAdmin"] = True
         admin_user["sectors"] = list(SECTOR_COMPANY_MAP.keys())
+        if not original_is_admin or original_sectors != admin_user["sectors"]:
+            needs_write = True
 
     next_user_id = int(store.get("nextUserId") or (max_user_id + 1))
     if next_user_id <= max_user_id:
         next_user_id = max_user_id + 1
+        needs_write = True
 
     normalized_store = {
         "nextUserId": next_user_id,
         "users": sorted(normalized_users, key=lambda user: user["email"]),
     }
-    _atomic_write_json(USERS_DATA_PATH, normalized_store)
+    if needs_write:
+        _atomic_write_json(USERS_DATA_PATH, normalized_store)
     return normalized_store
 
 
 def read_user_store():
-    return ensure_user_store()
+    store = _safe_read_json(USERS_DATA_PATH, None)
+    if not isinstance(store, dict):
+        return ensure_user_store()
+    if not isinstance(store.get("users"), list):
+        return ensure_user_store()
+    return store
 
 
 def write_user_store(store):
