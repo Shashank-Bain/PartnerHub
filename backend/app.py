@@ -797,6 +797,63 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
         return fallback
 
 
+def generate_pithy_focus_company_insights(selected_company, insights):
+    raw_insights = [str(item or "").strip() for item in (insights or []) if str(item or "").strip()]
+    if not raw_insights:
+        return []
+
+    fallback_points = [truncate_text(point, 120) for point in raw_insights[:3]]
+
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
+    if not api_key:
+        return fallback_points
+
+    try:
+        from openai import OpenAI
+
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model=model_name,
+            temperature=0.2,
+            response_format={"type": "json_object"},
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert ESG advisor. Rewrite insights into pithy executive bullets with no fluff.",
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {
+                            "selectedCompany": selected_company,
+                            "focusCompanyInsights": raw_insights[:3],
+                            "required": {
+                                "pithyBullets": "array of exactly 3 bullets, each <= 12 words, specific and actionable"
+                            },
+                        },
+                        ensure_ascii=False,
+                    ),
+                },
+            ],
+        )
+
+        content = response.choices[0].message.content or "{}"
+        parsed = json.loads(content)
+        bullets = [
+            truncate_text(str(point or "").strip(), 120)
+            for point in (parsed.get("pithyBullets") or [])
+            if str(point or "").strip()
+        ]
+
+        if len(bullets) < 3:
+            return fallback_points
+
+        return bullets[:3]
+    except Exception:
+        return fallback_points
+
+
 def build_peer_focus_bullets(selected_company, selected_topic_totals, peer_topic_totals, peer_count):
     safe_peer_count = max(1, int(peer_count or 1))
 
@@ -1071,6 +1128,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         ),
         None,
     )
+    focus_company_insights = (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else []
+    pithy_focus_company_insights = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
 
     all_regions_selected = aggregate_region_counts(selected_deals)
     total_region_events_selected = sum(all_regions_selected.values())
@@ -1520,7 +1579,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             "years": timeline_years,
         },
         "narrative": {
-            "focusCompanyInsights": (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else [],
+            "focusCompanyInsights": focus_company_insights,
+            "focusCompanyPithyInsights": pithy_focus_company_insights,
             "peerInsights": (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else [],
         },
     }

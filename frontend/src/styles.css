@@ -176,6 +176,14 @@ button {
   backdrop-filter: blur(12px);
 }
 
+.nav-main-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  margin-left: 12px;
+}
+
 .logo-wrap {
   display: flex;
   align-items: center;
@@ -211,13 +219,31 @@ button {
   gap: 10px;
 }
 
+.nav-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.nav-filter-control {
+  display: grid;
+  gap: 4px;
+}
+
+.nav-filter-control span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: #5b6382;
+}
+
 .nav-greeting {
-  flex: 1;
   min-width: 220px;
-  padding: 0 16px;
+  padding: 0 8px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   flex-direction: column;
 }
 
@@ -1378,6 +1404,27 @@ button {
   gap: 14px;
 }
 
+.investment-chart-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.investment-chart-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.investment-mix-chart-wrap {
+  min-height: 300px;
+}
+
+.investment-modal-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.investment-summary-band-modal {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .investment-chart-wrap {
   width: 100%;
   min-height: 360px;
@@ -2343,6 +2390,10 @@ th {
   .investment-chart-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .investment-chart-grid-four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
@@ -2352,10 +2403,33 @@ th {
     align-items: stretch;
   }
 
+  .nav-main-left {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .nav-actions {
     width: 100%;
     flex-wrap: wrap;
     gap: 8px;
+  }
+
+  .nav-filters {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .nav-filter-control {
+    width: 100%;
+  }
+
+  .nav-filter-control select {
+    width: 100%;
   }
 
   .nav-greeting {
@@ -2411,6 +2485,12 @@ th {
   }
 
   .investment-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .investment-chart-grid-two,
+  .investment-chart-grid-four,
+  .investment-summary-band-modal {
     grid-template-columns: 1fr;
   }
 

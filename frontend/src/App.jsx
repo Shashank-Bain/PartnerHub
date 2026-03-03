@@ -4,6 +4,7 @@ import {
   BarChart,
   CartesianGrid,
   ComposedChart,
+  LabelList,
   Legend,
   Line,
   PolarAngleAxis,
@@ -302,6 +303,112 @@ function ThemeSpiderChart({ data, companyName }) {
 
 const STACKED_COLORS = ['#6846da', '#813aa3', '#a02c64', '#b90b16', '#6f7797']
 
+function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
+  const matrix = {}
+  const rowTotals = {}
+  const columnTotals = {}
+
+  for (const event of events) {
+    if (options.excludeGreenCapex && String(event?.source || '').toLowerCase() === 'green capex') {
+      continue
+    }
+
+    const rowValue = String(rowAccessor(event) || '-').trim() || '-'
+    const columnValue = String(columnAccessor(event) || 'Other').trim() || 'Other'
+
+    matrix[rowValue] = matrix[rowValue] || {}
+    matrix[rowValue][columnValue] = (matrix[rowValue][columnValue] || 0) + 1
+
+    rowTotals[rowValue] = (rowTotals[rowValue] || 0) + 1
+    columnTotals[columnValue] = (columnTotals[columnValue] || 0) + 1
+  }
+
+  const sortedRows = Object.keys(rowTotals).sort((left, right) => {
+    if (left === '-' && right !== '-') return 1
+    if (right === '-' && left !== '-') return -1
+    return rowTotals[right] - rowTotals[left] || left.localeCompare(right)
+  })
+
+  const maxRows = options.maxRows || 8
+  const hasDashRow = sortedRows.includes('-')
+  const rowKeys = hasDashRow
+    ? sortedRows.filter((rowKey) => rowKey !== '-').slice(0, Math.max(1, maxRows - 1)).concat('-')
+    : sortedRows.slice(0, maxRows)
+
+  const maxColumns = options.maxColumns || 5
+  const columnKeys = Object.keys(columnTotals)
+    .sort((left, right) => columnTotals[right] - columnTotals[left] || left.localeCompare(right))
+    .slice(0, maxColumns)
+
+  const maxCellValue = Math.max(
+    1,
+    ...rowKeys.flatMap((rowKey) => columnKeys.map((columnKey) => matrix[rowKey]?.[columnKey] || 0)),
+  )
+
+  return { matrix, rowKeys, columnKeys, maxCellValue }
+}
+
+function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, columnAccessor, excludeGreenCapex = false }) {
+  const allEvents = (timelineYears || []).flatMap((yearBlock) => yearBlock?.events || [])
+  const { matrix, rowKeys, columnKeys, maxCellValue } = buildHeatmapData(allEvents, rowAccessor, columnAccessor, {
+    maxRows: 8,
+    maxColumns: 5,
+    excludeGreenCapex,
+  })
+
+  if (!rowKeys.length || !columnKeys.length) {
+    return (
+      <section className="card scorecard-chart-card">
+        <h3 className="scorecard-chart-title">{title}</h3>
+        <div className="scorecard-thin-divider" />
+        <p>No heatmap data available.</p>
+      </section>
+    )
+  }
+
+  const cellStyle = (value) => {
+    const intensity = value > 0 ? value / maxCellValue : 0
+    return {
+      background: `rgba(185, 11, 22, ${0.12 + intensity * 0.68})`,
+      color: intensity > 0.52 ? '#ffffff' : '#6a111b',
+    }
+  }
+
+  return (
+    <section className="card scorecard-chart-card">
+      <h3 className="scorecard-chart-title">{title}</h3>
+      <div className="scorecard-thin-divider" />
+      <div className="investment-heatmap-wrap">
+        <table className="investment-heatmap-table">
+          <thead>
+            <tr>
+              <th>{rowLabel}</th>
+              {columnKeys.map((columnKey) => (
+                <th key={columnKey}>{columnKey}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rowKeys.map((rowKey) => (
+              <tr key={rowKey}>
+                <td>{rowKey}</td>
+                {columnKeys.map((columnKey) => {
+                  const value = matrix[rowKey]?.[columnKey] || 0
+                  return (
+                    <td key={`${rowKey}-${columnKey}`}>
+                      <span className="investment-heatmap-cell" style={cellStyle(value)}>{value}</span>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
 function InvestmentStackedChart({ title, breakdown }) {
   const rows = breakdown?.rows || []
   const keys = breakdown?.keys || []
@@ -350,8 +457,6 @@ function InvestmentStackedChart({ title, breakdown }) {
 }
 
 function InvestmentDealHeatmapChart({ title, timelineYears }) {
-  const allEvents = (timelineYears || []).flatMap((yearBlock) => yearBlock?.events || [])
-
   const normalizeDealType = (rawDealType) => {
     const text = String(rawDealType || '').toLowerCase().trim()
     if (!text || text === '-') return 'Other'
@@ -371,97 +476,15 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
     return text
   }
 
-  const dealEvents = allEvents.filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
-
-  if (!dealEvents.length) {
-    return (
-      <section className="card scorecard-chart-card">
-        <h3 className="scorecard-chart-title">{title}</h3>
-        <div className="scorecard-thin-divider" />
-        <p>No heatmap data available.</p>
-      </section>
-    )
-  }
-
-  const matrix = {}
-  const rowTotals = {}
-  const columnTotals = {}
-
-  for (const event of dealEvents) {
-    const targetIndustry = normalizeIndustry(event?.targetIndustry || event?.theme)
-    const dealType = normalizeDealType(event?.dealType)
-
-    matrix[targetIndustry] = matrix[targetIndustry] || {}
-    matrix[targetIndustry][dealType] = (matrix[targetIndustry][dealType] || 0) + 1
-
-    rowTotals[targetIndustry] = (rowTotals[targetIndustry] || 0) + 1
-    columnTotals[dealType] = (columnTotals[dealType] || 0) + 1
-  }
-
-  const sortedIndustries = Object.keys(rowTotals).sort((left, right) => {
-    if (left === '-' && right !== '-') return 1
-    if (right === '-' && left !== '-') return -1
-    return rowTotals[right] - rowTotals[left] || left.localeCompare(right)
-  })
-
-  const maxRows = 8
-  const hasDashIndustry = sortedIndustries.includes('-')
-  const topIndustries = hasDashIndustry
-    ? sortedIndustries.filter((industry) => industry !== '-').slice(0, Math.max(1, maxRows - 1)).concat('-')
-    : sortedIndustries.slice(0, maxRows)
-
-  const rowKeys = topIndustries
-
-  const columnKeys = Object.keys(columnTotals)
-    .sort((left, right) => columnTotals[right] - columnTotals[left] || left.localeCompare(right))
-    .slice(0, 5)
-
-  const maxCellValue = Math.max(
-    1,
-    ...rowKeys.flatMap((rowKey) => columnKeys.map((columnKey) => matrix[rowKey]?.[columnKey] || 0)),
-  )
-
-  const cellStyle = (value) => {
-    const intensity = value > 0 ? value / maxCellValue : 0
-    return {
-      background: `rgba(185, 11, 22, ${0.12 + intensity * 0.68})`,
-      color: intensity > 0.52 ? '#ffffff' : '#6a111b',
-    }
-  }
-
   return (
-    <section className="card scorecard-chart-card">
-      <h3 className="scorecard-chart-title">{title}</h3>
-      <div className="scorecard-thin-divider" />
-
-      <div className="investment-heatmap-wrap">
-        <table className="investment-heatmap-table">
-          <thead>
-            <tr>
-              <th>Target Industry</th>
-              {columnKeys.map((columnKey) => (
-                <th key={columnKey}>{columnKey}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rowKeys.map((rowKey) => (
-              <tr key={rowKey}>
-                <td>{rowKey}</td>
-                {columnKeys.map((columnKey) => {
-                  const value = matrix[rowKey]?.[columnKey] || 0
-                  return (
-                    <td key={`${rowKey}-${columnKey}`}>
-                      <span className="investment-heatmap-cell" style={cellStyle(value)}>{value}</span>
-                    </td>
-                  )
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <InvestmentHeatmapChart
+      title={title}
+      timelineYears={timelineYears}
+      rowLabel="Target Industry"
+      rowAccessor={(event) => normalizeIndustry(event?.targetIndustry || event?.theme)}
+      columnAccessor={(event) => normalizeDealType(event?.dealType)}
+      excludeGreenCapex
+    />
   )
 }
 
@@ -544,6 +567,55 @@ function RegionMixChart({ regionShares }) {
         </BarChart>
       </ResponsiveContainer>
     </div>
+  )
+}
+
+function MixDistributionChart({ title, rows }) {
+  const chartData = (rows || []).map((row) => ({
+    label: row.label,
+    percentage: Number(row.percentage || 0),
+  }))
+
+  if (!chartData.length) {
+    return (
+      <section className="card scorecard-chart-card">
+        <h3 className="scorecard-chart-title">{title}</h3>
+        <div className="scorecard-thin-divider" />
+        <p>No mix data available.</p>
+      </section>
+    )
+  }
+
+  return (
+    <section className="card scorecard-chart-card">
+      <h3 className="scorecard-chart-title">{title}</h3>
+      <div className="scorecard-thin-divider" />
+      <div className="investment-chart-wrap investment-mix-chart-wrap">
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={chartData} margin={{ top: 18, right: 12, left: 4, bottom: 44 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+            <XAxis
+              dataKey="label"
+              type="category"
+              interval={0}
+              tick={{ fontSize: 11, fill: '#515a7a' }}
+              stroke="rgba(95, 104, 144, 0.35)"
+            />
+            <YAxis
+              type="number"
+              domain={[0, 100]}
+              tickFormatter={(value) => `${value}%`}
+              tick={{ fontSize: 12, fill: '#2f3554' }}
+              stroke="rgba(95, 104, 144, 0.35)"
+            />
+            <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix']} />
+            <Bar dataKey="percentage" fill="rgba(104, 70, 218, 0.74)" radius={[6, 6, 0, 0]}>
+              <LabelList dataKey="percentage" position="top" formatter={(value) => `${Number(value).toFixed(1)}%`} />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
   )
 }
 
@@ -704,6 +776,83 @@ function App() {
       capexFocus: resolvedCapexFocus.length === 2 ? resolvedCapexFocus : fallbackCapexFocus,
     }
   }, [investmentFocusMatrix])
+  const investmentSustainabilityMix = useMemo(() => {
+    const topicKeys = investmentInsights?.charts?.topics?.keys || []
+    const selectedRow = (investmentInsights?.charts?.topics?.rows || []).find((row) => row?.isSelected)
+    if (!selectedRow || !topicKeys.length) return []
+
+    const entries = topicKeys
+      .map((key) => ({ label: key, count: Number(selectedRow[key] || 0) }))
+      .filter((item) => item.count > 0)
+    const total = entries.reduce((sum, item) => sum + item.count, 0)
+    if (!total) return []
+
+    return entries
+      .map((item) => ({ label: item.label, percentage: (item.count / total) * 100 }))
+      .sort((a, b) => b.percentage - a.percentage)
+      .slice(0, 5)
+  }, [investmentInsights])
+
+  const investmentRegionMix = useMemo(() => {
+    const rows = investmentInsights?.regionShares || []
+    return rows.slice(0, 5).map((item) => ({
+      label: item.region,
+      percentage: Number(item.sharePct || 0),
+    }))
+  }, [investmentInsights])
+
+  const investmentTargetIndustryMix = useMemo(() => {
+    const events = (investmentInsights?.timeline?.years || []).flatMap((yearBlock) => yearBlock?.events || [])
+      .filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
+    const counter = {}
+
+    for (const event of events) {
+      const industry = String(event?.targetIndustry || '-').trim() || '-'
+      counter[industry] = (counter[industry] || 0) + 1
+    }
+
+    const entries = Object.entries(counter).sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    const total = entries.reduce((sum, [, count]) => sum + count, 0)
+    if (!total) return []
+
+    return entries.slice(0, 5).map(([label, count]) => ({
+      label,
+      percentage: (count / total) * 100,
+    }))
+  }, [investmentInsights])
+
+  const investmentDealTypeMix = useMemo(() => {
+    const events = (investmentInsights?.timeline?.years || []).flatMap((yearBlock) => yearBlock?.events || [])
+      .filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
+
+    const normalizeDealType = (rawDealType) => {
+      const text = String(rawDealType || '').toLowerCase().trim()
+      if (!text || text === '-') return 'Other'
+      if (text.includes('minority investment')) return 'Minority Investment'
+      if (text.includes('majority investment') || text.includes('control acquisition')) return 'Majority Investment'
+      if (text.includes('full acquisition')) return 'Full Acquisition'
+      if (text.includes('divestment') || text.includes('exit')) return 'Divestment / Exit'
+      if (text.includes('spin-off') || text.includes('spin off') || text.includes('split-off') || text.includes('demerger')) return 'Spin-off / Demerger'
+      if (text.includes('sponsor')) return 'Sponsor'
+      if (text.includes('strategic')) return 'Strategic'
+      return 'Other'
+    }
+
+    const counter = {}
+    for (const event of events) {
+      const dealType = normalizeDealType(event?.dealType)
+      counter[dealType] = (counter[dealType] || 0) + 1
+    }
+
+    const entries = Object.entries(counter).sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    const total = entries.reduce((sum, [, count]) => sum + count, 0)
+    if (!total) return []
+
+    return entries.slice(0, 5).map(([label, count]) => ({
+      label,
+      percentage: (count / total) * 100,
+    }))
+  }, [investmentInsights])
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -1229,22 +1378,33 @@ function App() {
           </button>
         </div>
 
-        <div className="nav-greeting">
-          <h2>{greeting}, {user.firstName}</h2>
+        <div className="nav-main-left">
+          <div className="nav-greeting">
+            <h2>{greeting}, {user.firstName}</h2>
+          </div>
+
+          <div className="nav-filters">
+            <label className="nav-filter-control">
+              <span>Sector</span>
+              <select value={selectedSector} onChange={(event) => setSelectedSector(event.target.value)}>
+                {sectors.map((sector) => (
+                  <option value={sector} key={sector}>{sector}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="nav-filter-control">
+              <span>Company</span>
+              <select value={selectedCompany} onChange={(event) => setSelectedCompany(event.target.value)}>
+                {companies.map((company) => (
+                  <option value={company} key={company}>{company}</option>
+                ))}
+              </select>
+            </label>
+          </div>
         </div>
 
         <div className="nav-actions">
-          <select value={selectedSector} onChange={(event) => setSelectedSector(event.target.value)}>
-            {sectors.map((sector) => (
-              <option value={sector} key={sector}>{sector}</option>
-            ))}
-          </select>
-
-          <select value={selectedCompany} onChange={(event) => setSelectedCompany(event.target.value)}>
-            {companies.map((company) => (
-              <option value={company} key={company}>{company}</option>
-            ))}
-          </select>
 
           {user.isAdmin && (
             <button
@@ -1694,20 +1854,28 @@ function App() {
             )}
 
             {!isInvestmentInsightsLoading && investmentInsights && (
-              <div className="investment-chart-grid">
-                <InvestmentStackedChart
-                  title={`Sustainability Topic Mix (${selectedCompany} vs Peers)`}
-                  breakdown={investmentInsights.charts?.topics}
-                />
-                <InvestmentStackedChart
-                  title={`Region Mix (${selectedCompany} vs Peers)`}
-                  breakdown={investmentInsights.charts?.regions}
-                />
-                <InvestmentDealHeatmapChart
-                  title="Target Industry × Deal Type"
-                  timelineYears={investmentInsights.timeline?.years || []}
-                />
-              </div>
+              <>
+                <div className="investment-chart-grid investment-chart-grid-four">
+                  <MixDistributionChart title="Sustainability Topic Mix" rows={investmentSustainabilityMix} />
+                  <MixDistributionChart title="Region Mix" rows={investmentRegionMix} />
+                  <MixDistributionChart title="Target Industry Mix" rows={investmentTargetIndustryMix} />
+                  <MixDistributionChart title="Deal Type Mix" rows={investmentDealTypeMix} />
+                </div>
+
+                <div className="investment-chart-grid investment-chart-grid-two">
+                  <InvestmentHeatmapChart
+                    title="Sustainability Topic × Region"
+                    timelineYears={investmentInsights.timeline?.years || []}
+                    rowLabel="Sustainability Topic"
+                    rowAccessor={(event) => String(event?.theme || '-').trim() || '-'}
+                    columnAccessor={(event) => String(event?.region || 'Other').trim() || 'Other'}
+                  />
+                  <InvestmentDealHeatmapChart
+                    title="Target Industry × Deal Type"
+                    timelineYears={investmentInsights.timeline?.years || []}
+                  />
+                </div>
+              </>
             )}
 
             {!isInvestmentInsightsLoading && !investmentInsights && (
@@ -2116,48 +2284,63 @@ function App() {
               <p>Capital Allocation Snapshot</p>
               {isInvestmentInsightsLoading && <p className="commitment-section-message">Loading investment metrics...</p>}
               {!isInvestmentInsightsLoading && investmentInsights && (
-                <section className="investment-snapshot-grid">
-                  <div className="investment-left-stack">
-                    <article className="commitment-total-tile">
-                      <span>Total Deals</span>
-                      <strong>{investmentInsights.summary?.dealCount || 0}</strong>
-                    </article>
-                    <article className="commitment-total-tile">
-                      <span>Green Capex Investments</span>
-                      <strong>{investmentInsights.summary?.greenCapexCount || 0}</strong>
-                    </article>
-                  </div>
-
-                  <div className="investment-right-stack">
-                    <section className="investment-strategy-block tone-neutral">
-                      <h4>Region Mix</h4>
-                      <RegionMixChart regionShares={investmentInsights.regionShares || []} />
-                    </section>
-
-                    <section className="investment-strategy-block tone-neutral">
-                      <h4>{selectedCompany} Insights</h4>
-                      <ul className="investment-simple-list">
-                        {(investmentInsights.narrative?.focusCompanyInsights || []).slice(0, 3).map((line, index) => (
-                          <li key={`fc-insight-${index}`}>{line}</li>
-                        ))}
-                      </ul>
-                    </section>
-
-                    <section className="investment-strategy-block tone-neutral">
-                      <h4>Peer Insights</h4>
-                      <ul className="investment-simple-list">
-                        {(investmentInsights.narrative?.peerInsights || []).slice(0, 3).map((line, index) => (
-                          <li key={`peer-insight-${index}`}>{line}</li>
-                        ))}
-                      </ul>
-                    </section>
-                  </div>
+                <section className="investment-summary-band investment-summary-band-modal">
+                  <article className="investment-stat-tile highlight">
+                    <span>Total Deals</span>
+                    <strong>{investmentInsights.summary?.dealCount || 0}</strong>
+                  </article>
+                  <article className="investment-stat-tile highlight">
+                    <span>Green Capex Investments</span>
+                    <strong>{investmentInsights.summary?.greenCapexCount || 0}</strong>
+                  </article>
+                  <article className="investment-stat-tile">
+                    <span>Top Region</span>
+                    <strong>{investmentInsights.summary?.topRegion || 'NA'}</strong>
+                  </article>
                 </section>
               )}
               {!isInvestmentInsightsLoading && !investmentInsights && (
                 <p className="commitment-section-message">No investment snapshot available.</p>
               )}
             </section>
+
+            {!isInvestmentInsightsLoading && investmentInsights && (
+              <div className="investment-modal-grid">
+                <div className="investment-chart-grid investment-chart-grid-two">
+                  <InvestmentHeatmapChart
+                    title="Sustainability Topic × Region Heatmap"
+                    timelineYears={investmentInsights.timeline?.years || []}
+                    rowLabel="Sustainability Topic"
+                    rowAccessor={(event) => String(event?.theme || '-').trim() || '-'}
+                    columnAccessor={(event) => String(event?.region || 'Other').trim() || 'Other'}
+                  />
+                  <InvestmentDealHeatmapChart
+                    title="Target × Deal Type Heatmap"
+                    timelineYears={investmentInsights.timeline?.years || []}
+                  />
+                </div>
+
+                <div className="investment-chart-grid investment-chart-grid-two">
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>{selectedCompany} Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(investmentInsights.narrative?.focusCompanyPithyInsights || []).slice(0, 3).map((line, index) => (
+                        <li key={`fc-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>Peer Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(investmentInsights.narrative?.peerInsights || []).slice(0, 3).map((line, index) => (
+                        <li key={`peer-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+              </div>
+            )}
 
             <div className="modal-footer">
               <button
