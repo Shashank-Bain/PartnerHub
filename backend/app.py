@@ -825,52 +825,108 @@ def generate_pithy_focus_company_insights(selected_company, insights):
         from openai import OpenAI
 
         client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model=model_name,
-            temperature=0.2,
-            response_format={"type": "json_object"},
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are an expert ESG advisor. Rewrite insights into pithy executive bullets with no fluff.",
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(
-                        {
-                            "selectedCompany": selected_company,
-                            "focusCompanyInsights": raw_insights[:3],
-                            "required": {
-                                "pithyBullets": "array of exactly 3 bullets, each <= 12 words, specific and actionable"
-                            },
-                        },
-                        ensure_ascii=False,
-                    ),
-                },
-            ],
-        )
+        prompt_payload = {
+            "selectedCompany": selected_company,
+            "focusCompanyInsights": raw_insights[:3],
+            "required": {
+                "pithyBullets": "array of exactly 3 bullets, each <= 12 words, specific and actionable"
+            },
+        }
 
-        content = response.choices[0].message.content or "{}"
-        parsed = json.loads(content)
-        bullets = [
-            truncate_text(str(point or "").strip(), 120)
-            for point in (parsed.get("pithyBullets") or [])
-            if str(point or "").strip()
-        ]
+        def _extract_bullets(text):
+            lines = [str(line or "").strip() for line in str(text or "").splitlines()]
+            cleaned = []
+            for line in lines:
+                if not line:
+                    continue
+                normalized = line
+                if normalized[:1] in {"-", "•", "*"}:
+                    normalized = normalized[1:].strip()
+                if ". " in normalized[:4] and normalized[:1].isdigit():
+                    normalized = normalized.split(". ", 1)[1].strip()
+                if normalized:
+                    cleaned.append(truncate_text(normalized, 120))
+            return cleaned[:3]
 
-        if len(bullets) < 3:
+        try:
+            response = client.chat.completions.create(
+                model=model_name,
+                temperature=0.2,
+                response_format={"type": "json_object"},
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert ESG advisor. Rewrite insights into pithy executive bullets with no fluff.",
+                    },
+                    {
+                        "role": "user",
+                        "content": json.dumps(prompt_payload, ensure_ascii=False),
+                    },
+                ],
+            )
+
+            content = response.choices[0].message.content or "{}"
+            parsed = json.loads(content)
+            bullets = [
+                truncate_text(str(point or "").strip(), 120)
+                for point in (parsed.get("pithyBullets") or [])
+                if str(point or "").strip()
+            ]
+
+            if len(bullets) >= 3:
+                return {
+                    "insights": bullets[:3],
+                    "source": "ai",
+                    "reason": "openai_success",
+                    "model": model_name,
+                    "hasApiKey": True,
+                }
+        except Exception:
+            pass
+
+        try:
+            response = client.chat.completions.create(
+                model=model_name,
+                temperature=0.2,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert ESG advisor. Return exactly 3 short bullets, one per line.",
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Company: {selected_company}\n"
+                            f"Insights:\n- {raw_insights[0]}\n- {raw_insights[1] if len(raw_insights) > 1 else ''}\n- {raw_insights[2] if len(raw_insights) > 2 else ''}\n"
+                            "Rewrite as 3 pithy executive bullets, max 12 words each."
+                        ),
+                    },
+                ],
+            )
+
+            plain_content = response.choices[0].message.content or ""
+            plain_bullets = _extract_bullets(plain_content)
+            if len(plain_bullets) >= 3:
+                return {
+                    "insights": plain_bullets[:3],
+                    "source": "ai",
+                    "reason": "openai_success_plaintext",
+                    "model": model_name,
+                    "hasApiKey": True,
+                }
+        except Exception as plain_error:
             return {
                 "insights": fallback_points,
                 "source": "fallback",
-                "reason": "invalid_ai_payload",
+                "reason": f"openai_error:{type(plain_error).__name__}",
                 "model": model_name,
                 "hasApiKey": True,
             }
 
         return {
-            "insights": bullets[:3],
-            "source": "ai",
-            "reason": "openai_success",
+            "insights": fallback_points,
+            "source": "fallback",
+            "reason": "invalid_ai_payload",
             "model": model_name,
             "hasApiKey": True,
         }

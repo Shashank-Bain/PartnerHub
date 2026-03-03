@@ -1450,7 +1450,7 @@ button {
 }
 
 .investment-mix-chart-wrap {
-  min-height: 300px;
+  min-height: 0;
 }
 
 .investment-modal-grid {
@@ -1469,13 +1469,13 @@ button {
 
 .investment-chart-wrap {
   width: 100%;
-  min-height: 360px;
+  min-height: 0;
 }
 
 .investment-heatmap-wrap {
   width: 100%;
   overflow: hidden;
-  min-height: 360px;
+  min-height: 0;
 }
 
 .investment-heatmap-table {

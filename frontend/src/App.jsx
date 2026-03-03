@@ -612,7 +612,7 @@ function MixDistributionChart({ title, keys, rows }) {
       <h3 className="scorecard-chart-title">{title}</h3>
       <div className="scorecard-thin-divider" />
       <div className="investment-chart-wrap investment-mix-chart-wrap">
-        <ResponsiveContainer width="100%" height={Math.max(320, chartData.length * 52)}>
+        <ResponsiveContainer width="100%" height={Math.max(240, chartData.length * 44)}>
           <BarChart data={chartData} margin={{ top: 20, right: 12, left: 4, bottom: 54 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
             <XAxis
@@ -639,11 +639,12 @@ function MixDistributionChart({ title, keys, rows }) {
                 stackId="mix"
                 name={key}
                 fill={STACKED_COLORS[index % STACKED_COLORS.length]}
-              />
+              >
+                {index === safeKeys.length - 1 && (
+                  <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
+                )}
+              </Bar>
             ))}
-            <Bar dataKey="totalPct" fill="rgba(0,0,0,0)" legendType="none" isAnimationActive={false}>
-              <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
-            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
