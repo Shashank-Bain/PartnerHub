@@ -834,16 +834,22 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             for item in sorted(counter.items(), key=lambda pair: (-pair[1], pair[0].lower()))[:limit]
         ]
 
+    def get_row_theme(row):
+        return str(row.get("classification_L1") or row.get("classification") or "").strip()
+
+    def get_row_target_industry(row):
+        return str(row.get("Master Primary Industry Target") or row.get("Primary Industry [Target/Issuer]") or "").strip()
+
     def aggregate_theme_counts(deals, capex):
         counter = {}
         for row in deals:
-            theme = str(row.get("classification") or "").strip()
+            theme = get_row_theme(row)
             if not theme:
                 continue
             counter[theme] = counter.get(theme, 0) + 1
 
         for row in capex:
-            theme = str(row.get("classification") or "").strip()
+            theme = str(row.get("classification") or row.get("classification_L1") or "").strip()
             if not theme:
                 continue
             counter[theme] = counter.get(theme, 0) + 1
@@ -862,31 +868,40 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
 
     recent_deals = []
     for row in selected_deals:
-        announced_date_raw = row.get("All Transactions Announced Date")
+        announced_date_raw = row.get("All Transactions Announced Date") or row.get("Year")
         announced_date = parse_flexible_date(announced_date_raw)
         announced_year = parse_year(announced_date_raw)
 
-        why_items = row.get("Why_The_Deal_Happened") or []
-        headline = ""
-        if isinstance(why_items, list) and why_items:
-            headline = str(why_items[0] or "").strip()
+        overview_items = row.get("Overview") or row.get("Why_The_Deal_Happened") or []
+        overview_points = [str(item).strip() for item in overview_items if str(item or "").strip()] if isinstance(overview_items, list) else []
+
+        headline = overview_points[0] if overview_points else ""
         if not headline:
             headline = str(row.get("Primary Driver Justification") or "").strip()
         if not headline:
             headline = str(row.get("Transaction Comments") or "").strip().split("\n")[0]
 
+        raw_date_text = str(announced_date_raw or "").strip()
+        looks_like_year_only = raw_date_text.isdigit() and len(raw_date_text) == 4
+        if looks_like_year_only:
+            date_label = str(announced_year or raw_date_text)
+        else:
+            date_label = announced_date.strftime("%Y-%m-%d") if announced_date else str(announced_year or announced_date_raw or "NA")
+
         recent_deals.append(
             {
-                "date": announced_date.strftime("%Y-%m-%d") if announced_date else str(announced_date_raw or "NA"),
+                "date": date_label,
                 "_sortDate": announced_date or datetime.min,
                 "year": announced_year,
-                "target": str(row.get("Target/Issuer") or row.get("Master Target") or "Unknown target").strip(),
+                "target": str(row.get("Master Target") or row.get("Target/Issuer") or "Unknown target").strip(),
                 "transactionType": str(row.get("Transaction Types") or "").strip(),
-                "targetIndustry": str(row.get("Primary Industry [Target/Issuer]") or row.get("Master Primary Industry Target") or "").strip(),
-                "classification": str(row.get("classification") or "").strip(),
+                "transactionValue": str(row.get("Total Transaction Value ($USDmm, Historical rate)") or "").strip(),
+                "targetIndustry": get_row_target_industry(row),
+                "classification": get_row_theme(row),
                 "primaryDriver": str(row.get("Primary Driver") or "").strip(),
                 "region": str(row.get("Master Target Region") or "").strip() or "Other",
                 "headline": headline,
+                "overviewPoints": overview_points,
             }
         )
 
@@ -962,6 +977,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "excerpt": str(row.get("Source Excerpt") or row.get("AI Interpretation") or "").strip(),
                 "value": str(row.get("Transaction Value") or "").strip(),
                 "unit": str(row.get("Transaction Unit") or "").strip(),
+                "overviewPoints": [str(row.get("Source Excerpt") or row.get("AI Interpretation") or "").strip()],
             }
         )
 
@@ -1102,9 +1118,11 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "theme": deal.get("classification") or "Unspecified",
                 "targetIndustry": deal.get("targetIndustry") or "Other",
                 "dealType": deal.get("transactionType") or "Investment Deal",
+                "transactionValue": deal.get("transactionValue") or "",
                 "region": deal.get("region") or "Other",
                 "primaryDriver": deal.get("primaryDriver"),
                 "headline": deal.get("headline"),
+                "overviewPoints": deal.get("overviewPoints") or [],
             }
         )
 
@@ -1118,9 +1136,15 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "theme": capex.get("classification") or capex.get("category") or "Unspecified",
                 "targetIndustry": capex.get("targetIndustry") or capex.get("category") or "Operations / Infrastructure",
                 "dealType": capex.get("dealType") or "Green Capex",
+                "transactionValue": " ".join(
+                    part
+                    for part in [str(capex.get("value") or "").strip(), str(capex.get("unit") or "").strip()]
+                    if part
+                ),
                 "region": capex.get("region") or "Other",
                 "primaryDriver": "Sustainability / operations",
                 "headline": capex.get("excerpt"),
+                "overviewPoints": [point for point in (capex.get("overviewPoints") or []) if point],
             }
         )
 
@@ -1161,13 +1185,43 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         year_key = str(event.get("year"))
         timeline_by_year.setdefault(year_key, []).append(event)
 
+    def build_year_overview(events):
+        snippets = []
+        seen = set()
+
+        for event in events:
+            points = event.get("overviewPoints") or []
+            if isinstance(points, list) and points:
+                candidate = str(points[0] or "").strip()
+            else:
+                candidate = str(event.get("headline") or "").strip()
+
+            if not candidate:
+                continue
+
+            normalized = " ".join(candidate.split())
+            dedupe_key = normalized.lower()
+            if dedupe_key in seen:
+                continue
+
+            seen.add(dedupe_key)
+            snippets.append(normalized)
+
+            if len(snippets) >= 2:
+                break
+
+        if not snippets:
+            return "No yearly strategy summary available."
+
+        return " ".join(snippets)
+
     timeline_years = []
     for year_key in sorted(timeline_by_year.keys()):
         events = sorted(timeline_by_year[year_key], key=lambda item: item.get("date") or "")
         timeline_years.append(
             {
                 "year": year_key,
-                "summary": ai_strategy.get("yearlySummaries", {}).get(year_key, "No yearly strategy summary available."),
+                "summary": build_year_overview(events),
                 "events": events,
             }
         )
@@ -1187,7 +1241,11 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             "topRegion": top_region,
             "topRegionSharePct": top_region_share_pct,
         },
-        "topClassifications": top_counts(selected_deals, "classification", limit=4),
+        "topClassifications": top_counts(
+            [{**row, "classification": get_row_theme(row)} for row in selected_deals],
+            "classification",
+            limit=4,
+        ),
         "topDrivers": top_counts(selected_deals, "Primary Driver", limit=4),
         "topBuckets": top_counts(selected_deals, "Primary Bucket", limit=4),
         "investmentFocus": ai_strategy.get("investmentFocus") or "Refocus portfolio toward resilient sustainability bets",

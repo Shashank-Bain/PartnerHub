@@ -355,14 +355,12 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
   const normalizeDealType = (rawDealType) => {
     const text = String(rawDealType || '').toLowerCase().trim()
     if (!text || text === '-') return 'Other'
-    if (text.includes('minority')) return 'Minority'
-    if (text.includes('full acquisition') || text.includes('100%')) return 'Acquire'
-    if (text.includes('control acquisition') || text.includes('majority')) return 'Majority'
-    if (text.includes('spin-off') || text.includes('spin off') || text.includes('demerger') || text.includes('corporate separation')) return 'Spin Off'
-    if (text.includes('divestment') || text.includes('exit') || text.includes('stake sale')) return 'Divest'
-    if (text.includes('joint venture') || text === 'jv') return 'Other'
-    if (text.includes('asset')) return 'Other'
-    if (text.includes('stake')) return 'Other'
+    if (text.includes('minority investment')) return 'Minority Investment'
+    if (text.includes('majority investment') || text.includes('control acquisition')) return 'Majority Investment'
+    if (text.includes('full acquisition')) return 'Full Acquisition'
+    if (text.includes('divestment') || text.includes('exit')) return 'Divestment / Exit'
+    if (text.includes('spin-off') || text.includes('spin off') || text.includes('split-off') || text.includes('demerger')) return 'Spin-off / Demerger'
+    if (text.includes('sponsor')) return 'Sponsor'
     if (text.includes('strategic')) return 'Strategic'
     return 'Other'
   }
@@ -523,6 +521,14 @@ function SustainabilityDealsTrendChart({ data }) {
   )
 }
 
+function formatTransactionValue(value) {
+  const text = String(value || '').trim()
+  if (!text || text === '-') {
+    return 'NA'
+  }
+  return text
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -547,6 +553,7 @@ function App() {
   const [investmentInsights, setInvestmentInsights] = useState(null)
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
   const [activeModal, setActiveModal] = useState(null)
+  const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [activeView, setActiveView] = useState('home')
@@ -698,6 +705,7 @@ function App() {
     const onEscape = (event) => {
       if (event.key === 'Escape') {
         setActiveModal(null)
+        setSelectedTimelineEvent(null)
       }
     }
 
@@ -1701,16 +1709,31 @@ function App() {
 
                       <div className="timeline-event-list">
                         {(yearBlock.events || []).map((event, index) => (
-                          <article key={`${event.title}-${event.date}-${index}`} className="timeline-event-card">
+                          <article
+                            key={`${event.title}-${event.date}-${index}`}
+                            className="timeline-event-card interactive-card"
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => setSelectedTimelineEvent(event)}
+                            onKeyDown={(keyboardEvent) => {
+                              if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+                                keyboardEvent.preventDefault()
+                                setSelectedTimelineEvent(event)
+                              }
+                            }}
+                          >
                             <span className={`timeline-source-chip ${event.source === 'Green Capex' ? 'capex' : 'deal'}`}>
                               {event.source}
                             </span>
                             <h5>{event.title}</h5>
-                            <p>{event.headline || 'No summary available.'}</p>
+                            <p>{event.headline || (event.overviewPoints || [])[0] || 'No summary available.'}</p>
                             <div className="timeline-event-meta">
                               <span>{event.date || 'NA'}</span>
                               <span>{event.theme || 'Unspecified theme'}</span>
                               <span>{event.region || 'Other'}</span>
+                              <span>{event.targetIndustry || 'Other industry'}</span>
+                              <span>{formatTransactionValue(event.transactionValue)}</span>
+                              <span>{event.dealType || 'Other'}</span>
                             </div>
                           </article>
                         ))}
@@ -1721,6 +1744,42 @@ function App() {
                 </div>
               )}
             </section>
+
+            {selectedTimelineEvent && (
+              <div className="modal-backdrop" onClick={() => setSelectedTimelineEvent(null)}>
+                <div className="modal-card commitment-modal" onClick={(event) => event.stopPropagation()}>
+                  <div className="modal-header">
+                    <h3>{selectedTimelineEvent.title || 'Deal Details'}</h3>
+                    <button type="button" className="btn-ghost" onClick={() => setSelectedTimelineEvent(null)}>Close</button>
+                  </div>
+
+                  <section className="modal-pane">
+                    <h4>Overview</h4>
+                    <ul className="modal-priority-list">
+                      {((selectedTimelineEvent.overviewPoints || []).length
+                        ? selectedTimelineEvent.overviewPoints
+                        : [selectedTimelineEvent.headline || 'No detailed overview available.'])
+                        .map((point, pointIndex) => (
+                          <li key={`${selectedTimelineEvent.title || 'deal'}-overview-${pointIndex}`}>{point}</li>
+                        ))}
+                    </ul>
+                  </section>
+
+                  <section className="modal-pane">
+                    <h4>Deal Metadata</h4>
+                    <div className="timeline-event-meta">
+                      <span>{selectedTimelineEvent.source || 'Investment Deal'}</span>
+                      <span>{selectedTimelineEvent.date || 'NA'}</span>
+                      <span>{selectedTimelineEvent.theme || 'Unspecified theme'}</span>
+                      <span>{selectedTimelineEvent.region || 'Other'}</span>
+                      <span>{selectedTimelineEvent.targetIndustry || 'Other industry'}</span>
+                      <span>{formatTransactionValue(selectedTimelineEvent.transactionValue)}</span>
+                      <span>{selectedTimelineEvent.dealType || 'Other'}</span>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
           </section>
         )}
 
