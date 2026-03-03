@@ -356,10 +356,13 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
     const text = String(rawDealType || '').toLowerCase().trim()
     if (!text || text === '-') return 'Other'
     if (text.includes('minority')) return 'Minority'
-    if (text.includes('majority') || text.includes('acquisition') || text.includes('buyout') || text.includes('merger')) return 'Majority'
-    if (text.includes('joint venture') || text === 'jv') return 'JV'
-    if (text.includes('asset')) return 'Asset'
-    if (text.includes('stake')) return 'Stake'
+    if (text.includes('full acquisition') || text.includes('100%')) return 'Acquire'
+    if (text.includes('control acquisition') || text.includes('majority')) return 'Majority'
+    if (text.includes('spin-off') || text.includes('spin off') || text.includes('demerger') || text.includes('corporate separation')) return 'Spin Off'
+    if (text.includes('divestment') || text.includes('exit') || text.includes('stake sale')) return 'Divest'
+    if (text.includes('joint venture') || text === 'jv') return 'Other'
+    if (text.includes('asset')) return 'Other'
+    if (text.includes('stake')) return 'Other'
     if (text.includes('strategic')) return 'Strategic'
     return 'Other'
   }
