@@ -2,12 +2,11 @@ import os
 import json
 import unicodedata
 from datetime import datetime, timezone
+from pathlib import Path
 
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import inspect, text
 from werkzeug.security import check_password_hash, generate_password_hash
 
 load_dotenv()
@@ -17,14 +16,19 @@ app = Flask(__name__)
 APP_VERSION = os.getenv("APP_VERSION") or os.getenv("VERCEL_GIT_COMMIT_SHA") or "dev"
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DB_PATH = os.path.join(BASE_DIR, "app.db")
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+_configured_data_dir = os.getenv("PARTNERHUB_DATA_DIR", "").strip()
+if _configured_data_dir:
+    USERS_DATA_PATH = os.path.join(_configured_data_dir, "users.json")
+elif os.path.isdir(DATA_DIR) and os.access(DATA_DIR, os.W_OK):
+    USERS_DATA_PATH = os.path.join(DATA_DIR, "users.json")
+else:
+    USERS_DATA_PATH = os.path.join("/tmp", "partnerhub", "users.json")
+
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "pulse-partner-hub-dev-secret")
 
 CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
-db = SQLAlchemy(app)
 
 
 SECTOR_COMPANY_MAP = {
@@ -51,26 +55,23 @@ BUCKET_BASE = {
 }
 
 
-user_sectors = db.Table(
-    "user_sectors",
-    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-    db.Column("sector_id", db.Integer, db.ForeignKey("sector.id"), primary_key=True),
-)
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255), unique=True, nullable=False)
-    password_hash = db.Column(db.String(512), nullable=False)
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
-    must_change_password = db.Column(db.Boolean, default=True, nullable=False)
-    is_admin = db.Column(db.Boolean, default=False, nullable=False)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
-    sectors = db.relationship("Sector", secondary=user_sectors, back_populates="users")
+class UserRecord:
+    def __init__(self, payload):
+        self.id = int(payload.get("id"))
+        self.email = str(payload.get("email") or "").strip().lower()
+        self.password_hash = str(payload.get("passwordHash") or "")
+        self.first_name = str(payload.get("firstName") or "").strip()
+        self.last_name = str(payload.get("lastName") or "").strip()
+        self.must_change_password = bool(payload.get("mustChangePassword", True))
+        self.is_admin = bool(payload.get("isAdmin", False))
+        self.created_at = str(payload.get("createdAt") or datetime.now(timezone.utc).isoformat())
+        self.sectors = sorted({
+            str(name or "").strip()
+            for name in (payload.get("sectors") or [])
+            if str(name or "").strip() in SECTOR_COMPANY_MAP
+        })
 
     def to_dict(self):
-        sector_names = sorted([sector.name for sector in self.sectors])
         return {
             "id": self.id,
             "email": self.email,
@@ -78,34 +79,205 @@ class User(db.Model):
             "lastName": self.last_name,
             "mustChangePassword": self.must_change_password,
             "isAdmin": self.is_admin,
-            "sectors": sector_names,
+            "sectors": self.sectors,
         }
 
     def to_admin_dict(self):
-        data = self.to_dict()
-        data["maskedPassword"] = "********"
-        return data
+        payload = self.to_dict()
+        payload["maskedPassword"] = "********"
+        return payload
 
 
-class Sector(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False)
-    users = db.relationship("User", secondary=user_sectors, back_populates="sectors")
-    companies = db.relationship("Company", back_populates="sector", cascade="all, delete-orphan")
+def _safe_read_json(path, default_value):
+    if not os.path.exists(path):
+        return default_value
+    try:
+        with open(path, "r", encoding="utf-8") as data_file:
+            return json.load(data_file)
+    except (OSError, json.JSONDecodeError):
+        return default_value
 
 
-class Company(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), nullable=False)
-    sector_id = db.Column(db.Integer, db.ForeignKey("sector.id"), nullable=False)
-    sector = db.relationship("Sector", back_populates="companies")
+def _atomic_write_json(path, payload):
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = target.with_suffix(f"{target.suffix}.tmp")
+    with open(temp_path, "w", encoding="utf-8") as data_file:
+        json.dump(payload, data_file, ensure_ascii=False, indent=2)
+    os.replace(temp_path, target)
+
+
+def _default_admin_record(user_id=1):
+    return {
+        "id": int(user_id),
+        "email": "admin@pulseph.com",
+        "passwordHash": generate_password_hash("admin123"),
+        "firstName": "Admin",
+        "lastName": "User",
+        "mustChangePassword": True,
+        "isAdmin": True,
+        "sectors": list(SECTOR_COMPANY_MAP.keys()),
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def _normalize_user_payload(raw_user):
+    return UserRecord(raw_user).to_dict() | {
+        "passwordHash": str(raw_user.get("passwordHash") or ""),
+        "createdAt": str(raw_user.get("createdAt") or datetime.now(timezone.utc).isoformat()),
+    }
+
+
+def ensure_user_store():
+    store = _safe_read_json(USERS_DATA_PATH, {"nextUserId": 1, "users": []})
+    if not isinstance(store, dict):
+        store = {"nextUserId": 1, "users": []}
+
+    users = store.get("users")
+    if not isinstance(users, list):
+        users = []
+
+    normalized_users = []
+    seen_emails = set()
+    max_user_id = 0
+
+    for raw_user in users:
+        if not isinstance(raw_user, dict):
+            continue
+        normalized = _normalize_user_payload(raw_user)
+        email = normalized["email"]
+        if not email or email in seen_emails:
+            continue
+        seen_emails.add(email)
+        normalized_users.append(normalized)
+        max_user_id = max(max_user_id, int(normalized["id"]))
+
+    admin_user = next((user for user in normalized_users if user.get("email") == "admin@pulseph.com"), None)
+    if not admin_user:
+        admin_payload = _default_admin_record(max_user_id + 1 if max_user_id else 1)
+        normalized_users.append(admin_payload)
+        max_user_id = max(max_user_id, admin_payload["id"])
+    else:
+        admin_user["isAdmin"] = True
+        admin_user["sectors"] = list(SECTOR_COMPANY_MAP.keys())
+
+    next_user_id = int(store.get("nextUserId") or (max_user_id + 1))
+    if next_user_id <= max_user_id:
+        next_user_id = max_user_id + 1
+
+    normalized_store = {
+        "nextUserId": next_user_id,
+        "users": sorted(normalized_users, key=lambda user: user["email"]),
+    }
+    _atomic_write_json(USERS_DATA_PATH, normalized_store)
+    return normalized_store
+
+
+def read_user_store():
+    return ensure_user_store()
+
+
+def write_user_store(store):
+    _atomic_write_json(USERS_DATA_PATH, store)
+
+
+def list_users():
+    store = read_user_store()
+    return [UserRecord(user) for user in store.get("users", [])]
+
+
+def get_user_by_id(user_id):
+    for user in list_users():
+        if user.id == int(user_id):
+            return user
+    return None
+
+
+def get_user_by_email(email):
+    lookup_email = str(email or "").strip().lower()
+    if not lookup_email:
+        return None
+    for user in list_users():
+        if user.email == lookup_email:
+            return user
+    return None
+
+
+def save_user(user_record):
+    store = read_user_store()
+    users = store.get("users", [])
+
+    updated_payload = {
+        "id": user_record.id,
+        "email": user_record.email,
+        "passwordHash": user_record.password_hash,
+        "firstName": user_record.first_name,
+        "lastName": user_record.last_name,
+        "mustChangePassword": user_record.must_change_password,
+        "isAdmin": user_record.is_admin,
+        "sectors": [sector for sector in user_record.sectors if sector in SECTOR_COMPANY_MAP],
+        "createdAt": user_record.created_at,
+    }
+
+    replaced = False
+    for index, existing in enumerate(users):
+        if int(existing.get("id", -1)) == user_record.id:
+            users[index] = updated_payload
+            replaced = True
+            break
+
+    if not replaced:
+        users.append(updated_payload)
+
+    store["users"] = sorted(users, key=lambda user: str(user.get("email") or ""))
+    next_id = int(store.get("nextUserId") or 1)
+    if user_record.id >= next_id:
+        store["nextUserId"] = user_record.id + 1
+    write_user_store(store)
+
+
+def delete_user(user_id):
+    store = read_user_store()
+    current_users = store.get("users", [])
+    filtered_users = [user for user in current_users if int(user.get("id", -1)) != int(user_id)]
+    if len(filtered_users) == len(current_users):
+        return False
+    store["users"] = filtered_users
+    write_user_store(store)
+    return True
+
+
+def create_user_record(email, password, first_name, last_name, sector_names, is_admin=False, must_change_password=True):
+    store = read_user_store()
+    users = store.get("users", [])
+    normalized_email = email.strip().lower()
+
+    if any(str(user.get("email") or "").strip().lower() == normalized_email for user in users):
+        return None
+
+    next_id = int(store.get("nextUserId") or 1)
+    user_record = UserRecord(
+        {
+            "id": next_id,
+            "email": normalized_email,
+            "passwordHash": generate_password_hash(password),
+            "firstName": first_name.strip(),
+            "lastName": last_name.strip(),
+            "mustChangePassword": bool(must_change_password),
+            "isAdmin": bool(is_admin),
+            "sectors": [sector for sector in sector_names if sector in SECTOR_COMPANY_MAP],
+            "createdAt": datetime.now(timezone.utc).isoformat(),
+        }
+    )
+    save_user(user_record)
+    return user_record
 
 
 def get_current_user():
     user_id = session.get("user_id")
     if not user_id:
         return None
-    return db.session.get(User, user_id)
+    return get_user_by_id(user_id)
 
 
 def get_admin_user_or_error():
@@ -117,94 +289,30 @@ def get_admin_user_or_error():
     return user, None
 
 
-def migrate_schema_if_needed():
-    inspector = inspect(db.engine)
-    tables = inspector.get_table_names()
-    if "user" in tables:
-        columns = [column["name"] for column in inspector.get_columns("user")]
-        if "is_admin" not in columns:
-            db.session.execute(text("ALTER TABLE user ADD COLUMN is_admin BOOLEAN NOT NULL DEFAULT 0"))
-            db.session.commit()
-
-
-def seed_sectors_and_companies():
-    allowed_sector_names = set(SECTOR_COMPANY_MAP.keys())
-
-    existing_sectors = Sector.query.all()
-    for sector in existing_sectors:
-        if sector.name not in allowed_sector_names:
-            for user in list(sector.users):
-                user.sectors.remove(sector)
-            db.session.delete(sector)
-
-    db.session.flush()
-
-    for sector_name, company_names in SECTOR_COMPANY_MAP.items():
-        sector = Sector.query.filter_by(name=sector_name).first()
-        if not sector:
-            sector = Sector(name=sector_name)
-            db.session.add(sector)
-            db.session.flush()
-
-        company_name_set = set(company_names)
-        for company in list(sector.companies):
-            if company.name not in company_name_set:
-                db.session.delete(company)
-
-        existing_company_names = {company.name for company in sector.companies}
-        for company_name in company_names:
-            if company_name not in existing_company_names:
-                db.session.add(Company(name=company_name, sector=sector))
-
-    db.session.commit()
-
-
-def seed_admin_user():
-    admin_email = "admin@pulseph.com"
-    existing_admin = User.query.filter_by(email=admin_email).first()
-    if not existing_admin:
-        existing_admin = User(
-            email=admin_email,
-            password_hash=generate_password_hash("admin123"),
-            first_name="Admin",
-            last_name="User",
-            must_change_password=True,
-            is_admin=True,
-        )
-        db.session.add(existing_admin)
-    else:
-        existing_admin.is_admin = True
-
-    all_sectors = Sector.query.order_by(Sector.name.asc()).all()
-    existing_admin.sectors = all_sectors
-    db.session.commit()
-
-
 def resolve_sector_names(sector_names):
     clean_sector_names = sorted({(name or "").strip() for name in (sector_names or []) if (name or "").strip()})
     if not clean_sector_names:
         return [], []
 
-    sectors = Sector.query.filter(Sector.name.in_(clean_sector_names)).all()
-    found_names = {sector.name for sector in sectors}
-    missing = [name for name in clean_sector_names if name not in found_names]
-    return sectors, missing
+    found_names = [name for name in clean_sector_names if name in SECTOR_COMPANY_MAP]
+    missing = [name for name in clean_sector_names if name not in SECTOR_COMPANY_MAP]
+    return found_names, missing
 
 
 def get_user_available_sectors(user):
     sector_order = {sector_name: index for index, sector_name in enumerate(SECTOR_COMPANY_MAP.keys())}
 
     if user.is_admin:
-        sectors = Sector.query.all()
+        sectors = list(SECTOR_COMPANY_MAP.keys())
     else:
-        sectors = list(user.sectors)
+        sectors = [sector for sector in (user.sectors or []) if sector in SECTOR_COMPANY_MAP]
 
-    return sorted(sectors, key=lambda sector: (sector_order.get(sector.name, 999), sector.name.lower()))
+    return sorted(sectors, key=lambda sector: (sector_order.get(sector, 999), sector.lower()))
 
 
-def get_ordered_company_names(sector):
-    configured_order = {company_name: index for index, company_name in enumerate(SECTOR_COMPANY_MAP.get(sector.name, []))}
-    company_names = [company.name for company in sector.companies]
+def get_ordered_company_names(sector_name):
+    configured_order = {company_name: index for index, company_name in enumerate(SECTOR_COMPANY_MAP.get(sector_name, []))}
+    company_names = list(SECTOR_COMPANY_MAP.get(sector_name, []))
     return sorted(company_names, key=lambda company_name: (configured_order.get(company_name, 999), company_name.lower()))
 
 
@@ -1114,7 +1222,7 @@ def resolve_sector_and_company_or_error(user, sector_name, selected_company):
         return None, None, (jsonify({"message": "Sector and company are required."}), 400)
 
     available_sectors = get_user_available_sectors(user)
-    available_sector_names = {sector.name for sector in available_sectors}
+    available_sector_names = set(available_sectors)
     if sector_name not in available_sector_names:
         return None, None, (jsonify({"message": "You do not have access to this sector."}), 403)
 
@@ -1444,7 +1552,7 @@ def login():
     if not email or not password:
         return jsonify({"message": "Email and password are required."}), 400
 
-    user = User.query.filter_by(email=email).first()
+    user = get_user_by_email(email)
     if not user or not check_password_hash(user.password_hash, password):
         return jsonify({"message": "Invalid credentials."}), 401
 
@@ -1492,7 +1600,7 @@ def change_password():
 
     user.password_hash = generate_password_hash(new_password)
     user.must_change_password = False
-    db.session.commit()
+    save_user(user)
 
     return jsonify({"message": "Password changed successfully.", "user": user.to_dict()})
 
@@ -1515,7 +1623,7 @@ def profile():
 
     user.first_name = first_name
     user.last_name = last_name
-    db.session.commit()
+    save_user(user)
 
     return jsonify({"message": "Profile updated successfully.", "user": user.to_dict()})
 
@@ -1527,10 +1635,10 @@ def options():
         return jsonify({"message": "Unauthorized."}), 401
 
     available_sectors = get_user_available_sectors(user)
-    sector_names = [sector.name for sector in available_sectors]
+    sector_names = list(available_sectors)
     sector_company_map = {
-        sector.name: get_ordered_company_names(sector)
-        for sector in available_sectors
+        sector_name: get_ordered_company_names(sector_name)
+        for sector_name in available_sectors
     }
 
     return jsonify({"sectors": sector_names, "sectorCompanyMap": sector_company_map})
@@ -1548,7 +1656,7 @@ def material_topics_comparison():
     if not sector_name or not selected_company:
         return jsonify({"message": "Sector and company are required."}), 400
 
-    available_sector_names = {sector.name for sector in get_user_available_sectors(user)}
+    available_sector_names = set(get_user_available_sectors(user))
     if sector_name not in available_sector_names:
         return jsonify({"message": "You do not have access to this sector."}), 403
 
@@ -1621,7 +1729,7 @@ def recommendations():
     if not sector_name or not selected_company:
         return jsonify({"message": "Sector and company are required."}), 400
 
-    available_sector_names = {sector.name for sector in get_user_available_sectors(user)}
+    available_sector_names = set(get_user_available_sectors(user))
     if sector_name not in available_sector_names:
         return jsonify({"message": "You do not have access to this sector."}), 403
 
@@ -1761,7 +1869,7 @@ def admin_metadata():
     if error:
         return error
 
-    all_sectors = [sector.name for sector in Sector.query.order_by(Sector.name.asc()).all()]
+    all_sectors = list(SECTOR_COMPANY_MAP.keys())
     return jsonify({"sectors": all_sectors})
 
 
@@ -1772,7 +1880,7 @@ def admin_users():
         return error
 
     if request.method == "GET":
-        users = User.query.order_by(User.email.asc()).all()
+        users = list_users()
         return jsonify({"users": [user.to_admin_dict() for user in users]})
 
     payload = request.get_json(silent=True) or {}
@@ -1789,25 +1897,22 @@ def admin_users():
     if len(password) < 6:
         return jsonify({"message": "Password must be at least 6 characters."}), 400
 
-    if User.query.filter_by(email=email).first():
+    if get_user_by_email(email):
         return jsonify({"message": "User with this email already exists."}), 400
 
     sectors, missing_sectors = resolve_sector_names(sector_names)
     if missing_sectors:
         return jsonify({"message": f"Invalid sectors: {', '.join(missing_sectors)}"}), 400
 
-    new_user = User(
+    new_user = create_user_record(
         email=email,
-        password_hash=generate_password_hash(password),
+        password=password,
         first_name=first_name,
         last_name=last_name,
-        must_change_password=True,
+        sector_names=sectors,
         is_admin=is_admin,
+        must_change_password=True,
     )
-    new_user.sectors = sectors
-
-    db.session.add(new_user)
-    db.session.commit()
 
     return jsonify({"message": "User created successfully.", "user": new_user.to_admin_dict()})
 
@@ -1820,15 +1925,14 @@ def admin_user_by_id(user_id):
     if not admin_user:
         return jsonify({"message": "Unauthorized."}), 401
 
-    target_user = db.session.get(User, user_id)
+    target_user = get_user_by_id(user_id)
     if not target_user:
         return jsonify({"message": "User not found."}), 404
 
     if request.method == "DELETE":
         if target_user.id == admin_user.id:
             return jsonify({"message": "You cannot delete your own account."}), 400
-        db.session.delete(target_user)
-        db.session.commit()
+        delete_user(target_user.id)
         return jsonify({"message": "User deleted successfully."})
 
     payload = request.get_json(silent=True) or {}
@@ -1861,16 +1965,12 @@ def admin_user_by_id(user_id):
             return jsonify({"message": f"Invalid sectors: {', '.join(missing_sectors)}"}), 400
         target_user.sectors = sectors
 
-    db.session.commit()
+    save_user(target_user)
 
     return jsonify({"message": "User updated successfully.", "user": target_user.to_admin_dict()})
 
 
-with app.app_context():
-    migrate_schema_if_needed()
-    db.create_all()
-    seed_sectors_and_companies()
-    seed_admin_user()
+ensure_user_store()
 
 
 if __name__ == "__main__":

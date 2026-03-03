@@ -14,7 +14,7 @@ Simple login application with:
 
 ## Project Structure
 
-- `backend/` Flask API + SQLite database
+- `backend/` Flask API + JSON-based user store
 - `frontend/` React (Vite) web app
 
 ## Backend Setup
@@ -35,6 +35,12 @@ python app.py
 ```
 
 Backend runs on `http://127.0.0.1:5000`.
+
+### User/auth storage
+
+- User/login/admin management is stored in `backend/data/users.json`.
+- In serverless environments (like Vercel), if app files are read-only, the app automatically uses `/tmp/partnerhub/users.json` at runtime.
+- Serverless `/tmp` storage is ephemeral and may reset between invocations/deployments.
 
 ### OpenAI setup (for priority moves + best practices)
 

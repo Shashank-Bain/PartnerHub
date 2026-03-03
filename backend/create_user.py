@@ -1,8 +1,6 @@
 import argparse
 
-from werkzeug.security import generate_password_hash
-
-from app import Sector, User, app, db
+from app import create_user_record, get_user_by_email, resolve_sector_names
 
 
 def parse_sector_list(sector_csv):
@@ -12,34 +10,31 @@ def parse_sector_list(sector_csv):
 
 
 def create_user(email, password, first_name, last_name, sectors, is_admin=False, must_change_password=True):
-    with app.app_context():
-        existing = User.query.filter_by(email=email.lower().strip()).first()
-        if existing:
-            print(f"User with email {email} already exists.")
-            return
+    normalized_email = email.lower().strip()
+    if get_user_by_email(normalized_email):
+        print(f"User with email {email} already exists.")
+        return
 
-        sector_objects = []
-        if sectors:
-            sector_objects = Sector.query.filter(Sector.name.in_(sectors)).all()
-            found_sector_names = {sector.name for sector in sector_objects}
-            missing_sectors = [sector for sector in sectors if sector not in found_sector_names]
-            if missing_sectors:
-                print(f"Invalid sectors: {', '.join(missing_sectors)}")
-                return
+    valid_sectors, missing_sectors = resolve_sector_names(sectors)
+    if missing_sectors:
+        print(f"Invalid sectors: {', '.join(missing_sectors)}")
+        return
 
-        user = User(
-            email=email.lower().strip(),
-            password_hash=generate_password_hash(password),
-            first_name=first_name.strip(),
-            last_name=last_name.strip(),
-            must_change_password=must_change_password,
-            is_admin=is_admin,
-        )
-        user.sectors = sector_objects
+    created_user = create_user_record(
+        email=normalized_email,
+        password=password,
+        first_name=first_name.strip(),
+        last_name=last_name.strip(),
+        sector_names=valid_sectors,
+        is_admin=is_admin,
+        must_change_password=must_change_password,
+    )
 
-        db.session.add(user)
-        db.session.commit()
-        print(f"User created successfully: {email}")
+    if not created_user:
+        print(f"User with email {email} already exists.")
+        return
+
+    print(f"User created successfully: {email}")
 
 
 if __name__ == "__main__":

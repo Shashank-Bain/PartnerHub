@@ -1,0 +1,21 @@
+{
+  "nextUserId": 2,
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@pulseph.com",
+      "firstName": "Admin",
+      "lastName": "User",
+      "mustChangePassword": true,
+      "isAdmin": true,
+      "sectors": [
+        "Consumer Products",
+        "Mining",
+        "Construction Materials",
+        "Private Equity"
+      ],
+      "passwordHash": "scrypt:32768:8:1$kj95kcC6dyBF4o4x$a26b1d62ad81038a6021dbfa2d440b1ca4367d7430fd279d47a15f17c280b162e5962140716781131335851f5c8a6e71521d79068c7afd62cb24722048cdc06b",
+      "createdAt": "2026-03-03T11:03:24.334955+00:00"
+    }
+  ]
+}
