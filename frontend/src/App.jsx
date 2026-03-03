@@ -529,6 +529,17 @@ function formatTransactionValue(value) {
   return text
 }
 
+function formatIndustryLabel(value) {
+  const text = String(value || '').trim()
+  if (!text || text === '-') {
+    return 'Other industry'
+  }
+  if (text.toLowerCase() === 'consumer') {
+    return 'Consumer Products'
+  }
+  return text
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -1728,12 +1739,11 @@ function App() {
                             <h5>{event.title}</h5>
                             <p>{event.headline || (event.overviewPoints || [])[0] || 'No summary available.'}</p>
                             <div className="timeline-event-meta">
-                              <span>{event.date || 'NA'}</span>
-                              <span>{event.theme || 'Unspecified theme'}</span>
-                              <span>{event.region || 'Other'}</span>
-                              <span>{event.targetIndustry || 'Other industry'}</span>
-                              <span>{formatTransactionValue(event.transactionValue)}</span>
-                              <span>{event.dealType || 'Other'}</span>
+                              <span>Date: {event.date || 'NA'}</span>
+                              <span>Theme: {event.theme || 'Unspecified theme'}</span>
+                              <span>Region: {event.region || 'Other'}</span>
+                              <span>Target Industry: {formatIndustryLabel(event.targetIndustry)}</span>
+                              <span>Deal Type: {event.dealType || 'Other'}</span>
                             </div>
                           </article>
                         ))}
@@ -1766,15 +1776,15 @@ function App() {
                   </section>
 
                   <section className="modal-pane">
-                    <h4>Deal Metadata</h4>
+                    <h4>Metadata Pills</h4>
                     <div className="timeline-event-meta">
-                      <span>{selectedTimelineEvent.source || 'Investment Deal'}</span>
-                      <span>{selectedTimelineEvent.date || 'NA'}</span>
-                      <span>{selectedTimelineEvent.theme || 'Unspecified theme'}</span>
-                      <span>{selectedTimelineEvent.region || 'Other'}</span>
-                      <span>{selectedTimelineEvent.targetIndustry || 'Other industry'}</span>
-                      <span>{formatTransactionValue(selectedTimelineEvent.transactionValue)}</span>
-                      <span>{selectedTimelineEvent.dealType || 'Other'}</span>
+                      <span>Source: {selectedTimelineEvent.source || 'Investment Deal'}</span>
+                      <span>Date: {selectedTimelineEvent.date || 'NA'}</span>
+                      <span>Theme: {selectedTimelineEvent.theme || 'Unspecified theme'}</span>
+                      <span>Region: {selectedTimelineEvent.region || 'Other'}</span>
+                      <span>Target Industry: {formatIndustryLabel(selectedTimelineEvent.targetIndustry)}</span>
+                      <span>Transaction Value: {formatTransactionValue(selectedTimelineEvent.transactionValue)}</span>
+                      <span>Deal Type: {selectedTimelineEvent.dealType || 'Other'}</span>
                     </div>
                   </section>
                 </div>

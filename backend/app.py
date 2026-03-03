@@ -1185,46 +1185,103 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         year_key = str(event.get("year"))
         timeline_by_year.setdefault(year_key, []).append(event)
 
-    def build_year_overview(events):
-        snippets = []
-        seen = set()
+    def _top_with_share(counter_map):
+        if not counter_map:
+            return None, 0, 0.0
+        total = sum(counter_map.values())
+        top_key, top_count = sorted(counter_map.items(), key=lambda item: (-item[1], item[0].lower()))[0]
+        share = (top_count / total) if total else 0.0
+        return top_key, top_count, share
 
-        for event in events:
-            points = event.get("overviewPoints") or []
-            if isinstance(points, list) and points:
-                candidate = str(points[0] or "").strip()
-            else:
-                candidate = str(event.get("headline") or "").strip()
+    def _deal_type_strategy_phrase(deal_type):
+        label = str(deal_type or "").strip().lower()
+        if label in {"full acquisition", "majority investment", "sponsor", "strategic"}:
+            return "the year prioritized control-oriented portfolio expansion"
+        if label in {"divestment / exit", "spin-off / demerger"}:
+            return "the year emphasized portfolio pruning and capital recycling"
+        if label == "minority investment":
+            return "the year leaned toward option-value bets and capability scouting"
+        return "the year maintained a mixed portfolio posture"
 
-            if not candidate:
-                continue
-
-            normalized = " ".join(candidate.split())
-            dedupe_key = normalized.lower()
-            if dedupe_key in seen:
-                continue
-
-            seen.add(dedupe_key)
-            snippets.append(normalized)
-
-            if len(snippets) >= 2:
-                break
-
-        if not snippets:
+    def build_year_overview(events, previous_events=None):
+        event_count = len(events)
+        if event_count == 0:
             return "No yearly strategy summary available."
 
-        return " ".join(snippets)
+        deal_type_counts = {}
+        theme_counts = {}
+        region_counts = {}
+        industry_counts = {}
+
+        for event in events:
+            deal_type = str(event.get("dealType") or "Other").strip() or "Other"
+            theme = str(event.get("theme") or "Unspecified").strip() or "Unspecified"
+            region = str(event.get("region") or "Other").strip() or "Other"
+            industry = str(event.get("targetIndustry") or "Other").strip() or "Other"
+
+            deal_type_counts[deal_type] = deal_type_counts.get(deal_type, 0) + 1
+            theme_counts[theme] = theme_counts.get(theme, 0) + 1
+            region_counts[region] = region_counts.get(region, 0) + 1
+            industry_counts[industry] = industry_counts.get(industry, 0) + 1
+
+        top_deal_type, _, top_deal_type_share = _top_with_share(deal_type_counts)
+        top_theme, _, top_theme_share = _top_with_share(theme_counts)
+        top_region, _, _ = _top_with_share(region_counts)
+        top_industry, _, _ = _top_with_share(industry_counts)
+
+        opening = f"{event_count} total deals"
+        mix_phrase = f"{top_deal_type} led the mix ({round(top_deal_type_share * 100)}% by count)"
+
+        concentration_parts = []
+        if top_industry and top_industry.lower() not in {"other", "-"}:
+            concentration_parts.append(f"{top_industry} was the main target industry")
+        if top_region and top_region.lower() != "other":
+            concentration_parts.append(f"{top_region} was the lead region")
+
+        focus_phrase = ""
+        if top_theme and top_theme.lower() != "none":
+            if top_theme_share >= 0.5:
+                focus_phrase = f"theme activity was concentrated in {top_theme}"
+            else:
+                focus_phrase = f"themes were diversified, with {top_theme} the largest cluster"
+
+        strategy_phrase = _deal_type_strategy_phrase(top_deal_type)
+
+        yoy_phrase = ""
+        if previous_events is not None:
+            previous_count = len(previous_events)
+            if previous_count > 0:
+                delta = event_count - previous_count
+                if delta > 0:
+                    yoy_phrase = f"volume increased by {delta} vs prior year"
+                elif delta < 0:
+                    yoy_phrase = f"volume decreased by {abs(delta)} vs prior year"
+                else:
+                    yoy_phrase = "volume was flat vs prior year"
+
+        parts = [opening, mix_phrase]
+        if concentration_parts:
+            parts.append("; ".join(concentration_parts))
+        if focus_phrase:
+            parts.append(focus_phrase)
+        parts.append(strategy_phrase)
+        if yoy_phrase:
+            parts.append(yoy_phrase)
+
+        return truncate_text(". ".join(parts) + ".", 260)
 
     timeline_years = []
+    previous_year_events = None
     for year_key in sorted(timeline_by_year.keys()):
         events = sorted(timeline_by_year[year_key], key=lambda item: item.get("date") or "")
         timeline_years.append(
             {
                 "year": year_key,
-                "summary": build_year_overview(events),
+                "summary": build_year_overview(events, previous_year_events),
                 "events": events,
             }
         )
+        previous_year_events = events
 
     latest_date = None
     if recent_deals:
