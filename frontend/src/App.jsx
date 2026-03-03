@@ -349,6 +349,116 @@ function InvestmentStackedChart({ title, breakdown }) {
   )
 }
 
+function InvestmentDealHeatmapChart({ title, timelineYears }) {
+  const allEvents = (timelineYears || []).flatMap((yearBlock) => yearBlock?.events || [])
+
+  if (!allEvents.length) {
+    return (
+      <section className="card scorecard-chart-card">
+        <h3 className="scorecard-chart-title">{title}</h3>
+        <div className="scorecard-thin-divider" />
+        <p>No heatmap data available.</p>
+      </section>
+    )
+  }
+
+  const matrix = {}
+  const rowTotals = {}
+  const columnTotals = {}
+
+  for (const event of allEvents) {
+    const targetIndustry = String(event?.targetIndustry || event?.theme || 'Other').trim() || 'Other'
+    const dealType = String(event?.dealType || event?.source || 'Other').trim() || 'Other'
+
+    matrix[targetIndustry] = matrix[targetIndustry] || {}
+    matrix[targetIndustry][dealType] = (matrix[targetIndustry][dealType] || 0) + 1
+
+    rowTotals[targetIndustry] = (rowTotals[targetIndustry] || 0) + 1
+    columnTotals[dealType] = (columnTotals[dealType] || 0) + 1
+  }
+
+  const rowKeys = Object.keys(rowTotals)
+    .sort((left, right) => rowTotals[right] - rowTotals[left] || left.localeCompare(right))
+    .slice(0, 8)
+
+  const columnKeys = Object.keys(columnTotals)
+    .sort((left, right) => columnTotals[right] - columnTotals[left] || left.localeCompare(right))
+    .slice(0, 6)
+
+  const maxCellValue = Math.max(
+    1,
+    ...rowKeys.flatMap((rowKey) => columnKeys.map((columnKey) => matrix[rowKey]?.[columnKey] || 0)),
+  )
+
+  const cellStyle = (value) => {
+    const intensity = value > 0 ? value / maxCellValue : 0
+    return {
+      background: `rgba(104, 70, 218, ${0.08 + intensity * 0.52})`,
+      color: intensity > 0.55 ? '#ffffff' : '#2a2f4f',
+    }
+  }
+
+  return (
+    <section className="card scorecard-chart-card">
+      <h3 className="scorecard-chart-title">{title}</h3>
+      <div className="scorecard-thin-divider" />
+
+      <div className="investment-heatmap-wrap">
+        <table className="investment-heatmap-table">
+          <thead>
+            <tr>
+              <th>Target Industry</th>
+              {columnKeys.map((columnKey) => (
+                <th key={columnKey}>{columnKey}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rowKeys.map((rowKey) => (
+              <tr key={rowKey}>
+                <td>{rowKey}</td>
+                {columnKeys.map((columnKey) => {
+                  const value = matrix[rowKey]?.[columnKey] || 0
+                  return (
+                    <td key={`${rowKey}-${columnKey}`}>
+                      <span className="investment-heatmap-cell" style={cellStyle(value)}>{value}</span>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
+function splitTimelineSummary(summaryText) {
+  const normalized = String(summaryText || '').trim()
+  if (!normalized) {
+    return { lead: 'No yearly strategy summary available.', tail: '' }
+  }
+
+  const sentenceParts = normalized.split(/(?<=[.!?])\s+/)
+  if (sentenceParts.length > 1) {
+    return {
+      lead: sentenceParts[0],
+      tail: sentenceParts.slice(1).join(' '),
+    }
+  }
+
+  const commaSplit = normalized.split(/,\s+/, 2)
+  if (commaSplit.length === 2) {
+    return {
+      lead: `${commaSplit[0]},`,
+      tail: commaSplit[1],
+    }
+  }
+
+  return { lead: normalized, tail: '' }
+}
+
 function SustainabilityDealsTrendTooltip({ active, payload, label }) {
   if (!active || !payload?.length) {
     return null
@@ -1532,36 +1642,13 @@ function App() {
             </div>
             <p className="body-subtitle">Topic and region positioning vs peers, plus multi-year investment + green capex trajectory</p>
 
-            <section className="card scorecard-chart-card">
-              <h3 className="scorecard-chart-title">Investment Snapshot</h3>
-              <div className="scorecard-thin-divider" />
-              {isInvestmentInsightsLoading && <p>Loading investment snapshot...</p>}
-              {!isInvestmentInsightsLoading && investmentInsights && (
-                <div className="investment-deep-grid">
-                  <article className="investment-deep-tile">
-                    <span>Total Deals</span>
-                    <strong>{investmentInsights.summary?.dealCount || 0}</strong>
-                  </article>
-                  <article className="investment-deep-tile highlight">
-                    <span>Total Green Capex</span>
-                    <strong>{investmentInsights.summary?.greenCapexCount || 0}</strong>
-                  </article>
-                  <article className="investment-deep-tile">
-                    <span>Closed Deals</span>
-                    <strong>{investmentInsights.summary?.closedDealCount || 0}</strong>
-                  </article>
-                  <article className="investment-deep-tile">
-                    <span>Top Region Share</span>
-                    <strong>
-                      {investmentInsights.summary?.topRegion
-                        ? `${investmentInsights.summary.topRegion} ${formatPct(investmentInsights.summary?.topRegionSharePct)}`
-                        : 'N/A'}
-                    </strong>
-                  </article>
-                </div>
-              )}
-              {!isInvestmentInsightsLoading && !investmentInsights && <p>No investment insights available.</p>}
-            </section>
+            {isInvestmentInsightsLoading && (
+              <section className="card scorecard-chart-card">
+                <h3 className="scorecard-chart-title">Investment Charts</h3>
+                <div className="scorecard-thin-divider" />
+                <p>Loading investment charts...</p>
+              </section>
+            )}
 
             {!isInvestmentInsightsLoading && investmentInsights && (
               <div className="investment-chart-grid">
@@ -1573,7 +1660,19 @@ function App() {
                   title={`Region Mix (${selectedCompany} vs Peers)`}
                   breakdown={investmentInsights.charts?.regions}
                 />
+                <InvestmentDealHeatmapChart
+                  title="Target Industry × Deal Type"
+                  timelineYears={investmentInsights.timeline?.years || []}
+                />
               </div>
+            )}
+
+            {!isInvestmentInsightsLoading && !investmentInsights && (
+              <section className="card scorecard-chart-card">
+                <h3 className="scorecard-chart-title">Investment Charts</h3>
+                <div className="scorecard-thin-divider" />
+                <p>No investment insights available.</p>
+              </section>
             )}
 
             <section className="card scorecard-table-card">
@@ -1587,10 +1686,19 @@ function App() {
                 <div className="investment-timeline-wrap">
                   {(investmentInsights.timeline?.years || []).map((yearBlock) => (
                     <section key={yearBlock.year} className="timeline-year-column">
-                      <header className="timeline-year-head">
-                        <h4>{yearBlock.year}</h4>
-                        <p>{yearBlock.summary}</p>
-                      </header>
+                      {(() => {
+                        const summaryParts = splitTimelineSummary(yearBlock.summary)
+                        return (
+                          <header className="timeline-year-head">
+                            <h4>{yearBlock.year}</h4>
+                            <p className="timeline-year-summary">
+                              <span className="timeline-summary-label">Overview</span>
+                              <strong className="timeline-summary-lead">{summaryParts.lead}</strong>
+                              {!!summaryParts.tail && <span className="timeline-summary-tail"> {summaryParts.tail}</span>}
+                            </p>
+                          </header>
+                        )
+                      })()}
 
                       <div className="timeline-event-list">
                         {(yearBlock.events || []).map((event, index) => (
@@ -1949,15 +2057,6 @@ function App() {
               {!isInvestmentInsightsLoading && !investmentInsights && (
                 <p className="commitment-section-message">No investment snapshot available.</p>
               )}
-            </section>
-
-            <section className="modal-pane commitment-pane-actions investment-strategy-block tone-risk">
-              <h4>Nestle vs peers</h4>
-              <ul className="modal-priority-list">
-                {(investmentInsights?.differenceBullets || []).slice(0, 3).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
             </section>
 
             <div className="modal-footer">

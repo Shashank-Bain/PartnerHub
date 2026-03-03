@@ -1374,13 +1374,56 @@ button {
 
 .investment-chart-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
 .investment-chart-wrap {
   width: 100%;
   min-height: 360px;
+}
+
+.investment-heatmap-wrap {
+  width: 100%;
+  overflow-x: auto;
+  min-height: 360px;
+}
+
+.investment-heatmap-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+.investment-heatmap-table th,
+.investment-heatmap-table td {
+  border: 1px solid rgba(104, 70, 218, 0.16);
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.investment-heatmap-table th {
+  background: rgba(104, 70, 218, 0.1);
+  color: #2a2f4f;
+  font-weight: 700;
+}
+
+.investment-heatmap-table td:first-child,
+.investment-heatmap-table th:first-child {
+  text-align: left;
+  min-width: 200px;
+}
+
+.investment-heatmap-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 26px;
+  border-radius: 8px;
+  font-weight: 700;
 }
 
 .investment-timeline-wrap {
@@ -1399,13 +1442,16 @@ button {
   background: linear-gradient(170deg, rgba(255, 255, 255, 0.9), rgba(247, 245, 255, 0.75));
   padding: 12px;
   display: grid;
+  grid-template-rows: auto 1fr;
+  align-content: start;
   gap: 10px;
   scroll-snap-align: start;
 }
 
 .timeline-year-head {
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  min-height: 118px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(104, 70, 218, 0.14);
 }
@@ -1423,8 +1469,32 @@ button {
   line-height: 1.35;
 }
 
+.timeline-year-summary {
+  display: grid;
+  gap: 4px;
+}
+
+.timeline-summary-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #4f3f95;
+}
+
+.timeline-summary-lead {
+  color: #2a2f4f;
+  font-size: 13px;
+}
+
+.timeline-summary-tail {
+  color: #5b6382;
+  font-size: 12px;
+}
+
 .timeline-event-list {
   display: grid;
+  align-content: start;
   gap: 10px;
 }
 
@@ -2263,7 +2333,7 @@ th {
   }
 
   .investment-chart-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2330,6 +2400,10 @@ th {
   .investment-intel-layout {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+  }
+
+  .investment-chart-grid {
+    grid-template-columns: 1fr;
   }
 
   .investment-intel-kpi-card strong {
