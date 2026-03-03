@@ -915,10 +915,10 @@ button {
 
 .investment-intel-layout {
   display: grid;
-  grid-template-rows: 2fr 3fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  min-height: 340px;
-  height: 100%;
+  min-height: 0;
+  align-items: stretch;
 }
 
 .investment-intel-top-row {
@@ -933,6 +933,30 @@ button {
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 8px;
   min-height: 0;
+}
+
+.investment-intel-focus-column {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+}
+
+.investment-intel-focus-card {
+  border: 1px solid rgba(104, 70, 218, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 10px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-height: 0;
+}
+
+.investment-intel-focus-card h4 {
+  margin: 0;
+  font-size: 13px;
+  color: #232743;
 }
 
 .investment-intel-kpi-card {
@@ -992,7 +1016,7 @@ button {
 .investment-intelligence-card .investment-intel-layout {
   min-height: 0;
   height: auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .investment-intel-focus-table {
@@ -2317,7 +2341,8 @@ th {
   }
 
   .investment-intel-layout {
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
   .investment-intel-kpi-card strong {

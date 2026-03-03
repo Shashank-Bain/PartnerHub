@@ -532,6 +532,25 @@ function App() {
       peerCapexFocus: peerFocusTopics.length ? [...peerFocusTopics].reverse().slice(0, 3) : fallbackTopics,
     }
   }, [investmentInsights])
+  const investmentCardFocus = useMemo(() => {
+    const fallbackDealFocus = ['Circular Economy', 'Sustainable Mobility']
+    const fallbackCapexFocus = ['Renewable Power', 'Energy Storage']
+
+    const dealFocus = [...new Set(investmentFocusMatrix.selectedDealFocus || [])].slice(0, 2)
+    const capexCandidates = [...new Set(investmentFocusMatrix.selectedCapexFocus || [])]
+    const capexFocus = capexCandidates.filter((topic) => !dealFocus.includes(topic)).slice(0, 2)
+
+    const resolvedDealFocus = dealFocus.length === 2 ? dealFocus : fallbackDealFocus
+    const resolvedCapexFocus = capexFocus
+      .concat(fallbackCapexFocus)
+      .filter((topic, index, source) => !resolvedDealFocus.includes(topic) && source.indexOf(topic) === index)
+      .slice(0, 2)
+
+    return {
+      dealFocus: resolvedDealFocus,
+      capexFocus: resolvedCapexFocus.length === 2 ? resolvedCapexFocus : fallbackCapexFocus,
+    }
+  }, [investmentFocusMatrix])
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -1309,71 +1328,40 @@ function App() {
 
                   {!isInvestmentInsightsLoading && investmentInsights && (
                     <section className="investment-intel-layout">
-                      <div className="investment-intel-top-row">
-                        <div className="investment-intel-kpi-column">
-                          <article className="commitment-total-tile investment-intel-kpi-card">
-                            <span>Total Deals in Sustainability</span>
-                            <strong>{investmentInsights.summary?.dealCount || 0}</strong>
-                          </article>
-                          <article className="commitment-total-tile investment-intel-kpi-card">
-                            <span>Total Green Capex Investment</span>
-                            <strong>{investmentInsights.summary?.greenCapexCount || 0}</strong>
-                          </article>
-                        </div>
-
-                        <section className="investment-intel-trend-card">
-                          <h4>% Deals Related to Sustainability (Last 3 Years)</h4>
-                          <p className="investment-intel-chart-note">Bars = selected player, line = peer average (mock data)</p>
-                          <SustainabilityDealsTrendChart data={investmentTrendData} />
-                        </section>
+                      <div className="investment-intel-kpi-column">
+                        <article className="commitment-total-tile investment-intel-kpi-card">
+                          <span>Total Deals in Sustainability</span>
+                          <strong>{investmentInsights.summary?.dealCount || 0}</strong>
+                        </article>
+                        <article className="commitment-total-tile investment-intel-kpi-card">
+                          <span>Total Green Capex Investment</span>
+                          <strong>{investmentInsights.summary?.greenCapexCount || 0}</strong>
+                        </article>
                       </div>
 
-                      <section className="investment-intel-focus-table-wrap">
-                        <table className="investment-intel-focus-table">
-                          <thead>
-                            <tr>
-                              <th>Player Group</th>
-                              <th>Sustainability Deal Focus</th>
-                              <th>Green Capex Investment Focus</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{selectedCompany || 'Selected player'}</td>
-                              <td>
-                                <div className="investment-topic-cell-list">
-                                  {investmentFocusMatrix.selectedDealFocus.map((topic) => (
-                                    <span key={`selected-deal-${topic}`} className="investment-chip">{topic}</span>
-                                  ))}
-                                </div>
-                              </td>
-                              <td>
-                                <div className="investment-topic-cell-list">
-                                  {investmentFocusMatrix.selectedCapexFocus.map((topic) => (
-                                    <span key={`selected-capex-${topic}`} className="investment-chip">{topic}</span>
-                                  ))}
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Peers</td>
-                              <td>
-                                <div className="investment-topic-cell-list">
-                                  {investmentFocusMatrix.peerDealFocus.map((topic) => (
-                                    <span key={`peer-deal-${topic}`} className="investment-chip">{topic}</span>
-                                  ))}
-                                </div>
-                              </td>
-                              <td>
-                                <div className="investment-topic-cell-list">
-                                  {investmentFocusMatrix.peerCapexFocus.map((topic) => (
-                                    <span key={`peer-capex-${topic}`} className="investment-chip">{topic}</span>
-                                  ))}
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      <section className="investment-intel-focus-column">
+                        <article className="investment-intel-focus-card">
+                          <h4>Sustainability Deal Focus</h4>
+                          <div className="investment-topic-cell-list">
+                            {investmentCardFocus.dealFocus.map((topic) => (
+                              <span key={`card-deal-${topic}`} className="investment-chip">{topic}</span>
+                            ))}
+                          </div>
+                        </article>
+                        <article className="investment-intel-focus-card">
+                          <h4>Green Capex Focus</h4>
+                          <div className="investment-topic-cell-list">
+                            {investmentCardFocus.capexFocus.map((topic) => (
+                              <span key={`card-capex-${topic}`} className="investment-chip">{topic}</span>
+                            ))}
+                          </div>
+                        </article>
+                      </section>
+
+                      <section className="investment-intel-trend-card">
+                        <h4>% Deals Related to Sustainability (Last 3 Years)</h4>
+                        <p className="investment-intel-chart-note">Bars = selected player, line = peer average (mock data)</p>
+                        <SustainabilityDealsTrendChart data={investmentTrendData} />
                       </section>
                     </section>
                   )}
@@ -1938,13 +1926,6 @@ function App() {
                   </div>
 
                   <div className="investment-right-stack">
-                    <section className="investment-strategy-block tone-positive">
-                      <h4>Investment Focus</h4>
-                      <p className="investment-focus-line">
-                        {investmentInsights.investmentFocus || 'Refocus portfolio toward resilient sustainability bets'}
-                      </p>
-                    </section>
-
                     <section className="investment-strategy-block tone-neutral">
                       <h4>Region Shares</h4>
                       <ul className="investment-simple-list">
@@ -1969,22 +1950,6 @@ function App() {
                 <p className="commitment-section-message">No investment snapshot available.</p>
               )}
             </section>
-
-            <div className="modal-two-column commitment-modal-grid">
-              <section className="modal-pane commitment-pane-chart">
-                <h4>Sustainable Topic vs Peer Avg</h4>
-                {!isInvestmentInsightsLoading && (
-                  <ThemeSpiderChart data={investmentInsights?.spider?.topics || []} companyName={selectedCompany} />
-                )}
-              </section>
-
-              <section className="modal-pane commitment-pane-chart">
-                <h4>Region Mix vs Peer Avg</h4>
-                {!isInvestmentInsightsLoading && (
-                  <ThemeSpiderChart data={investmentInsights?.spider?.regions || []} companyName={selectedCompany} />
-                )}
-              </section>
-            </div>
 
             <section className="modal-pane commitment-pane-actions investment-strategy-block tone-risk">
               <h4>Nestle vs peers</h4>
