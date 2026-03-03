@@ -1385,43 +1385,45 @@ button {
 
 .investment-heatmap-wrap {
   width: 100%;
-  overflow-x: auto;
+  overflow: hidden;
   min-height: 360px;
 }
 
 .investment-heatmap-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 620px;
+  table-layout: fixed;
 }
 
 .investment-heatmap-table th,
 .investment-heatmap-table td {
   border: 1px solid rgba(104, 70, 218, 0.16);
-  padding: 8px;
+  padding: 6px;
   text-align: center;
   vertical-align: middle;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .investment-heatmap-table th {
-  background: rgba(104, 70, 218, 0.1);
-  color: #2a2f4f;
+  background: rgba(185, 11, 22, 0.1);
+  color: #5f131c;
   font-weight: 700;
+  word-break: break-word;
 }
 
 .investment-heatmap-table td:first-child,
 .investment-heatmap-table th:first-child {
   text-align: left;
-  min-width: 200px;
+  width: 34%;
+  word-break: break-word;
 }
 
 .investment-heatmap-cell {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 34px;
-  min-height: 26px;
+  min-width: 28px;
+  min-height: 22px;
   border-radius: 8px;
   font-weight: 700;
 }
@@ -1467,29 +1469,6 @@ button {
   color: #495271;
   font-size: 13px;
   line-height: 1.35;
-}
-
-.timeline-year-summary {
-  display: grid;
-  gap: 4px;
-}
-
-.timeline-summary-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-weight: 700;
-  color: #4f3f95;
-}
-
-.timeline-summary-lead {
-  color: #2a2f4f;
-  font-size: 13px;
-}
-
-.timeline-summary-tail {
-  color: #5b6382;
-  font-size: 12px;
 }
 
 .timeline-event-list {

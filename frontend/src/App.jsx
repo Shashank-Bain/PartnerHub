@@ -352,7 +352,27 @@ function InvestmentStackedChart({ title, breakdown }) {
 function InvestmentDealHeatmapChart({ title, timelineYears }) {
   const allEvents = (timelineYears || []).flatMap((yearBlock) => yearBlock?.events || [])
 
-  if (!allEvents.length) {
+  const normalizeDealType = (rawDealType) => {
+    const text = String(rawDealType || '').toLowerCase().trim()
+    if (!text || text === '-') return 'Other'
+    if (text.includes('minority')) return 'Minority'
+    if (text.includes('majority') || text.includes('acquisition') || text.includes('buyout') || text.includes('merger')) return 'Majority'
+    if (text.includes('joint venture') || text === 'jv') return 'JV'
+    if (text.includes('asset')) return 'Asset'
+    if (text.includes('stake')) return 'Stake'
+    if (text.includes('strategic')) return 'Strategic'
+    return 'Other'
+  }
+
+  const normalizeIndustry = (rawIndustry) => {
+    const text = String(rawIndustry || '').trim()
+    if (!text || text === '-') return '-'
+    return text
+  }
+
+  const dealEvents = allEvents.filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
+
+  if (!dealEvents.length) {
     return (
       <section className="card scorecard-chart-card">
         <h3 className="scorecard-chart-title">{title}</h3>
@@ -366,9 +386,9 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
   const rowTotals = {}
   const columnTotals = {}
 
-  for (const event of allEvents) {
-    const targetIndustry = String(event?.targetIndustry || event?.theme || 'Other').trim() || 'Other'
-    const dealType = String(event?.dealType || event?.source || 'Other').trim() || 'Other'
+  for (const event of dealEvents) {
+    const targetIndustry = normalizeIndustry(event?.targetIndustry || event?.theme)
+    const dealType = normalizeDealType(event?.dealType)
 
     matrix[targetIndustry] = matrix[targetIndustry] || {}
     matrix[targetIndustry][dealType] = (matrix[targetIndustry][dealType] || 0) + 1
@@ -377,13 +397,23 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
     columnTotals[dealType] = (columnTotals[dealType] || 0) + 1
   }
 
-  const rowKeys = Object.keys(rowTotals)
-    .sort((left, right) => rowTotals[right] - rowTotals[left] || left.localeCompare(right))
-    .slice(0, 8)
+  const sortedIndustries = Object.keys(rowTotals).sort((left, right) => {
+    if (left === '-' && right !== '-') return 1
+    if (right === '-' && left !== '-') return -1
+    return rowTotals[right] - rowTotals[left] || left.localeCompare(right)
+  })
+
+  const maxRows = 8
+  const hasDashIndustry = sortedIndustries.includes('-')
+  const topIndustries = hasDashIndustry
+    ? sortedIndustries.filter((industry) => industry !== '-').slice(0, Math.max(1, maxRows - 1)).concat('-')
+    : sortedIndustries.slice(0, maxRows)
+
+  const rowKeys = topIndustries
 
   const columnKeys = Object.keys(columnTotals)
     .sort((left, right) => columnTotals[right] - columnTotals[left] || left.localeCompare(right))
-    .slice(0, 6)
+    .slice(0, 5)
 
   const maxCellValue = Math.max(
     1,
@@ -393,8 +423,8 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
   const cellStyle = (value) => {
     const intensity = value > 0 ? value / maxCellValue : 0
     return {
-      background: `rgba(104, 70, 218, ${0.08 + intensity * 0.52})`,
-      color: intensity > 0.55 ? '#ffffff' : '#2a2f4f',
+      background: `rgba(185, 11, 22, ${0.12 + intensity * 0.68})`,
+      color: intensity > 0.52 ? '#ffffff' : '#6a111b',
     }
   }
 
@@ -432,31 +462,6 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
       </div>
     </section>
   )
-}
-
-function splitTimelineSummary(summaryText) {
-  const normalized = String(summaryText || '').trim()
-  if (!normalized) {
-    return { lead: 'No yearly strategy summary available.', tail: '' }
-  }
-
-  const sentenceParts = normalized.split(/(?<=[.!?])\s+/)
-  if (sentenceParts.length > 1) {
-    return {
-      lead: sentenceParts[0],
-      tail: sentenceParts.slice(1).join(' '),
-    }
-  }
-
-  const commaSplit = normalized.split(/,\s+/, 2)
-  if (commaSplit.length === 2) {
-    return {
-      lead: `${commaSplit[0]},`,
-      tail: commaSplit[1],
-    }
-  }
-
-  return { lead: normalized, tail: '' }
 }
 
 function SustainabilityDealsTrendTooltip({ active, payload, label }) {
@@ -1686,19 +1691,10 @@ function App() {
                 <div className="investment-timeline-wrap">
                   {(investmentInsights.timeline?.years || []).map((yearBlock) => (
                     <section key={yearBlock.year} className="timeline-year-column">
-                      {(() => {
-                        const summaryParts = splitTimelineSummary(yearBlock.summary)
-                        return (
-                          <header className="timeline-year-head">
-                            <h4>{yearBlock.year}</h4>
-                            <p className="timeline-year-summary">
-                              <span className="timeline-summary-label">Overview</span>
-                              <strong className="timeline-summary-lead">{summaryParts.lead}</strong>
-                              {!!summaryParts.tail && <span className="timeline-summary-tail"> {summaryParts.tail}</span>}
-                            </p>
-                          </header>
-                        )
-                      })()}
+                      <header className="timeline-year-head">
+                        <h4>{yearBlock.year}</h4>
+                        <p>{yearBlock.summary}</p>
+                      </header>
 
                       <div className="timeline-event-list">
                         {(yearBlock.events || []).map((event, index) => (
