@@ -597,11 +597,14 @@ def build_strategy_fallback(selected_company, combined_events, topic_counts, reg
     for year, events in sorted(events_by_year.items()):
         year_topics = {}
         year_regions = {}
+        year_industries = {}
         for event in events:
             topic = str(event.get("theme") or "Unspecified").strip() or "Unspecified"
             region = str(event.get("region") or "Other").strip() or "Other"
+            industry = str(event.get("targetIndustry") or "Other").strip() or "Other"
             year_topics[topic] = year_topics.get(topic, 0) + 1
             year_regions[region] = year_regions.get(region, 0) + 1
+            year_industries[industry] = year_industries.get(industry, 0) + 1
 
         top_topic = sorted(year_topics.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
         top_region = sorted(year_regions.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
@@ -610,10 +613,49 @@ def build_strategy_fallback(selected_company, combined_events, topic_counts, reg
             f"In {year}, {selected_company} concentrated on {top_topic} in {top_region}; potential value remains in under-covered themes and regions.",
             190,
         )
+        top_deal_type_counts = {}
+        source_counts = {"Investment Deal": 0, "Green Capex": 0}
+        for event in events:
+            deal_type = str(event.get("dealType") or "Other").strip() or "Other"
+            top_deal_type_counts[deal_type] = top_deal_type_counts.get(deal_type, 0) + 1
+            source_name = str(event.get("source") or "Investment Deal").strip()
+            if source_name in source_counts:
+                source_counts[source_name] += 1
+
+        if top_deal_type_counts:
+            top_deal_type, top_type_count = sorted(
+                top_deal_type_counts.items(),
+                key=lambda item: (-item[1], item[0].lower()),
+            )[0]
+        else:
+            top_deal_type, top_type_count = (None, 0)
+        top_type_share = (top_type_count / len(events)) if events else 0
+        if top_deal_type and top_type_share >= 0.6:
+            posture_line = f"{top_deal_type} dominated the playbook this year."
+        elif top_deal_type:
+            posture_line = f"Portfolio activity stayed mixed, led by {top_deal_type}."
+        else:
+            posture_line = "Portfolio activity stayed mixed across transaction types."
+
+        if source_counts["Green Capex"] > 0 and source_counts["Investment Deal"] > 0:
+            capex_line = "Execution blended investment deals with green capex scaling."
+        elif source_counts["Green Capex"] > 0:
+            capex_line = "Capital deployment leaned toward green capex execution."
+        else:
+            capex_line = "Execution leaned on transaction-led portfolio moves."
+
+        top_industry = None
+        if year_industries:
+            top_industry = sorted(year_industries.items(), key=lambda item: (-item[1], item[0].lower()))[0][0]
+        if top_industry and top_industry.lower() not in {"other", "-"}:
+            focus_line = f"Target-industry emphasis leaned toward {top_industry}."
+        else:
+            focus_line = "Portfolio actions stayed spread across target industries."
+
         yearly_insights[year_key] = [
-            truncate_text(f"{len(events)} sustainability deals executed.", 120),
-            truncate_text(f"Theme concentration favored {top_topic}.", 120),
-            truncate_text(f"Regional focus centered on {top_region}.", 120),
+            truncate_text(posture_line, 120),
+            truncate_text(capex_line, 120),
+            truncate_text(focus_line, 120),
         ]
 
     return {
@@ -672,7 +714,7 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
                                 "strategicDirection": "array of exactly 2-3 concise strings about missed value opportunities and strategic focus",
                                 "majorDeals": "array of 1-2 objects with title,date,source,why where why explains strategy significance without using deal value",
                                 "yearlySummaries": "object of year->1 concise sentence on strategy and value-left-on-table",
-                                "yearlyInsights": "object of year->array of exactly 3 short, pithy bullet points (max 12 words each)",
+                                "yearlyInsights": "object of year->array of exactly 3 short, pithy bullet points (max 12 words each); avoid repeating raw deal counts and avoid theme/region callouts",
                             },
                         },
                         ensure_ascii=False,
@@ -887,17 +929,10 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             counter[theme] = counter.get(theme, 0) + 1
         return counter
 
-    def aggregate_region_counts(deals, capex):
+    def aggregate_region_counts(deals):
         counter = {}
         for row in deals:
             if not is_sustainability_classification(get_row_theme(row)):
-                continue
-            region = str(row.get("Master Target Region") or "").strip() or "Other"
-            counter[region] = counter.get(region, 0) + 1
-
-        for row in capex:
-            capex_theme = str(row.get("classification") or row.get("classification_L1") or "").strip()
-            if not is_sustainability_classification(capex_theme):
                 continue
             region = str(row.get("Master Target Region") or "").strip() or "Other"
             counter[region] = counter.get(region, 0) + 1
@@ -957,7 +992,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     peer_topic_totals = {}
     peer_region_totals = {}
     selected_topic_totals = aggregate_theme_counts(selected_deals, selected_capex)
-    selected_region_totals = aggregate_region_counts(selected_deals, selected_capex)
+    selected_region_totals = aggregate_region_counts(selected_deals)
 
     for company_name in sector_companies:
         company_deals = [
@@ -979,7 +1014,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             )
         ]
         company_theme_totals = aggregate_theme_counts(company_deals, company_capex)
-        company_region_totals = aggregate_region_counts(company_deals, company_capex)
+        company_region_totals = aggregate_region_counts(company_deals)
 
         if normalize_company_name(company_name) != normalize_company_name(selected_company):
             for key, value in company_theme_totals.items():
@@ -1037,7 +1072,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         None,
     )
 
-    all_regions_selected = aggregate_region_counts(selected_deals, selected_capex)
+    all_regions_selected = aggregate_region_counts(selected_deals)
     total_region_events_selected = sum(all_regions_selected.values())
     top_region = None
     top_region_share_pct = 0.0
@@ -1193,7 +1228,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             )
         ]
         company_theme_counts = aggregate_theme_counts(company_deals, company_capex)
-        company_region_counts = aggregate_region_counts(company_deals, company_capex)
+        company_region_counts = aggregate_region_counts(company_deals)
 
         topic_row = {
             "company": company_name,
@@ -1342,27 +1377,27 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             industry_counts[industry] = industry_counts.get(industry, 0) + 1
 
         top_deal_type, _, top_deal_type_share = _top_with_share(deal_type_counts)
-        top_theme, _, top_theme_share = _top_with_share(theme_counts)
-        top_region, _, _ = _top_with_share(region_counts)
         top_industry, _, _ = _top_with_share(industry_counts)
 
-        opening = f"{event_count} total sustainability deals"
-        mix_phrase = f"{top_deal_type} led mix ({round(top_deal_type_share * 100)}% by count)"
-
-        concentration_parts = []
-        if top_industry and top_industry.lower() not in {"other", "-"}:
-            concentration_parts.append(f"{top_industry} was the main target industry")
-        if top_region and top_region.lower() != "other":
-            concentration_parts.append(f"{top_region} was the lead region")
-
-        focus_phrase = ""
-        if top_theme and top_theme.lower() != "none":
-            if top_theme_share >= 0.5:
-                focus_phrase = f"theme activity was concentrated in {top_theme}"
-            else:
-                focus_phrase = f"themes were diversified, with {top_theme} the largest cluster"
+        if top_deal_type_share >= 0.6:
+            posture_phrase = f"{top_deal_type} dominated the yearly playbook"
+        else:
+            posture_phrase = f"activity stayed mixed, led by {top_deal_type}"
 
         strategy_phrase = _deal_type_strategy_phrase(top_deal_type)
+
+        source_counts = {"Investment Deal": 0, "Green Capex": 0}
+        for event in events:
+            source_name = str(event.get("source") or "Investment Deal").strip()
+            if source_name in source_counts:
+                source_counts[source_name] += 1
+
+        if source_counts["Investment Deal"] > 0 and source_counts["Green Capex"] > 0:
+            execution_phrase = "investment deals and green capex progressed in parallel"
+        elif source_counts["Green Capex"] > 0:
+            execution_phrase = "capital deployment leaned toward green capex implementation"
+        else:
+            execution_phrase = "capital deployment was driven by transaction execution"
 
         yoy_phrase = ""
         if previous_events is not None:
@@ -1370,32 +1405,21 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             if previous_count > 0:
                 delta = event_count - previous_count
                 if delta > 0:
-                    yoy_phrase = f"volume increased by {delta} vs prior year"
+                    yoy_phrase = "deal velocity accelerated versus the prior year"
                 elif delta < 0:
-                    yoy_phrase = f"volume decreased by {abs(delta)} vs prior year"
+                    yoy_phrase = "deal velocity softened versus the prior year"
                 else:
-                    yoy_phrase = "volume was flat vs prior year"
+                    yoy_phrase = "deal velocity held steady versus the prior year"
 
-        concentration_phrase = ""
-        if concentration_parts:
-            concentration_phrase = "; ".join(concentration_parts)
-            if focus_phrase:
-                concentration_phrase = f"{concentration_phrase}; {focus_phrase}"
-        elif focus_phrase:
-            concentration_phrase = focus_phrase
+        industry_phrase = ""
+        if top_industry and top_industry.lower() not in {"other", "-"}:
+            industry_phrase = f"target focus leaned toward {top_industry}"
 
-        strategy_line = strategy_phrase
-        if yoy_phrase:
-            strategy_line = f"{strategy_phrase}; {yoy_phrase}"
-
-        points = [truncate_text(opening, 120), truncate_text(mix_phrase, 120)]
-        if concentration_phrase:
-            points.append(truncate_text(concentration_phrase, 140))
-        else:
-            points.append(truncate_text(strategy_line, 140))
-
-        if len(points) < 3:
-            points.append(truncate_text(strategy_line, 140))
+        points = [
+            truncate_text(posture_phrase + ".", 130),
+            truncate_text(execution_phrase + ".", 130),
+            truncate_text((industry_phrase or strategy_phrase) + (f"; {yoy_phrase}." if yoy_phrase else "."), 150),
+        ]
 
         return points[:3]
 
@@ -1410,6 +1434,19 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             for point in (ai_points if isinstance(ai_points, list) else [])
             if str(point or "").strip()
         ][:3]
+        filtered_year_points = []
+        for point in year_points:
+            point_lc = point.lower()
+            low_value_pattern = (
+                " total deal" in point_lc
+                or " deals executed" in point_lc
+                or "theme concentration" in point_lc
+                or "regional focus" in point_lc
+                or " lead region" in point_lc
+            )
+            if not low_value_pattern:
+                filtered_year_points.append(point)
+        year_points = filtered_year_points
         if len(year_points) < 3:
             for point in fallback_points:
                 if len(year_points) >= 3:

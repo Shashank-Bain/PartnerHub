@@ -484,7 +484,7 @@ function SustainabilityDealsTrendTooltip({ active, payload, label }) {
   )
 }
 
-function SustainabilityDealsTrendChart({ data }) {
+function SustainabilityDealsTrendChart({ data, selectedCompany }) {
   if (!data?.length) {
     return null
   }
@@ -506,7 +506,8 @@ function SustainabilityDealsTrendChart({ data }) {
             stroke="rgba(95, 104, 144, 0.35)"
           />
           <Tooltip content={<SustainabilityDealsTrendTooltip />} cursor={{ fill: 'rgba(104, 70, 218, 0.08)' }} />
-          <Bar dataKey="sustainabilityPct" name="Sustainability deals" fill="rgba(104, 70, 218, 0.72)" radius={[6, 6, 0, 0]} />
+          <Legend wrapperStyle={{ fontSize: 12 }} />
+          <Bar dataKey="sustainabilityPct" name={selectedCompany || 'Selected company'} fill="rgba(104, 70, 218, 0.72)" radius={[6, 6, 0, 0]} />
           <Line
             type="monotone"
             dataKey="peerAvgPct"
@@ -516,6 +517,31 @@ function SustainabilityDealsTrendChart({ data }) {
             dot={{ r: 3, fill: 'rgba(185, 11, 22, 0.85)' }}
           />
         </ComposedChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+function RegionMixChart({ regionShares }) {
+  const chartData = (regionShares || []).slice(0, 5).map((item) => ({
+    region: item.region,
+    sharePct: Number(item.sharePct || 0),
+  }))
+
+  if (!chartData.length) {
+    return <p>No region mix data available.</p>
+  }
+
+  return (
+    <div className="investment-trend-chart-wrap">
+      <ResponsiveContainer width="100%" height={220}>
+        <BarChart data={chartData} margin={{ top: 8, right: 12, left: 4, bottom: 8 }} layout="vertical">
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 12, fill: '#2f3554' }} stroke="rgba(95, 104, 144, 0.35)" />
+          <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 12, fill: '#515a7a' }} stroke="rgba(95, 104, 144, 0.35)" />
+          <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Share']} />
+          <Bar dataKey="sharePct" name="Region share" fill="rgba(104, 70, 218, 0.72)" radius={[0, 6, 6, 0]} />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   )
@@ -1487,9 +1513,8 @@ function App() {
                       </section>
 
                       <section className="investment-intel-trend-card">
-                        <h4>% Deals Related to Sustainability (Last 3 Years)</h4>
-                        <p className="investment-intel-chart-note">Bars = selected player, line = peer average (mock data)</p>
-                        <SustainabilityDealsTrendChart data={investmentTrendData} />
+                        <h4>% Deals Related to Sustainability</h4>
+                        <SustainabilityDealsTrendChart data={investmentTrendData} selectedCompany={selectedCompany} />
                       </section>
                     </section>
                   )}
@@ -1695,7 +1720,7 @@ function App() {
 
             <section className="card scorecard-table-card">
               <div className="scorecard-table-head">
-                <h3>Investment & Green Capex Timeline (Last 2-3 Years)</h3>
+                <h3>Investment & Green Capex Timeline</h3>
               </div>
               <div className="gradient-line" />
 
@@ -2105,12 +2130,8 @@ function App() {
 
                   <div className="investment-right-stack">
                     <section className="investment-strategy-block tone-neutral">
-                      <h4>Region Shares</h4>
-                      <ul className="investment-simple-list">
-                        {(investmentInsights.regionShares || []).slice(0, 4).map((item) => (
-                          <li key={item.region}>{item.region}: {formatPct(item.sharePct)}</li>
-                        ))}
-                      </ul>
+                      <h4>Region Mix</h4>
+                      <RegionMixChart regionShares={investmentInsights.regionShares || []} />
                     </section>
 
                     <section className="investment-strategy-block tone-neutral">
