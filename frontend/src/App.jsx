@@ -570,13 +570,34 @@ function RegionMixChart({ regionShares }) {
   )
 }
 
-function MixDistributionChart({ title, rows }) {
-  const chartData = (rows || []).map((row) => ({
-    label: row.label,
-    percentage: Number(row.percentage || 0),
-  }))
+function MixDistributionChart({ title, keys, rows }) {
+  const safeKeys = (keys || []).filter(Boolean)
+  const sourceRows = rows || []
 
-  if (!chartData.length) {
+  const chartData = sourceRows.map((row) => {
+    const totalDeals = safeKeys.reduce((sum, key) => sum + Number(row?.[key] || 0), 0)
+    const payload = {
+      company: row?.isSelected ? `${row.company} (Client)` : row.company,
+      companyRaw: String(row?.company || ''),
+      isSelected: Boolean(row?.isSelected),
+      totalDeals,
+      totalPct: totalDeals > 0 ? 100 : 0,
+    }
+
+    for (const key of safeKeys) {
+      const count = Number(row?.[key] || 0)
+      payload[key] = totalDeals > 0 ? (count / totalDeals) * 100 : 0
+    }
+
+    return payload
+  }).sort((left, right) => {
+    if (left.isSelected && !right.isSelected) return -1
+    if (!left.isSelected && right.isSelected) return 1
+    if (right.totalDeals !== left.totalDeals) return right.totalDeals - left.totalDeals
+    return left.companyRaw.localeCompare(right.companyRaw)
+  })
+
+  if (!chartData.length || !safeKeys.length) {
     return (
       <section className="card scorecard-chart-card">
         <h3 className="scorecard-chart-title">{title}</h3>
@@ -591,15 +612,16 @@ function MixDistributionChart({ title, rows }) {
       <h3 className="scorecard-chart-title">{title}</h3>
       <div className="scorecard-thin-divider" />
       <div className="investment-chart-wrap investment-mix-chart-wrap">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData} margin={{ top: 18, right: 12, left: 4, bottom: 44 }}>
+        <ResponsiveContainer width="100%" height={Math.max(320, chartData.length * 52)}>
+          <BarChart data={chartData} margin={{ top: 20, right: 12, left: 4, bottom: 54 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
             <XAxis
-              dataKey="label"
+              dataKey="company"
               type="category"
               interval={0}
-              tick={{ fontSize: 11, fill: '#515a7a' }}
+              tick={{ fontSize: 10, fill: '#515a7a' }}
               stroke="rgba(95, 104, 144, 0.35)"
+              tickMargin={10}
             />
             <YAxis
               type="number"
@@ -608,9 +630,19 @@ function MixDistributionChart({ title, rows }) {
               tick={{ fontSize: 12, fill: '#2f3554' }}
               stroke="rgba(95, 104, 144, 0.35)"
             />
-            <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix']} />
-            <Bar dataKey="percentage" fill="rgba(104, 70, 218, 0.74)" radius={[6, 6, 0, 0]}>
-              <LabelList dataKey="percentage" position="top" formatter={(value) => `${Number(value).toFixed(1)}%`} />
+            <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix share']} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            {safeKeys.map((key, index) => (
+              <Bar
+                key={`${title}-${key}`}
+                dataKey={key}
+                stackId="mix"
+                name={key}
+                fill={STACKED_COLORS[index % STACKED_COLORS.length]}
+              />
+            ))}
+            <Bar dataKey="totalPct" fill="rgba(0,0,0,0)" legendType="none" isAnimationActive={false}>
+              <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -776,83 +808,25 @@ function App() {
       capexFocus: resolvedCapexFocus.length === 2 ? resolvedCapexFocus : fallbackCapexFocus,
     }
   }, [investmentFocusMatrix])
-  const investmentSustainabilityMix = useMemo(() => {
-    const topicKeys = investmentInsights?.charts?.topics?.keys || []
-    const selectedRow = (investmentInsights?.charts?.topics?.rows || []).find((row) => row?.isSelected)
-    if (!selectedRow || !topicKeys.length) return []
+  const investmentSustainabilityMix = useMemo(() => ({
+    keys: investmentInsights?.charts?.topics?.keys || [],
+    rows: investmentInsights?.charts?.topics?.rows || [],
+  }), [investmentInsights])
 
-    const entries = topicKeys
-      .map((key) => ({ label: key, count: Number(selectedRow[key] || 0) }))
-      .filter((item) => item.count > 0)
-    const total = entries.reduce((sum, item) => sum + item.count, 0)
-    if (!total) return []
+  const investmentRegionMix = useMemo(() => ({
+    keys: investmentInsights?.charts?.regions?.keys || [],
+    rows: investmentInsights?.charts?.regions?.rows || [],
+  }), [investmentInsights])
 
-    return entries
-      .map((item) => ({ label: item.label, percentage: (item.count / total) * 100 }))
-      .sort((a, b) => b.percentage - a.percentage)
-      .slice(0, 5)
-  }, [investmentInsights])
+  const investmentTargetIndustryMix = useMemo(() => ({
+    keys: investmentInsights?.charts?.targetIndustries?.keys || [],
+    rows: investmentInsights?.charts?.targetIndustries?.rows || [],
+  }), [investmentInsights])
 
-  const investmentRegionMix = useMemo(() => {
-    const rows = investmentInsights?.regionShares || []
-    return rows.slice(0, 5).map((item) => ({
-      label: item.region,
-      percentage: Number(item.sharePct || 0),
-    }))
-  }, [investmentInsights])
-
-  const investmentTargetIndustryMix = useMemo(() => {
-    const events = (investmentInsights?.timeline?.years || []).flatMap((yearBlock) => yearBlock?.events || [])
-      .filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
-    const counter = {}
-
-    for (const event of events) {
-      const industry = String(event?.targetIndustry || '-').trim() || '-'
-      counter[industry] = (counter[industry] || 0) + 1
-    }
-
-    const entries = Object.entries(counter).sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-    const total = entries.reduce((sum, [, count]) => sum + count, 0)
-    if (!total) return []
-
-    return entries.slice(0, 5).map(([label, count]) => ({
-      label,
-      percentage: (count / total) * 100,
-    }))
-  }, [investmentInsights])
-
-  const investmentDealTypeMix = useMemo(() => {
-    const events = (investmentInsights?.timeline?.years || []).flatMap((yearBlock) => yearBlock?.events || [])
-      .filter((event) => String(event?.source || '').toLowerCase() !== 'green capex')
-
-    const normalizeDealType = (rawDealType) => {
-      const text = String(rawDealType || '').toLowerCase().trim()
-      if (!text || text === '-') return 'Other'
-      if (text.includes('minority investment')) return 'Minority Investment'
-      if (text.includes('majority investment') || text.includes('control acquisition')) return 'Majority Investment'
-      if (text.includes('full acquisition')) return 'Full Acquisition'
-      if (text.includes('divestment') || text.includes('exit')) return 'Divestment / Exit'
-      if (text.includes('spin-off') || text.includes('spin off') || text.includes('split-off') || text.includes('demerger')) return 'Spin-off / Demerger'
-      if (text.includes('sponsor')) return 'Sponsor'
-      if (text.includes('strategic')) return 'Strategic'
-      return 'Other'
-    }
-
-    const counter = {}
-    for (const event of events) {
-      const dealType = normalizeDealType(event?.dealType)
-      counter[dealType] = (counter[dealType] || 0) + 1
-    }
-
-    const entries = Object.entries(counter).sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-    const total = entries.reduce((sum, [, count]) => sum + count, 0)
-    if (!total) return []
-
-    return entries.slice(0, 5).map(([label, count]) => ({
-      label,
-      percentage: (count / total) * 100,
-    }))
-  }, [investmentInsights])
+  const investmentDealTypeMix = useMemo(() => ({
+    keys: investmentInsights?.charts?.dealTypes?.keys || [],
+    rows: investmentInsights?.charts?.dealTypes?.rows || [],
+  }), [investmentInsights])
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -1378,7 +1352,7 @@ function App() {
           </button>
         </div>
 
-        <div className="nav-main-left">
+        <div className="nav-main-center">
           <div className="nav-greeting">
             <h2>{greeting}, {user.firstName}</h2>
           </div>
@@ -1855,13 +1829,6 @@ function App() {
 
             {!isInvestmentInsightsLoading && investmentInsights && (
               <>
-                <div className="investment-chart-grid investment-chart-grid-four">
-                  <MixDistributionChart title="Sustainability Topic Mix" rows={investmentSustainabilityMix} />
-                  <MixDistributionChart title="Region Mix" rows={investmentRegionMix} />
-                  <MixDistributionChart title="Target Industry Mix" rows={investmentTargetIndustryMix} />
-                  <MixDistributionChart title="Deal Type Mix" rows={investmentDealTypeMix} />
-                </div>
-
                 <div className="investment-chart-grid investment-chart-grid-two">
                   <InvestmentHeatmapChart
                     title="Sustainability Topic × Region"
@@ -1874,6 +1841,13 @@ function App() {
                     title="Target Industry × Deal Type"
                     timelineYears={investmentInsights.timeline?.years || []}
                   />
+                </div>
+
+                <div className="investment-chart-grid investment-chart-grid-four">
+                  <MixDistributionChart title="Sustainability Topic Mix" keys={investmentSustainabilityMix.keys} rows={investmentSustainabilityMix.rows} />
+                  <MixDistributionChart title="Region Mix" keys={investmentRegionMix.keys} rows={investmentRegionMix.rows} />
+                  <MixDistributionChart title="Target Industry Mix" keys={investmentTargetIndustryMix.keys} rows={investmentTargetIndustryMix.rows} />
+                  <MixDistributionChart title="Deal Type Mix" keys={investmentDealTypeMix.keys} rows={investmentDealTypeMix.rows} />
                 </div>
               </>
             )}
@@ -2322,7 +2296,20 @@ function App() {
 
                 <div className="investment-chart-grid investment-chart-grid-two">
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>{selectedCompany} Insights</h4>
+                    <div className="investment-insight-header">
+                      <h4>{selectedCompany} Insights</h4>
+                      <span
+                        className={`investment-insight-source ${(investmentInsights.narrative?.focusCompanyPithyMeta?.source || 'fallback') === 'ai' ? 'ai' : 'fallback'}`}
+                      >
+                        {(investmentInsights.narrative?.focusCompanyPithyMeta?.source || 'fallback') === 'ai' ? 'AI generated' : 'Fallback'}
+                      </span>
+                    </div>
+                    <p className="investment-insight-debug">
+                      Reason: {investmentInsights.narrative?.focusCompanyPithyMeta?.reason || 'unknown'}
+                      {investmentInsights.narrative?.focusCompanyPithyMeta?.model
+                        ? ` · Model: ${investmentInsights.narrative.focusCompanyPithyMeta.model}`
+                        : ''}
+                    </p>
                     <ul className="investment-simple-list">
                       {(investmentInsights.narrative?.focusCompanyPithyInsights || []).slice(0, 3).map((line, index) => (
                         <li key={`fc-insight-${index}`}>{line}</li>

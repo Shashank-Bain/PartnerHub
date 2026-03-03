@@ -800,14 +800,26 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
 def generate_pithy_focus_company_insights(selected_company, insights):
     raw_insights = [str(item or "").strip() for item in (insights or []) if str(item or "").strip()]
     if not raw_insights:
-        return []
+        return {
+            "insights": [],
+            "source": "fallback",
+            "reason": "no_input_insights",
+            "model": None,
+            "hasApiKey": bool(os.getenv("OPENAI_API_KEY", "").strip()),
+        }
 
     fallback_points = [truncate_text(point, 120) for point in raw_insights[:3]]
 
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
     if not api_key:
-        return fallback_points
+        return {
+            "insights": fallback_points,
+            "source": "fallback",
+            "reason": "missing_openai_api_key",
+            "model": model_name,
+            "hasApiKey": False,
+        }
 
     try:
         from openai import OpenAI
@@ -847,11 +859,29 @@ def generate_pithy_focus_company_insights(selected_company, insights):
         ]
 
         if len(bullets) < 3:
-            return fallback_points
+            return {
+                "insights": fallback_points,
+                "source": "fallback",
+                "reason": "invalid_ai_payload",
+                "model": model_name,
+                "hasApiKey": True,
+            }
 
-        return bullets[:3]
-    except Exception:
-        return fallback_points
+        return {
+            "insights": bullets[:3],
+            "source": "ai",
+            "reason": "openai_success",
+            "model": model_name,
+            "hasApiKey": True,
+        }
+    except Exception as error:
+        return {
+            "insights": fallback_points,
+            "source": "fallback",
+            "reason": f"openai_error:{type(error).__name__}",
+            "model": model_name,
+            "hasApiKey": True,
+        }
 
 
 def build_peer_focus_bullets(selected_company, selected_topic_totals, peer_topic_totals, peer_count):
@@ -1129,7 +1159,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         None,
     )
     focus_company_insights = (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else []
-    pithy_focus_company_insights = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
+    pithy_focus_company_result = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
+    pithy_focus_company_insights = pithy_focus_company_result.get("insights", [])
 
     all_regions_selected = aggregate_region_counts(selected_deals)
     total_region_events_selected = sum(all_regions_selected.values())
@@ -1266,6 +1297,39 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
 
     topic_breakdown_rows = []
     region_breakdown_rows = []
+    target_industry_breakdown_rows = []
+    deal_type_breakdown_rows = []
+
+    def normalize_deal_type(value):
+        text = str(value or "").strip().lower()
+        if not text or text == "-":
+            return "Other"
+        if "minority investment" in text:
+            return "Minority Investment"
+        if "majority investment" in text or "control acquisition" in text:
+            return "Majority Investment"
+        if "full acquisition" in text:
+            return "Full Acquisition"
+        if "divestment" in text or "exit" in text:
+            return "Divestment / Exit"
+        if "spin-off" in text or "spin off" in text or "split-off" in text or "demerger" in text:
+            return "Spin-off / Demerger"
+        if "sponsor" in text:
+            return "Sponsor"
+        if "strategic" in text:
+            return "Strategic"
+        return "Other"
+
+    def normalize_target_industry(value):
+        text = str(value or "").strip()
+        if not text or text == "-":
+            return "Other"
+        if text.lower() == "consumer":
+            return "Consumer Products"
+        return text
+
+    company_target_industry_counts = {}
+    company_deal_type_counts = {}
 
     for company_name in sector_companies:
         company_deals = [
@@ -1288,6 +1352,20 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         ]
         company_theme_counts = aggregate_theme_counts(company_deals, company_capex)
         company_region_counts = aggregate_region_counts(company_deals)
+
+        company_target_counts = {}
+        company_deal_counts = {}
+        for row in company_deals:
+            if not isinstance(row, dict):
+                continue
+            target_industry = normalize_target_industry(row.get("Master Primary Industry Target"))
+            company_target_counts[target_industry] = company_target_counts.get(target_industry, 0) + 1
+
+            deal_type = normalize_deal_type(row.get("Transaction Types") or row.get("Transaction Type"))
+            company_deal_counts[deal_type] = company_deal_counts.get(deal_type, 0) + 1
+
+        company_target_industry_counts[company_name] = company_target_counts
+        company_deal_type_counts[company_name] = company_deal_counts
 
         topic_row = {
             "company": company_name,
@@ -1315,8 +1393,68 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         region_row["Other"] = region_other
         region_breakdown_rows.append(region_row)
 
+    aggregated_target_industry_counts = {}
+    aggregated_deal_type_counts = {}
+    for company_name in sector_companies:
+        for key, value in (company_target_industry_counts.get(company_name) or {}).items():
+            aggregated_target_industry_counts[key] = aggregated_target_industry_counts.get(key, 0) + value
+        for key, value in (company_deal_type_counts.get(company_name) or {}).items():
+            aggregated_deal_type_counts[key] = aggregated_deal_type_counts.get(key, 0) + value
+
+    top_target_industry_keys = [
+        key
+        for key, _ in sorted(
+            aggregated_target_industry_counts.items(),
+            key=lambda item: (-item[1], item[0].lower()),
+        )[:4]
+    ]
+    if not top_target_industry_keys:
+        top_target_industry_keys = ["Other"]
+
+    top_deal_type_keys = [
+        key
+        for key, _ in sorted(
+            aggregated_deal_type_counts.items(),
+            key=lambda item: (-item[1], item[0].lower()),
+        )[:4]
+    ]
+    if not top_deal_type_keys:
+        top_deal_type_keys = ["Other"]
+
+    for company_name in sector_companies:
+        target_counts = company_target_industry_counts.get(company_name, {})
+        deal_counts = company_deal_type_counts.get(company_name, {})
+
+        target_row = {
+            "company": company_name,
+            "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+        }
+        target_other = 0
+        for key, value in target_counts.items():
+            if key in top_target_industry_keys:
+                target_row[key] = value
+            else:
+                target_other += value
+        target_row["Other"] = target_other
+        target_industry_breakdown_rows.append(target_row)
+
+        deal_row = {
+            "company": company_name,
+            "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
+        }
+        deal_other = 0
+        for key, value in deal_counts.items():
+            if key in top_deal_type_keys:
+                deal_row[key] = value
+            else:
+                deal_other += value
+        deal_row["Other"] = deal_other
+        deal_type_breakdown_rows.append(deal_row)
+
     topic_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
     region_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
+    target_industry_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
+    deal_type_breakdown_rows.sort(key=lambda item: (not item["isSelected"], item["company"].lower()))
 
     timeline_events = []
     for deal in recent_deals:
@@ -1574,6 +1712,14 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "keys": [*top_region_keys, "Other"],
                 "rows": region_breakdown_rows,
             },
+            "targetIndustries": {
+                "keys": [*top_target_industry_keys, "Other"],
+                "rows": target_industry_breakdown_rows,
+            },
+            "dealTypes": {
+                "keys": [*top_deal_type_keys, "Other"],
+                "rows": deal_type_breakdown_rows,
+            },
         },
         "timeline": {
             "years": timeline_years,
@@ -1581,6 +1727,12 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         "narrative": {
             "focusCompanyInsights": focus_company_insights,
             "focusCompanyPithyInsights": pithy_focus_company_insights,
+            "focusCompanyPithyMeta": {
+                "source": pithy_focus_company_result.get("source", "fallback"),
+                "reason": pithy_focus_company_result.get("reason", "unknown"),
+                "model": pithy_focus_company_result.get("model"),
+                "hasApiKey": bool(pithy_focus_company_result.get("hasApiKey", False)),
+            },
             "peerInsights": (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else [],
         },
     }

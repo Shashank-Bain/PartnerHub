@@ -167,8 +167,8 @@ button {
 .navbar {
   position: relative;
   z-index: 120;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   padding: 14px 24px;
   border-bottom: 1px solid var(--border);
@@ -176,12 +176,12 @@ button {
   backdrop-filter: blur(12px);
 }
 
-.nav-main-left {
+.nav-main-center {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  flex: 1;
-  margin-left: 12px;
+  justify-self: center;
 }
 
 .logo-wrap {
@@ -1196,6 +1196,43 @@ button {
   gap: 8px;
 }
 
+.investment-insight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.investment-insight-source {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.investment-insight-source.ai {
+  color: #1f7a4c;
+  background: rgba(31, 122, 76, 0.12);
+  border-color: rgba(31, 122, 76, 0.3);
+}
+
+.investment-insight-source.fallback {
+  color: #8a4a0e;
+  background: rgba(223, 143, 59, 0.18);
+  border-color: rgba(223, 143, 59, 0.35);
+}
+
+.investment-insight-debug {
+  margin: -2px 0 0;
+  color: #5a6281;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 .modal-priority-list.compact {
   margin-top: 0;
   font-size: 13px;
@@ -1419,6 +1456,11 @@ button {
 .investment-modal-grid {
   display: grid;
   gap: 14px;
+}
+
+.investment-modal-grid .investment-chart-wrap,
+.investment-modal-grid .investment-heatmap-wrap {
+  min-height: 0;
 }
 
 .investment-summary-band-modal {
@@ -2398,16 +2440,17 @@ th {
 
 @media (max-width: 900px) {
   .navbar {
+    display: flex;
     flex-direction: column;
     gap: 12px;
     align-items: stretch;
   }
 
-  .nav-main-left {
-    margin-left: 0;
+  .nav-main-center {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 8px;
   }
 
