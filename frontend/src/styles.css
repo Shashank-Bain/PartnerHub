@@ -223,7 +223,7 @@ button {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  margin-left: 16px;
+  margin-left: 28px;
 }
 
 .nav-filter-control {
@@ -2466,6 +2466,7 @@ th {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
+    margin-left: 0;
   }
 
   .nav-filter-control {
@@ -2489,6 +2490,11 @@ th {
   .nav-actions select,
   .nav-actions .nav-tab {
     width: 100%;
+  }
+
+  .dropdown-menu {
+    right: auto;
+    left: 0;
   }
 
   .form-grid {
