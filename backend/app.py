@@ -1842,6 +1842,50 @@ def is_not_disclosed_value(value):
     return normalized_value in {"", "notdisclosed", "nadisclosed", "na"}
 
 
+def normalize_commitment_status(status_value):
+    normalized_key = normalize_text_token(status_value)
+    if normalized_key == "achieved":
+        return "achieved", "Achieved"
+    if normalized_key == "ontrack":
+        return "onTrack", "On-Track"
+    if normalized_key == "offtrack":
+        return "offTrack", "Off-Track"
+    if normalized_key in {"notreporting", "noreporting"}:
+        return "noReporting", "Not Reporting"
+    return "noTarget", "No-target"
+
+
+def compute_theme_commitment_progress(theme_data):
+    commitments = theme_data.get("Commitments") if isinstance(theme_data, dict) else []
+    if not isinstance(commitments, list):
+        return {
+            "total": 0,
+            "achievedOnTrack": 0,
+            "pct": 0.0,
+        }
+
+    total_commitments = 0
+    achieved_on_track = 0
+
+    for commitment_item in commitments:
+        if not isinstance(commitment_item, dict):
+            continue
+        commitment_name = str(commitment_item.get("Name") or "").strip()
+        if not commitment_name:
+            continue
+        total_commitments += 1
+        status_key, _ = normalize_commitment_status(commitment_item.get("Status"))
+        if status_key in {"achieved", "onTrack"}:
+            achieved_on_track += 1
+
+    progress_pct = round((achieved_on_track / total_commitments) * 100, 2) if total_commitments else 0.0
+    return {
+        "total": total_commitments,
+        "achievedOnTrack": achieved_on_track,
+        "pct": progress_pct,
+    }
+
+
 def build_best_practice_lookup(sector_name):
     best_practices_dataset = load_scorecard_best_practices_dataset()
     selected_sector_item = next(
@@ -1960,6 +2004,8 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
         best_score_value = selected_score["finalScore"]
         best_player = matched_selected_company
         best_practice_source = selected_rationale
+        peer_theme_progress_percentages = []
+        commitment_peer_status_counts = {}
 
         for peer_company in peer_company_names:
             peer_theme_data = dataset.get(peer_company, {}).get(theme_name)
@@ -1977,16 +2023,89 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
                 best_player = peer_company
                 best_practice_source = peer_theme_data.get("rationale", {})
 
+            peer_progress = compute_theme_commitment_progress(peer_theme_data)
+            if peer_progress["total"] > 0:
+                peer_theme_progress_percentages.append(peer_progress["pct"])
+
+            for peer_commitment in peer_theme_data.get("Commitments") or []:
+                if not isinstance(peer_commitment, dict):
+                    continue
+                commitment_name = str(peer_commitment.get("Name") or "").strip()
+                if not commitment_name:
+                    continue
+
+                commitment_key = normalize_text_token(commitment_name)
+                if commitment_key not in commitment_peer_status_counts:
+                    commitment_peer_status_counts[commitment_key] = {
+                        "achieved": 0,
+                        "onTrack": 0,
+                        "offTrack": 0,
+                        "noReporting": 0,
+                        "noTarget": 0,
+                    }
+
+                status_key, _ = normalize_commitment_status(peer_commitment.get("Status"))
+                commitment_peer_status_counts[commitment_key][status_key] += 1
+
         peer_average = round((sum(peer_scores) / len(peer_scores)), 2) if peer_scores else selected_score["finalScore"]
 
         gap_vs_peer = round(selected_score["finalScore"] - peer_average, 2)
         lagging_candidates.append({"theme": theme_name, "gap": gap_vs_peer})
+
+        selected_progress = compute_theme_commitment_progress(selected_theme_data)
+        company_progress_pct = selected_progress["pct"]
+        peer_progress_avg_pct = round(
+            (sum(peer_theme_progress_percentages) / len(peer_theme_progress_percentages)),
+            2,
+        ) if peer_theme_progress_percentages else company_progress_pct
+
+        if abs(company_progress_pct - peer_progress_avg_pct) < 0.01:
+            progress_label = "At-Par"
+        elif company_progress_pct > peer_progress_avg_pct:
+            progress_label = "Leading"
+        else:
+            progress_label = "Lagging"
 
         theme_best_practice = best_practice_lookup.get(normalize_text_token(theme_name), {})
         row_best_player = str(theme_best_practice.get("bestPlayer") or "").strip() or best_player
         row_best_practice = str(theme_best_practice.get("bestPractice") or "").strip()
         if not row_best_practice:
             row_best_practice = summarize_best_practice_from_rationale(best_player, best_practice_source, theme_name)
+
+        commitments_with_peer_data = []
+        for commitment_item in commitments:
+            commitment_name = commitment_item.get("name", "")
+            commitment_key = normalize_text_token(commitment_name)
+            peer_counts = commitment_peer_status_counts.get(
+                commitment_key,
+                {
+                    "achieved": 0,
+                    "onTrack": 0,
+                    "offTrack": 0,
+                    "noReporting": 0,
+                    "noTarget": 0,
+                },
+            )
+
+            peer_status_parts = []
+            if peer_counts["achieved"] > 0:
+                peer_status_parts.append(f"{peer_counts['achieved']} achieved")
+            if peer_counts["onTrack"] > 0:
+                peer_status_parts.append(f"{peer_counts['onTrack']} on track")
+            if peer_counts["offTrack"] > 0:
+                peer_status_parts.append(f"{peer_counts['offTrack']} off track")
+            if peer_counts["noReporting"] > 0:
+                peer_status_parts.append(f"{peer_counts['noReporting']} not reporting")
+            if peer_counts["noTarget"] > 0:
+                peer_status_parts.append(f"{peer_counts['noTarget']} no-target")
+
+            commitments_with_peer_data.append(
+                {
+                    **commitment_item,
+                    "peerStatusSummary": ", ".join(peer_status_parts) if peer_status_parts else "No peer commitments mapped",
+                    "peerStatusCounts": peer_counts,
+                }
+            )
 
         rows.append(
             {
@@ -1997,10 +2116,13 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
                 "bestPlayer": row_best_player,
                 "bestPractice": row_best_practice,
                 "bestPracticeSource": best_practice_source,
-                "progress": "Pending logic",
+                "progress": f"{selected_progress['achievedOnTrack']}/{selected_progress['total']} commitments Achieved or On-Track",
+                "progressLabel": progress_label,
+                "companyAchievedOnTrackPct": company_progress_pct,
+                "peerAchievedOnTrackPct": peer_progress_avg_pct,
                 "rationalePoints": rationale_points,
-                "commitments": commitments,
-                "commitmentCount": len(commitments),
+                "commitments": commitments_with_peer_data,
+                "commitmentCount": selected_progress["total"],
             }
         )
 
@@ -2014,6 +2136,8 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
 
     sorted_by_gap_ascending = sorted(lagging_candidates, key=lambda item: item["gap"])
     sorted_by_gap_descending = sorted(lagging_candidates, key=lambda item: item["gap"], reverse=True)
+
+    rows.sort(key=lambda item: item.get("overallStatus", {}).get("finalScore", 0), reverse=True)
 
     lagging_themes = [item["theme"] for item in sorted_by_gap_ascending[:3]]
     leading_themes = []
@@ -2516,6 +2640,9 @@ def scorecard():
                 "bestPlayer": row["bestPlayer"],
                 "bestPractice": row["bestPractice"],
                 "progress": row["progress"],
+                "progressLabel": row.get("progressLabel"),
+                "companyAchievedOnTrackPct": row.get("companyAchievedOnTrackPct", 0),
+                "peerAchievedOnTrackPct": row.get("peerAchievedOnTrackPct", 0),
                 "rationalePoints": row.get("rationalePoints", []),
                 "commitments": row.get("commitments", []),
                 "commitmentCount": row.get("commitmentCount", 0),

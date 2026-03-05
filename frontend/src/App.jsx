@@ -86,6 +86,13 @@ function formatCommitmentStatus(status) {
   return String(status || '').trim() || 'No-target'
 }
 
+function getProgressLabelClass(label) {
+  const normalized = String(label || '').toLowerCase()
+  if (normalized === 'leading') return 'leading'
+  if (normalized === 'lagging') return 'lagging'
+  return 'atpar'
+}
+
 function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   const toScaleScore = (value) => {
     const numericValue = Number(value)
@@ -1862,7 +1869,16 @@ function App() {
                                   bestScore={row.bestScore}
                                 />
                               </td>
-                              <td>{row.progress || 'Pending logic'}</td>
+                              <td>
+                                <div className="scorecard-progress-cell">
+                                  <span>{row.progress || 'Pending logic'}</span>
+                                  {!!row.progressLabel && (
+                                    <span className={`progress-pill ${getProgressLabelClass(row.progressLabel)}`}>
+                                      {row.progressLabel}
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
                               <td>
                                 <strong>{row.bestPlayer}</strong>
                                 <p className="best-practice-text">{row.bestPractice}</p>
@@ -1878,6 +1894,7 @@ function App() {
                                         <tr>
                                           <th>Commitment Name</th>
                                           <th>Status</th>
+                                          <th>Peer numbers</th>
                                           <th>Description</th>
                                         </tr>
                                       </thead>
@@ -1890,6 +1907,7 @@ function App() {
                                                 {formatCommitmentStatus(commitment.status)}
                                               </span>
                                             </td>
+                                            <td>{commitment.peerStatusSummary || 'No peer commitments mapped'}</td>
                                             <td>
                                               {!!(commitment.descriptionPoints || []).length && (
                                                 <ul className="commitment-description-list">
@@ -1906,7 +1924,7 @@ function App() {
                                         ))}
                                         {!commitments.length && (
                                           <tr>
-                                            <td colSpan={3}>No commitments available for this theme.</td>
+                                            <td colSpan={4}>No commitments available for this theme.</td>
                                           </tr>
                                         )}
                                       </tbody>
