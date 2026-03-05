@@ -1827,8 +1827,8 @@ button {
   padding: 16px;
 }
 
-.scorecard-table-wrap table td:nth-child(2) {
-  min-width: 240px;
+.scorecard-main-table {
+  table-layout: fixed;
 }
 
 .scorecard-theme-row {
