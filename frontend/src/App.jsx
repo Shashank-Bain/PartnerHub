@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Bar,
   BarChart,
@@ -61,6 +61,29 @@ function formatPct(value) {
     return '0.0%'
   }
   return `${numericValue.toFixed(1)}%`
+}
+
+function normalizeStatusKey(status) {
+  return String(status || '')
+    .toLowerCase()
+    .replace(/[^a-z]/g, '')
+}
+
+function getCommitmentStatusClass(status) {
+  const statusKey = normalizeStatusKey(status)
+  if (statusKey === 'achieved') return 'achieved'
+  if (statusKey === 'ontrack') return 'ontrack'
+  if (statusKey === 'offtrack') return 'offtrack'
+  if (statusKey === 'noreporting' || statusKey === 'notreporting') return 'noreporting'
+  return 'others'
+}
+
+function formatCommitmentStatus(status) {
+  const statusKey = normalizeStatusKey(status)
+  if (statusKey === 'noreporting' || statusKey === 'notreporting') {
+    return 'Not Reporting'
+  }
+  return String(status || '').trim() || 'No-target'
 }
 
 function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
@@ -695,7 +718,9 @@ function App() {
   const [investmentInsights, setInvestmentInsights] = useState(null)
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
   const [activeModal, setActiveModal] = useState(null)
+  const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
+  const [expandedScorecardThemes, setExpandedScorecardThemes] = useState({})
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [activeView, setActiveView] = useState('home')
@@ -857,6 +882,7 @@ function App() {
     const onEscape = (event) => {
       if (event.key === 'Escape') {
         setActiveModal(null)
+        setSelectedThemeRationale(null)
         setSelectedTimelineEvent(null)
       }
     }
@@ -892,10 +918,15 @@ function App() {
       setIsCommitmentOverviewLoading(false)
       setScorecardData(null)
       setIsScorecardLoading(false)
+      setExpandedScorecardThemes({})
+      setSelectedThemeRationale(null)
       setInvestmentInsights(null)
       setIsInvestmentInsightsLoading(false)
       return
     }
+
+    setExpandedScorecardThemes({})
+    setSelectedThemeRationale(null)
 
     loadMaterialTopicComparison(selectedSector, selectedCompany)
     loadRecommendations(selectedSector, selectedCompany)
@@ -1104,6 +1135,7 @@ function App() {
     setIsUserMenuOpen(false)
     setShowChangePassword(false)
     setActiveModal(null)
+    setSelectedThemeRationale(null)
     setActiveView('home')
     setCommitmentOverview(null)
     setScorecardData(null)
@@ -1112,6 +1144,13 @@ function App() {
     setAllSectors([])
     resetAdminForm()
     setMessage('Logged out successfully.')
+  }
+
+  const toggleScorecardThemeExpansion = (themeName) => {
+    setExpandedScorecardThemes((current) => ({
+      ...current,
+      [themeName]: !current[themeName],
+    }))
   }
 
   const handleSaveProfile = async (event) => {
@@ -1781,23 +1820,98 @@ function App() {
                       </tr>
                     </thead>
                     <tbody>
-                      {(scorecardData.rows || []).map((row) => (
-                        <tr key={row.theme}>
-                          <td>{row.theme}</td>
-                          <td>
-                            <StatusScaleCell
-                              overallStatus={row.overallStatus}
-                              peerAverage={row.peerAverage}
-                              bestScore={row.bestScore}
-                            />
-                          </td>
-                          <td>{row.progress || 'Pending logic'}</td>
-                          <td>
-                            <strong>{row.bestPlayer}</strong>
-                            <p className="best-practice-text">{row.bestPractice}</p>
-                          </td>
-                        </tr>
-                      ))}
+                      {(scorecardData.rows || []).map((row) => {
+                        const isExpanded = !!expandedScorecardThemes[row.theme]
+                        const commitments = row.commitments || []
+
+                        return (
+                          <Fragment key={row.theme}>
+                            <tr
+                              className={`scorecard-theme-row ${isExpanded ? 'expanded' : ''}`}
+                              onClick={() => toggleScorecardThemeExpansion(row.theme)}
+                            >
+                              <td>
+                                <div className="scorecard-theme-cell">
+                                  <strong>{row.theme}</strong>
+                                  <span className="theme-commitment-count">({row.commitmentCount || commitments.length} commitments)</span>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="score-scale-cell-head">
+                                  <button
+                                    type="button"
+                                    className="score-info-button"
+                                    aria-label={`Open score rationale for ${row.theme}`}
+                                    onClick={(event) => {
+                                      event.stopPropagation()
+                                      setSelectedThemeRationale(row)
+                                    }}
+                                  >
+                                    i
+                                  </button>
+                                </div>
+                                <StatusScaleCell
+                                  overallStatus={row.overallStatus}
+                                  peerAverage={row.peerAverage}
+                                  bestScore={row.bestScore}
+                                />
+                              </td>
+                              <td>{row.progress || 'Pending logic'}</td>
+                              <td>
+                                <strong>{row.bestPlayer}</strong>
+                                <p className="best-practice-text">{row.bestPractice}</p>
+                              </td>
+                            </tr>
+
+                            {isExpanded && (
+                              <tr className="scorecard-commitments-row">
+                                <td colSpan={4}>
+                                  <div className="scorecard-commitments-wrap">
+                                    <table className="scorecard-commitments-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Commitment Name</th>
+                                          <th>Status</th>
+                                          <th>Description</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {commitments.map((commitment) => (
+                                          <tr key={`${row.theme}-${commitment.name}`}>
+                                            <td>{commitment.name}</td>
+                                            <td>
+                                              <span className={`commitment-status-pill ${getCommitmentStatusClass(commitment.status)}`}>
+                                                {formatCommitmentStatus(commitment.status)}
+                                              </span>
+                                            </td>
+                                            <td>
+                                              {!!(commitment.descriptionPoints || []).length && (
+                                                <ul className="commitment-description-list">
+                                                  {(commitment.descriptionPoints || []).map((point) => (
+                                                    <li key={`${commitment.name}-${point}`}>{point}</li>
+                                                  ))}
+                                                </ul>
+                                              )}
+                                              {!(commitment.descriptionPoints || []).length && (
+                                                <span className="commitment-description-empty">No additional details disclosed.</span>
+                                              )}
+                                            </td>
+                                          </tr>
+                                        ))}
+                                        {!commitments.length && (
+                                          <tr>
+                                            <td colSpan={3}>No commitments available for this theme.</td>
+                                          </tr>
+                                        )}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                          </Fragment>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -2356,10 +2470,31 @@ function App() {
 
             <ul className="modal-priority-list">
               <li>Each theme is scored on 5 parameters (0–10): Existence & Specificity, Ambition, Coverage, Credibility & Transparency, Delivery/Status.</li>
-              <li>Average parameter score is doubled and added to the bucket base score.</li>
+              <li>Each theme uses the provided overall score and adds it directly to the bucket base score.</li>
               <li>Bucket base: X=0, A=20, P=40, L=60, D=80, resulting in a final 0–100 score.</li>
               <li>Overall status scale shows Client (C), Peer Avg (P), and Best (B) positions for direct comparison.</li>
             </ul>
+          </div>
+        </div>
+      )}
+
+      {!!selectedThemeRationale && (
+        <div className="modal-backdrop" onClick={() => setSelectedThemeRationale(null)}>
+          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+            <div className="modal-header">
+              <h3>{selectedThemeRationale.theme} - Score rationale</h3>
+              <button type="button" className="btn-ghost" onClick={() => setSelectedThemeRationale(null)}>Close</button>
+            </div>
+
+            <section className="modal-pane">
+              <h4>Client score: {Number(selectedThemeRationale.overallStatus?.finalScore || 0).toFixed(1)}</h4>
+              <h4>Score rationale</h4>
+              <ul className="modal-priority-list">
+                {(selectedThemeRationale.rationalePoints || []).map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </section>
           </div>
         </div>
       )}

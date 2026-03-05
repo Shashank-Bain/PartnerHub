@@ -1831,6 +1831,127 @@ button {
   min-width: 240px;
 }
 
+.scorecard-theme-row {
+  cursor: pointer;
+}
+
+.scorecard-theme-row:hover {
+  background: rgba(104, 70, 218, 0.05);
+}
+
+.scorecard-theme-row.expanded {
+  background: rgba(104, 70, 218, 0.08);
+}
+
+.scorecard-theme-cell {
+  display: grid;
+  gap: 4px;
+}
+
+.theme-commitment-count {
+  font-size: 11px;
+  color: rgba(74, 82, 118, 0.72);
+  font-weight: 500;
+}
+
+.score-scale-cell-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.score-info-button {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 70, 218, 0.3);
+  background: rgba(104, 70, 218, 0.1);
+  color: #4f3f95;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+}
+
+.scorecard-commitments-row td {
+  background: rgba(104, 70, 218, 0.04);
+}
+
+.scorecard-commitments-wrap {
+  padding: 8px 0;
+}
+
+.scorecard-commitments-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(104, 70, 218, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.scorecard-commitments-table th,
+.scorecard-commitments-table td {
+  font-size: 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(104, 70, 218, 0.1);
+  vertical-align: top;
+}
+
+.commitment-status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.commitment-status-pill.achieved {
+  background: rgba(26, 143, 78, 0.15);
+  color: #1a8f4e;
+  border-color: rgba(26, 143, 78, 0.28);
+}
+
+.commitment-status-pill.ontrack {
+  background: rgba(99, 179, 107, 0.16);
+  color: #3f8b47;
+  border-color: rgba(99, 179, 107, 0.34);
+}
+
+.commitment-status-pill.offtrack {
+  background: rgba(214, 91, 91, 0.15);
+  color: #b44343;
+  border-color: rgba(214, 91, 91, 0.3);
+}
+
+.commitment-status-pill.noreporting {
+  background: rgba(155, 162, 183, 0.2);
+  color: #5f667c;
+  border-color: rgba(155, 162, 183, 0.38);
+}
+
+.commitment-status-pill.others {
+  background: rgba(201, 206, 218, 0.28);
+  color: #6f768d;
+  border-color: rgba(201, 206, 218, 0.45);
+}
+
+.commitment-description-list {
+  margin: 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 4px;
+  color: #3f4868;
+}
+
+.commitment-description-empty {
+  color: #6b7391;
+  font-size: 11px;
+}
+
 .scorecard-table-head {
   display: flex;
   align-items: center;

@@ -380,7 +380,7 @@ def load_commitment_breakdown_dataset():
     return []
 
 
-def load_scorecard_dataset():
+def load_scorecard_payload():
     data_path = os.path.join(BASE_DIR, "data", "scorecard.json")
     if not os.path.exists(data_path):
         return {}
@@ -391,6 +391,24 @@ def load_scorecard_dataset():
     if isinstance(parsed, dict):
         return parsed
     return {}
+
+
+def load_scorecard_dataset():
+    payload = load_scorecard_payload()
+    scores_dataset = payload.get("scores") if isinstance(payload, dict) else None
+    if isinstance(scores_dataset, dict):
+        return scores_dataset
+    if isinstance(payload, dict):
+        return payload
+    return {}
+
+
+def load_scorecard_best_practices_dataset():
+    payload = load_scorecard_payload()
+    best_practices = payload.get("best_practices") if isinstance(payload, dict) else None
+    if isinstance(best_practices, list):
+        return best_practices
+    return []
 
 
 def load_investment_deals_dataset():
@@ -1802,18 +1820,54 @@ def find_matching_company_name(requested_name, available_names):
     return None
 
 
-def compute_theme_score(bucket, parameter_scores):
+def compute_theme_score(bucket, overall_score):
     bucket_key = (bucket or "X").strip().upper()
     bucket_base = BUCKET_BASE.get(bucket_key, 0)
 
-    score_values = [float(value) for value in (parameter_scores or {}).values()]
-    average_score = (sum(score_values) / len(score_values)) if score_values else 0.0
-    final_score = max(0.0, min(100.0, bucket_base + (average_score * 2)))
+    try:
+        overall_value = float(overall_score or 0)
+    except (TypeError, ValueError):
+        overall_value = 0.0
+
+    final_score = max(0.0, min(100.0, bucket_base + overall_value))
     return {
         "bucket": bucket_key,
-        "averageScore": round(average_score, 2),
+        "overallScore": round(overall_value, 2),
         "finalScore": round(final_score, 2),
     }
+
+
+def is_not_disclosed_value(value):
+    normalized_value = normalize_text_token(str(value or ""))
+    return normalized_value in {"", "notdisclosed", "nadisclosed", "na"}
+
+
+def build_best_practice_lookup(sector_name):
+    best_practices_dataset = load_scorecard_best_practices_dataset()
+    selected_sector_item = next(
+        (
+            item for item in best_practices_dataset
+            if normalize_text_token(item.get("Sector")) == normalize_text_token(sector_name)
+        ),
+        None,
+    )
+
+    if not isinstance(selected_sector_item, dict):
+        return {}
+
+    lookup = {}
+    for theme_item in selected_sector_item.get("Themes") or []:
+        if not isinstance(theme_item, dict):
+            continue
+        theme_name = str(theme_item.get("Theme") or "").strip()
+        if not theme_name:
+            continue
+        lookup[normalize_text_token(theme_name)] = {
+            "bestPlayer": str(theme_item.get("Company") or "").strip(),
+            "bestPractice": str(theme_item.get("Practice") or "").strip(),
+        }
+
+    return lookup
 
 
 def resolve_sector_and_company_or_error(user, sector_name, selected_company):
@@ -1835,6 +1889,7 @@ def resolve_sector_and_company_or_error(user, sector_name, selected_company):
 
 def build_scorecard_context(sector_name, selected_company, sector_companies):
     dataset = load_scorecard_dataset()
+    best_practice_lookup = build_best_practice_lookup(sector_name)
     matched_selected_company = find_matching_company_name(selected_company, list(dataset.keys()))
     if not matched_selected_company:
         return None
@@ -1864,13 +1919,47 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
 
         selected_score = compute_theme_score(
             selected_bucket,
-            selected_theme_data.get("scores", {}),
+            selected_theme_data.get("overall", 0),
         )
+
+        selected_rationale = selected_theme_data.get("rationale", {})
+        rationale_points = []
+        if isinstance(selected_rationale, dict):
+            rationale_points = [
+                str(value).strip()
+                for value in selected_rationale.values()
+                if str(value).strip()
+            ]
+
+        commitments = []
+        for commitment_item in selected_theme_data.get("Commitments") or []:
+            if not isinstance(commitment_item, dict):
+                continue
+
+            commitment_name = str(commitment_item.get("Name") or "").strip()
+            commitment_status = str(commitment_item.get("Status") or "").strip()
+            commitment_description = commitment_item.get("Description") or {}
+
+            description_points = []
+            if isinstance(commitment_description, dict):
+                for key_name in ("description", "coverage", "validation"):
+                    detail_value = str(commitment_description.get(key_name) or "").strip()
+                    if detail_value and not is_not_disclosed_value(detail_value):
+                        description_points.append(detail_value)
+
+            if commitment_name:
+                commitments.append(
+                    {
+                        "name": commitment_name,
+                        "status": commitment_status,
+                        "descriptionPoints": description_points,
+                    }
+                )
 
         peer_scores = []
         best_score_value = selected_score["finalScore"]
         best_player = matched_selected_company
-        best_practice_source = selected_theme_data.get("rationale", {})
+        best_practice_source = selected_rationale
 
         for peer_company in peer_company_names:
             peer_theme_data = dataset.get(peer_company, {}).get(theme_name)
@@ -1879,7 +1968,7 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
 
             peer_theme_score = compute_theme_score(
                 peer_theme_data.get("bucket", "X"),
-                peer_theme_data.get("scores", {}),
+                peer_theme_data.get("overall", 0),
             )
             peer_scores.append(peer_theme_score["finalScore"])
 
@@ -1893,16 +1982,25 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
         gap_vs_peer = round(selected_score["finalScore"] - peer_average, 2)
         lagging_candidates.append({"theme": theme_name, "gap": gap_vs_peer})
 
+        theme_best_practice = best_practice_lookup.get(normalize_text_token(theme_name), {})
+        row_best_player = str(theme_best_practice.get("bestPlayer") or "").strip() or best_player
+        row_best_practice = str(theme_best_practice.get("bestPractice") or "").strip()
+        if not row_best_practice:
+            row_best_practice = summarize_best_practice_from_rationale(best_player, best_practice_source, theme_name)
+
         rows.append(
             {
                 "theme": theme_name,
                 "overallStatus": selected_score,
                 "peerAverage": peer_average,
                 "bestScore": round(best_score_value, 2),
-                "bestPlayer": best_player,
-                "bestPractice": "",
+                "bestPlayer": row_best_player,
+                "bestPractice": row_best_practice,
                 "bestPracticeSource": best_practice_source,
                 "progress": "Pending logic",
+                "rationalePoints": rationale_points,
+                "commitments": commitments,
+                "commitmentCount": len(commitments),
             }
         )
 
@@ -2407,24 +2505,20 @@ def scorecard():
         scorecard_context.get("laggingThemes", []),
     )
 
-    best_practice_map = {
-        item["theme"]: item
-        for item in ai_insights.get("bestPractices", [])
-        if isinstance(item, dict) and item.get("theme")
-    }
-
     rows = []
     for row in scorecard_context["rows"]:
-        best_item = best_practice_map.get(row["theme"])
         rows.append(
             {
                 "theme": row["theme"],
                 "overallStatus": row["overallStatus"],
                 "peerAverage": row["peerAverage"],
                 "bestScore": row["bestScore"],
-                "bestPlayer": best_item.get("bestPlayer") if best_item else row["bestPlayer"],
-                "bestPractice": best_item.get("bestPractice") if best_item else summarize_best_practice_from_rationale(row["bestPlayer"], row.get("bestPracticeSource"), row["theme"]),
+                "bestPlayer": row["bestPlayer"],
+                "bestPractice": row["bestPractice"],
                 "progress": row["progress"],
+                "rationalePoints": row.get("rationalePoints", []),
+                "commitments": row.get("commitments", []),
+                "commitmentCount": row.get("commitmentCount", 0),
             }
         )
 
