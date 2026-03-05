@@ -1871,7 +1871,26 @@ function App() {
                               </td>
                               <td>
                                 <div className="scorecard-progress-cell">
-                                  <span>{row.progress || 'Pending logic'}</span>
+                                  {(() => {
+                                    const progressText = String(row.progress || 'Pending logic')
+                                    const match = progressText.match(/^(\d+)\/(\d+)\s+(.*)$/)
+
+                                    if (!match) {
+                                      return <span>{progressText}</span>
+                                    }
+
+                                    const [, achievedCount, totalCount, suffix] = match
+                                    return (
+                                      <span className="progress-summary-text">
+                                        <strong className="progress-ratio">
+                                          <span>{achievedCount}</span>
+                                          <span className="progress-ratio-slash"> / </span>
+                                          <span>{totalCount}</span>
+                                        </strong>{' '}
+                                        <span>{suffix}</span>
+                                      </span>
+                                    )
+                                  })()}
                                   {!!row.progressLabel && (
                                     <span className={`progress-pill ${getProgressLabelClass(row.progressLabel)}`}>
                                       {row.progressLabel}
