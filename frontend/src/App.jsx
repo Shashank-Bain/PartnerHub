@@ -2618,46 +2618,50 @@ function App() {
               <button type="button" className="btn-ghost" onClick={() => setSelectedThemeRationale(null)}>Close</button>
             </div>
 
-            <section className="modal-pane">
-              <h4>Client score: {Number(selectedThemeRationale.overallStatus?.finalScore || 0).toFixed(1)}</h4>
-              <h4>Score rationale</h4>
-              <ul className="modal-priority-list">
-                {(selectedThemeRationale.rationalePoints || []).map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+            <div className="theme-modal-sections">
+              <section className="modal-pane">
+                <h4>Client score: {Number(selectedThemeRationale.overallStatus?.finalScore || 0).toFixed(1)}</h4>
+                <h4>Score rationale</h4>
+                <ul className="modal-priority-list">
+                  {(selectedThemeRationale.rationalePoints || []).map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </section>
 
-              <h4 className="theme-scale-heading">{selectedSector} | {selectedThemeRationale.theme} scale</h4>
-              {!!(selectedThemeRationale.themeScale || []).length && (
-                <div className="methodology-scale-table-wrap">
-                  <table className="methodology-scale-table compact">
-                    <thead>
-                      <tr>
-                        <th>Parameter</th>
-                        {['X', 'A', 'P', 'L', 'D'].map((code) => (
-                          <th key={`theme-scale-head-${code}`}>{code}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(selectedThemeRationale.themeScale || []).map((scaleRow) => (
-                        <tr key={`${selectedThemeRationale.theme}-${scaleRow.parameter}`}>
-                          <td>{scaleRow.parameter}</td>
+              <section className="modal-pane">
+                <h4>{selectedSector} | {selectedThemeRationale.theme} scale</h4>
+                {!!(selectedThemeRationale.themeScale || []).length && (
+                  <div className="methodology-scale-table-wrap">
+                    <table className="methodology-scale-table compact">
+                      <thead>
+                        <tr>
+                          <th>Parameter</th>
                           {['X', 'A', 'P', 'L', 'D'].map((code) => (
-                            <td key={`${selectedThemeRationale.theme}-${scaleRow.parameter}-${code}`}>
-                              {scaleRow.buckets?.[code] || '—'}
-                            </td>
+                            <th key={`theme-scale-head-${code}`}>{code}</th>
                           ))}
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-              {!(selectedThemeRationale.themeScale || []).length && (
-                <p className="methodology-mini-note">No industry/theme scale definition found in Commitment_Scale.xlsx for this theme.</p>
-              )}
-            </section>
+                      </thead>
+                      <tbody>
+                        {(selectedThemeRationale.themeScale || []).map((scaleRow) => (
+                          <tr key={`${selectedThemeRationale.theme}-${scaleRow.parameter}`}>
+                            <td>{scaleRow.parameter}</td>
+                            {['X', 'A', 'P', 'L', 'D'].map((code) => (
+                              <td key={`${selectedThemeRationale.theme}-${scaleRow.parameter}-${code}`}>
+                                {scaleRow.buckets?.[code] || '—'}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {!(selectedThemeRationale.themeScale || []).length && (
+                  <p className="methodology-mini-note">No industry/theme scale definition found in Commitment_Scale.xlsx for this theme.</p>
+                )}
+              </section>
+            </div>
           </div>
         </div>
       )}

@@ -2381,6 +2381,11 @@ button {
 .theme-scale-heading {
   margin-top: 18px;
 }
+
+.theme-modal-sections {
+  display: grid;
+  gap: 12px;
+}
 .progress-summary-text {
   color: #2f3554;
 }
