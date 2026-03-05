@@ -136,7 +136,7 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   return (
     <div className="status-scale-wrap">
       <div className="status-client-score">
-        <span className="status-client-score-label">Company Score</span>
+        <span className="status-client-score-label">Client Score</span>
         <span className="status-client-score-value">{companyScore.toFixed(1)}</span>
       </div>
       <div className="status-scale-track">
@@ -860,6 +860,23 @@ function App() {
     keys: investmentInsights?.charts?.dealTypes?.keys || [],
     rows: investmentInsights?.charts?.dealTypes?.rows || [],
   }), [investmentInsights])
+  const scorecardBucketLegend = useMemo(() => {
+    const providedLegend = scorecardData?.bucketLegend || []
+    if (providedLegend.length) {
+      return providedLegend
+    }
+    return [
+      { code: 'X', label: 'No Commitments' },
+      { code: 'A', label: 'Active' },
+      { code: 'P', label: 'Proactive' },
+      { code: 'L', label: 'Leading' },
+      { code: 'D', label: 'Distinctive' },
+    ]
+  }, [scorecardData])
+  const scorecardBucketLabelByCode = useMemo(
+    () => Object.fromEntries(scorecardBucketLegend.map((item) => [item.code, item.label])),
+    [scorecardBucketLegend],
+  )
 
   useEffect(() => {
     const loadInitialData = async () => {
@@ -2507,16 +2524,88 @@ function App() {
         <div className="modal-backdrop" onClick={() => setActiveModal(null)}>
           <div className="modal-card" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h3>Methodology</h3>
+              <h3>Methodology Framework</h3>
               <button type="button" className="btn-ghost" onClick={() => setActiveModal(null)}>Close</button>
             </div>
 
-            <ul className="modal-priority-list">
-              <li>Each theme is scored on 5 parameters (0–10): Existence & Specificity, Ambition, Coverage, Credibility & Transparency, Delivery/Status.</li>
-              <li>Each theme uses the provided overall score and adds it directly to the bucket base score.</li>
-              <li>Bucket base: X=0, A=20, P=40, L=60, D=80, resulting in a final 0–100 score.</li>
-              <li>Overall status scale shows Client (C), Peer Avg (P), and Best (B) positions for direct comparison.</li>
-            </ul>
+            <div className="methodology-grid">
+              <section className="modal-pane methodology-card">
+                <p className="method-step">Step 1</p>
+                <h4>Bucket Classification</h4>
+                <p>
+                  Each theme is first evaluated on industry-specific scale definitions across 5 parameters:
+                  Existence &amp; Specificity, Ambition, Coverage, Credibility &amp; Transparency, and Delivery / Status.
+                </p>
+                <div className="method-bucket-row">
+                  {scorecardBucketLegend.map((item) => (
+                    <span key={item.code} className="method-bucket-pill">{item.code} = {item.label}</span>
+                  ))}
+                </div>
+              </section>
+
+              <section className="modal-pane methodology-card">
+                <p className="method-step">Step 2</p>
+                <h4>Quantitative Positioning Within Bucket</h4>
+                <p>
+                  Once the bucket is identified, the theme’s overall score is added to bucket base score
+                  to determine final score and relative position vs peers.
+                </p>
+                <ul className="modal-priority-list compact">
+                  <li>Final score = Bucket base + Overall score</li>
+                  <li>Bucket base: X=0, A=20, P=40, L=60, D=80</li>
+                  <li>Status scale compares Client, Peer Avg, and Best player</li>
+                </ul>
+              </section>
+
+              <section className="modal-pane methodology-card">
+                <p className="method-step">Step 3</p>
+                <h4>Progress Status Logic</h4>
+                <p>
+                  For each theme, progress = (Achieved + On-Track) / Total commitments. This percentage is compared
+                  against peer average % for the same theme.
+                </p>
+                <div className="method-bucket-row">
+                  <span className="progress-pill leading">Leading</span>
+                  <span className="progress-pill atpar">At-Par</span>
+                  <span className="progress-pill lagging">Lagging</span>
+                </div>
+              </section>
+
+              <section className="modal-pane methodology-card">
+                <h4>Industry Scale Example ({selectedSector})</h4>
+                {!!scorecardData?.industryScaleExample && (
+                  <>
+                    <p className="methodology-mini-note">
+                      Example parameter from {scorecardData.industryScaleExample.theme}: {scorecardData.industryScaleExample.parameter}
+                    </p>
+                    <div className="methodology-scale-table-wrap">
+                      <table className="methodology-scale-table compact">
+                        <thead>
+                          <tr>
+                            {['X', 'A', 'P', 'L', 'D'].map((code) => (
+                              <th key={`method-example-${code}`}>{code} ({scorecardBucketLabelByCode[code] || code})</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {['X', 'A', 'P', 'L', 'D'].map((code) => (
+                              <td key={`method-example-value-${code}`}>{scorecardData.industryScaleExample.buckets?.[code] || '—'}</td>
+                            ))}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                )}
+                {!scorecardData?.industryScaleExample && (
+                  <p className="methodology-mini-note">Scale example not available for this industry in the uploaded file.</p>
+                )}
+                <p className="methodology-mini-note">
+                  For theme-specific parameter scales, open each theme’s <strong>i</strong> icon in the scorecard table.
+                </p>
+              </section>
+            </div>
           </div>
         </div>
       )}
@@ -2537,6 +2626,37 @@ function App() {
                   <li key={point}>{point}</li>
                 ))}
               </ul>
+
+              <h4>{selectedSector} | {selectedThemeRationale.theme} scale</h4>
+              {!!(selectedThemeRationale.themeScale || []).length && (
+                <div className="methodology-scale-table-wrap">
+                  <table className="methodology-scale-table compact">
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        {['X', 'A', 'P', 'L', 'D'].map((code) => (
+                          <th key={`theme-scale-head-${code}`}>{code}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(selectedThemeRationale.themeScale || []).map((scaleRow) => (
+                        <tr key={`${selectedThemeRationale.theme}-${scaleRow.parameter}`}>
+                          <td>{scaleRow.parameter}</td>
+                          {['X', 'A', 'P', 'L', 'D'].map((code) => (
+                            <td key={`${selectedThemeRationale.theme}-${scaleRow.parameter}-${code}`}>
+                              {scaleRow.buckets?.[code] || '—'}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {!(selectedThemeRationale.themeScale || []).length && (
+                <p className="methodology-mini-note">No industry/theme scale definition found in Commitment_Scale.xlsx for this theme.</p>
+              )}
             </section>
           </div>
         </div>

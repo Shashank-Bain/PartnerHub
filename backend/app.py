@@ -2,6 +2,7 @@ import os
 import json
 import unicodedata
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 
 from flask import Flask, jsonify, request, session
@@ -52,6 +53,14 @@ BUCKET_BASE = {
     "P": 40,
     "L": 60,
     "D": 80,
+}
+
+BUCKET_LABELS = {
+    "X": "No Commitments",
+    "A": "Active",
+    "P": "Proactive",
+    "L": "Leading",
+    "D": "Distinctive",
 }
 
 
@@ -409,6 +418,108 @@ def load_scorecard_best_practices_dataset():
     if isinstance(best_practices, list):
         return best_practices
     return []
+
+
+@lru_cache(maxsize=1)
+def load_commitment_scale_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "Commitment_Scale.xlsx")
+    if not os.path.exists(data_path):
+        return {
+            "bucketLegend": [{"code": key, "label": value} for key, value in BUCKET_LABELS.items()],
+            "industries": {},
+        }
+
+    try:
+        from openpyxl import load_workbook
+    except Exception:
+        return {
+            "bucketLegend": [{"code": key, "label": value} for key, value in BUCKET_LABELS.items()],
+            "industries": {},
+        }
+
+    workbook = load_workbook(data_path, data_only=True)
+    worksheet = workbook[workbook.sheetnames[0]]
+
+    header_row = [str(cell or "").strip() for cell in next(worksheet.iter_rows(min_row=2, max_row=2, values_only=True))]
+    bucket_columns = {
+        "X": 4,
+        "A": 5,
+        "P": 6,
+        "L": 7,
+        "D": 8,
+    }
+
+    bucket_legend = []
+    for code, index in bucket_columns.items():
+        header_value = header_row[index] if index < len(header_row) else ""
+        label = BUCKET_LABELS[code]
+        if "-" in header_value:
+            _, parsed_label = header_value.split("-", 1)
+            parsed_label = parsed_label.strip()
+            if parsed_label:
+                label = parsed_label
+        bucket_legend.append({"code": code, "label": label})
+
+    industries = {}
+    for row in worksheet.iter_rows(min_row=3, values_only=True):
+        industry_name = str(row[1] or "").strip()
+        theme_name = str(row[2] or "").strip()
+        parameter_name = str(row[3] or "").strip()
+        if not (industry_name and theme_name and parameter_name):
+            continue
+
+        parameter_scale = {
+            "parameter": parameter_name,
+            "buckets": {
+                code: str(row[column_index] or "").strip()
+                for code, column_index in bucket_columns.items()
+            },
+        }
+
+        industry_key = normalize_text_token(industry_name)
+        theme_key = normalize_text_token(theme_name)
+        industries.setdefault(industry_key, {
+            "name": industry_name,
+            "themes": {},
+        })
+        industries[industry_key]["themes"].setdefault(theme_key, {
+            "name": theme_name,
+            "parameters": [],
+        })
+        industries[industry_key]["themes"][theme_key]["parameters"].append(parameter_scale)
+
+    return {
+        "bucketLegend": bucket_legend,
+        "industries": industries,
+    }
+
+
+def get_theme_scale(industry_name, theme_name):
+    scale_dataset = load_commitment_scale_dataset()
+    industry = scale_dataset.get("industries", {}).get(normalize_text_token(industry_name), {})
+    theme = (industry.get("themes") or {}).get(normalize_text_token(theme_name), {})
+    return theme.get("parameters", []) if isinstance(theme, dict) else []
+
+
+def get_industry_scale_example(industry_name):
+    scale_dataset = load_commitment_scale_dataset()
+    industry = scale_dataset.get("industries", {}).get(normalize_text_token(industry_name), {})
+    themes = industry.get("themes") if isinstance(industry, dict) else {}
+    if not isinstance(themes, dict):
+        return None
+
+    for theme in themes.values():
+        parameters = theme.get("parameters") if isinstance(theme, dict) else []
+        if not parameters:
+            continue
+        example_parameter = parameters[0]
+        return {
+            "industry": industry.get("name") or industry_name,
+            "theme": theme.get("name") or "",
+            "parameter": example_parameter.get("parameter") or "",
+            "buckets": example_parameter.get("buckets") or {},
+        }
+    return None
 
 
 def load_investment_deals_dataset():
@@ -2156,6 +2267,8 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
         "radarThemes": radar_themes,
         "leadingThemes": leading_themes,
         "laggingThemes": lagging_themes,
+        "bucketLegend": load_commitment_scale_dataset().get("bucketLegend", []),
+        "industryScaleExample": get_industry_scale_example(sector_name),
     }
 
 
@@ -2646,6 +2759,7 @@ def scorecard():
                 "rationalePoints": row.get("rationalePoints", []),
                 "commitments": row.get("commitments", []),
                 "commitmentCount": row.get("commitmentCount", 0),
+                "themeScale": get_theme_scale(sector_name, row["theme"]),
             }
         )
 
@@ -2655,6 +2769,8 @@ def scorecard():
             "selectedCompany": matched_company,
             "priorityMoves": ai_insights.get("priorityMoves", []),
             "radarThemes": scorecard_context["radarThemes"],
+            "bucketLegend": scorecard_context.get("bucketLegend", []),
+            "industryScaleExample": scorecard_context.get("industryScaleExample"),
             "rows": rows,
         }
     )

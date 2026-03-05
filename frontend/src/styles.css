@@ -2298,6 +2298,85 @@ button {
   display: grid;
   gap: 6px;
 }
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.methodology-card {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.method-step {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #4f3f95;
+  font-weight: 800;
+}
+
+.method-bucket-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.method-bucket-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(104, 70, 218, 0.24);
+  background: rgba(104, 70, 218, 0.1);
+  color: #4b3f8a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.methodology-scale-table-wrap {
+  border: 1px solid rgba(104, 70, 218, 0.18);
+  border-radius: 10px;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.methodology-scale-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.methodology-scale-table th,
+.methodology-scale-table td {
+  border: 1px solid rgba(104, 70, 218, 0.12);
+  padding: 6px 8px;
+  font-size: 11px;
+  vertical-align: top;
+  line-height: 1.35;
+}
+
+.methodology-scale-table th {
+  background: rgba(104, 70, 218, 0.1);
+  color: #2a2f4f;
+  font-weight: 700;
+}
+
+.methodology-scale-table.compact th,
+.methodology-scale-table.compact td {
+  font-size: 10px;
+  padding: 5px 6px;
+}
+
+.methodology-mini-note {
+  margin: 0;
+  color: #5d6685;
+  font-size: 11px;
+}
 .progress-summary-text {
   color: #2f3554;
 }
@@ -2770,6 +2849,10 @@ th {
   }
 
   .score-scale-legend-labels {
+    grid-template-columns: 1fr;
+  }
+
+  .methodology-grid {
     grid-template-columns: 1fr;
   }
 }
