@@ -2377,6 +2377,10 @@ button {
   color: #5d6685;
   font-size: 11px;
 }
+
+.theme-scale-heading {
+  margin-top: 18px;
+}
 .progress-summary-text {
   color: #2f3554;
 }

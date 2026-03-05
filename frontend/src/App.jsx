@@ -2627,7 +2627,7 @@ function App() {
                 ))}
               </ul>
 
-              <h4>{selectedSector} | {selectedThemeRationale.theme} scale</h4>
+              <h4 className="theme-scale-heading">{selectedSector} | {selectedThemeRationale.theme} scale</h4>
               {!!(selectedThemeRationale.themeScale || []).length && (
                 <div className="methodology-scale-table-wrap">
                   <table className="methodology-scale-table compact">
