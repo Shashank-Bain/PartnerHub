@@ -1476,6 +1476,34 @@ button {
 
 .investment-mix-chart-wrap {
   min-height: 0;
+  position: relative;
+}
+
+.investment-mix-chart-wrap .recharts-tooltip-wrapper {
+  z-index: 9999 !important;
+}
+
+.mix-distribution-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  font-size: 11px;
+  color: #3f4568;
+}
+
+.mix-distribution-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.mix-distribution-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
 }
 
 .investment-modal-grid {

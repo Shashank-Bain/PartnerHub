@@ -728,6 +728,19 @@ function MixDistributionTooltip({ active, payload, label }) {
   )
 }
 
+function MixDistributionLegend({ orderedKeys, colorByKey }) {
+  return (
+    <div className="mix-distribution-legend" role="list" aria-label="Mix legend">
+      {orderedKeys.map((key) => (
+        <span key={key} className="mix-distribution-legend-item" role="listitem">
+          <i className="mix-distribution-legend-swatch" style={{ backgroundColor: colorByKey[key] }} />
+          {key}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false }) {
   const safeKeys = (keys || []).filter(Boolean)
   const sourceRows = rows || []
@@ -796,12 +809,12 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
     return left.companyRaw.localeCompare(right.companyRaw)
   })
 
-  const legendPayload = orderedKeys.map((key, index) => ({
-    value: key,
-    type: 'square',
-    color: INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length],
-    id: key,
-  }))
+  const colorByKey = Object.fromEntries(
+    orderedKeys.map((key, index) => [
+      key,
+      INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length],
+    ]),
+  )
 
   if (!chartData.length || !orderedKeys.length) {
     return (
@@ -838,15 +851,22 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
               tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
               stroke="rgba(132, 151, 176, 0.5)"
             />
-            <Tooltip content={<MixDistributionTooltip />} />
-            <Legend wrapperStyle={{ fontSize: 11 }} payload={legendPayload} />
+            <Tooltip
+              content={<MixDistributionTooltip />}
+              allowEscapeViewBox={{ x: true, y: true }}
+              wrapperStyle={{ zIndex: 9999, pointerEvents: 'none' }}
+            />
+            <Legend
+              wrapperStyle={{ fontSize: 11 }}
+              content={() => <MixDistributionLegend orderedKeys={orderedKeys} colorByKey={colorByKey} />}
+            />
             {orderedKeys.map((key, index) => (
               <Bar
                 key={`${title}-${key}`}
                 dataKey={key}
                 stackId="mix"
                 name={key}
-                fill={INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length]}
+                fill={colorByKey[key]}
               >
                 {index === orderedKeys.length - 1 && (
                   <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
