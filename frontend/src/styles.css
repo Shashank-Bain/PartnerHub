@@ -2209,8 +2209,14 @@ button {
 
 .status-marker-label.company {
   top: 0;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 800;
+  -webkit-text-stroke: 0.6px #111111;
+  text-shadow:
+    -1px -1px 0 #111111,
+    1px -1px 0 #111111,
+    -1px 1px 0 #111111,
+    1px 1px 0 #111111;
 }
 
 .status-marker-label.peer {
