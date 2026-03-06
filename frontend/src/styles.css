@@ -1474,6 +1474,15 @@ button {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.scorecard-chart-card {
+  position: relative;
+  z-index: 1;
+}
+
+.mix-distribution-chart-card {
+  z-index: 10;
+}
+
 .investment-mix-chart-wrap {
   min-height: 0;
   position: relative;
@@ -1481,6 +1490,25 @@ button {
 
 .investment-mix-chart-wrap .recharts-tooltip-wrapper {
   z-index: 9999 !important;
+}
+
+.mix-distribution-chart-card .investment-mix-chart-wrap .recharts-tooltip-wrapper {
+  z-index: 10001 !important;
+}
+
+.heatmap-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.heatmap-card-hint {
+  font-size: 11px;
+  color: #5b6382;
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .mix-distribution-legend {
@@ -2633,6 +2661,19 @@ button {
   margin-top: 14px;
   display: flex;
   justify-content: flex-end;
+}
+
+.investment-modal-footer {
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.investment-modal-heatmap-hint {
+  font-size: 12px;
+  color: #5b6382;
+  font-weight: 600;
 }
 
 .modal-kpi-grid {

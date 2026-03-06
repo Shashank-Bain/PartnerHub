@@ -498,7 +498,10 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
   if (!rowKeys.length || !columnKeys.length) {
     return (
       <section className="card scorecard-chart-card">
-        <h3 className="scorecard-chart-title">{title}</h3>
+        <div className="heatmap-card-head">
+          <h3 className="scorecard-chart-title">{title}</h3>
+          <span className="heatmap-card-hint">Click on Heatmap numbers to see the deal details</span>
+        </div>
         <div className="scorecard-thin-divider" />
         <p>No heatmap data available.</p>
       </section>
@@ -522,7 +525,10 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
 
   return (
     <section className="card scorecard-chart-card">
-      <h3 className="scorecard-chart-title">{title}</h3>
+      <div className="heatmap-card-head">
+        <h3 className="scorecard-chart-title">{title}</h3>
+        <span className="heatmap-card-hint">Click on Heatmap numbers to see the deal details</span>
+      </div>
       <div className="scorecard-thin-divider" />
       <div className="investment-heatmap-wrap">
         <table className="investment-heatmap-table">
@@ -861,7 +867,7 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
   }
 
   return (
-    <section className="card scorecard-chart-card">
+    <section className="card scorecard-chart-card mix-distribution-chart-card">
       <h3 className="scorecard-chart-title">{title}</h3>
       <div className="scorecard-thin-divider" />
       <div className="investment-chart-wrap investment-mix-chart-wrap">
@@ -2601,7 +2607,8 @@ function App() {
               </section>
             </div>
 
-            <div className="modal-footer">
+            <div className="modal-footer investment-modal-footer">
+              <span className="investment-modal-heatmap-hint">Click on Heatmap numbers to see the deal details</span>
               <button
                 type="button"
                 className="btn-primary"
