@@ -139,11 +139,6 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
 
   const toRgbCss = (rgb) => `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
 
-  const darkenRgb = (rgb, factor = 0.5) => {
-    const boundedFactor = Math.max(0, Math.min(1, factor))
-    return rgb.map((channel) => Math.max(0, Math.min(255, Math.round(channel * (1 - boundedFactor)))))
-  }
-
   const companyScore = toScaleScore(overallStatus?.finalScore)
   const peerScore = toScaleScore(peerAverage)
   const best = toScaleScore(bestScore)
@@ -207,7 +202,6 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   const bottomLabelByType = Object.fromEntries(bottomLabelMarkers.map((marker) => [marker.type, marker]))
   const companyLabelBaseRgb = getGradientRgbAt(companyMarker.score)
   const companyLabelBackground = toRgbCss(companyLabelBaseRgb)
-  const companyLabelTextColor = toRgbCss(darkenRgb(companyLabelBaseRgb, 0.5))
 
   return (
     <div className="status-scale-wrap">
@@ -227,7 +221,7 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
           style={{
             left: `${companyMarker.score}%`,
             backgroundColor: companyLabelBackground,
-            color: companyLabelTextColor,
+            color: '#ffffff',
           }}
         >
           {companyBucketLabel}

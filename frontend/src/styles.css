@@ -2210,7 +2210,7 @@ button {
 .status-marker-label.company {
   top: -2px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 400;
   padding: 2px 10px;
   border-radius: 8px;
   line-height: 1.1;
