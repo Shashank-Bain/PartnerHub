@@ -1708,23 +1708,23 @@ button {
 }
 
 .score-segment.achieved {
-  background: #2fa866;
+  background: rgb(136, 216, 123);
 }
 
 .score-segment.ontrack {
-  background: #7bc77f;
+  background: rgb(195, 232, 148);
 }
 
 .score-segment.offtrack {
-  background: #e07a7a;
+  background: rgb(248, 201, 99);
 }
 
 .score-segment.noreporting {
-  background: #a9b1c5;
+  background: rgb(248, 179, 186);
 }
 
 .score-segment.others {
-  background: #d8dde9;
+  background: rgb(246, 154, 153);
 }
 
 .score-segment-legend {
@@ -1771,11 +1771,11 @@ button {
   vertical-align: middle;
 }
 
-.legend-block.achieved { background: #2fa866; }
-.legend-block.ontrack { background: #7bc77f; }
-.legend-block.offtrack { background: #e07a7a; }
-.legend-block.noreporting { background: #a9b1c5; }
-.legend-block.others { background: #d8dde9; }
+.legend-block.achieved { background: rgb(136, 216, 123); }
+.legend-block.ontrack { background: rgb(195, 232, 148); }
+.legend-block.offtrack { background: rgb(248, 201, 99); }
+.legend-block.noreporting { background: rgb(248, 179, 186); }
+.legend-block.others { background: rgb(246, 154, 153); }
 
 .score-bar-item {
   display: grid;
@@ -1870,21 +1870,21 @@ button {
 }
 
 .progress-pill.leading {
-  background: rgba(47, 168, 102, 0.16);
-  color: #2f925b;
-  border-color: rgba(47, 168, 102, 0.3);
+  background: rgba(136, 216, 123, 0.24);
+  color: rgb(64, 132, 53);
+  border-color: rgba(136, 216, 123, 0.52);
 }
 
 .progress-pill.lagging {
-  background: rgba(224, 122, 122, 0.16);
-  color: #bf5656;
-  border-color: rgba(224, 122, 122, 0.32);
+  background: rgba(248, 201, 99, 0.24);
+  color: rgb(147, 102, 14);
+  border-color: rgba(248, 201, 99, 0.52);
 }
 
 .progress-pill.atpar {
-  background: rgba(123, 199, 127, 0.17);
-  color: #4d9b53;
-  border-color: rgba(123, 199, 127, 0.34);
+  background: rgba(195, 232, 148, 0.26);
+  color: rgb(97, 136, 46);
+  border-color: rgba(195, 232, 148, 0.54);
 }
 
 .theme-commitment-count {
@@ -1949,33 +1949,33 @@ button {
 }
 
 .commitment-status-pill.achieved {
-  background: rgba(47, 168, 102, 0.16);
-  color: #2f925b;
-  border-color: rgba(47, 168, 102, 0.3);
+  background: rgba(136, 216, 123, 0.24);
+  color: rgb(64, 132, 53);
+  border-color: rgba(136, 216, 123, 0.52);
 }
 
 .commitment-status-pill.ontrack {
-  background: rgba(123, 199, 127, 0.17);
-  color: #4d9b53;
-  border-color: rgba(123, 199, 127, 0.34);
+  background: rgba(195, 232, 148, 0.26);
+  color: rgb(97, 136, 46);
+  border-color: rgba(195, 232, 148, 0.54);
 }
 
 .commitment-status-pill.offtrack {
-  background: rgba(224, 122, 122, 0.16);
-  color: #bf5656;
-  border-color: rgba(224, 122, 122, 0.32);
+  background: rgba(248, 201, 99, 0.24);
+  color: rgb(147, 102, 14);
+  border-color: rgba(248, 201, 99, 0.52);
 }
 
 .commitment-status-pill.noreporting {
-  background: rgba(155, 162, 183, 0.2);
-  color: #5f667c;
-  border-color: rgba(155, 162, 183, 0.38);
+  background: rgba(248, 179, 186, 0.3);
+  color: rgb(155, 71, 83);
+  border-color: rgba(248, 179, 186, 0.56);
 }
 
 .commitment-status-pill.others {
-  background: rgba(201, 206, 218, 0.28);
-  color: #6f768d;
-  border-color: rgba(201, 206, 218, 0.45);
+  background: rgba(246, 154, 153, 0.3);
+  color: rgb(154, 62, 61);
+  border-color: rgba(246, 154, 153, 0.56);
 }
 
 .commitment-description-list {
@@ -2151,7 +2151,7 @@ button {
   top: 26px;
   height: 10px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #a64b56, #cb6f78, #e0a06e, #aecd7d, #5e9d68);
+  background: linear-gradient(90deg, rgb(192, 0, 0), rgb(230, 0, 0), rgb(247, 148, 30), rgb(122, 184, 0), rgb(46, 125, 0));
 }
 
 .status-marker-line {

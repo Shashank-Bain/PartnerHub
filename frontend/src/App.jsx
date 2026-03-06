@@ -109,11 +109,11 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   }
 
   const gradientStops = [
-    { position: 0, rgb: [166, 75, 86] },
-    { position: 25, rgb: [203, 111, 120] },
-    { position: 50, rgb: [224, 160, 110] },
-    { position: 75, rgb: [174, 205, 125] },
-    { position: 100, rgb: [94, 157, 104] },
+    { position: 0, rgb: [192, 0, 0] },
+    { position: 25, rgb: [230, 0, 0] },
+    { position: 50, rgb: [247, 148, 30] },
+    { position: 75, rgb: [122, 184, 0] },
+    { position: 100, rgb: [46, 125, 0] },
   ]
 
   const getGradientRgbAt = (position) => {
@@ -338,11 +338,11 @@ function CommitmentProgressChart({ ranking }) {
             stroke="rgba(95, 104, 144, 0.35)"
           />
           <Tooltip content={<CommitmentProgressTooltip />} cursor={{ fill: 'rgba(104, 70, 218, 0.08)' }} />
-          <Bar dataKey="achievedPct" stackId="commitment" name="Achieved" fill="#2fa866" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="onTrackPct" stackId="commitment" name="On-Track" fill="#7bc77f" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="offTrackPct" stackId="commitment" name="Off-Track" fill="#e07a7a" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="noReportingPct" stackId="commitment" name="Not Reporting" fill="#a9b1c5" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="noTargetPct" stackId="commitment" name="No-target" fill="#d8dde9" radius={[0, 4, 4, 0]} />
+          <Bar dataKey="achievedPct" stackId="commitment" name="Achieved" fill="rgb(136, 216, 123)" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="onTrackPct" stackId="commitment" name="On-Track" fill="rgb(195, 232, 148)" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="offTrackPct" stackId="commitment" name="Off-Track" fill="rgb(248, 201, 99)" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="noReportingPct" stackId="commitment" name="Not Reporting" fill="rgb(248, 179, 186)" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="noTargetPct" stackId="commitment" name="No-target" fill="rgb(246, 154, 153)" radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
