@@ -507,12 +507,16 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
 
   const cellStyle = (value) => {
     const intensity = maxCellValue > 0 && value > 0 ? value / maxCellValue : 0
-    const [red, green, blue] = getScorecardGradientRgbAt(intensity * 100)
-    const alpha = value > 0 ? (0.18 + intensity * 0.78) : 0.08
-    const perceivedLuminance = (red * 299 + green * 587 + blue * 114) / 1000
+    const baseRed = 230
+    const baseGreen = 0
+    const baseBlue = 0
+    const lightenFactor = value > 0 ? (0.84 - intensity * 0.66) : 0.94
+    const red = Math.round(baseRed + (255 - baseRed) * lightenFactor)
+    const green = Math.round(baseGreen + (255 - baseGreen) * lightenFactor)
+    const blue = Math.round(baseBlue + (255 - baseBlue) * lightenFactor)
     return {
-      background: `rgba(${red}, ${green}, ${blue}, ${alpha})`,
-      color: perceivedLuminance < 145 && alpha > 0.35 ? 'rgb(245, 245, 245)' : 'rgb(20, 24, 34)',
+      background: `rgb(${red}, ${green}, ${blue})`,
+      color: intensity > 0.58 ? 'rgb(247, 247, 247)' : 'rgb(26, 32, 44)',
     }
   }
 
@@ -2726,57 +2730,6 @@ function App() {
                         <li key={`fc-insight-${index}`}>{line}</li>
                       ))}
 
-                    {selectedHeatmapCell && (
-                      <div className="modal-backdrop" onClick={() => setSelectedHeatmapCell(null)}>
-                        <div className="modal-card commitment-modal heatmap-drilldown-modal" onClick={(event) => event.stopPropagation()}>
-                          <div className="modal-header">
-                            <h3>{selectedHeatmapCell.title || 'Heatmap Drilldown'}</h3>
-                            <button type="button" className="btn-ghost" onClick={() => setSelectedHeatmapCell(null)}>Close</button>
-                          </div>
-
-                          <section className="modal-pane">
-                            <h4>{selectedHeatmapCell.rowLabel || 'Row'}: {selectedHeatmapCell.rowValue || '-'} • {selectedHeatmapCell.columnValue || '-'}</h4>
-                            <div className="heatmap-drilldown-table-wrap">
-                              <table className="heatmap-drilldown-table">
-                                <thead>
-                                  <tr>
-                                    <th>Target Name</th>
-                                    <th>Quick Overview</th>
-                                    <th>Other Info</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {(selectedHeatmapCell.events || []).map((event, index) => {
-                                    const quickOverview = String(
-                                      event?.headline
-                                      || (Array.isArray(event?.overviewPoints) ? event.overviewPoints[0] : '')
-                                      || 'No summary available.',
-                                    )
-                                    return (
-                                      <tr key={`${event?.title || 'event'}-${event?.date || 'na'}-${index}`}>
-                                        <td>{event?.title || 'Unknown target'}</td>
-                                        <td>{quickOverview}</td>
-                                        <td>
-                                          <div className="timeline-event-meta">
-                                            <span>Source: {event?.source || 'Investment Deal'}</span>
-                                            <span>Date: {event?.date || 'NA'}</span>
-                                            <span>Theme: {event?.theme || 'Unspecified theme'}</span>
-                                            <span>Region: {event?.region || 'Other'}</span>
-                                            <span>Target Industry: {formatIndustryLabel(event?.targetIndustry)}</span>
-                                            <span>Deal Type: {event?.dealType || 'Other'}</span>
-                                            <span>Transaction Value: {formatTransactionValue(event?.transactionValue)}</span>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </table>
-                            </div>
-                          </section>
-                        </div>
-                      </div>
-                    )}
                     </ul>
                   </section>
 
@@ -2814,6 +2767,58 @@ function App() {
                 Open Investment Deep Dive
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {selectedHeatmapCell && (
+        <div className="modal-backdrop" onClick={() => setSelectedHeatmapCell(null)}>
+          <div className="modal-card commitment-modal heatmap-drilldown-modal" onClick={(event) => event.stopPropagation()}>
+            <div className="modal-header">
+              <h3>{selectedHeatmapCell.title || 'Heatmap Drilldown'}</h3>
+              <button type="button" className="btn-ghost" onClick={() => setSelectedHeatmapCell(null)}>Close</button>
+            </div>
+
+            <section className="modal-pane">
+              <h4>{selectedHeatmapCell.rowLabel || 'Row'}: {selectedHeatmapCell.rowValue || '-'} • {selectedHeatmapCell.columnValue || '-'}</h4>
+              <div className="heatmap-drilldown-table-wrap">
+                <table className="heatmap-drilldown-table">
+                  <thead>
+                    <tr>
+                      <th>Target Name</th>
+                      <th>Quick Overview</th>
+                      <th>Other Info</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(selectedHeatmapCell.events || []).map((event, index) => {
+                      const quickOverview = String(
+                        event?.headline
+                        || (Array.isArray(event?.overviewPoints) ? event.overviewPoints[0] : '')
+                        || 'No summary available.',
+                      )
+                      return (
+                        <tr key={`${event?.title || 'event'}-${event?.date || 'na'}-${index}`}>
+                          <td>{event?.title || 'Unknown target'}</td>
+                          <td>{quickOverview}</td>
+                          <td>
+                            <div className="timeline-event-meta">
+                              <span>Source: {event?.source || 'Investment Deal'}</span>
+                              <span>Date: {event?.date || 'NA'}</span>
+                              <span>Theme: {event?.theme || 'Unspecified theme'}</span>
+                              <span>Region: {event?.region || 'Other'}</span>
+                              <span>Target Industry: {formatIndustryLabel(event?.targetIndustry)}</span>
+                              <span>Deal Type: {event?.dealType || 'Other'}</span>
+                              <span>Transaction Value: {formatTransactionValue(event?.transactionValue)}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </section>
           </div>
         </div>
       )}
