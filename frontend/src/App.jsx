@@ -412,7 +412,6 @@ function ThemeSpiderChart({ data, companyName }) {
 }
 
 const INVESTMENT_CHART_COLORS = [
-  'rgb(0, 0, 0)',
   'rgb(166, 166, 166)',
   'rgb(132, 151, 176)',
   'rgb(177, 133, 164)',
@@ -433,6 +432,7 @@ const INVESTMENT_CHART_COLORS_EXTENDED = [
   'rgb(226, 209, 219)',
   'rgb(238, 229, 199)',
   'rgb(217, 224, 218)',
+  'rgb(0, 0, 0)',
 ]
 
 function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
@@ -702,12 +702,42 @@ function RegionMixChart({ regionShares }) {
   )
 }
 
-function MixDistributionChart({ title, keys, rows }) {
+function MixDistributionChart({ title, keys, rows, tall = false }) {
   const safeKeys = (keys || []).filter(Boolean)
   const sourceRows = rows || []
 
+  const selectedSourceRow = sourceRows.find((row) => Boolean(row?.isSelected)) || sourceRows[0] || {}
+  const orderedKeys = [...safeKeys]
+    .map((key) => {
+      const clientCount = Number(selectedSourceRow?.[key] || 0)
+      const totalCount = sourceRows.reduce((sum, row) => sum + Number(row?.[key] || 0), 0)
+      const peerCount = Math.max(0, totalCount - clientCount)
+      return {
+        key,
+        clientCount,
+        peerCount,
+        hasClientSegment: clientCount > 0,
+      }
+    })
+    .sort((left, right) => {
+      if (left.hasClientSegment !== right.hasClientSegment) {
+        return left.hasClientSegment ? -1 : 1
+      }
+
+      if (left.hasClientSegment && right.hasClientSegment && right.clientCount !== left.clientCount) {
+        return right.clientCount - left.clientCount
+      }
+
+      if (right.peerCount !== left.peerCount) {
+        return right.peerCount - left.peerCount
+      }
+
+      return left.key.localeCompare(right.key)
+    })
+    .map((item) => item.key)
+
   const chartData = sourceRows.map((row) => {
-    const totalDeals = safeKeys.reduce((sum, key) => sum + Number(row?.[key] || 0), 0)
+    const totalDeals = orderedKeys.reduce((sum, key) => sum + Number(row?.[key] || 0), 0)
     const payload = {
       company: row?.isSelected ? `${row.company} (Client)` : row.company,
       companyRaw: String(row?.company || ''),
@@ -716,7 +746,7 @@ function MixDistributionChart({ title, keys, rows }) {
       totalPct: totalDeals > 0 ? 100 : 0,
     }
 
-    for (const key of safeKeys) {
+    for (const key of orderedKeys) {
       const count = Number(row?.[key] || 0)
       payload[key] = totalDeals > 0 ? (count / totalDeals) * 100 : 0
     }
@@ -729,7 +759,7 @@ function MixDistributionChart({ title, keys, rows }) {
     return left.companyRaw.localeCompare(right.companyRaw)
   })
 
-  if (!chartData.length || !safeKeys.length) {
+  if (!chartData.length || !orderedKeys.length) {
     return (
       <section className="card scorecard-chart-card">
         <h3 className="scorecard-chart-title">{title}</h3>
@@ -744,7 +774,7 @@ function MixDistributionChart({ title, keys, rows }) {
       <h3 className="scorecard-chart-title">{title}</h3>
       <div className="scorecard-thin-divider" />
       <div className="investment-chart-wrap investment-mix-chart-wrap">
-        <ResponsiveContainer width="100%" height={Math.max(240, chartData.length * 44)}>
+        <ResponsiveContainer width="100%" height={Math.max(tall ? 360 : 240, chartData.length * (tall ? 66 : 44))}>
           <BarChart data={chartData} margin={{ top: 20, right: 12, left: 4, bottom: 54 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
             <XAxis
@@ -764,7 +794,7 @@ function MixDistributionChart({ title, keys, rows }) {
             />
             <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix share']} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
-            {safeKeys.map((key, index) => (
+            {orderedKeys.map((key, index) => (
               <Bar
                 key={`${title}-${key}`}
                 dataKey={key}
@@ -772,7 +802,7 @@ function MixDistributionChart({ title, keys, rows }) {
                 name={key}
                 fill={INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length]}
               >
-                {index === safeKeys.length - 1 && (
+                {index === orderedKeys.length - 1 && (
                   <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
                 )}
               </Bar>
@@ -2130,10 +2160,10 @@ function App() {
                 </div>
 
                 <div className="investment-chart-grid investment-chart-grid-four">
-                  <MixDistributionChart title="Sustainability Topic Mix" keys={investmentSustainabilityMix.keys} rows={investmentSustainabilityMix.rows} />
-                  <MixDistributionChart title="Region Mix" keys={investmentRegionMix.keys} rows={investmentRegionMix.rows} />
-                  <MixDistributionChart title="Target Industry Mix" keys={investmentTargetIndustryMix.keys} rows={investmentTargetIndustryMix.rows} />
-                  <MixDistributionChart title="Deal Type Mix" keys={investmentDealTypeMix.keys} rows={investmentDealTypeMix.rows} />
+                  <MixDistributionChart title="Sustainability Topic Mix" keys={investmentSustainabilityMix.keys} rows={investmentSustainabilityMix.rows} tall />
+                  <MixDistributionChart title="Region Mix" keys={investmentRegionMix.keys} rows={investmentRegionMix.rows} tall />
+                  <MixDistributionChart title="Target Industry Mix" keys={investmentTargetIndustryMix.keys} rows={investmentTargetIndustryMix.rows} tall />
+                  <MixDistributionChart title="Deal Type Mix" keys={investmentDealTypeMix.keys} rows={investmentDealTypeMix.rows} tall />
                 </div>
               </>
             )}
