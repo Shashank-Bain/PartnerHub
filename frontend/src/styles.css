@@ -409,6 +409,30 @@ button {
   font-size: 20px;
 }
 
+.card-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-see-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(104, 70, 218, 0.24);
+  background: rgba(104, 70, 218, 0.1);
+  color: #4f3f95;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
 .card-subtitle {
   margin-top: 6px;
   margin-bottom: 0;
@@ -418,14 +442,6 @@ button {
   text-transform: uppercase;
   line-height: 1.35;
   font-weight: 700;
-}
-
-.card-click-hint {
-  margin-top: 4px;
-  margin-bottom: 0;
-  font-size: 11px;
-  color: rgba(79, 63, 149, 0.72);
-  font-weight: 500;
 }
 
 .home-insight-card p {

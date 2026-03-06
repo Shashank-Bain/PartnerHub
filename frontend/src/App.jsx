@@ -1665,9 +1665,11 @@ function App() {
                   }
                 }}
               >
-                <h3>Commitment Progress</h3>
+                <div className="card-heading-row">
+                  <h3>Commitment Progress</h3>
+                  <span className="card-see-more">See More</span>
+                </div>
                 <p className="card-subtitle">Commitment delivery and peer-positioning at a glance</p>
-                <p className="card-click-hint">Click anywhere on this card for deep dive</p>
                 <div className="gradient-line" />
 
                 <div className="commitment-infographic">
@@ -1752,9 +1754,11 @@ function App() {
                   }
                 }}
               >
-                <h3>Investment Intelligence</h3>
+                <div className="card-heading-row">
+                  <h3>Investment Intelligence</h3>
+                  <span className="card-see-more">See More</span>
+                </div>
                 <p className="card-subtitle">Deals, green capex, and strategic intent at a glance</p>
-                <p className="card-click-hint">Click anywhere on this card for deep dive</p>
                 <div className="gradient-line" />
 
                 <div className="investment-infographic">
@@ -1819,7 +1823,10 @@ function App() {
                   }
                 }}
               >
-                <h3>KPI Momentum</h3>
+                <div className="card-heading-row">
+                  <h3>KPI Momentum</h3>
+                  <span className="card-see-more">See More</span>
+                </div>
                 <p className="card-subtitle">Performance signal strength across sustainability KPIs</p>
                 <div className="gradient-line" />
 
