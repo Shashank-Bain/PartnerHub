@@ -2209,7 +2209,8 @@ button {
 
 .status-marker-label.company {
   top: 0;
-  color: #111111;
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .status-marker-label.peer {

@@ -108,6 +108,35 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
     return Math.max(0, Math.min(100, numericValue))
   }
 
+  const gradientStops = [
+    { position: 0, rgb: [166, 75, 86] },
+    { position: 25, rgb: [203, 111, 120] },
+    { position: 50, rgb: [224, 160, 110] },
+    { position: 75, rgb: [174, 205, 125] },
+    { position: 100, rgb: [94, 157, 104] },
+  ]
+
+  const getGradientColorAt = (position) => {
+    const boundedPosition = Math.max(0, Math.min(100, Number(position) || 0))
+
+    for (let index = 1; index < gradientStops.length; index += 1) {
+      const currentStop = gradientStops[index]
+      const previousStop = gradientStops[index - 1]
+
+      if (boundedPosition <= currentStop.position) {
+        const span = currentStop.position - previousStop.position || 1
+        const ratio = (boundedPosition - previousStop.position) / span
+        const red = Math.round(previousStop.rgb[0] + (currentStop.rgb[0] - previousStop.rgb[0]) * ratio)
+        const green = Math.round(previousStop.rgb[1] + (currentStop.rgb[1] - previousStop.rgb[1]) * ratio)
+        const blue = Math.round(previousStop.rgb[2] + (currentStop.rgb[2] - previousStop.rgb[2]) * ratio)
+        return `rgb(${red}, ${green}, ${blue})`
+      }
+    }
+
+    const lastStop = gradientStops[gradientStops.length - 1]
+    return `rgb(${lastStop.rgb[0]}, ${lastStop.rgb[1]}, ${lastStop.rgb[2]})`
+  }
+
   const companyScore = toScaleScore(overallStatus?.finalScore)
   const peerScore = toScaleScore(peerAverage)
   const best = toScaleScore(bestScore)
@@ -169,6 +198,7 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   }
 
   const bottomLabelByType = Object.fromEntries(bottomLabelMarkers.map((marker) => [marker.type, marker]))
+  const companyLabelColor = getGradientColorAt(companyMarker.score)
 
   return (
     <div className="status-scale-wrap">
@@ -183,7 +213,10 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
           style={{ left: `${companyMarker.score}%` }}
           title={`${companyMarker.longLabel} ${companyMarker.rawScore.toFixed(1)}`}
         />
-        <span className="status-marker-label company" style={{ left: `${companyMarker.score}%` }}>
+        <span
+          className="status-marker-label company"
+          style={{ left: `${companyMarker.score}%`, color: companyLabelColor }}
+        >
           {companyBucketLabel}
         </span>
 
