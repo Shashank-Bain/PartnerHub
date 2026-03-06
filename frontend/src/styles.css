@@ -420,6 +420,14 @@ button {
   font-weight: 700;
 }
 
+.card-click-hint {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-size: 11px;
+  color: rgba(79, 63, 149, 0.72);
+  font-weight: 500;
+}
+
 .home-insight-card p {
   color: var(--muted);
   margin: 0;

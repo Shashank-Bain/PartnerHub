@@ -1667,6 +1667,7 @@ function App() {
               >
                 <h3>Commitment Progress</h3>
                 <p className="card-subtitle">Commitment delivery and peer-positioning at a glance</p>
+                <p className="card-click-hint">Click anywhere on this card for deep dive</p>
                 <div className="gradient-line" />
 
                 <div className="commitment-infographic">
@@ -1753,6 +1754,7 @@ function App() {
               >
                 <h3>Investment Intelligence</h3>
                 <p className="card-subtitle">Deals, green capex, and strategic intent at a glance</p>
+                <p className="card-click-hint">Click anywhere on this card for deep dive</p>
                 <div className="gradient-line" />
 
                 <div className="investment-infographic">
