@@ -1069,6 +1069,11 @@ def generate_pithy_focus_company_insights(selected_company, insights):
         }
 
 
+def generate_pithy_peer_insights(selected_company, peer_insights):
+    peer_context_name = f"{selected_company} peer set"
+    return generate_pithy_focus_company_insights(peer_context_name, peer_insights)
+
+
 def build_peer_focus_bullets(selected_company, selected_topic_totals, peer_topic_totals, peer_count):
     safe_peer_count = max(1, int(peer_count or 1))
 
@@ -1344,8 +1349,11 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         None,
     )
     focus_company_insights = (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else []
+    peer_insights = (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else []
     pithy_focus_company_result = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
     pithy_focus_company_insights = pithy_focus_company_result.get("insights", [])
+    pithy_peer_result = generate_pithy_peer_insights(selected_company, peer_insights)
+    pithy_peer_insights = pithy_peer_result.get("insights", [])
 
     all_regions_selected = aggregate_region_counts(selected_deals)
     total_region_events_selected = sum(all_regions_selected.values())
@@ -1918,7 +1926,14 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "model": pithy_focus_company_result.get("model"),
                 "hasApiKey": bool(pithy_focus_company_result.get("hasApiKey", False)),
             },
-            "peerInsights": (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else [],
+            "peerInsights": peer_insights,
+            "peerPithyInsights": pithy_peer_insights,
+            "peerPithyMeta": {
+                "source": pithy_peer_result.get("source", "fallback"),
+                "reason": pithy_peer_result.get("reason", "unknown"),
+                "model": pithy_peer_result.get("model"),
+                "hasApiKey": bool(pithy_peer_result.get("hasApiKey", False)),
+            },
         },
     }
 

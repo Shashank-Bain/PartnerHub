@@ -2479,12 +2479,6 @@ function App() {
                         {(investmentInsights.narrative?.focusCompanyPithyMeta?.source || 'fallback') === 'ai' ? 'AI generated' : 'Fallback'}
                       </span>
                     </div>
-                    <p className="investment-insight-debug">
-                      Reason: {investmentInsights.narrative?.focusCompanyPithyMeta?.reason || 'unknown'}
-                      {investmentInsights.narrative?.focusCompanyPithyMeta?.model
-                        ? ` · Model: ${investmentInsights.narrative.focusCompanyPithyMeta.model}`
-                        : ''}
-                    </p>
                     <ul className="investment-simple-list">
                       {(investmentInsights.narrative?.focusCompanyPithyInsights || []).slice(0, 3).map((line, index) => (
                         <li key={`fc-insight-${index}`}>{line}</li>
@@ -2493,9 +2487,19 @@ function App() {
                   </section>
 
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>Peer Insights</h4>
+                    <div className="investment-insight-header">
+                      <h4>Peer Insights</h4>
+                      <span
+                        className={`investment-insight-source ${(investmentInsights.narrative?.peerPithyMeta?.source || 'fallback') === 'ai' ? 'ai' : 'fallback'}`}
+                      >
+                        {(investmentInsights.narrative?.peerPithyMeta?.source || 'fallback') === 'ai' ? 'AI generated' : 'Fallback'}
+                      </span>
+                    </div>
                     <ul className="investment-simple-list">
-                      {(investmentInsights.narrative?.peerInsights || []).slice(0, 3).map((line, index) => (
+                      {((investmentInsights.narrative?.peerPithyInsights || []).length
+                        ? investmentInsights.narrative.peerPithyInsights
+                        : (investmentInsights.narrative?.peerInsights || [])
+                      ).slice(0, 3).map((line, index) => (
                         <li key={`peer-insight-${index}`}>{line}</li>
                       ))}
                     </ul>
