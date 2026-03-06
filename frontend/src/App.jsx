@@ -770,6 +770,13 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
     return left.companyRaw.localeCompare(right.companyRaw)
   })
 
+  const legendPayload = orderedKeys.map((key, index) => ({
+    value: key,
+    type: 'square',
+    color: INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length],
+    id: key,
+  }))
+
   if (!chartData.length || !orderedKeys.length) {
     return (
       <section className="card scorecard-chart-card">
@@ -806,7 +813,7 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
               stroke="rgba(132, 151, 176, 0.5)"
             />
             <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix share']} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend wrapperStyle={{ fontSize: 11 }} payload={legendPayload} />
             {orderedKeys.map((key, index) => (
               <Bar
                 key={`${title}-${key}`}
