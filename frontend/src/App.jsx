@@ -702,6 +702,32 @@ function RegionMixChart({ regionShares }) {
   )
 }
 
+function MixDistributionTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) {
+    return null
+  }
+
+  const sortedItems = [...payload]
+    .filter((entry) => Number(entry?.value || 0) > 0)
+    .sort((left, right) => Number(right?.value || 0) - Number(left?.value || 0))
+
+  return (
+    <div className="commitment-tooltip">
+      <strong>{label}</strong>
+      {sortedItems.length ? (
+        sortedItems.map((entry) => (
+          <p key={`${entry?.dataKey}-${entry?.name}`}>
+            <span>{entry?.name || entry?.dataKey}:</span>{' '}
+            <strong>{`${Number(entry?.value || 0).toFixed(1)}%`}</strong>
+          </p>
+        ))
+      ) : (
+        <p>No mix contribution.</p>
+      )}
+    </div>
+  )
+}
+
 function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false }) {
   const safeKeys = (keys || []).filter(Boolean)
   const sourceRows = rows || []
@@ -812,7 +838,7 @@ function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false
               tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
               stroke="rgba(132, 151, 176, 0.5)"
             />
-            <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix share']} />
+            <Tooltip content={<MixDistributionTooltip />} />
             <Legend wrapperStyle={{ fontSize: 11 }} payload={legendPayload} />
             {orderedKeys.map((key, index) => (
               <Bar

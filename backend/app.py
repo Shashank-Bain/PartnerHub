@@ -1186,7 +1186,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         ]
 
     def get_row_theme(row):
-        return str(row.get("classification_L1") or row.get("classification") or "").strip()
+        return str(row.get("classification") or row.get("classification_L1") or "").strip()
 
     def get_row_target_industry(row):
         return str(row.get("Master Primary Industry Target") or row.get("Primary Industry [Target/Issuer]") or "").strip()
@@ -1200,7 +1200,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             counter[theme] = counter.get(theme, 0) + 1
 
         for row in capex:
-            theme = str(row.get("classification") or row.get("classification_L1") or "").strip()
+            theme = get_row_theme(row)
             if not is_sustainability_classification(theme):
                 continue
             counter[theme] = counter.get(theme, 0) + 1
@@ -1480,7 +1480,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     ]
     region_spider.sort(key=lambda item: item["companyScore"], reverse=True)
 
-    top_topic_keys = [item["theme"] for item in topic_spider[:3]]
+    top_topic_keys = [item["theme"] for item in topic_spider]
     if not top_topic_keys:
         top_topic_keys = ["Unspecified"]
 
@@ -1564,13 +1564,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
             "company": company_name,
             "isSelected": normalize_company_name(company_name) == normalize_company_name(selected_company),
         }
-        topic_other = 0
-        for key, value in company_theme_counts.items():
-            if key in top_topic_keys:
-                topic_row[key] = value
-            else:
-                topic_other += value
-        topic_row["Other"] = topic_other
+        for key in top_topic_keys:
+            topic_row[key] = int(company_theme_counts.get(key, 0) or 0)
         topic_breakdown_rows.append(topic_row)
 
         region_row = {
@@ -1898,7 +1893,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         },
         "charts": {
             "topics": {
-                "keys": [*top_topic_keys, "Other"],
+                "keys": top_topic_keys,
                 "rows": topic_breakdown_rows,
             },
             "regions": {
