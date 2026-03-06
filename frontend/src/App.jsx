@@ -702,20 +702,31 @@ function RegionMixChart({ regionShares }) {
   )
 }
 
-function MixDistributionChart({ title, keys, rows, tall = false }) {
+function MixDistributionChart({ title, keys, rows, selectedCompany, tall = false }) {
   const safeKeys = (keys || []).filter(Boolean)
   const sourceRows = rows || []
 
-  const selectedSourceRow = sourceRows.find((row) => Boolean(row?.isSelected)) || sourceRows[0] || {}
+  const normalizeCompanyToken = (value) => String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+
+  const selectedCompanyToken = normalizeCompanyToken(selectedCompany)
+
+  const selectedSourceRow = sourceRows.find((row) => Boolean(row?.isSelected))
+    || sourceRows.find((row) => normalizeCompanyToken(row?.company) === selectedCompanyToken)
+    || sourceRows[0]
+    || {}
+
   const orderedKeys = [...safeKeys]
     .map((key) => {
       const clientCount = Number(selectedSourceRow?.[key] || 0)
       const totalCount = sourceRows.reduce((sum, row) => sum + Number(row?.[key] || 0), 0)
-      const peerCount = Math.max(0, totalCount - clientCount)
       return {
         key,
         clientCount,
-        peerCount,
+        totalCount,
         hasClientSegment: clientCount > 0,
       }
     })
@@ -724,12 +735,12 @@ function MixDistributionChart({ title, keys, rows, tall = false }) {
         return left.hasClientSegment ? -1 : 1
       }
 
-      if (left.hasClientSegment && right.hasClientSegment && right.clientCount !== left.clientCount) {
+      if (right.clientCount !== left.clientCount) {
         return right.clientCount - left.clientCount
       }
 
-      if (right.peerCount !== left.peerCount) {
-        return right.peerCount - left.peerCount
+      if (right.totalCount !== left.totalCount) {
+        return right.totalCount - left.totalCount
       }
 
       return left.key.localeCompare(right.key)
@@ -788,7 +799,9 @@ function MixDistributionChart({ title, keys, rows, tall = false }) {
             <YAxis
               type="number"
               domain={[0, 100]}
-              tickFormatter={(value) => `${value}%`}
+              ticks={[0, 20, 40, 60, 80, 100]}
+              allowDecimals={false}
+              tickFormatter={(value) => `${Math.round(Number(value) || 0)}%`}
               tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
               stroke="rgba(132, 151, 176, 0.5)"
             />
@@ -2160,10 +2173,10 @@ function App() {
                 </div>
 
                 <div className="investment-chart-grid investment-chart-grid-four">
-                  <MixDistributionChart title="Sustainability Topic Mix" keys={investmentSustainabilityMix.keys} rows={investmentSustainabilityMix.rows} tall />
-                  <MixDistributionChart title="Region Mix" keys={investmentRegionMix.keys} rows={investmentRegionMix.rows} tall />
-                  <MixDistributionChart title="Target Industry Mix" keys={investmentTargetIndustryMix.keys} rows={investmentTargetIndustryMix.rows} tall />
-                  <MixDistributionChart title="Deal Type Mix" keys={investmentDealTypeMix.keys} rows={investmentDealTypeMix.rows} tall />
+                  <MixDistributionChart title="Sustainability Topic Mix" keys={investmentSustainabilityMix.keys} rows={investmentSustainabilityMix.rows} selectedCompany={selectedCompany} tall />
+                  <MixDistributionChart title="Region Mix" keys={investmentRegionMix.keys} rows={investmentRegionMix.rows} selectedCompany={selectedCompany} tall />
+                  <MixDistributionChart title="Target Industry Mix" keys={investmentTargetIndustryMix.keys} rows={investmentTargetIndustryMix.rows} selectedCompany={selectedCompany} tall />
+                  <MixDistributionChart title="Deal Type Mix" keys={investmentDealTypeMix.keys} rows={investmentDealTypeMix.rows} selectedCompany={selectedCompany} tall />
                 </div>
               </>
             )}
