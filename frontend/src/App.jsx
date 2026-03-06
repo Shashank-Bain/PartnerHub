@@ -94,6 +94,14 @@ function getProgressLabelClass(label) {
 }
 
 function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
+  const bucketLabelByCode = {
+    X: 'No Commitments',
+    A: 'Active',
+    P: 'Proactive',
+    L: 'Leading',
+    D: 'Distinctive',
+  }
+
   const toScaleScore = (value) => {
     const numericValue = Number(value)
     if (!Number.isFinite(numericValue)) return 0
@@ -103,6 +111,9 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   const companyScore = toScaleScore(overallStatus?.finalScore)
   const peerScore = toScaleScore(peerAverage)
   const best = toScaleScore(bestScore)
+  const derivedBucketCode = companyScore >= 80 ? 'D' : companyScore >= 60 ? 'L' : companyScore >= 40 ? 'P' : companyScore >= 20 ? 'A' : 'X'
+  const companyBucketCode = String(overallStatus?.bucket || overallStatus?.bucketCode || derivedBucketCode).toUpperCase()
+  const companyBucketLabel = bucketLabelByCode[companyBucketCode] || bucketLabelByCode[derivedBucketCode]
 
   const markers = [
     { type: 'company', longLabel: 'Client', rawScore: companyScore, score: companyScore },
@@ -133,6 +144,32 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   const peerMarker = markerByType.peer
   const bestMarker = markerByType.best
 
+  const bottomLabelMarkers = [
+    { type: 'peer', score: peerMarker.score },
+    { type: 'best', score: bestMarker.score },
+  ].sort((first, second) => first.score - second.score)
+
+  const bottomLabelMinGap = 8
+  const bottomLabelEdgePadding = 4
+
+  for (let index = 1; index < bottomLabelMarkers.length; index += 1) {
+    const current = bottomLabelMarkers[index]
+    const previous = bottomLabelMarkers[index - 1]
+    if (current.score - previous.score < bottomLabelMinGap) {
+      current.score = Math.min(100 - bottomLabelEdgePadding, previous.score + bottomLabelMinGap)
+    }
+  }
+
+  for (let index = bottomLabelMarkers.length - 2; index >= 0; index -= 1) {
+    const current = bottomLabelMarkers[index]
+    const next = bottomLabelMarkers[index + 1]
+    if (next.score - current.score < bottomLabelMinGap) {
+      current.score = Math.max(bottomLabelEdgePadding, next.score - bottomLabelMinGap)
+    }
+  }
+
+  const bottomLabelByType = Object.fromEntries(bottomLabelMarkers.map((marker) => [marker.type, marker]))
+
   return (
     <div className="status-scale-wrap">
       <div className="status-client-score">
@@ -146,13 +183,16 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
           style={{ left: `${companyMarker.score}%` }}
           title={`${companyMarker.longLabel} ${companyMarker.rawScore.toFixed(1)}`}
         />
+        <span className="status-marker-label company" style={{ left: `${companyMarker.score}%` }}>
+          {companyBucketLabel}
+        </span>
 
         <span
           className="status-marker-triangle peer"
           style={{ left: `${peerMarker.score}%` }}
           title={`${peerMarker.longLabel} ${peerMarker.rawScore.toFixed(1)}`}
         />
-        <span className="status-marker-label peer" style={{ left: `${peerMarker.score}%` }}>
+        <span className="status-marker-label peer" style={{ left: `${bottomLabelByType.peer.score}%` }}>
           P {peerMarker.rawScore.toFixed(1)}
         </span>
 
@@ -161,7 +201,7 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
           style={{ left: `${bestMarker.score}%` }}
           title={`${bestMarker.longLabel} ${bestMarker.rawScore.toFixed(1)}`}
         />
-        <span className="status-marker-label best" style={{ left: `${bestMarker.score}%` }}>
+        <span className="status-marker-label best" style={{ left: `${bottomLabelByType.best.score}%` }}>
           B {bestMarker.rawScore.toFixed(1)}
         </span>
       </div>
@@ -252,11 +292,11 @@ function CommitmentProgressChart({ ranking }) {
             stroke="rgba(95, 104, 144, 0.35)"
           />
           <Tooltip content={<CommitmentProgressTooltip />} cursor={{ fill: 'rgba(104, 70, 218, 0.08)' }} />
-          <Bar dataKey="achievedPct" stackId="commitment" name="Achieved" fill="#1a8f4e" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="onTrackPct" stackId="commitment" name="On-Track" fill="#63b36b" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="offTrackPct" stackId="commitment" name="Off-Track" fill="#d65b5b" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="noReportingPct" stackId="commitment" name="Not Reporting" fill="#9ba2b7" radius={[0, 0, 0, 0]} />
-          <Bar dataKey="noTargetPct" stackId="commitment" name="No-target" fill="#c9ceda" radius={[0, 4, 4, 0]} />
+          <Bar dataKey="achievedPct" stackId="commitment" name="Achieved" fill="#2fa866" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="onTrackPct" stackId="commitment" name="On-Track" fill="#7bc77f" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="offTrackPct" stackId="commitment" name="Off-Track" fill="#e07a7a" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="noReportingPct" stackId="commitment" name="Not Reporting" fill="#a9b1c5" radius={[0, 0, 0, 0]} />
+          <Bar dataKey="noTargetPct" stackId="commitment" name="No-target" fill="#d8dde9" radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -1818,7 +1858,7 @@ function App() {
                   <div className="score-scale-legend-labels">
                     <span>X (No Commitments)</span>
                     <span>A (Active)</span>
-                    <span>P (Pro-Active)</span>
+                    <span>P (Proactive)</span>
                     <span>L (Leading)</span>
                     <span>D (Distinctive)</span>
                   </div>
@@ -1826,7 +1866,7 @@ function App() {
                 <div className="score-scale-meta">
                   <span className="scale-marker-legend-item company"><i className="scale-marker-legend-line" />C = Client</span>
                   <span className="scale-marker-legend-item peer"><i className="scale-marker-legend-triangle up" />P = Peer Avg</span>
-                  <span className="scale-marker-legend-item best"><i className="scale-marker-legend-triangle down" />B = Best</span>
+                  <span className="scale-marker-legend-item best"><i className="scale-marker-legend-triangle up" />B = Best</span>
                 </div>
               </div>
 

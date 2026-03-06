@@ -1708,23 +1708,23 @@ button {
 }
 
 .score-segment.achieved {
-  background: #1a8f4e;
+  background: #2fa866;
 }
 
 .score-segment.ontrack {
-  background: #63b36b;
+  background: #7bc77f;
 }
 
 .score-segment.offtrack {
-  background: #d65b5b;
+  background: #e07a7a;
 }
 
 .score-segment.noreporting {
-  background: #9ba2b7;
+  background: #a9b1c5;
 }
 
 .score-segment.others {
-  background: #c9ceda;
+  background: #d8dde9;
 }
 
 .score-segment-legend {
@@ -1771,11 +1771,11 @@ button {
   vertical-align: middle;
 }
 
-.legend-block.achieved { background: #1a8f4e; }
-.legend-block.ontrack { background: #63b36b; }
-.legend-block.offtrack { background: #d65b5b; }
-.legend-block.noreporting { background: #9ba2b7; }
-.legend-block.others { background: #c9ceda; }
+.legend-block.achieved { background: #2fa866; }
+.legend-block.ontrack { background: #7bc77f; }
+.legend-block.offtrack { background: #e07a7a; }
+.legend-block.noreporting { background: #a9b1c5; }
+.legend-block.others { background: #d8dde9; }
 
 .score-bar-item {
   display: grid;
@@ -1870,21 +1870,21 @@ button {
 }
 
 .progress-pill.leading {
-  background: rgba(26, 143, 78, 0.15);
-  color: #1a8f4e;
-  border-color: rgba(26, 143, 78, 0.28);
+  background: rgba(47, 168, 102, 0.16);
+  color: #2f925b;
+  border-color: rgba(47, 168, 102, 0.3);
 }
 
 .progress-pill.lagging {
-  background: rgba(214, 91, 91, 0.15);
-  color: #b44343;
-  border-color: rgba(214, 91, 91, 0.3);
+  background: rgba(224, 122, 122, 0.16);
+  color: #bf5656;
+  border-color: rgba(224, 122, 122, 0.32);
 }
 
 .progress-pill.atpar {
-  background: rgba(99, 179, 107, 0.16);
-  color: #3f8b47;
-  border-color: rgba(99, 179, 107, 0.34);
+  background: rgba(123, 199, 127, 0.17);
+  color: #4d9b53;
+  border-color: rgba(123, 199, 127, 0.34);
 }
 
 .theme-commitment-count {
@@ -1949,21 +1949,21 @@ button {
 }
 
 .commitment-status-pill.achieved {
-  background: rgba(26, 143, 78, 0.15);
-  color: #1a8f4e;
-  border-color: rgba(26, 143, 78, 0.28);
+  background: rgba(47, 168, 102, 0.16);
+  color: #2f925b;
+  border-color: rgba(47, 168, 102, 0.3);
 }
 
 .commitment-status-pill.ontrack {
-  background: rgba(99, 179, 107, 0.16);
-  color: #3f8b47;
-  border-color: rgba(99, 179, 107, 0.34);
+  background: rgba(123, 199, 127, 0.17);
+  color: #4d9b53;
+  border-color: rgba(123, 199, 127, 0.34);
 }
 
 .commitment-status-pill.offtrack {
-  background: rgba(214, 91, 91, 0.15);
-  color: #b44343;
-  border-color: rgba(214, 91, 91, 0.3);
+  background: rgba(224, 122, 122, 0.16);
+  color: #bf5656;
+  border-color: rgba(224, 122, 122, 0.32);
 }
 
 .commitment-status-pill.noreporting {
@@ -2141,7 +2141,7 @@ button {
 
 .status-scale-track {
   position: relative;
-  height: 68px;
+  height: 84px;
 }
 
 .status-scale-gradient {
@@ -2151,7 +2151,7 @@ button {
   top: 26px;
   height: 10px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #7a0f1d, #b82b38, #d47a53, #9bca67, #2f7b43);
+  background: linear-gradient(90deg, #a64b56, #cb6f78, #e0a06e, #aecd7d, #5e9d68);
 }
 
 .status-marker-line {
@@ -2192,10 +2192,10 @@ button {
 }
 
 .status-marker-triangle.best {
-  top: 15px;
+  top: 40px;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 9px solid #8acb95;
+  border-bottom: 9px solid #8acb95;
 }
 
 .status-marker-label {
@@ -2207,13 +2207,18 @@ button {
   z-index: 3;
 }
 
+.status-marker-label.company {
+  top: 0;
+  color: #111111;
+}
+
 .status-marker-label.peer {
   top: 52px;
   color: #7a7f8c;
 }
 
 .status-marker-label.best {
-  top: 0;
+  top: 66px;
   color: #8acb95;
 }
 
