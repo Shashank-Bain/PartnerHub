@@ -29,6 +29,39 @@ function getGreeting() {
 
 const SCALE_LABELS = ['X', 'A', 'P', 'L', 'D']
 
+const SCORECARD_GRADIENT_STOPS = [
+  { position: 0, rgb: [192, 0, 0] },
+  { position: 25, rgb: [230, 0, 0] },
+  { position: 50, rgb: [247, 148, 30] },
+  { position: 75, rgb: [122, 184, 0] },
+  { position: 100, rgb: [46, 125, 0] },
+]
+
+function getScorecardGradientRgbAt(position) {
+  const boundedPosition = Math.max(0, Math.min(100, Number(position) || 0))
+
+  for (let index = 1; index < SCORECARD_GRADIENT_STOPS.length; index += 1) {
+    const currentStop = SCORECARD_GRADIENT_STOPS[index]
+    const previousStop = SCORECARD_GRADIENT_STOPS[index - 1]
+
+    if (boundedPosition <= currentStop.position) {
+      const span = currentStop.position - previousStop.position || 1
+      const ratio = (boundedPosition - previousStop.position) / span
+      const red = Math.round(previousStop.rgb[0] + (currentStop.rgb[0] - previousStop.rgb[0]) * ratio)
+      const green = Math.round(previousStop.rgb[1] + (currentStop.rgb[1] - previousStop.rgb[1]) * ratio)
+      const blue = Math.round(previousStop.rgb[2] + (currentStop.rgb[2] - previousStop.rgb[2]) * ratio)
+      return [red, green, blue]
+    }
+  }
+
+  const lastStop = SCORECARD_GRADIENT_STOPS[SCORECARD_GRADIENT_STOPS.length - 1]
+  return [...lastStop.rgb]
+}
+
+function toRgbCss(rgb) {
+  return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
+}
+
 function hashString(value) {
   let hash = 0
   for (let index = 0; index < value.length; index += 1) {
@@ -108,37 +141,6 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
     return Math.max(0, Math.min(100, numericValue))
   }
 
-  const gradientStops = [
-    { position: 0, rgb: [192, 0, 0] },
-    { position: 25, rgb: [230, 0, 0] },
-    { position: 50, rgb: [247, 148, 30] },
-    { position: 75, rgb: [122, 184, 0] },
-    { position: 100, rgb: [46, 125, 0] },
-  ]
-
-  const getGradientRgbAt = (position) => {
-    const boundedPosition = Math.max(0, Math.min(100, Number(position) || 0))
-
-    for (let index = 1; index < gradientStops.length; index += 1) {
-      const currentStop = gradientStops[index]
-      const previousStop = gradientStops[index - 1]
-
-      if (boundedPosition <= currentStop.position) {
-        const span = currentStop.position - previousStop.position || 1
-        const ratio = (boundedPosition - previousStop.position) / span
-        const red = Math.round(previousStop.rgb[0] + (currentStop.rgb[0] - previousStop.rgb[0]) * ratio)
-        const green = Math.round(previousStop.rgb[1] + (currentStop.rgb[1] - previousStop.rgb[1]) * ratio)
-        const blue = Math.round(previousStop.rgb[2] + (currentStop.rgb[2] - previousStop.rgb[2]) * ratio)
-        return [red, green, blue]
-      }
-    }
-
-    const lastStop = gradientStops[gradientStops.length - 1]
-    return [...lastStop.rgb]
-  }
-
-  const toRgbCss = (rgb) => `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
-
   const companyScore = toScaleScore(overallStatus?.finalScore)
   const peerScore = toScaleScore(peerAverage)
   const best = toScaleScore(bestScore)
@@ -200,7 +202,7 @@ function StatusScaleCell({ overallStatus, peerAverage, bestScore }) {
   }
 
   const bottomLabelByType = Object.fromEntries(bottomLabelMarkers.map((marker) => [marker.type, marker]))
-  const companyLabelBaseRgb = getGradientRgbAt(companyMarker.score)
+  const companyLabelBaseRgb = getScorecardGradientRgbAt(companyMarker.score)
   const companyLabelBackground = toRgbCss(companyLabelBaseRgb)
 
   return (
@@ -437,6 +439,7 @@ const INVESTMENT_CHART_COLORS_EXTENDED = [
 
 function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
   const matrix = {}
+  const cellEvents = {}
   const rowTotals = {}
   const columnTotals = {}
 
@@ -450,6 +453,10 @@ function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
 
     matrix[rowValue] = matrix[rowValue] || {}
     matrix[rowValue][columnValue] = (matrix[rowValue][columnValue] || 0) + 1
+
+    cellEvents[rowValue] = cellEvents[rowValue] || {}
+    cellEvents[rowValue][columnValue] = cellEvents[rowValue][columnValue] || []
+    cellEvents[rowValue][columnValue].push(event)
 
     rowTotals[rowValue] = (rowTotals[rowValue] || 0) + 1
     columnTotals[columnValue] = (columnTotals[columnValue] || 0) + 1
@@ -477,12 +484,12 @@ function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
     ...rowKeys.flatMap((rowKey) => columnKeys.map((columnKey) => matrix[rowKey]?.[columnKey] || 0)),
   )
 
-  return { matrix, rowKeys, columnKeys, maxCellValue }
+  return { matrix, cellEvents, rowKeys, columnKeys, maxCellValue }
 }
 
-function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, columnAccessor, excludeGreenCapex = false }) {
+function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, columnAccessor, excludeGreenCapex = false, onCellClick }) {
   const allEvents = (timelineYears || []).flatMap((yearBlock) => yearBlock?.events || [])
-  const { matrix, rowKeys, columnKeys, maxCellValue } = buildHeatmapData(allEvents, rowAccessor, columnAccessor, {
+  const { matrix, cellEvents, rowKeys, columnKeys, maxCellValue } = buildHeatmapData(allEvents, rowAccessor, columnAccessor, {
     maxRows: 8,
     maxColumns: 5,
     excludeGreenCapex,
@@ -499,10 +506,13 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
   }
 
   const cellStyle = (value) => {
-    const intensity = value > 0 ? value / maxCellValue : 0
+    const intensity = maxCellValue > 0 && value > 0 ? value / maxCellValue : 0
+    const [red, green, blue] = getScorecardGradientRgbAt(intensity * 100)
+    const alpha = value > 0 ? (0.18 + intensity * 0.78) : 0.08
+    const perceivedLuminance = (red * 299 + green * 587 + blue * 114) / 1000
     return {
-      background: `rgba(154, 64, 110, ${0.12 + intensity * 0.68})`,
-      color: intensity > 0.52 ? 'rgb(217, 217, 217)' : 'rgb(0, 0, 0)',
+      background: `rgba(${red}, ${green}, ${blue}, ${alpha})`,
+      color: perceivedLuminance < 145 && alpha > 0.35 ? 'rgb(245, 245, 245)' : 'rgb(20, 24, 34)',
     }
   }
 
@@ -526,9 +536,28 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
                 <td>{rowKey}</td>
                 {columnKeys.map((columnKey) => {
                   const value = matrix[rowKey]?.[columnKey] || 0
+                  const eventsForCell = cellEvents[rowKey]?.[columnKey] || []
+                  const isClickable = value > 0 && typeof onCellClick === 'function'
                   return (
                     <td key={`${rowKey}-${columnKey}`}>
-                      <span className="investment-heatmap-cell" style={cellStyle(value)}>{value}</span>
+                      {isClickable ? (
+                        <button
+                          type="button"
+                          className="investment-heatmap-cell investment-heatmap-cell-btn"
+                          style={cellStyle(value)}
+                          onClick={() => onCellClick({
+                            title,
+                            rowLabel,
+                            rowValue: rowKey,
+                            columnValue: columnKey,
+                            events: eventsForCell,
+                          })}
+                        >
+                          {value}
+                        </button>
+                      ) : (
+                        <span className="investment-heatmap-cell" style={cellStyle(value)}>{value}</span>
+                      )}
                     </td>
                   )
                 })}
@@ -588,7 +617,7 @@ function InvestmentStackedChart({ title, breakdown }) {
   )
 }
 
-function InvestmentDealHeatmapChart({ title, timelineYears }) {
+function InvestmentDealHeatmapChart({ title, timelineYears, onCellClick }) {
   const normalizeDealType = (rawDealType) => {
     const text = String(rawDealType || '').toLowerCase().trim()
     if (!text || text === '-') return 'Other'
@@ -616,6 +645,7 @@ function InvestmentDealHeatmapChart({ title, timelineYears }) {
       rowAccessor={(event) => normalizeIndustry(event?.targetIndustry || event?.theme)}
       columnAccessor={(event) => normalizeDealType(event?.dealType)}
       excludeGreenCapex
+      onCellClick={onCellClick}
     />
   )
 }
@@ -925,6 +955,7 @@ function App() {
   const [activeModal, setActiveModal] = useState(null)
   const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
+  const [selectedHeatmapCell, setSelectedHeatmapCell] = useState(null)
   const [expandedScorecardThemes, setExpandedScorecardThemes] = useState({})
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -2218,10 +2249,12 @@ function App() {
                     rowLabel="Sustainability Topic"
                     rowAccessor={(event) => String(event?.theme || '-').trim() || '-'}
                     columnAccessor={(event) => String(event?.region || 'Other').trim() || 'Other'}
+                    onCellClick={setSelectedHeatmapCell}
                   />
                   <InvestmentDealHeatmapChart
                     title="Target Industry × Deal Type"
                     timelineYears={investmentInsights.timeline?.years || []}
+                    onCellClick={setSelectedHeatmapCell}
                   />
                 </div>
 
@@ -2287,6 +2320,7 @@ function App() {
                             <span className={`timeline-source-chip ${event.source === 'Green Capex' ? 'capex' : 'deal'}`}>
                               {event.source}
                             </span>
+                            <span className="timeline-dealtype-pill">{event.dealType || 'Other'}</span>
                             <h5>{event.title}</h5>
                             <p>{event.headline || (event.overviewPoints || [])[0] || 'No summary available.'}</p>
                             <div className="timeline-event-meta">
@@ -2294,7 +2328,6 @@ function App() {
                               <span>Theme: {event.theme || 'Unspecified theme'}</span>
                               <span>Region: {event.region || 'Other'}</span>
                               <span>Target Industry: {formatIndustryLabel(event.targetIndustry)}</span>
-                              <span>Deal Type: {event.dealType || 'Other'}</span>
                             </div>
                           </article>
                         ))}
@@ -2669,10 +2702,12 @@ function App() {
                     rowLabel="Sustainability Topic"
                     rowAccessor={(event) => String(event?.theme || '-').trim() || '-'}
                     columnAccessor={(event) => String(event?.region || 'Other').trim() || 'Other'}
+                    onCellClick={setSelectedHeatmapCell}
                   />
                   <InvestmentDealHeatmapChart
                     title="Target × Deal Type Heatmap"
                     timelineYears={investmentInsights.timeline?.years || []}
+                    onCellClick={setSelectedHeatmapCell}
                   />
                 </div>
 
@@ -2690,6 +2725,58 @@ function App() {
                       {(investmentInsights.narrative?.focusCompanyPithyInsights || []).slice(0, 3).map((line, index) => (
                         <li key={`fc-insight-${index}`}>{line}</li>
                       ))}
+
+                    {selectedHeatmapCell && (
+                      <div className="modal-backdrop" onClick={() => setSelectedHeatmapCell(null)}>
+                        <div className="modal-card commitment-modal heatmap-drilldown-modal" onClick={(event) => event.stopPropagation()}>
+                          <div className="modal-header">
+                            <h3>{selectedHeatmapCell.title || 'Heatmap Drilldown'}</h3>
+                            <button type="button" className="btn-ghost" onClick={() => setSelectedHeatmapCell(null)}>Close</button>
+                          </div>
+
+                          <section className="modal-pane">
+                            <h4>{selectedHeatmapCell.rowLabel || 'Row'}: {selectedHeatmapCell.rowValue || '-'} • {selectedHeatmapCell.columnValue || '-'}</h4>
+                            <div className="heatmap-drilldown-table-wrap">
+                              <table className="heatmap-drilldown-table">
+                                <thead>
+                                  <tr>
+                                    <th>Target Name</th>
+                                    <th>Quick Overview</th>
+                                    <th>Other Info</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {(selectedHeatmapCell.events || []).map((event, index) => {
+                                    const quickOverview = String(
+                                      event?.headline
+                                      || (Array.isArray(event?.overviewPoints) ? event.overviewPoints[0] : '')
+                                      || 'No summary available.',
+                                    )
+                                    return (
+                                      <tr key={`${event?.title || 'event'}-${event?.date || 'na'}-${index}`}>
+                                        <td>{event?.title || 'Unknown target'}</td>
+                                        <td>{quickOverview}</td>
+                                        <td>
+                                          <div className="timeline-event-meta">
+                                            <span>Source: {event?.source || 'Investment Deal'}</span>
+                                            <span>Date: {event?.date || 'NA'}</span>
+                                            <span>Theme: {event?.theme || 'Unspecified theme'}</span>
+                                            <span>Region: {event?.region || 'Other'}</span>
+                                            <span>Target Industry: {formatIndustryLabel(event?.targetIndustry)}</span>
+                                            <span>Deal Type: {event?.dealType || 'Other'}</span>
+                                            <span>Transaction Value: {formatTransactionValue(event?.transactionValue)}</span>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    )
+                                  })}
+                                </tbody>
+                              </table>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    )}
                     </ul>
                   </section>
 

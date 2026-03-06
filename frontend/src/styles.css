@@ -1540,16 +1540,18 @@ button {
 .investment-heatmap-table th,
 .investment-heatmap-table td {
   border: 1px solid rgba(104, 70, 218, 0.16);
-  padding: 6px;
+  padding: 0;
   text-align: center;
   vertical-align: middle;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .investment-heatmap-table th {
   background: rgba(185, 11, 22, 0.1);
   color: #5f131c;
   font-weight: 700;
+  padding: 10px 8px;
+  font-size: 13px;
   word-break: break-word;
 }
 
@@ -1557,17 +1559,31 @@ button {
 .investment-heatmap-table th:first-child {
   text-align: left;
   width: 34%;
+  padding: 10px 9px;
+  font-size: 13px;
+  font-weight: 600;
   word-break: break-word;
 }
 
 .investment-heatmap-cell {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
-  min-height: 22px;
-  border-radius: 8px;
+  width: 100%;
+  min-height: 42px;
+  border-radius: 0;
+  font-size: 14px;
   font-weight: 700;
+}
+
+.investment-heatmap-cell-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.investment-heatmap-cell-btn:hover {
+  filter: brightness(0.96);
 }
 
 .investment-timeline-wrap {
@@ -1680,6 +1696,26 @@ button {
   background: rgba(30, 157, 85, 0.14);
 }
 
+.timeline-dealtype-pill {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(132, 151, 176, 0.35);
+  background: rgba(207, 218, 225, 0.6);
+  color: rgb(68, 94, 114);
+  font-size: 11px;
+  font-weight: 700;
+  max-width: 68%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .timeline-event-card h5 {
   margin: 0;
   font-size: 14px;
@@ -1710,6 +1746,51 @@ button {
   color: #3f4568;
   font-size: 11px;
   font-weight: 700;
+}
+
+.heatmap-drilldown-modal {
+  max-width: min(1220px, 96vw);
+}
+
+.heatmap-drilldown-table-wrap {
+  width: 100%;
+  overflow: auto;
+}
+
+.heatmap-drilldown-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.heatmap-drilldown-table th,
+.heatmap-drilldown-table td {
+  border: 1px solid rgba(104, 70, 218, 0.16);
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 12px;
+}
+
+.heatmap-drilldown-table th {
+  background: rgba(185, 11, 22, 0.08);
+  color: #5f131c;
+  font-weight: 700;
+}
+
+.heatmap-drilldown-table th:nth-child(1),
+.heatmap-drilldown-table td:nth-child(1) {
+  width: 24%;
+}
+
+.heatmap-drilldown-table th:nth-child(2),
+.heatmap-drilldown-table td:nth-child(2) {
+  width: 36%;
+}
+
+.heatmap-drilldown-table th:nth-child(3),
+.heatmap-drilldown-table td:nth-child(3) {
+  width: 40%;
 }
 
 .scorecard-page {
