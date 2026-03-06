@@ -2208,15 +2208,13 @@ button {
 }
 
 .status-marker-label.company {
-  top: 0;
+  top: -2px;
   font-size: 18px;
   font-weight: 800;
-  -webkit-text-stroke: 0.6px #111111;
-  text-shadow:
-    -1px -1px 0 #111111,
-    1px -1px 0 #111111,
-    -1px 1px 0 #111111,
-    1px 1px 0 #111111;
+  padding: 2px 10px;
+  border-radius: 8px;
+  line-height: 1.1;
+  border: 1px solid rgba(17, 17, 17, 0.25);
 }
 
 .status-marker-label.peer {
