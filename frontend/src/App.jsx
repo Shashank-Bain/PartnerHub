@@ -411,7 +411,29 @@ function ThemeSpiderChart({ data, companyName }) {
   )
 }
 
-const STACKED_COLORS = ['#6846da', '#813aa3', '#a02c64', '#b90b16', '#6f7797']
+const INVESTMENT_CHART_COLORS = [
+  'rgb(0, 0, 0)',
+  'rgb(166, 166, 166)',
+  'rgb(132, 151, 176)',
+  'rgb(177, 133, 164)',
+  'rgb(224, 196, 76)',
+  'rgb(136, 167, 151)',
+  'rgb(102, 102, 102)',
+  'rgb(68, 94, 114)',
+  'rgb(154, 64, 110)',
+  'rgb(191, 162, 64)',
+  'rgb(79, 112, 96)',
+]
+
+const INVESTMENT_CHART_COLORS_EXTENDED = [
+  ...INVESTMENT_CHART_COLORS,
+  'rgb(218, 0, 0)',
+  'rgb(217, 217, 217)',
+  'rgb(207, 218, 225)',
+  'rgb(226, 209, 219)',
+  'rgb(238, 229, 199)',
+  'rgb(217, 224, 218)',
+]
 
 function buildHeatmapData(events, rowAccessor, columnAccessor, options = {}) {
   const matrix = {}
@@ -479,8 +501,8 @@ function InvestmentHeatmapChart({ title, timelineYears, rowLabel, rowAccessor, c
   const cellStyle = (value) => {
     const intensity = value > 0 ? value / maxCellValue : 0
     return {
-      background: `rgba(185, 11, 22, ${0.12 + intensity * 0.68})`,
-      color: intensity > 0.52 ? '#ffffff' : '#6a111b',
+      background: `rgba(154, 64, 110, ${0.12 + intensity * 0.68})`,
+      color: intensity > 0.52 ? 'rgb(217, 217, 217)' : 'rgb(0, 0, 0)',
     }
   }
 
@@ -540,24 +562,24 @@ function InvestmentStackedChart({ title, breakdown }) {
       <div className="investment-chart-wrap">
         <ResponsiveContainer width="100%" height={360}>
           <BarChart data={rows} margin={{ top: 8, right: 14, left: 4, bottom: 48 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
             <XAxis
               dataKey="company"
               type="category"
               interval={0}
-              tick={{ fontSize: 12, fill: '#515a7a' }}
-              stroke="rgba(95, 104, 144, 0.35)"
+              tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
+              stroke="rgba(132, 151, 176, 0.5)"
             />
             <YAxis
               type="number"
-              tick={{ fontSize: 12, fill: '#2f3554' }}
-              stroke="rgba(95, 104, 144, 0.35)"
+              tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
+              stroke="rgba(132, 151, 176, 0.5)"
               allowDecimals={false}
             />
             <Tooltip />
             <Legend />
             {keys.map((key, index) => (
-              <Bar key={key} dataKey={key} stackId="investment" fill={STACKED_COLORS[index % STACKED_COLORS.length]} />
+              <Bar key={key} dataKey={key} stackId="investment" fill={INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length]} />
             ))}
           </BarChart>
         </ResponsiveContainer>
@@ -626,28 +648,28 @@ function SustainabilityDealsTrendChart({ data, selectedCompany }) {
     <div className="investment-trend-chart-wrap">
       <ResponsiveContainer width="100%" height={210}>
         <ComposedChart data={data} margin={{ top: 10, right: 12, left: 2, bottom: 8 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
           <XAxis
             dataKey="year"
-            tick={{ fontSize: 12, fill: '#515a7a' }}
-            stroke="rgba(95, 104, 144, 0.35)"
+            tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
+            stroke="rgba(132, 151, 176, 0.5)"
           />
           <YAxis
             domain={[0, 100]}
             tickFormatter={(value) => `${value}%`}
-            tick={{ fontSize: 12, fill: '#2f3554' }}
-            stroke="rgba(95, 104, 144, 0.35)"
+            tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
+            stroke="rgba(132, 151, 176, 0.5)"
           />
-          <Tooltip content={<SustainabilityDealsTrendTooltip />} cursor={{ fill: 'rgba(104, 70, 218, 0.08)' }} />
+          <Tooltip content={<SustainabilityDealsTrendTooltip />} cursor={{ fill: 'rgba(207, 218, 225, 0.28)' }} />
           <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Bar dataKey="sustainabilityPct" name={selectedCompany || 'Selected company'} fill="rgba(104, 70, 218, 0.72)" radius={[6, 6, 0, 0]} />
+          <Bar dataKey="sustainabilityPct" name={selectedCompany || 'Selected company'} fill="rgb(68, 94, 114)" radius={[6, 6, 0, 0]} />
           <Line
             type="monotone"
             dataKey="peerAvgPct"
             name="Peer average"
-            stroke="rgba(185, 11, 22, 0.85)"
+            stroke="rgb(154, 64, 110)"
             strokeWidth={2}
-            dot={{ r: 3, fill: 'rgba(185, 11, 22, 0.85)' }}
+            dot={{ r: 3, fill: 'rgb(154, 64, 110)' }}
           />
         </ComposedChart>
       </ResponsiveContainer>
@@ -669,11 +691,11 @@ function RegionMixChart({ regionShares }) {
     <div className="investment-trend-chart-wrap">
       <ResponsiveContainer width="100%" height={220}>
         <BarChart data={chartData} margin={{ top: 8, right: 12, left: 4, bottom: 8 }} layout="vertical">
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
-          <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 12, fill: '#2f3554' }} stroke="rgba(95, 104, 144, 0.35)" />
-          <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 12, fill: '#515a7a' }} stroke="rgba(95, 104, 144, 0.35)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
+          <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
           <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Share']} />
-          <Bar dataKey="sharePct" name="Region share" fill="rgba(104, 70, 218, 0.72)" radius={[0, 6, 6, 0]} />
+          <Bar dataKey="sharePct" name="Region share" fill="rgb(136, 167, 151)" radius={[0, 6, 6, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -724,21 +746,21 @@ function MixDistributionChart({ title, keys, rows }) {
       <div className="investment-chart-wrap investment-mix-chart-wrap">
         <ResponsiveContainer width="100%" height={Math.max(240, chartData.length * 44)}>
           <BarChart data={chartData} margin={{ top: 20, right: 12, left: 4, bottom: 54 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
             <XAxis
               dataKey="company"
               type="category"
               interval={0}
-              tick={{ fontSize: 10, fill: '#515a7a' }}
-              stroke="rgba(95, 104, 144, 0.35)"
+              tick={{ fontSize: 10, fill: 'rgb(68, 94, 114)' }}
+              stroke="rgba(132, 151, 176, 0.5)"
               tickMargin={10}
             />
             <YAxis
               type="number"
               domain={[0, 100]}
               tickFormatter={(value) => `${value}%`}
-              tick={{ fontSize: 12, fill: '#2f3554' }}
-              stroke="rgba(95, 104, 144, 0.35)"
+              tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }}
+              stroke="rgba(132, 151, 176, 0.5)"
             />
             <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Mix share']} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
@@ -748,7 +770,7 @@ function MixDistributionChart({ title, keys, rows }) {
                 dataKey={key}
                 stackId="mix"
                 name={key}
-                fill={STACKED_COLORS[index % STACKED_COLORS.length]}
+                fill={INVESTMENT_CHART_COLORS_EXTENDED[index % INVESTMENT_CHART_COLORS_EXTENDED.length]}
               >
                 {index === safeKeys.length - 1 && (
                   <LabelList dataKey="totalDeals" position="top" formatter={(value) => `${Number(value || 0)}`} />
