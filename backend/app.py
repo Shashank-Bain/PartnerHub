@@ -1051,154 +1051,6 @@ def generate_investment_ai_summary(selected_company, combined_events, topic_coun
         return fallback
 
 
-def generate_pithy_focus_company_insights(selected_company, insights):
-    raw_insights = [str(item or "").strip() for item in (insights or []) if str(item or "").strip()]
-    if not raw_insights:
-        return {
-            "insights": [],
-            "source": "fallback",
-            "reason": "no_input_insights",
-            "model": None,
-            "hasApiKey": bool(os.getenv("OPENAI_API_KEY", "").strip()),
-        }
-
-    fallback_points = [truncate_text(point, 120) for point in raw_insights[:3]]
-
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
-    if not api_key:
-        return {
-            "insights": fallback_points,
-            "source": "fallback",
-            "reason": "missing_openai_api_key",
-            "model": model_name,
-            "hasApiKey": False,
-        }
-
-    try:
-        from openai import OpenAI
-
-        client = OpenAI(api_key=api_key)
-        prompt_payload = {
-            "selectedCompany": selected_company,
-            "focusCompanyInsights": raw_insights[:3],
-            "required": {
-                "pithyBullets": "array of exactly 3 bullets, each <= 12 words, specific and actionable"
-            },
-        }
-
-        def _extract_bullets(text):
-            lines = [str(line or "").strip() for line in str(text or "").splitlines()]
-            cleaned = []
-            for line in lines:
-                if not line:
-                    continue
-                normalized = line
-                if normalized[:1] in {"-", "•", "*"}:
-                    normalized = normalized[1:].strip()
-                if ". " in normalized[:4] and normalized[:1].isdigit():
-                    normalized = normalized.split(". ", 1)[1].strip()
-                if normalized:
-                    cleaned.append(truncate_text(normalized, 120))
-            return cleaned[:3]
-
-        try:
-            response = client.chat.completions.create(
-                model=model_name,
-                temperature=0.2,
-                response_format={"type": "json_object"},
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are an expert ESG advisor. Rewrite insights into pithy executive bullets with no fluff.",
-                    },
-                    {
-                        "role": "user",
-                        "content": json.dumps(prompt_payload, ensure_ascii=False),
-                    },
-                ],
-            )
-
-            content = response.choices[0].message.content or "{}"
-            parsed = json.loads(content)
-            bullets = [
-                truncate_text(str(point or "").strip(), 120)
-                for point in (parsed.get("pithyBullets") or [])
-                if str(point or "").strip()
-            ]
-
-            if len(bullets) >= 3:
-                return {
-                    "insights": bullets[:3],
-                    "source": "ai",
-                    "reason": "openai_success",
-                    "model": model_name,
-                    "hasApiKey": True,
-                }
-        except Exception:
-            pass
-
-        try:
-            response = client.chat.completions.create(
-                model=model_name,
-                temperature=0.2,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are an expert ESG advisor. Return exactly 3 short bullets, one per line.",
-                    },
-                    {
-                        "role": "user",
-                        "content": (
-                            f"Company: {selected_company}\n"
-                            f"Insights:\n- {raw_insights[0]}\n- {raw_insights[1] if len(raw_insights) > 1 else ''}\n- {raw_insights[2] if len(raw_insights) > 2 else ''}\n"
-                            "Rewrite as 3 pithy executive bullets, max 12 words each."
-                        ),
-                    },
-                ],
-            )
-
-            plain_content = response.choices[0].message.content or ""
-            plain_bullets = _extract_bullets(plain_content)
-            if len(plain_bullets) >= 3:
-                return {
-                    "insights": plain_bullets[:3],
-                    "source": "ai",
-                    "reason": "openai_success_plaintext",
-                    "model": model_name,
-                    "hasApiKey": True,
-                }
-        except Exception as plain_error:
-            return {
-                "insights": fallback_points,
-                "source": "fallback",
-                "reason": f"openai_error:{type(plain_error).__name__}",
-                "model": model_name,
-                "hasApiKey": True,
-            }
-
-        return {
-            "insights": fallback_points,
-            "source": "fallback",
-            "reason": "invalid_ai_payload",
-            "model": model_name,
-            "hasApiKey": True,
-        }
-    except Exception as error:
-        return {
-            "insights": fallback_points,
-            "source": "fallback",
-            "reason": f"openai_error:{type(error).__name__}",
-            "model": model_name,
-            "hasApiKey": True,
-        }
-
-
-def generate_pithy_peer_insights(selected_company, peer_insights):
-    peer_context_name = f"{selected_company} peer set"
-    return generate_pithy_focus_company_insights(peer_context_name, peer_insights)
-
-
 def build_peer_focus_bullets(selected_company, selected_topic_totals, peer_topic_totals, peer_count):
     safe_peer_count = max(1, int(peer_count or 1))
 
@@ -1482,10 +1334,6 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     peer_summarized_insights = (
         (selected_rationale or {}).get("Peers Insights Summarized", []) if isinstance(selected_rationale, dict) else []
     )
-    pithy_focus_company_result = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
-    pithy_focus_company_insights = pithy_focus_company_result.get("insights", [])
-    pithy_peer_result = generate_pithy_peer_insights(selected_company, peer_insights)
-    pithy_peer_insights = pithy_peer_result.get("insights", [])
 
     all_regions_selected = aggregate_region_counts(selected_deals)
     total_region_events_selected = sum(all_regions_selected.values())
@@ -2047,22 +1895,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         "narrative": {
             "focusCompanyInsights": focus_company_insights,
             "focusCompanySummarizedInsights": focus_company_summarized_insights,
-            "focusCompanyPithyInsights": pithy_focus_company_insights,
-            "focusCompanyPithyMeta": {
-                "source": pithy_focus_company_result.get("source", "fallback"),
-                "reason": pithy_focus_company_result.get("reason", "unknown"),
-                "model": pithy_focus_company_result.get("model"),
-                "hasApiKey": bool(pithy_focus_company_result.get("hasApiKey", False)),
-            },
             "peerInsights": peer_insights,
             "peerSummarizedInsights": peer_summarized_insights,
-            "peerPithyInsights": pithy_peer_insights,
-            "peerPithyMeta": {
-                "source": pithy_peer_result.get("source", "fallback"),
-                "reason": pithy_peer_result.get("reason", "unknown"),
-                "model": pithy_peer_result.get("model"),
-                "hasApiKey": bool(pithy_peer_result.get("hasApiKey", False)),
-            },
         },
     }
 
