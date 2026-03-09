@@ -1190,6 +1190,10 @@ function App() {
     () => allKpiRows.filter((row) => String(row?.source || '').toLowerCase() === 'reported'),
     [allKpiRows],
   )
+  const benchmarkableKpiRows = useMemo(
+    () => allKpiRows.filter((row) => Number(row?.peerCoverage || 0) > 0),
+    [allKpiRows],
+  )
   const benchmarkableReportedRows = useMemo(
     () => reportedKpiRows.filter((row) => Number(row?.peerCoverage || 0) > 0),
     [reportedKpiRows],
@@ -1201,7 +1205,7 @@ function App() {
       lagging: [],
     }
 
-    benchmarkableReportedRows.forEach((row) => {
+    benchmarkableKpiRows.forEach((row) => {
       const status = getKpiMomentumStatus(row)
       if (status === 'Leading') {
         output.leading.push(row)
@@ -1226,7 +1230,7 @@ function App() {
       atPar: sortRows(output.atPar),
       lagging: sortRows(output.lagging),
     }
-  }, [benchmarkableReportedRows])
+  }, [benchmarkableKpiRows])
   const topLeadingChartRows = useMemo(
     () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 4),
     [kpiStatusSections],
@@ -1254,7 +1258,7 @@ function App() {
       governance: { numbersIntensity: [], percentages: [], booleans: [] },
     }
 
-    benchmarkableReportedRows
+    benchmarkableKpiRows
       .filter((row) => row.typeGroup !== 'boolean')
       .forEach((row) => {
         const sectionKey = resolveEsgSectionForKpi(row)
@@ -1284,7 +1288,7 @@ function App() {
       { key: 'social', title: 'Social', ...base.social },
       { key: 'governance', title: 'Governance', ...base.governance },
     ]
-  }, [benchmarkableReportedRows, reportedKpiRows])
+  }, [benchmarkableKpiRows, reportedKpiRows])
   const investmentTrendData = useMemo(() => {
     const trendRows = investmentInsights?.sustainabilityTrend || []
     if (trendRows.length) {
