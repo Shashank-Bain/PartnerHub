@@ -996,6 +996,24 @@ function parseKpiChartNumber(value) {
   return Number.isFinite(parsed) ? parsed : 0
 }
 
+function formatKpiAxisTick(value) {
+  const numericValue = Number(value)
+  if (!Number.isFinite(numericValue)) {
+    return '0'
+  }
+
+  const absoluteValue = Math.abs(numericValue)
+  if (absoluteValue >= 1000) {
+    return numericValue.toLocaleString(undefined, { maximumFractionDigits: 1 })
+  }
+
+  if (absoluteValue >= 1) {
+    return numericValue.toLocaleString(undefined, { maximumFractionDigits: 2 })
+  }
+
+  return numericValue.toLocaleString(undefined, { maximumFractionDigits: 6 })
+}
+
 function KpiModalSignalPanel({ rows, emptyMessage }) {
   if (!rows?.length) {
     return <p className="commitment-section-message">{emptyMessage}</p>
@@ -1066,18 +1084,12 @@ function KpiSingleBenchmarkChart({ row, selectedCompany, peerCompanies }) {
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={chartRows} margin={{ top: 10, right: 10, left: 0, bottom: 62 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
-          <XAxis dataKey="company" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-15} textAnchor="end" interval={0} height={58} />
-          <YAxis domain={[0, yAxisMax]} tick={{ fontSize: 11, fill: '#3f4769' }} width={64} />
+          <XAxis dataKey="company" tick={{ fontSize: 11, fill: '#3f4769' }} angle={0} textAnchor="middle" interval={0} height={58} />
+          <YAxis domain={[0, yAxisMax]} tick={{ fontSize: 11, fill: '#3f4769' }} tickFormatter={formatKpiAxisTick} width={64} />
           <Tooltip formatter={(value) => formatKpiDisplayValue(value, row?.typeGroup)} />
-          <Legend
-            payload={[
-              { value: 'Client', type: 'square', color: 'var(--bain-red, #CC0000)' },
-              { value: 'Peers', type: 'square', color: 'rgba(104, 70, 218, 0.5)' },
-            ]}
-          />
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>
             {chartRows.map((item) => (
-              <Cell key={`${row.kpi}-${item.company}`} fill={item.isClient ? 'var(--bain-red, #CC0000)' : 'rgba(104, 70, 218, 0.5)'} />
+              <Cell key={`${row.kpi}-${item.company}`} fill={item.isClient ? 'var(--bain-red, #CC0000)' : 'rgba(120, 120, 120, 0.8)'} />
             ))}
           </Bar>
         </BarChart>
@@ -2832,7 +2844,7 @@ function App() {
                       <thead>
                         <tr>
                           <th>KPI</th>
-                          <th>Client</th>
+                          <th>{selectedCompany}</th>
                           {kpiPeerColumns.map((peerCompany) => (
                             <th key={`tf-col-global-${peerCompany}`}>{peerCompany}</th>
                           ))}
