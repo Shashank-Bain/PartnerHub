@@ -2,185 +2,351 @@
   {
     "Focus Company": "Anglo American",
     "FC Insights": [
-      "Materials dominate Anglo American's portfolio, representing about 61% of deals, with a strong emphasis on building Capabilities & Assets, signaling a focus on strengthening core operational foundations.",
-      "Within Materials, Growth initiatives also play a significant role, indicating a balanced approach between expanding capacity and enhancing existing assets.",
-      "Secondary industries like Industrials and Energy, each around 17% and 17% respectively, show a more diversified strategic intent, blending Growth and ESG & External Alignment, reflecting a broader commitment to sustainability and market expansion beyond core materials."
+      "Anglo American's portfolio is heavily concentrated in Materials, representing 61% of deals, with a strong focus on Strategic Positioning & Market Advantage (28% of total deals).",
+      "Technology & Capability Enablement accounts for 17% of deals, primarily in Materials and Industrials, indicating a drive to enhance operational capabilities.",
+      "Sustainability, Risk & Regulatory Alignment is pursued across diverse industries (17%), including Energy and Financials, reflecting a broad commitment to ESG and compliance.",
+      "Commercial Growth & Revenue Expansion is targeted in 17% of deals, notably in Industrials and Energy, showing efforts to expand market presence beyond core Materials."
     ],
     "Peers Insights": [
-      "Peers overwhelmingly concentrate on Materials, accounting for roughly 75% of deals, with a dominant strategic focus on Capabilities & Assets, underscoring a collective priority on operational excellence and asset enhancement.",
-      "Growth is a notable secondary focus within Materials, but less pronounced compared to Capabilities & Assets, suggesting a more conservative expansion approach relative to Anglo American.",
-      "Industrials and Energy, while smaller in share, lean heavily toward Capabilities & Assets and Growth respectively, highlighting peers’ preference for strengthening existing operations and selective growth in adjacent sectors."
+      "Peers show an overwhelming Materials focus at 82% of deals, with Portfolio Architecture & Offering Strategy dominating 49%, highlighting a strategic emphasis on refining product and service portfolios.",
+      "Technology & Capability Enablement represents 15% of deals, mostly in Industrials and Materials, underscoring capability development as a key theme.",
+      "Sustainability, Risk & Regulatory Alignment is less prominent at 7%, but still present mainly within Materials, indicating moderate ESG integration.",
+      "Commercial Growth & Revenue Expansion accounts for 13%, spread across Materials and Industrials, reflecting growth ambitions aligned with core sectors."
+    ],
+    "FC Insights Summarized": [
+      "61% of Anglo American deals target Materials, with 28% focused on Strategic Positioning & Market Advantage.",
+      "17% of deals emphasize Technology & Capability Enablement, mainly in Materials and Industrials.",
+      "Sustainability efforts span 17% of deals across multiple industries."
+    ],
+    "Peers Insights Summarized": [
+      "82% of peer deals concentrate on Materials, with 49% in Portfolio Architecture & Offering Strategy.",
+      "Technology & Capability Enablement accounts for 15% of peer deals, mainly in Industrials and Materials.",
+      "Sustainability initiatives represent 7% of deals among peers."
     ]
   },
   {
     "Focus Company": "BHP Materials",
     "FC Insights": [
-      "Materials dominate BHP Materials' portfolio, representing about 67% of deals, with a strong emphasis on Capabilities & Assets, reflecting a focus on consolidating and enhancing core operational strengths.",
-      "Within Materials, Growth initiatives are minimal, indicating a conservative approach to expansion compared to capability enhancement.",
-      "Secondary industries like Industrials and Energy, together about 20%, also lean heavily on Capabilities & Assets, underscoring a consistent strategy of operational strengthening across sectors rather than diversification into new strategic intents."
+      "BHP Materials' deals are heavily concentrated in the Materials industry, representing 73% of total deals, indicating a strong focus on core sector investments.",
+      "Technology & Capability Enablement is the dominant strategic intent, accounting for 40% of deals, reflecting emphasis on innovation and operational improvements.",
+      "Portfolio Architecture & Offering Strategy represents 40% of deals, showing a balanced approach to reshaping and optimizing the portfolio alongside technology investments.",
+      "Commercial Growth & Revenue Expansion is less prominent at 7%, suggesting selective growth initiatives within the materials sector."
     ],
     "Peers Insights": [
-      "Peers show a similar Materials dominance at roughly 65%, but with a more diversified strategic intent mix including significant Growth and ESG & External Alignment activities, signaling a balanced approach between expansion and sustainability.",
-      "Industrials and Energy sectors among peers exhibit a broader strategic spread, with Growth and ESG & External Alignment more prominent, contrasting with the focus on Capabilities & Assets seen in Materials and highlighting peers’ pursuit of innovation and external value drivers.",
-      "The presence of ESG & External Alignment across multiple industries in peers’ portfolios suggests a strategic priority on sustainability and stakeholder engagement that is less evident in BHP Materials’ more capability-centric approach."
+      "Peers show 67% deal concentration in Materials, slightly less than BHP, with broader industry diversification including Energy (13%) and Industrials (13%).",
+      "Strategic Positioning & Market Advantage is a key focus, comprising 22% of deals, highlighting peers' emphasis on competitive positioning.",
+      "Portfolio Architecture & Offering Strategy accounts for 31% of deals, indicating strong portfolio management similar to BHP but with more strategic diversity.",
+      "Sustainability, Risk & Regulatory Alignment is notable at 13%, reflecting peers' growing attention to ESG and regulatory factors."
+    ],
+    "FC Insights Summarized": [
+      "73% of BHP deals target Materials, underscoring sector focus.",
+      "40% of deals emphasize Technology & Capability Enablement.",
+      "40% focus on Portfolio Architecture & Offering Strategy."
+    ],
+    "Peers Insights Summarized": [
+      "67% of peer deals are in Materials; Energy and Industrials add diversity.",
+      "31% of deals target Portfolio Architecture & Offering Strategy.",
+      "22% focus on Strategic Positioning & Market Advantage."
     ]
   },
   {
     "Focus Company": "RIO Tinto",
     "FC Insights": [
-      "RIO Tinto's portfolio is heavily concentrated in Materials, representing 50% of its deals, where the strategic focus leans predominantly on Capabilities & Assets, reflecting a drive to strengthen operational foundations.",
-      "Within Materials, Growth initiatives are also notable, indicating a balanced approach between expanding capacity and enhancing existing assets.",
-      "Industrials, accounting for 33%, diverge by focusing exclusively on Capabilities & Assets, emphasizing operational enhancement over expansion or other intents.",
-      "Technology, though smaller at 17%, aligns with Industrials in prioritizing Capabilities & Assets, suggesting a targeted effort to build technological competencies rather than pursue growth."
+      "RIO Tinto's deal portfolio is heavily concentrated in the Materials industry, representing 50% of its deals, underscoring a core focus on its primary sector.",
+      "Technology & Capability Enablement is the dominant strategic intent, accounting for 50% of deals, reflecting a strong emphasis on innovation and operational improvement.",
+      "Commercial Growth & Revenue Expansion and Portfolio Architecture & Offering Strategy each represent 16.7% of deals, indicating balanced efforts in market growth and portfolio refinement.",
+      "Industrials and Technology sectors combined constitute 33.3% of deals, showing diversification into adjacent industries primarily through capability enhancement."
     ],
     "Peers Insights": [
-      "Peers show an even stronger Materials dominance at roughly 65%, where Capabilities & Assets overwhelmingly lead, underscoring a shared emphasis on operational strength across the sector.",
-      "Unlike RIO Tinto, peers integrate Growth more aggressively within Materials, reflecting a dual strategy of expanding and optimizing their core industry footprint.",
-      "Industrials and Energy, together about 20%, display a more diversified strategic mix including Growth and ESG & External Alignment, signaling broader ambitions beyond pure operational improvements.",
-      "The presence of ESG & External Alignment notably in Materials and Energy among peers highlights a growing focus on sustainability and external stakeholder considerations absent in RIO Tinto’s primary buckets."
+      "Peers show a strong Materials industry focus with approximately 70% of deals, indicating sector dominance similar to RIO Tinto but with broader strategic diversity.",
+      "Technology & Capability Enablement accounts for about 15% of peer deals, less dominant than RIO Tinto, while Portfolio Architecture & Offering Strategy is highly prevalent at roughly 40%.",
+      "Strategic Positioning & Market Advantage and Sustainability, Risk & Regulatory Alignment collectively represent over 30% of deals, highlighting peers’ emphasis on competitive positioning and compliance.",
+      "Peers diversify more across industries with Industrials (15%) and Energy (15%) deals, reflecting broader sector engagement and strategic intents like Commercial Growth and Sustainability."
+    ],
+    "FC Insights Summarized": [
+      "50% of RIO Tinto deals target Materials, focusing on core industry strength.",
+      "Half of deals (50%) emphasize Technology & Capability Enablement for innovation.",
+      "Balanced growth with 16.7% in Commercial Expansion and Portfolio Strategy."
+    ],
+    "Peers Insights Summarized": [
+      "70% of peer deals focus on Materials, with broader strategic intents.",
+      "Portfolio Strategy dominates peers at ~40%, with 15% in Technology Enablement.",
+      "Peers diversify with 15% deals in Industrials and Energy sectors."
     ]
   },
   {
     "Focus Company": "Glencore",
     "FC Insights": [
-      "Materials dominate Glencore’s portfolio, representing approximately 72% of deals, with a strong emphasis on Capabilities & Assets and Growth, signaling a dual focus on expanding operational capacity and scaling business lines within this core industry.",
-      "Within Materials, ESG & External Alignment also plays a notable role, reflecting a strategic commitment to sustainability alongside growth and capability enhancement.",
-      "Secondary industries like Industrials and Energy, though smaller at around 17% combined, show a different strategic tilt: Industrials lean towards Capabilities & Assets and Growth, while Energy focuses more on Value & Timing and Growth, indicating a more opportunistic and timing-sensitive approach outside the core Materials sector."
+      "Glencore's portfolio is heavily concentrated in Materials, representing 78% of deals, with a strong focus on Portfolio Architecture & Offering Strategy (33%) and Strategic Positioning & Market Advantage (22%).",
+      "Sustainability, Risk & Regulatory Alignment accounts for 17% of Glencore's deals, all within Materials, indicating a significant commitment to regulatory and sustainability priorities in its core industry.",
+      "Commercial Growth & Revenue Expansion and Operational Excellence & Margin Enhancement together represent 17% of deals, showing balanced efforts between growth and efficiency.",
+      "Industrials and Energy sectors are minor focuses at 11% combined, with Industrials linked mainly to Technology & Capability Enablement and Commercial Growth."
     ],
     "Peers Insights": [
-      "Peers concentrate even more heavily on Materials, accounting for roughly 75% of deals, with a pronounced dominance of Capabilities & Assets, highlighting a collective industry focus on strengthening operational foundations over other strategic intents.",
-      "Growth initiatives in Materials are present but less emphasized compared to Glencore, suggesting peers prioritize operational consolidation and efficiency within their core industry.",
-      "In contrast, Industrials and Energy sectors among peers display a more balanced mix of Capabilities & Assets, Growth, and ESG & External Alignment, indicating a broader strategic diversification and a stronger integration of sustainability considerations outside Materials."
+      "Peers show a more diversified industry focus: Materials constitute about 70% of deals, Industrials 17%, and Energy 9%, with Financials and Technology making up the remainder.",
+      "Portfolio Architecture & Offering Strategy dominates peers' strategic intent at approximately 38%, followed by Technology & Capability Enablement at 21%, highlighting a strong emphasis on capability building and portfolio refinement.",
+      "Sustainability, Risk & Regulatory Alignment accounts for 11% of peer deals, spread across Materials, Energy, Industrials, and Financials, reflecting broader regulatory and sustainability integration.",
+      "Commercial Growth & Revenue Expansion is 13% of deals, indicating peers maintain growth focus but with more balanced strategic intents across industries."
+    ],
+    "FC Insights Summarized": [
+      "78% of Glencore's deals target Materials, focusing 33% on Portfolio Architecture & Offering Strategy.",
+      "17% of deals emphasize Sustainability and Regulatory Alignment within Materials.",
+      "Industrials and Energy combined represent 11%, mainly for Technology Enablement and Growth."
+    ],
+    "Peers Insights Summarized": [
+      "Peers allocate 70% of deals to Materials, with 38% on Portfolio Architecture & Offering Strategy.",
+      "Technology Enablement accounts for 21%, showing peers' focus on capability building.",
+      "Sustainability and Regulatory Alignment represent 11%, spread across multiple industries."
     ]
   },
   {
     "Focus Company": "Teck",
     "FC Insights": [
-      "Teck’s portfolio is heavily concentrated in Materials, representing approximately 83% of its deals, with a strong emphasis on Capabilities & Assets, which dominate over 70% within this sector, signaling a focus on strengthening operational foundations.",
-      "Within Materials, Growth initiatives also play a notable role at around 15%, complemented by ESG & External Alignment efforts near 15%, indicating a balanced approach between expansion and sustainability.",
-      "Industrials, accounting for about 12% of deals, are exclusively targeted for Capabilities & Assets, reflecting a strategic intent to enhance operational capabilities in this secondary sector, distinct from the more diversified bucket mix in Materials."
+      "Teck's portfolio is heavily concentrated in Materials, representing approximately 85% of deals, underscoring a strong industry focus.",
+      "Within Materials, 50% of deals target Portfolio Architecture & Offering Strategy, highlighting a priority on refining and expanding core offerings.",
+      "Strategic Positioning & Market Advantage accounts for 15% of deals, indicating efforts to strengthen market presence in key sectors.",
+      "Sustainability, Risk & Regulatory Alignment represents 15% of deals, reflecting a commitment to compliance and sustainable practices."
     ],
     "Peers Insights": [
-      "Peers show a more diversified industry spread with Materials comprising roughly 60% of deals, where Capabilities & Assets and Growth buckets share prominence, highlighting a dual focus on operational strength and expansion within the core sector.",
-      "Industrials and Energy sectors, together about 25% of deals, reveal a broader strategic mix including Growth and ESG & External Alignment, contrasting with Teck’s narrower Capabilities & Assets focus in Industrials.",
-      "Notably, peers incorporate a wider range of buckets such as Operating Improvement and Value & Timing, especially in Energy and Materials, suggesting a more varied approach to portfolio management beyond Teck’s concentrated strategic intents."
+      "Peers show more diversified industry targets: Materials comprise about 65% of deals, with Industrials (20%) and Energy (10%) also significant.",
+      "Technology & Capability Enablement is a key strategic intent for peers, representing roughly 25% of deals, compared to Teck's 8%.",
+      "Portfolio Architecture & Offering Strategy accounts for about 30% of peer deals, indicating a shared focus on portfolio optimization.",
+      "Sustainability, Risk & Regulatory Alignment is present in 15% of peer deals, similar to Teck, showing industry-wide regulatory focus."
+    ],
+    "FC Insights Summarized": [
+      "85% of Teck's deals focus on Materials, emphasizing industry specialization.",
+      "Half of Materials deals target Portfolio Architecture & Offering Strategy.",
+      "15% of deals address Sustainability and Strategic Positioning each."
+    ],
+    "Peers Insights Summarized": [
+      "Peers allocate 65% of deals to Materials, with broader industry spread.",
+      "25% of peer deals focus on Technology & Capability Enablement.",
+      "Portfolio Architecture & Offering Strategy covers 30% of peer deals."
     ]
   },
   {
     "Focus Company": "Heidelberg Materials",
     "FC Insights": [
-      "Heidelberg Materials concentrates heavily in Construction & Infrastructure, representing about 67% of its deals, where Growth initiatives dominate, accounting for roughly 70% within this sector, complemented by a notable 15% focus on ESG & External Alignment.",
-      "Within Construction & Infrastructure, the company also pursues Capabilities & Assets and Value & Timing strategies, indicating a balanced approach between expansion and operational readiness.",
-      "Secondary industries like Materials and Industrials, together making up around 20%, emphasize Growth but also include Operating Improvement and some Unspecified intents, reflecting a more diverse strategic approach outside the core sector."
+      "Heidelberg Materials' portfolio is heavily concentrated in Construction & Infrastructure, representing approximately 73% of deals, with a strong emphasis on Commercial Growth & Revenue Expansion (about 57% overall).",
+      "Sustainability, Risk & Regulatory Alignment accounts for 10% of deals, mainly within Construction & Infrastructure, signaling a strategic focus on regulatory compliance and sustainable practices.",
+      "Materials sector deals constitute roughly 13%, predominantly targeting Commercial Growth & Revenue Expansion and Operational Excellence, highlighting efforts to improve margins and product offerings.",
+      "Technology & Capability Enablement and Portfolio Architecture & Offering Strategy are niche but present buckets, each representing around 3-7%, indicating selective investments in innovation and portfolio optimization."
     ],
     "Peers Insights": [
-      "Peers similarly prioritize Construction & Infrastructure, comprising approximately 70% of deals, with Growth overwhelmingly dominant at about 80%, yet they show a stronger tilt towards ESG & External Alignment compared to the focus company.",
-      "In contrast to Heidelberg Materials, peers deploy a broader mix of strategic intents in Industrials, including Capabilities & Assets and ESG, suggesting a more varied approach to industrial sector investments.",
-      "Materials and Financials, Real Estate & Other sectors form smaller portions of peer activity but tend to emphasize Growth and ESG strategies, highlighting a consistent but slightly more diversified strategic pattern across industries."
+      "Peers show an even stronger Construction & Infrastructure focus, about 75% of deals, with Commercial Growth & Revenue Expansion dominating at roughly 62%, underscoring aggressive market growth strategies.",
+      "Sustainability, Risk & Regulatory Alignment is more prominent among peers, comprising about 11% of deals, reflecting industry-wide regulatory and environmental priorities.",
+      "Strategic Positioning & Market Advantage accounts for approximately 12% of peer deals, higher than Heidelberg Materials, indicating peers' emphasis on competitive positioning within core sectors.",
+      "Industrials and Financials, Real Estate & Other sectors appear more frequently in peers' portfolios (around 15%), suggesting broader diversification compared to Heidelberg Materials."
+    ],
+    "FC Insights Summarized": [
+      "73% of Heidelberg Materials' deals target Construction & Infrastructure, with 57% focused on Commercial Growth.",
+      "Sustainability initiatives represent 10% of deals, mainly in Construction & Infrastructure.",
+      "Materials sector accounts for 13%, emphasizing growth and operational excellence."
+    ],
+    "Peers Insights Summarized": [
+      "Peers allocate 75% of deals to Construction & Infrastructure, with 62% for Commercial Growth.",
+      "Sustainability focus is 11%, slightly higher than Heidelberg Materials.",
+      "Peers show 12% deals in Strategic Positioning, highlighting competitive focus."
     ]
   },
   {
     "Focus Company": "CRH Material",
     "FC Insights": [
-      "CRH Material’s portfolio is heavily concentrated in Construction & Infrastructure, representing approximately 75% of its deals, where Growth initiatives dominate, accounting for over 80% within this sector, complemented by a notable ESG & External Alignment focus around 15%.",
-      "Outside its core sector, Industrials and Consumer deals, though smaller in share, are almost exclusively Growth-oriented, indicating a consistent expansion strategy but without the ESG emphasis seen in Construction & Infrastructure.",
-      "The presence of Value & Timing buckets exclusively in Construction & Infrastructure suggests CRH Material selectively times market opportunities within its dominant industry, contrasting with a more straightforward growth approach in secondary sectors."
+      "CRH Material's portfolio is heavily concentrated in Construction & Infrastructure, representing 77% of deals, with 58% focused on Commercial Growth & Revenue Expansion, signaling a strong emphasis on market expansion within its core industry.",
+      "Sustainability, Risk & Regulatory Alignment accounts for 13% of CRH's deals, all within Construction & Infrastructure, highlighting a targeted approach to regulatory compliance and sustainable practices in its primary sector.",
+      "Strategic Positioning & Market Advantage represents 13% of deals, predominantly in Construction & Infrastructure (92%), indicating CRH's focus on strengthening competitive positioning in its main industry.",
+      "Industrials and Consumer sectors are minor focuses, together comprising 13% of deals, mostly aligned with Commercial Growth & Revenue Expansion, suggesting selective diversification beyond core markets."
     ],
     "Peers Insights": [
-      "Peers show an even stronger Construction & Infrastructure dominance at roughly 70%, but with a more diversified strategic mix including significant ESG & External Alignment and Capabilities & Assets buckets, reflecting a broader approach to sustainability and operational enhancement.",
-      "Materials emerge as a meaningful secondary industry for peers, with a distinct strategic pattern emphasizing Growth and Operating Improvement, signaling a focus on both expansion and efficiency gains unlike CRH Material’s more singular Growth focus outside its main sector.",
-      "Industrials for peers display a varied strategic intent including Growth, ESG & External Alignment, and Capabilities & Assets, highlighting a multi-faceted approach to this sector that contrasts with CRH Material’s predominantly Growth-driven Industrials investments."
+      "Peers show an even stronger Construction & Infrastructure concentration at 75%, with 62% of deals aimed at Commercial Growth & Revenue Expansion, underscoring a shared priority on growth in this sector.",
+      "Sustainability, Risk & Regulatory Alignment constitutes 13% of peer deals, primarily in Construction & Infrastructure (70%) and Industrials (15%), reflecting broader regulatory and sustainability initiatives across sectors.",
+      "Peers diversify more into Materials (15%) and Industrials (15%), with Materials deals including 7% focused on Operational Excellence & Margin Enhancement, indicating a strategic emphasis on efficiency improvements.",
+      "Technology & Capability Enablement appears in 5% of peer deals, mainly in Construction & Infrastructure and Industrials, suggesting peers invest in tech capabilities to support growth and innovation."
+    ],
+    "FC Insights Summarized": [
+      "77% of CRH deals target Construction & Infrastructure; 58% focus on Commercial Growth.",
+      "13% of deals address Sustainability & Regulatory Alignment within core industry.",
+      "Strategic Positioning accounts for 13%, mostly in Construction & Infrastructure."
+    ],
+    "Peers Insights Summarized": [
+      "75% of peer deals in Construction & Infrastructure; 62% target Commercial Growth.",
+      "13% focus on Sustainability & Regulatory Alignment across multiple sectors.",
+      "Peers show 15% Materials deals, including 7% on Operational Excellence."
     ]
   },
   {
     "Focus Company": "Holcim",
     "FC Insights": [
-      "Holcim’s portfolio is heavily concentrated in Construction & Infrastructure, representing roughly 60% of its deals, where Growth initiatives clearly dominate, reflecting a strong push for market expansion and innovation.",
-      "Within this dominant industry, ESG & External Alignment also plays a significant role, indicating Holcim’s commitment to sustainability alongside growth, balancing commercial and environmental priorities.",
-      "Industrials form a notable secondary focus at about 30%, where the strategic mix shifts toward Capabilities & Assets and ESG efforts, suggesting a focus on operational enhancement and responsible practices rather than pure growth.",
-      "Other industries like Materials and Financials, Real Estate & Other are smaller but maintain a Growth emphasis, highlighting Holcim’s selective diversification while keeping growth as a core theme."
+      "Holcim's portfolio is heavily concentrated in Construction & Infrastructure, representing 62% of deals, with 63% of these focused on Commercial Growth & Revenue Expansion, highlighting a strong growth orientation in its core industry.",
+      "Industrials account for 26% of Holcim's deals, with 42% targeting Commercial Growth & Revenue Expansion and 29% addressing Sustainability, Risk & Regulatory Alignment, indicating a balanced approach between growth and compliance in this sector.",
+      "Sustainability, Risk & Regulatory Alignment is a key strategic intent across Holcim's portfolio, comprising 21% of total deals, with a notable 38% of these deals in Construction & Infrastructure, reflecting commitment to regulatory and sustainability priorities.",
+      "Holcim shows diversification with 10% of deals in Financials, Real Estate & Other, predominantly focused (80%) on Commercial Growth & Revenue Expansion, suggesting opportunistic growth beyond core sectors."
     ],
     "Peers Insights": [
-      "Peers show an even stronger concentration in Construction & Infrastructure, exceeding 70%, with Growth overwhelmingly dominant, underscoring a shared industry focus on expansion and market capture.",
-      "Unlike Holcim, peers incorporate Value & Timing strategies within Construction & Infrastructure, signaling a more opportunistic or cyclical approach alongside steady growth and ESG considerations.",
-      "Secondary industries such as Industrials and Materials are present but less diversified in strategic intent, primarily emphasizing Growth, which contrasts with Holcim’s broader mix including Operating Improvement and ESG.",
-      "Peers’ ESG & External Alignment efforts in Construction & Infrastructure are present but less pronounced relative to Growth, suggesting a somewhat more traditional growth-driven portfolio compared to Holcim’s balanced approach."
+      "Peers show even greater concentration in Construction & Infrastructure at 75% of deals, with 70% of these deals aimed at Commercial Growth & Revenue Expansion, underscoring a dominant growth focus in this sector.",
+      "Sustainability, Risk & Regulatory Alignment represents 11% of peer deals, mostly within Construction & Infrastructure (60%), indicating a moderate but consistent emphasis on sustainability compared to Holcim.",
+      "Peers have a more limited presence in Industrials (13%) and Materials (7%), with Commercial Growth & Revenue Expansion accounting for over 65% of deals in these industries, reflecting a growth-driven but less diversified portfolio.",
+      "Capital Deployment & Transaction Strategy appears uniquely in peers' portfolio (5% of deals), exclusively in Construction & Infrastructure, suggesting a strategic focus on deal structuring and portfolio optimization not evident in Holcim."
+    ],
+    "FC Insights Summarized": [
+      "62% of Holcim's deals target Construction & Infrastructure, with 63% focused on growth.",
+      "Industrials make up 26% of deals, balancing growth (42%) and sustainability (29%).",
+      "21% of deals emphasize Sustainability & Regulatory Alignment, mainly in Construction.",
+      "10% of deals in Financials focus 80% on growth opportunities."
+    ],
+    "Peers Insights Summarized": [
+      "75% of peer deals are in Construction & Infrastructure, 70% targeting growth.",
+      "Sustainability focus is 11% overall, mostly in Construction sector (60%).",
+      "Peers show unique 5% focus on Capital Deployment in Construction deals."
     ]
   },
   {
     "Focus Company": "Cemex Material",
     "FC Insights": [
-      "Cemex Material’s portfolio is fully concentrated in Construction & Infrastructure, representing 100% of its deals, with a clear strategic emphasis on Growth initiatives, which dominate the entire set of transactions.",
-      "This singular focus on Growth within the dominant industry suggests a strong commitment to expanding market presence and scaling operations rather than diversification or repositioning.",
-      "The absence of other industries or strategic intents highlights a highly focused approach, prioritizing organic and inorganic expansion in core construction markets."
+      "100% of Cemex Material's deals target the Construction & Infrastructure industry, showing a highly concentrated sector focus.",
+      "All deals (100%) are aimed at Commercial Growth & Revenue Expansion, indicating a clear strategic intent to drive top-line growth.",
+      "The absence of diversification into other industries or strategic buckets suggests a focused growth approach within core competencies."
     ],
     "Peers Insights": [
-      "Peers show a dominant Construction & Infrastructure presence at roughly 75%, but unlike Cemex, their strategic intent is more varied, blending Growth with significant ESG & External Alignment and some Value & Timing moves, indicating a balance between expansion and sustainability.",
-      "Secondary industries like Industrials and Materials, which together account for about 15%, lean heavily on Growth but also incorporate Capabilities & Assets and ESG buckets, reflecting a diversification strategy that supports operational enhancement and responsible investing.",
-      "Financials, Real Estate & Other and Consumer sectors, though smaller, consistently pursue Growth, contrasting with the dominant industry’s broader strategic mix and underscoring peers’ multi-industry growth ambitions."
+      "Peers show 82% deal concentration in Construction & Infrastructure, with 18% spread across Industrials, Materials, Consumer, Financials, Real Estate & Other, Energy, and Technology sectors.",
+      "Commercial Growth & Revenue Expansion accounts for approximately 66% of peer deals, reflecting a dominant growth orientation.",
+      "Peers diversify strategic intent with 14% in Sustainability, Risk & Regulatory Alignment and 11% in Strategic Positioning & Market Advantage, indicating broader portfolio strategies beyond growth.",
+      "Capital Deployment & Transaction Strategy and Portfolio Architecture & Offering Strategy represent smaller but notable focuses at 4% and 5%, respectively."
+    ],
+    "FC Insights Summarized": [
+      "100% deals in Construction & Infrastructure.",
+      "100% focus on Commercial Growth & Revenue Expansion.",
+      "Highly concentrated and growth-driven portfolio."
+    ],
+    "Peers Insights Summarized": [
+      "82% deals in Construction & Infrastructure; 18% diversified across other sectors.",
+      "66% focus on Commercial Growth & Revenue Expansion; 14% on Sustainability & Risk.",
+      "Broader strategic intents with 11% in Market Advantage and 4% in Capital Deployment."
     ]
   },
   {
     "Focus Company": "Nestle",
     "FC Insights": [
-      "Nestle’s portfolio is heavily concentrated in the Consumer industry, representing about 70% of its deals, where Growth initiatives clearly dominate, accounting for roughly 60% of total deals. This underscores a strong focus on expanding market presence and product lines within its core sector.",
-      "Within Consumer, Capabilities & Assets and Brand & Positioning also play meaningful roles, indicating Nestle’s balanced approach to strengthening operational foundations and brand equity alongside growth.",
-      "Healthcare, the secondary industry at around 25%, shows a more diversified strategic intent with Growth, Capabilities & Assets, and some Unspecified buckets, suggesting Nestle is building both market expansion and foundational capabilities in this adjacent sector."
+      "Nestle's portfolio is heavily concentrated in the Consumer industry, representing 70.8% of deals, with 58.3% focused on Commercial Growth & Revenue Expansion, highlighting a strong growth orientation in core markets.",
+      "Healthcare deals constitute 25% of Nestle's portfolio, diversified across Commercial Growth (12.5%), Portfolio Architecture (8.3%), and Technology Enablement (8.3%), indicating strategic expansion into health-related offerings.",
+      "Strategic Positioning & Market Advantage accounts for 16.7% of deals within Consumer, showing Nestle's focus on strengthening market presence alongside growth.",
+      "Operational Excellence & Margin Enhancement is less emphasized, representing 8.3% of Consumer deals, suggesting efficiency improvements are a secondary priority."
     ],
     "Peers Insights": [
-      "Peers show a slightly more diversified industry spread, with Consumer deals making up about 65%, predominantly driven by Growth strategies, which make up over half of their deals, reflecting a shared emphasis on market expansion.",
-      "Unlike Nestle, peers deploy a broader mix of Brand & Positioning and Unspecified buckets within Consumer, indicating a more varied approach to brand development and strategic flexibility.",
-      "Secondary industries such as Financials, Real Estate & Other and Industrials appear more frequently among peers, with Growth and Capabilities & Assets strategies, highlighting a wider industry reach and a balanced focus on asset building and expansion beyond Consumer."
+      "Peers show a strong Consumer industry focus at 75.6% of deals, with 56.1% targeting Commercial Growth & Revenue Expansion, mirroring Nestle's growth-driven approach.",
+      "Portfolio Architecture & Offering Strategy is more prominent among peers at 17.1% of deals, compared to Nestle's 8.3%, indicating peers prioritize portfolio reshaping more aggressively.",
+      "Strategic Positioning & Market Advantage represents 14.6% of peer deals, similar to Nestle, but peers also invest notably in Operational Excellence & Margin Enhancement (7.3%) and Technology & Capability Enablement (7.3%).",
+      "Peers diversify slightly more across industries including Industrials (4.9%) and Financials, Real Estate & Other (14.6%), reflecting broader sector engagement."
+    ],
+    "FC Insights Summarized": [
+      "70.8% of Nestle's deals target Consumer, with 58.3% focused on Commercial Growth.",
+      "Healthcare makes up 25% of deals, spread across growth and portfolio strategy.",
+      "16.7% of Consumer deals aim at Strategic Positioning; Operational Excellence is 8.3%."
+    ],
+    "Peers Insights Summarized": [
+      "75.6% of peer deals are Consumer-focused; 56.1% target Commercial Growth.",
+      "Peers emphasize Portfolio Architecture more (17.1%) than Nestle (8.3%).",
+      "Peers diversify with 14.6% deals in Financials and 7.3% in Technology Enablement."
     ]
   },
   {
     "Focus Company": "PepsiCo",
     "FC Insights": [
-      "PepsiCo’s portfolio is heavily concentrated in the Consumer industry, representing 70% of its deals, where Growth-oriented initiatives dominate, accounting for 50% within this sector. This underscores a clear strategic focus on expanding market presence and scaling consumer offerings.",
-      "Within the Consumer industry, Brand & Positioning also plays a notable role, reflecting efforts to enhance brand equity alongside growth. In contrast, secondary industries like Financials, Real Estate & Other and Industrials, though smaller at 20% combined, lean more toward Capabilities & Assets and Growth respectively, indicating targeted capability building and operational expansion outside core consumer markets."
+      "PepsiCo's portfolio is heavily concentrated in the Consumer industry, representing 80% of its deals, highlighting a strong focus on its core market.",
+      "Within Consumer deals, 50% target Commercial Growth & Revenue Expansion, indicating a priority on scaling sales and market reach.",
+      "Portfolio Architecture & Offering Strategy accounts for 20% of deals, showing strategic refinement of product mix.",
+      "Strategic Positioning & Market Advantage and Technology & Capability Enablement are less emphasized, at 10% each, suggesting selective investments in competitive positioning and tech capabilities."
     ],
     "Peers Insights": [
-      "Peers show an even stronger Consumer industry focus at approximately 70%, with Growth overwhelmingly prevailing in nearly 70% of these consumer deals, highlighting a shared emphasis on aggressive market expansion and volume increase.",
-      "Unlike PepsiCo, peers diversify their strategic intent more within secondary industries such as Healthcare and Financials, Real Estate & Other, where Capabilities & Assets and Operating Improvement are more prominent. This suggests peers balance growth with capability enhancement and operational efficiency across a broader industry spectrum."
+      "Peers show even greater Consumer industry focus, with approximately 75% of deals in Consumer, reinforcing sector dominance.",
+      "Commercial Growth & Revenue Expansion dominates peers’ strategic intent at roughly 70%, underscoring aggressive growth ambitions.",
+      "Portfolio Architecture & Offering Strategy and Strategic Positioning & Market Advantage together represent about 15%, reflecting balanced innovation and competitive positioning.",
+      "Peers diversify more into Healthcare (10%) and Financials, Real Estate & Other (10%), indicating broader industry engagement than PepsiCo."
+    ],
+    "FC Insights Summarized": [
+      "80% of PepsiCo deals target Consumer industry, focusing on core markets.",
+      "Half of Consumer deals aim at Commercial Growth & Revenue Expansion.",
+      "20% focus on Portfolio Architecture & Offering Strategy for product refinement."
+    ],
+    "Peers Insights Summarized": [
+      "Peers allocate 75% of deals to Consumer industry, emphasizing sector strength.",
+      "70% of deals focus on Commercial Growth & Revenue Expansion for growth.",
+      "Peers diversify with 10% Healthcare and 10% Financials, Real Estate & Other deals."
     ]
   },
   {
     "Focus Company": "Unilever",
     "FC Insights": [
-      "Unilever’s portfolio is heavily concentrated in the Consumer industry, representing 70% of its deals, where Growth initiatives dominate, accounting for nearly 47% within this sector. This indicates a strong focus on expanding market presence and scaling operations in core consumer markets.",
-      "Within Consumer, Capabilities & Assets and Operating Improvement also play significant roles, reflecting a balanced approach between expansion and operational efficiency. Brand & Positioning, while present, is less emphasized compared to growth-driven deals.",
-      "Secondary industries such as Financials, Real Estate & Other (20%) and Materials (5%) show a more varied strategic mix, with Financials leaning towards Capabilities & Assets and Operating Improvement, suggesting targeted enhancements rather than broad growth ambitions."
+      "Unilever's portfolio is heavily concentrated in the Consumer industry, representing 70% of deals, with a strong focus on Commercial Growth & Revenue Expansion (35%) and Portfolio Architecture & Offering Strategy (25%).",
+      "Strategic Positioning & Market Advantage accounts for 20% of deals, spread across Consumer and Financials, Real Estate & Other sectors, indicating a balanced approach to market positioning.",
+      "Operational Excellence & Margin Enhancement represents 15% of deals, including Consumer and Healthcare targets, highlighting efficiency improvements alongside growth.",
+      "Materials and Healthcare industries are minor but strategically targeted for Portfolio Architecture and Operational Excellence, each representing 5% of deals."
     ],
     "Peers Insights": [
-      "Peers show an even stronger Consumer industry focus at approximately 75%, overwhelmingly driven by Growth deals, which make up over 65% of their consumer-related activity, highlighting a collective emphasis on aggressive market expansion.",
-      "Unlike Unilever, peers deploy Capabilities & Assets more prominently within Consumer and Healthcare sectors, indicating a strategic tilt towards building foundational strengths alongside growth. Brand & Positioning is consistently present but secondary to growth efforts.",
-      "Peers diversify more into Healthcare and Financials, Real Estate & Other with a notable share of Growth and Capabilities & Assets buckets, reflecting a broader strategic intent to balance expansion with capability building across multiple industries."
+      "Peers show an even stronger Consumer industry focus at 75%, with Commercial Growth & Revenue Expansion dominating at 65% of all deals, underscoring aggressive growth strategies.",
+      "Strategic Positioning & Market Advantage accounts for 10% of deals, mainly within Consumer and Industrials sectors, reflecting competitive positioning efforts.",
+      "Healthcare-related deals represent 10%, split between Technology & Capability Enablement and Portfolio Architecture, signaling innovation and offering refinement.",
+      "Financials, Real Estate & Other and Industrials sectors are marginally represented, each around 5%, mostly aligned with growth and strategic positioning."
+    ],
+    "FC Insights Summarized": [
+      "70% of Unilever's deals target Consumer, with 35% focused on Commercial Growth.",
+      "Strategic Positioning & Market Advantage accounts for 20%, spanning Consumer and Financials.",
+      "Operational Excellence & Margin Enhancement covers 15%, including Healthcare targets."
+    ],
+    "Peers Insights Summarized": [
+      "75% of peers' deals focus on Consumer; 65% target Commercial Growth.",
+      "Strategic Positioning & Market Advantage makes up 10%, mainly in Consumer and Industrials.",
+      "Healthcare deals represent 10%, emphasizing innovation and portfolio strategy."
     ]
   },
   {
     "Focus Company": "Kraft Heinz",
     "FC Insights": [
-      "Kraft Heinz’s portfolio is heavily concentrated in the Consumer industry, representing 75% of its deals, with a clear strategic emphasis on Growth initiatives that account for two-thirds of these Consumer deals.",
-      "Within Consumer, the dominant Growth focus suggests a priority on expanding market share or product lines, while a smaller portion remains unspecified, indicating some strategic flexibility or exploratory moves.",
-      "The Financials, Real Estate & Other sector, though only 25%, also leans toward Growth, signaling selective diversification but with a consistent growth-driven approach distinct from the Consumer core."
+      "Kraft Heinz's deal portfolio is heavily concentrated in the Consumer industry, representing 75% of its deals, indicating a strong focus on its core market.",
+      "Within Consumer deals, 67% target Commercial Growth & Revenue Expansion, highlighting a strategic priority on driving top-line growth.",
+      "Portfolio Architecture & Offering Strategy accounts for 25% of deals overall, showing attention to refining product and service mix.",
+      "Deals outside Consumer, such as Financials, Real Estate & Other, comprise 25%, all focused on Commercial Growth & Revenue Expansion, suggesting selective diversification."
     ],
     "Peers Insights": [
-      "Peers show an even stronger Consumer industry focus at approximately 70%, predominantly driven by Growth strategies, which make up the majority of Consumer deals, underscoring a shared priority on expansion within this sector.",
-      "Unlike Kraft Heinz, peers demonstrate a more varied strategic mix within Consumer, including notable Brand & Positioning and Capabilities & Assets initiatives, reflecting a broader approach to strengthening market presence and operational capabilities.",
-      "Secondary industries such as Healthcare and Financials, Real Estate & Other feature more Capabilities & Assets and Operating Improvement efforts, indicating peers’ use of these sectors for capability building and efficiency rather than pure growth."
+      "Peers show a broader industry spread with Consumer deals at 70%, complemented by Healthcare (15%) and others, reflecting diversified sector engagement.",
+      "Commercial Growth & Revenue Expansion dominates peers' strategic intent at approximately 63% of all deals, underscoring growth focus across industries.",
+      "Strategic Positioning & Market Advantage represents about 13% of deals, mainly within Consumer, indicating emphasis on competitive differentiation.",
+      "Portfolio Architecture & Offering Strategy and Technology & Capability Enablement collectively account for roughly 15%, showing balanced investment in innovation and portfolio refinement."
+    ],
+    "FC Insights Summarized": [
+      "75% of Kraft Heinz deals focus on Consumer industry.",
+      "67% of deals target Commercial Growth & Revenue Expansion.",
+      "25% of deals emphasize Portfolio Architecture & Offering Strategy."
+    ],
+    "Peers Insights Summarized": [
+      "70% of peer deals are in Consumer; 15% in Healthcare.",
+      "63% of deals focus on Commercial Growth & Revenue Expansion.",
+      "13% of deals target Strategic Positioning & Market Advantage."
     ]
   },
   {
     "Focus Company": "Danone",
     "FC Insights": [
-      "Danone’s portfolio is heavily concentrated in the Consumer industry, representing approximately 67% of its deals, with a strong strategic emphasis on Growth initiatives that dominate this sector, reflecting a clear focus on expanding market presence and product lines.",
-      "Within Consumer, Brand & Positioning plays a smaller yet notable role, indicating selective efforts to enhance brand equity alongside aggressive growth strategies.",
-      "Secondary industries like Healthcare and Industrials, though smaller at about 17%, show a distinct strategic tilt toward Capabilities & Assets and Growth respectively, suggesting targeted investments to build operational strengths and diversify beyond core consumer growth."
+      "Danone's portfolio is heavily concentrated in the Consumer industry, representing 75% of its deals, with 83% of these focused on Commercial Growth & Revenue Expansion, highlighting a strong growth orientation in its core market.",
+      "Strategic Positioning & Market Advantage accounts for 8% of Danone's Consumer deals, indicating selective moves to strengthen competitive positioning within its primary industry.",
+      "Danone diversifies modestly with 8% of deals in Healthcare and Industrials, primarily targeting Technology & Capability Enablement and Commercial Growth respectively, reflecting targeted capability investments beyond Consumer.",
+      "Financials, Real Estate & Other represent 8% of deals, all aimed at Commercial Growth, suggesting ancillary sector investments to support revenue expansion."
     ],
     "Peers Insights": [
-      "Peers collectively show an even stronger Consumer industry dominance at around 75%, where Growth remains the primary strategic intent but is complemented by a more diverse mix including Capabilities & Assets, Brand & Positioning, and Operating Improvement, signaling a balanced approach to scaling and refining core consumer businesses.",
-      "Healthcare emerges as a meaningful secondary industry with a varied strategic focus including Growth, Capabilities & Assets, and Operating Improvement, highlighting peers’ broader commitment to innovation and operational excellence beyond consumer markets.",
-      "Financials, Real Estate & Other sectors also feature prominently with a focus on Growth and Capabilities & Assets, contrasting with Danone’s more limited exposure and underscoring peers’ wider diversification and strategic complexity."
+      "Peers show an even stronger Consumer industry focus at 74%, with 63% of all deals targeting Commercial Growth & Revenue Expansion, underscoring growth as a dominant strategic intent.",
+      "Strategic Positioning & Market Advantage is more prominent among peers at 14%, indicating a greater emphasis on competitive differentiation within Consumer and Financial sectors.",
+      "Healthcare deals constitute 14% of peers' portfolio with a balanced mix of Commercial Growth, Portfolio Architecture, and Technology Enablement, reflecting diversified strategic approaches in health-related markets.",
+      "Peers also invest 10% in Financials, Real Estate & Other, with a notable presence in Operational Excellence and Strategic Positioning, suggesting a broader operational and strategic focus beyond core Consumer."
+    ],
+    "FC Insights Summarized": [
+      "75% of Danone's deals target Consumer, with 83% focused on growth expansion.",
+      "Selective 8% focus on Strategic Positioning in Consumer to enhance market advantage.",
+      "8% of deals in Healthcare and Industrials target capability and growth."
+    ],
+    "Peers Insights Summarized": [
+      "74% of peer deals focus on Consumer, with 63% targeting growth expansion.",
+      "Peers emphasize Strategic Positioning at 14%, higher than Danone.",
+      "Healthcare and Financial sectors represent 24% of peer deals with diverse strategic intents."
     ]
   }
 ]

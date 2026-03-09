@@ -2805,6 +2805,42 @@ function App() {
               </section>
             )}
 
+            {!isInvestmentInsightsLoading && investmentInsights && (
+              <section className="card scorecard-table-card">
+                <div className="scorecard-table-head">
+                  <h3>Investment Insights</h3>
+                </div>
+                <div className="gradient-line" />
+                <div className="investment-chart-grid investment-chart-grid-two investment-narrative-grid">
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>FC Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(
+                        ((investmentInsights.narrative?.focusCompanySummarizedInsights || []).length
+                          ? investmentInsights.narrative.focusCompanySummarizedInsights
+                          : (investmentInsights.narrative?.focusCompanyInsights || []))
+                      ).slice(0, 3).map((line, index) => (
+                        <li key={`deep-dive-fc-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>Peers Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(
+                        ((investmentInsights.narrative?.peerSummarizedInsights || []).length
+                          ? investmentInsights.narrative.peerSummarizedInsights
+                          : (investmentInsights.narrative?.peerInsights || []))
+                      ).slice(0, 3).map((line, index) => (
+                        <li key={`deep-dive-peer-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+              </section>
+            )}
+
             <section className="card scorecard-table-card">
               <div className="scorecard-table-head">
                 <h3>Investment & Green Capex Timeline</h3>
@@ -2913,7 +2949,7 @@ function App() {
               <h2>ESG KPI Deep Dive</h2>
               <button type="button" className="btn-ghost" onClick={() => setActiveView('home')}>Back to Dashboard</button>
             </div>
-            <p className="body-subtitle">Sustainability KPI positioning to guide partner priorities and strategic client conversations</p>
+            <p className="body-subtitle">Sustainability KPI positioning to enable strategic client conversations</p>
 
             {isKpiMomentumLoading && (
               <section className="card scorecard-chart-card">
@@ -3372,16 +3408,13 @@ function App() {
 
                 <div className="investment-chart-grid investment-chart-grid-two">
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <div className="investment-insight-header">
-                      <h4>{selectedCompany} Insights</h4>
-                      <span
-                        className={`investment-insight-source ${(investmentInsights.narrative?.focusCompanyPithyMeta?.source || 'fallback') === 'ai' ? 'ai' : 'fallback'}`}
-                      >
-                        {(investmentInsights.narrative?.focusCompanyPithyMeta?.source || 'fallback') === 'ai' ? 'AI generated' : 'Fallback'}
-                      </span>
-                    </div>
+                    <h4>FC Insights</h4>
                     <ul className="investment-simple-list">
-                      {(investmentInsights.narrative?.focusCompanyPithyInsights || []).slice(0, 3).map((line, index) => (
+                      {(
+                        ((investmentInsights.narrative?.focusCompanySummarizedInsights || []).length
+                          ? investmentInsights.narrative.focusCompanySummarizedInsights
+                          : (investmentInsights.narrative?.focusCompanyInsights || []))
+                      ).slice(0, 3).map((line, index) => (
                         <li key={`fc-insight-${index}`}>{line}</li>
                       ))}
 
@@ -3389,18 +3422,12 @@ function App() {
                   </section>
 
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <div className="investment-insight-header">
-                      <h4>Peer Insights</h4>
-                      <span
-                        className={`investment-insight-source ${(investmentInsights.narrative?.peerPithyMeta?.source || 'fallback') === 'ai' ? 'ai' : 'fallback'}`}
-                      >
-                        {(investmentInsights.narrative?.peerPithyMeta?.source || 'fallback') === 'ai' ? 'AI generated' : 'Fallback'}
-                      </span>
-                    </div>
+                    <h4>Peers Insights</h4>
                     <ul className="investment-simple-list">
-                      {((investmentInsights.narrative?.peerPithyInsights || []).length
-                        ? investmentInsights.narrative.peerPithyInsights
-                        : (investmentInsights.narrative?.peerInsights || [])
+                      {(
+                        ((investmentInsights.narrative?.peerSummarizedInsights || []).length
+                          ? investmentInsights.narrative.peerSummarizedInsights
+                          : (investmentInsights.narrative?.peerInsights || []))
                       ).slice(0, 3).map((line, index) => (
                         <li key={`peer-insight-${index}`}>{line}</li>
                       ))}

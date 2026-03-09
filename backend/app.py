@@ -1349,25 +1349,23 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
 
     recent_deals = []
     for row in selected_sustainability_deals:
-        announced_date_raw = row.get("All Transactions Announced Date") or row.get("Year")
+        announced_date_raw = row.get("All Transactions Announced Date")
         announced_date = parse_flexible_date(announced_date_raw)
-        announced_year = parse_year(announced_date_raw)
+        announced_year = parse_year(announced_date_raw) or parse_year(row.get("Year"))
 
-        overview_items = row.get("Overview") or row.get("Why_The_Deal_Happened") or []
+        overview_items = row.get("Overview") or row.get("Why_The_Deal_Happened") or row.get("Why_The_Deal Happened") or []
         overview_points = [str(item).strip() for item in overview_items if str(item or "").strip()] if isinstance(overview_items, list) else []
 
-        headline = overview_points[0] if overview_points else ""
+        headline = str(row.get("Quick_Overview") or "").strip()
+        if not headline and overview_points:
+            headline = overview_points[0]
         if not headline:
             headline = str(row.get("Primary Driver Justification") or "").strip()
         if not headline:
             headline = str(row.get("Transaction Comments") or "").strip().split("\n")[0]
 
         raw_date_text = str(announced_date_raw or "").strip()
-        looks_like_year_only = raw_date_text.isdigit() and len(raw_date_text) == 4
-        if looks_like_year_only:
-            date_label = str(announced_year or raw_date_text)
-        else:
-            date_label = announced_date.strftime("%Y-%m-%d") if announced_date else str(announced_year or announced_date_raw or "NA")
+        date_label = announced_date.strftime("%Y-%m-%d") if announced_date else (raw_date_text or "NA")
 
         recent_deals.append(
             {
@@ -1475,6 +1473,12 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
     )
     focus_company_insights = (selected_rationale or {}).get("FC Insights", []) if isinstance(selected_rationale, dict) else []
     peer_insights = (selected_rationale or {}).get("Peers Insights", []) if isinstance(selected_rationale, dict) else []
+    focus_company_summarized_insights = (
+        (selected_rationale or {}).get("FC Insights Summarized", []) if isinstance(selected_rationale, dict) else []
+    )
+    peer_summarized_insights = (
+        (selected_rationale or {}).get("Peers Insights Summarized", []) if isinstance(selected_rationale, dict) else []
+    )
     pithy_focus_company_result = generate_pithy_focus_company_insights(selected_company, focus_company_insights)
     pithy_focus_company_insights = pithy_focus_company_result.get("insights", [])
     pithy_peer_result = generate_pithy_peer_insights(selected_company, peer_insights)
@@ -2039,6 +2043,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         },
         "narrative": {
             "focusCompanyInsights": focus_company_insights,
+            "focusCompanySummarizedInsights": focus_company_summarized_insights,
             "focusCompanyPithyInsights": pithy_focus_company_insights,
             "focusCompanyPithyMeta": {
                 "source": pithy_focus_company_result.get("source", "fallback"),
@@ -2047,6 +2052,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "hasApiKey": bool(pithy_focus_company_result.get("hasApiKey", False)),
             },
             "peerInsights": peer_insights,
+            "peerSummarizedInsights": peer_summarized_insights,
             "peerPithyInsights": pithy_peer_insights,
             "peerPithyMeta": {
                 "source": pithy_peer_result.get("source", "fallback"),
