@@ -1928,51 +1928,47 @@ button {
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.88);
   padding: 10px;
+  padding-top: 38px;
   display: grid;
   gap: 6px;
   position: relative;
 }
 
-.timeline-source-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  min-height: 22px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  border: 1px solid rgba(104, 70, 218, 0.22);
-}
-
-.timeline-source-chip.deal {
-  color: #4f3f95;
-  background: rgba(129, 58, 163, 0.12);
-}
-
-.timeline-source-chip.capex {
-  color: #176e40;
-  background: rgba(30, 157, 85, 0.14);
-}
-
-.timeline-dealtype-pill {
+.timeline-pill-row {
   position: absolute;
   top: 10px;
   right: 10px;
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+  max-width: calc(100% - 20px);
+}
+
+.timeline-card-pill {
+  display: inline-flex;
+  align-items: center;
   min-height: 22px;
   padding: 2px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(132, 151, 176, 0.35);
-  background: rgba(207, 218, 225, 0.6);
-  color: rgb(68, 94, 114);
   font-size: 11px;
   font-weight: 700;
-  max-width: 68%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.timeline-card-pill.dealtype {
+  border: 1px solid rgba(132, 151, 176, 0.35);
+  background: rgba(207, 218, 225, 0.6);
+  color: rgb(68, 94, 114);
+  max-width: 180px;
+}
+
+.timeline-card-pill.theme {
+  border: 1px solid rgba(104, 70, 218, 0.28);
+  background: rgba(129, 58, 163, 0.12);
+  color: #4f3f95;
+  max-width: 220px;
 }
 
 .timeline-event-card h5 {

@@ -1442,6 +1442,8 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
         capex_date_raw = row.get("All Transactions Announced Date")
         capex_date = parse_flexible_date(capex_date_raw)
         capex_year = parse_year(capex_date_raw)
+        source_excerpt = str(row.get("Source Excerpt") or "").strip()
+        ai_interpretation = str(row.get("AI Interpretation") or "").strip()
         capex_highlights.append(
             {
                 "date": capex_date.strftime("%Y-%m-%d") if capex_date else str(capex_date_raw or "NA"),
@@ -1453,10 +1455,11 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 "targetIndustry": str(row.get("Primary Industry [Target/Issuer]") or row.get("Master Primary Industry Target") or "").strip(),
                 "classification": str(row.get("classification") or "").strip(),
                 "region": str(row.get("Master Target Region") or "").strip() or "Other",
-                "excerpt": str(row.get("Source Excerpt") or row.get("AI Interpretation") or "").strip(),
+                "sourceExcerpt": source_excerpt,
+                "aiInterpretation": ai_interpretation,
                 "value": str(row.get("Transaction Value") or "").strip(),
                 "unit": str(row.get("Transaction Unit") or "").strip(),
-                "overviewPoints": [str(row.get("Source Excerpt") or row.get("AI Interpretation") or "").strip()],
+                "overviewPoints": [source_excerpt] if source_excerpt else ([ai_interpretation] if ai_interpretation else []),
             }
         )
 
@@ -1809,7 +1812,7 @@ def build_investment_insights(sector_name, selected_company, sector_companies):
                 ),
                 "region": capex.get("region") or "Other",
                 "primaryDriver": "Sustainability / operations",
-                "headline": capex.get("excerpt"),
+                "headline": capex.get("aiInterpretation") or capex.get("sourceExcerpt"),
                 "overviewPoints": [point for point in (capex.get("overviewPoints") or []) if point],
             }
         )

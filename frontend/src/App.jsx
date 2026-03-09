@@ -2879,15 +2879,16 @@ function App() {
                               }
                             }}
                           >
-                            <span className={`timeline-source-chip ${event.source === 'Green Capex' ? 'capex' : 'deal'}`}>
-                              {event.source}
-                            </span>
-                            <span className="timeline-dealtype-pill">{event.dealType || 'Other'}</span>
+                            <div className="timeline-pill-row">
+                              {event.source !== 'Green Capex' && (
+                                <span className="timeline-card-pill dealtype">{event.dealType || 'Other'}</span>
+                              )}
+                              <span className="timeline-card-pill theme">{event.theme || 'Unspecified'}</span>
+                            </div>
                             <h5>{event.title}</h5>
                             <p>{event.headline || (event.overviewPoints || [])[0] || 'No summary available.'}</p>
                             <div className="timeline-event-meta">
                               <span>Date: {event.date || 'NA'}</span>
-                              <span>Theme: {event.theme || 'Unspecified theme'}</span>
                               <span>Region: {event.region || 'Other'}</span>
                               <span>Target Industry: {formatIndustryLabel(event.targetIndustry)}</span>
                             </div>
