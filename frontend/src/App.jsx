@@ -2813,12 +2813,10 @@ function App() {
                 <div className="gradient-line" />
                 <div className="investment-chart-grid investment-chart-grid-two investment-narrative-grid">
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>FC Insights</h4>
+                    <h4>{selectedCompany} Insights</h4>
                     <ul className="investment-simple-list">
                       {(
-                        ((investmentInsights.narrative?.focusCompanySummarizedInsights || []).length
-                          ? investmentInsights.narrative.focusCompanySummarizedInsights
-                          : (investmentInsights.narrative?.focusCompanyInsights || []))
+                        (investmentInsights.narrative?.focusCompanyInsights || [])
                       ).slice(0, 3).map((line, index) => (
                         <li key={`deep-dive-fc-insight-${index}`}>{line}</li>
                       ))}
@@ -2829,9 +2827,7 @@ function App() {
                     <h4>Peers Insights</h4>
                     <ul className="investment-simple-list">
                       {(
-                        ((investmentInsights.narrative?.peerSummarizedInsights || []).length
-                          ? investmentInsights.narrative.peerSummarizedInsights
-                          : (investmentInsights.narrative?.peerInsights || []))
+                        (investmentInsights.narrative?.peerInsights || [])
                       ).slice(0, 3).map((line, index) => (
                         <li key={`deep-dive-peer-insight-${index}`}>{line}</li>
                       ))}
@@ -3408,7 +3404,7 @@ function App() {
 
                 <div className="investment-chart-grid investment-chart-grid-two">
                   <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>FC Insights</h4>
+                    <h4>{selectedCompany} Insights</h4>
                     <ul className="investment-simple-list">
                       {(
                         ((investmentInsights.narrative?.focusCompanySummarizedInsights || []).length
