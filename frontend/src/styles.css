@@ -4,6 +4,8 @@
   --surface: rgba(255, 255, 255, 0.75);
   --surface-solid: #ffffff;
   --border: rgba(104, 70, 218, 0.2);
+  --bain-red: rgb(185, 11, 22);
+  --kpi-peer-yellow: rgb(247, 148, 30);
   --gradient: linear-gradient(90deg, rgb(185, 11, 22), rgb(160, 44, 100), rgb(129, 58, 163), rgb(104, 70, 218));
 }
 
@@ -959,6 +961,11 @@ button {
 .kpi-chart-wrap {
   width: 100%;
   min-height: 180px;
+}
+
+.kpi-chart-scroll {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .kpi-spotlight-wrap {

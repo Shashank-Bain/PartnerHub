@@ -975,32 +975,35 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
     typeGroup: item.typeGroup,
   }))
 
-  const chartHeight = Math.max(260, chartData.length * 48)
+  const chartHeight = Math.max(280, Math.min(480, chartData.length * 78))
+  const chartWidth = Math.max(680, chartData.length * 120)
 
   return (
-    <div className="kpi-chart-wrap">
-      <ResponsiveContainer width="100%" height={chartHeight}>
-        <ComposedChart data={chartData} layout="vertical" margin={{ top: 8, right: 28, left: 20, bottom: 8 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
-          <XAxis type="number" tick={{ fontSize: 11, fill: '#3f4769' }} />
-          <YAxis type="category" dataKey="kpi" width={220} tick={{ fontSize: 11, fill: '#3f4769' }} />
-          <Tooltip
-            formatter={(value, key, payload) => {
-              const typeGroup = payload?.payload?.typeGroup
-              if (key === 'clientValue') {
-                return [formatKpiDisplayValue(value, typeGroup), 'Client']
-              }
-              if (key === 'peerAverage') {
-                return [formatKpiDisplayValue(value, typeGroup), 'Peer Avg']
-              }
-              return [value, key]
-            }}
-          />
-          <Legend />
-          <Bar dataKey="clientValue" name="Client" fill="rgba(104, 70, 218, 0.8)" radius={[0, 4, 4, 0]} />
-          <Line type="monotone" dataKey="peerAverage" name="Peer Avg" stroke="rgba(46, 125, 0, 0.95)" strokeWidth={2.2} dot={{ r: 2.5 }} />
-        </ComposedChart>
-      </ResponsiveContainer>
+    <div className="kpi-chart-wrap kpi-chart-scroll">
+      <div style={{ width: `${chartWidth}px`, minWidth: '100%' }}>
+        <ResponsiveContainer width="100%" height={chartHeight}>
+          <ComposedChart data={chartData} margin={{ top: 8, right: 20, left: 0, bottom: 72 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
+            <XAxis dataKey="kpi" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-18} textAnchor="end" interval={0} height={66} />
+            <YAxis tick={{ fontSize: 11, fill: '#3f4769' }} />
+            <Tooltip
+              formatter={(value, key, payload) => {
+                const typeGroup = payload?.payload?.typeGroup
+                if (key === 'clientValue') {
+                  return [formatKpiDisplayValue(value, typeGroup), 'Client']
+                }
+                if (key === 'peerAverage') {
+                  return [formatKpiDisplayValue(value, typeGroup), 'Peer Avg']
+                }
+                return [value, key]
+              }}
+            />
+            <Legend />
+            <Bar dataKey="clientValue" name="Client" fill="var(--bain-red)" radius={[6, 6, 0, 0]} />
+            <Line type="monotone" dataKey="peerAverage" name="Peer Avg" stroke="var(--kpi-peer-yellow)" strokeWidth={2.8} dot={false} activeDot={{ r: 4 }} />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   )
 }
@@ -1030,7 +1033,6 @@ function App() {
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
   const [kpiMomentumData, setKpiMomentumData] = useState(null)
   const [isKpiMomentumLoading, setIsKpiMomentumLoading] = useState(false)
-  const [kpiModalPage, setKpiModalPage] = useState('summary')
   const [activeModal, setActiveModal] = useState(null)
   const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
@@ -1110,11 +1112,11 @@ function App() {
     }
   }, [benchmarkableReportedRows])
   const topLeadingChartRows = useMemo(
-    () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 5),
+    () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 4),
     [kpiStatusSections],
   )
   const topLaggingChartRows = useMemo(
-    () => kpiStatusSections.lagging.filter((row) => row.typeGroup !== 'boolean').slice(0, 5),
+    () => kpiStatusSections.lagging.filter((row) => row.typeGroup !== 'boolean').slice(0, 4),
     [kpiStatusSections],
   )
   const allReportedChartRows = useMemo(
@@ -2114,14 +2116,10 @@ function App() {
                 className="card home-insight-card interactive-card kpi-half-card"
                 role="button"
                 tabIndex={0}
-                onClick={() => {
-                  setKpiModalPage('summary')
-                  setActiveModal('kpi')
-                }}
+                onClick={() => setActiveModal('kpi')}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
-                    setKpiModalPage('summary')
                     setActiveModal('kpi')
                   }
                 }}
@@ -2550,6 +2548,101 @@ function App() {
           </section>
         )}
 
+        {activeView === 'kpiDeepDive' && (
+          <section className="scorecard-page">
+            <div className="settings-header">
+              <h2>ESG KPI Deep Dive</h2>
+              <button type="button" className="btn-ghost" onClick={() => setActiveView('home')}>Back to Dashboard</button>
+            </div>
+            <p className="body-subtitle">Reported KPI benchmarking with client bars and peer-average line markers</p>
+
+            {isKpiMomentumLoading && (
+              <section className="card scorecard-chart-card">
+                <h3 className="scorecard-chart-title">KPI Charts</h3>
+                <div className="scorecard-thin-divider" />
+                <p>Loading KPI deep dive...</p>
+              </section>
+            )}
+
+            {!isKpiMomentumLoading && kpiMomentumData && (
+              <>
+                <div className="investment-chart-grid investment-chart-grid-two">
+                  <section className="modal-pane">
+                    <h4>Top Leading KPIs</h4>
+                    <KpiPeerBarLineChart
+                      data={topLeadingChartRows}
+                      emptyMessage="No top leading reported KPIs available."
+                    />
+                  </section>
+
+                  <section className="modal-pane">
+                    <h4>Top Lagging KPIs</h4>
+                    <KpiPeerBarLineChart
+                      data={topLaggingChartRows}
+                      emptyMessage="No top lagging reported KPIs available."
+                    />
+                  </section>
+                </div>
+
+                <section className="card scorecard-chart-card">
+                  <h3 className="scorecard-chart-title">All Reported KPIs - Client vs Peer Avg</h3>
+                  <div className="scorecard-thin-divider" />
+                  <KpiPeerBarLineChart
+                    data={allReportedChartRows}
+                    emptyMessage="No reported benchmarkable numeric/intensity/percentage KPIs available."
+                  />
+                </section>
+
+                <section className="card scorecard-table-card">
+                  <div className="scorecard-table-head">
+                    <h3>True / False KPI Table</h3>
+                  </div>
+                  <div className="gradient-line" />
+                  <div className="table-wrap kpi-deepdive-table-wrap">
+                    <table className="kpi-deepdive-table">
+                      <thead>
+                        <tr>
+                          <th>KPI</th>
+                          <th>Client</th>
+                          <th>Peer True Rate</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {allReportedBooleanRows.map((row) => {
+                          const clientTrue = Number(row?.selectedValue || 0) >= 0.5
+                          const peerRate = Number(row?.peerAverage || 0) * 100
+                          return (
+                            <tr key={`tf-page-${row.kpi}`}>
+                              <td>{row.kpi}</td>
+                              <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
+                              <td>{Number.isFinite(peerRate) ? `${peerRate.toFixed(1)}%` : 'NA'}</td>
+                              <td>{getKpiMomentumStatus(row)}</td>
+                            </tr>
+                          )
+                        })}
+                        {!allReportedBooleanRows.length && (
+                          <tr>
+                            <td colSpan={4}>No reported true/false KPIs available.</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </>
+            )}
+
+            {!isKpiMomentumLoading && !kpiMomentumData && (
+              <section className="card scorecard-chart-card">
+                <h3 className="scorecard-chart-title">KPI Charts</h3>
+                <div className="scorecard-thin-divider" />
+                <p>No KPI momentum data available for this company.</p>
+              </section>
+            )}
+          </section>
+        )}
+
         {activeView === 'settings' && (
           <section className="card settings-card">
             <div className="settings-header">
@@ -2791,14 +2884,11 @@ function App() {
         <div className="modal-backdrop" onClick={() => setActiveModal(null)}>
           <div className="modal-card kpi-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h3>{kpiModalPage === 'summary' ? 'KPI Momentum' : 'KPI Momentum Deep Dive'} - {selectedCompany}</h3>
+              <h3>KPI Momentum - {selectedCompany}</h3>
               <button
                 type="button"
                 className="btn-ghost"
-                onClick={() => {
-                  setKpiModalPage('summary')
-                  setActiveModal(null)
-                }}
+                onClick={() => setActiveModal(null)}
               >
                 Close
               </button>
@@ -2808,102 +2898,44 @@ function App() {
 
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
-                {kpiModalPage === 'summary' && (
-                  <>
-                    <section className="modal-kpi-hero">
-                      <div className="kpi-signal-row">
-                        <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
-                        <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
-                        <span className="kpi-signal-chip risk">Lagging: {kpiStatusSections.lagging.length}</span>
-                      </div>
-                    </section>
+                <section className="modal-kpi-hero">
+                  <div className="kpi-signal-row">
+                    <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
+                    <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
+                    <span className="kpi-signal-chip risk">Lagging: {kpiStatusSections.lagging.length}</span>
+                  </div>
+                </section>
 
-                    <div className="modal-two-column">
-                      <section className="modal-pane">
-                        <h4>Top Leading KPIs</h4>
-                        <KpiPeerBarLineChart
-                          data={topLeadingChartRows}
-                          emptyMessage="No top leading reported KPIs available."
-                        />
-                      </section>
+                <div className="modal-two-column">
+                  <section className="modal-pane">
+                    <h4>Top Leading KPIs</h4>
+                    <KpiPeerBarLineChart
+                      data={topLeadingChartRows}
+                      emptyMessage="No top leading reported KPIs available."
+                    />
+                  </section>
 
-                      <section className="modal-pane">
-                        <h4>Top Lagging KPIs</h4>
-                        <KpiPeerBarLineChart
-                          data={topLaggingChartRows}
-                          emptyMessage="No top lagging reported KPIs available."
-                        />
-                      </section>
-                    </div>
+                  <section className="modal-pane">
+                    <h4>Top Lagging KPIs</h4>
+                    <KpiPeerBarLineChart
+                      data={topLaggingChartRows}
+                      emptyMessage="No top lagging reported KPIs available."
+                    />
+                  </section>
+                </div>
 
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn-primary"
-                        onClick={() => setKpiModalPage('deepdive')}
-                      >
-                        Open Deep Dive
-                      </button>
-                    </div>
-                  </>
-                )}
-
-                {kpiModalPage === 'deepdive' && (
-                  <>
-                    <div className="modal-footer kpi-deepdive-header-actions">
-                      <button
-                        type="button"
-                        className="btn-ghost"
-                        onClick={() => setKpiModalPage('summary')}
-                      >
-                        Back to KPI Summary
-                      </button>
-                    </div>
-
-                    <section className="modal-pane">
-                      <h4>All Reported KPIs - Client vs Peer Avg</h4>
-                      <KpiPeerBarLineChart
-                        data={allReportedChartRows}
-                        emptyMessage="No reported benchmarkable numeric/intensity/percentage KPIs available."
-                      />
-                    </section>
-
-                    <section className="modal-pane">
-                      <h4>True / False KPI Table</h4>
-                      <div className="table-wrap kpi-deepdive-table-wrap">
-                        <table className="kpi-deepdive-table">
-                          <thead>
-                            <tr>
-                              <th>KPI</th>
-                              <th>Client</th>
-                              <th>Peer True Rate</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {allReportedBooleanRows.map((row) => {
-                              const clientTrue = Number(row?.selectedValue || 0) >= 0.5
-                              const peerRate = Number(row?.peerAverage || 0) * 100
-                              return (
-                                <tr key={`tf-${row.kpi}`}>
-                                  <td>{row.kpi}</td>
-                                  <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
-                                  <td>{Number.isFinite(peerRate) ? `${peerRate.toFixed(1)}%` : 'NA'}</td>
-                                  <td>{getKpiMomentumStatus(row)}</td>
-                                </tr>
-                              )
-                            })}
-                            {!allReportedBooleanRows.length && (
-                              <tr>
-                                <td colSpan={4}>No reported true/false KPIs available.</td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </>
-                )}
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => {
+                      setActiveModal(null)
+                      setActiveView('kpiDeepDive')
+                    }}
+                  >
+                    Open ESG KPI Deep Dive
+                  </button>
+                </div>
               </>
             )}
 
