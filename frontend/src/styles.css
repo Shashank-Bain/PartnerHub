@@ -4,6 +4,16 @@
   --surface: rgba(255, 255, 255, 0.75);
   --surface-solid: #ffffff;
   --border: rgba(104, 70, 218, 0.2);
+  --panel-bg: rgba(255, 255, 255, 0.82);
+  --panel-border: rgba(104, 70, 218, 0.18);
+  --chip-bg: rgba(104, 70, 218, 0.1);
+  --chip-border: rgba(104, 70, 218, 0.24);
+  --chip-text: #4f3f95;
+  --radius-card: 18px;
+  --radius-pane: 12px;
+  --shadow-card: 0 12px 40px rgba(104, 70, 218, 0.14);
+  --shadow-card-hover: 0 20px 45px rgba(104, 70, 218, 0.2);
+  --shadow-modal: 0 26px 52px rgba(32, 24, 78, 0.22);
   --bain-red: rgb(185, 11, 22);
   --kpi-peer-yellow: rgb(247, 148, 30);
   --gradient: linear-gradient(90deg, rgb(185, 11, 22), rgb(160, 44, 100), rgb(129, 58, 163), rgb(104, 70, 218));
@@ -40,8 +50,8 @@ h1, h2, p {
   background: var(--surface);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(104, 70, 218, 0.14);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 @keyframes softEnter {
@@ -375,8 +385,8 @@ button {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(129, 58, 163, 0.22);
-  box-shadow: 0 16px 38px rgba(104, 70, 218, 0.15);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow-card);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   animation: softEnter 170ms ease-out both;
 }
@@ -393,8 +403,8 @@ button {
 
 .home-insight-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(104, 70, 218, 0.2);
-  border-color: rgba(129, 58, 163, 0.35);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(104, 70, 218, 0.3);
 }
 
 .interactive-card {
@@ -425,9 +435,9 @@ button {
   min-height: 24px;
   padding: 3px 9px;
   border-radius: 8px;
-  border: 1px solid rgba(104, 70, 218, 0.24);
-  background: rgba(104, 70, 218, 0.1);
-  color: #4f3f95;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--chip-text);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -438,7 +448,7 @@ button {
 .card-subtitle {
   margin-top: 6px;
   margin-bottom: 0;
-  color: #4f3f95;
+  color: var(--chip-text);
   font-size: 12px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -456,7 +466,7 @@ button {
   height: 1px;
   margin-top: 10px;
   margin-bottom: 12px;
-  background: #000;
+  background: rgba(104, 70, 218, 0.22);
 }
 
 .benchmark-table-wrap {
@@ -1366,9 +1376,9 @@ button {
 }
 
 .investment-stat-tile {
-  border: 1px solid rgba(104, 70, 218, 0.18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-pane);
+  background: var(--panel-bg);
   padding: 10px;
   display: grid;
   gap: 4px;
@@ -1389,7 +1399,7 @@ button {
 }
 
 .investment-stat-tile.highlight strong {
-  color: #4f3f95;
+  color: var(--chip-text);
 }
 
 .investment-chip-block {
@@ -1417,17 +1427,17 @@ button {
   min-height: 26px;
   padding: 4px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(104, 70, 218, 0.2);
-  background: rgba(104, 70, 218, 0.1);
-  color: #443b7e;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--chip-text);
   font-size: 12px;
   font-weight: 700;
 }
 
 .investment-strategy-block {
-  border: 1px solid rgba(129, 58, 163, 0.18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-pane);
+  background: var(--panel-bg);
   padding: 10px;
   display: grid;
   gap: 8px;
@@ -1893,9 +1903,9 @@ button {
 }
 
 .timeline-event-card {
-  border: 1px solid rgba(129, 58, 163, 0.18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-pane);
+  background: var(--panel-bg);
   padding: 10px;
   padding-top: 42px;
   display: grid;
@@ -2632,10 +2642,10 @@ button {
   width: min(1100px, 100%);
   max-height: 92vh;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(129, 58, 163, 0.25);
-  border-radius: 16px;
-  box-shadow: 0 26px 52px rgba(32, 24, 78, 0.22);
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-modal);
   padding: 18px;
   animation: softEnter 180ms ease-out both;
 }
@@ -2669,9 +2679,9 @@ button {
 }
 
 .modal-pane {
-  border: 1px solid rgba(129, 58, 163, 0.18);
-  background: rgba(255, 255, 255, 0.76);
-  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  border-radius: var(--radius-pane);
   padding: 12px;
 }
 
@@ -2707,7 +2717,7 @@ button {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #4f3f95;
+  color: var(--chip-text);
   font-weight: 800;
 }
 
@@ -2723,9 +2733,9 @@ button {
   min-height: 24px;
   padding: 2px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(104, 70, 218, 0.24);
-  background: rgba(104, 70, 218, 0.1);
-  color: #4b3f8a;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--chip-text);
   font-size: 11px;
   font-weight: 700;
 }
