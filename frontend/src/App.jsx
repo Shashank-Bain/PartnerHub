@@ -2762,6 +2762,38 @@ function App() {
             </div>
             <p className="body-subtitle">Topic and region positioning vs peers, plus multi-year investment + green capex trajectory</p>
 
+            {!isInvestmentInsightsLoading && investmentInsights && (
+              <section className="card scorecard-table-card">
+                <div className="scorecard-table-head">
+                  <h3>Investment Insights</h3>
+                </div>
+                <div className="gradient-line" />
+                <div className="investment-chart-grid investment-chart-grid-two investment-narrative-grid">
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>{selectedCompany} Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(
+                        (investmentInsights.narrative?.focusCompanyInsights || [])
+                      ).slice(0, 3).map((line, index) => (
+                        <li key={`deep-dive-fc-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section className="modal-pane investment-strategy-block tone-neutral">
+                    <h4>Peers Insights</h4>
+                    <ul className="investment-simple-list">
+                      {(
+                        (investmentInsights.narrative?.peerInsights || [])
+                      ).slice(0, 3).map((line, index) => (
+                        <li key={`deep-dive-peer-insight-${index}`}>{line}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+              </section>
+            )}
+
             {isInvestmentInsightsLoading && (
               <section className="card scorecard-chart-card">
                 <h3 className="scorecard-chart-title">Investment Charts</h3>
@@ -2802,38 +2834,6 @@ function App() {
                 <h3 className="scorecard-chart-title">Investment Charts</h3>
                 <div className="scorecard-thin-divider" />
                 <p>No investment insights available.</p>
-              </section>
-            )}
-
-            {!isInvestmentInsightsLoading && investmentInsights && (
-              <section className="card scorecard-table-card">
-                <div className="scorecard-table-head">
-                  <h3>Investment Insights</h3>
-                </div>
-                <div className="gradient-line" />
-                <div className="investment-chart-grid investment-chart-grid-two investment-narrative-grid">
-                  <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>{selectedCompany} Insights</h4>
-                    <ul className="investment-simple-list">
-                      {(
-                        (investmentInsights.narrative?.focusCompanyInsights || [])
-                      ).slice(0, 3).map((line, index) => (
-                        <li key={`deep-dive-fc-insight-${index}`}>{line}</li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  <section className="modal-pane investment-strategy-block tone-neutral">
-                    <h4>Peers Insights</h4>
-                    <ul className="investment-simple-list">
-                      {(
-                        (investmentInsights.narrative?.peerInsights || [])
-                      ).slice(0, 3).map((line, index) => (
-                        <li key={`deep-dive-peer-insight-${index}`}>{line}</li>
-                      ))}
-                    </ul>
-                  </section>
-                </div>
               </section>
             )}
 
@@ -2879,6 +2879,9 @@ function App() {
                               }
                             }}
                           >
+                            <span className={`timeline-source-chip ${event.source === 'Green Capex' ? 'capex' : 'deal'}`}>
+                              {event.source}
+                            </span>
                             <div className="timeline-pill-row">
                               {event.source !== 'Green Capex' && (
                                 <span className="timeline-card-pill dealtype">{event.dealType || 'Other'}</span>

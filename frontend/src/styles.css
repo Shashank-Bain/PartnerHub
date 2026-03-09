@@ -1905,16 +1905,22 @@ button {
 
 .timeline-year-insight-list {
   margin: 0;
-  padding-left: 18px;
+  padding-left: 0;
+  list-style: none;
   display: grid;
-  gap: 4px;
+  gap: 6px;
 }
 
 .timeline-year-insight-list li {
   margin: 0;
-  color: #495271;
-  font-size: 13px;
+  color: #2f3d75;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.35;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(129, 58, 163, 0.1);
+  border-left: 3px solid rgba(104, 70, 218, 0.45);
 }
 
 .timeline-event-list {
@@ -1932,6 +1938,28 @@ button {
   display: grid;
   gap: 6px;
   position: relative;
+}
+
+.timeline-source-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  border: 1px solid rgba(104, 70, 218, 0.22);
+}
+
+.timeline-source-chip.deal {
+  color: #4f3f95;
+  background: rgba(129, 58, 163, 0.12);
+}
+
+.timeline-source-chip.capex {
+  color: #176e40;
+  background: rgba(30, 157, 85, 0.14);
 }
 
 .timeline-pill-row {
