@@ -7,6 +7,7 @@ import {
   LabelList,
   Legend,
   Line,
+  Scatter,
   PolarAngleAxis,
   PolarGrid,
   PolarRadiusAxis,
@@ -963,6 +964,28 @@ function formatIndustryLabel(value) {
   return text
 }
 
+function KpiPeerAverageMarker(props) {
+  const { cx, cy } = props
+  const centerX = Number(cx)
+  const centerY = Number(cy)
+  if (!Number.isFinite(centerX) || !Number.isFinite(centerY)) {
+    return null
+  }
+
+  const halfWidth = 17
+  return (
+    <line
+      x1={centerX - halfWidth}
+      y1={centerY}
+      x2={centerX + halfWidth}
+      y2={centerY}
+      stroke="var(--kpi-peer-yellow, #F5C400)"
+      strokeWidth={2.8}
+      strokeLinecap="round"
+    />
+  )
+}
+
 function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available.' }) {
   if (!data?.length) {
     return <p className="commitment-section-message">{emptyMessage}</p>
@@ -975,6 +998,14 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
     typeGroup: item.typeGroup,
   }))
 
+  const allValues = chartData.flatMap((item) => [Number(item.clientValue), Number(item.peerAverage)]).filter(Number.isFinite)
+  const rawMin = allValues.length ? Math.min(...allValues) : 0
+  const rawMax = allValues.length ? Math.max(...allValues) : 1
+  const range = Math.max(rawMax - rawMin, 1)
+  const padding = Math.max(range * 0.18, 1)
+  const yAxisMin = rawMin >= 0 ? 0 : rawMin - padding
+  const yAxisMax = rawMax + padding
+
   const chartHeight = Math.max(280, Math.min(480, chartData.length * 78))
   const chartWidth = Math.max(680, chartData.length * 120)
 
@@ -985,7 +1016,7 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
           <ComposedChart data={chartData} margin={{ top: 8, right: 20, left: 0, bottom: 72 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
             <XAxis dataKey="kpi" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-18} textAnchor="end" interval={0} height={66} />
-            <YAxis tick={{ fontSize: 11, fill: '#3f4769' }} />
+            <YAxis domain={[yAxisMin, yAxisMax]} tick={{ fontSize: 11, fill: '#3f4769' }} width={64} />
             <Tooltip
               formatter={(value, key, payload) => {
                 const typeGroup = payload?.payload?.typeGroup
@@ -998,9 +1029,21 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
                 return [value, key]
               }}
             />
-            <Legend />
-            <Bar dataKey="clientValue" name="Client" fill="var(--bain-red)" radius={[6, 6, 0, 0]} />
-            <Line type="monotone" dataKey="peerAverage" name="Peer Avg" stroke="var(--kpi-peer-yellow)" strokeWidth={2.8} dot={false} activeDot={{ r: 4 }} />
+            <Legend
+              payload={[
+                { value: 'Client', type: 'square', color: 'var(--bain-red, #CC0000)' },
+                { value: 'Peer Avg', type: 'line', color: 'var(--kpi-peer-yellow, #F5C400)' },
+              ]}
+            />
+            <Bar dataKey="clientValue" name="Client" fill="var(--bain-red, #CC0000)" radius={[6, 6, 0, 0]} barSize={34} />
+            <Scatter
+              data={chartData}
+              dataKey="peerAverage"
+              name="Peer Avg"
+              shape={KpiPeerAverageMarker}
+              fill="var(--kpi-peer-yellow, #F5C400)"
+              isAnimationActive={false}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
