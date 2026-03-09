@@ -1,0 +1,7534 @@
+{
+  "CP": {
+    "Nestlé": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 103480637168.142
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 5652337.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 90452324.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 54.62217043383432,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 874.0990244680037
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 97900000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 946.070711189439,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 1770141.0,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 17.10601179546052
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 40.3,
+              "Women Managers %": 47.4,
+              "Board Gender Diversity %": 33.3333333333333,
+              "Gender Pay Gap %": 109.1,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 87.5
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": 195964602.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": 1893.73208
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 375587006956.435,
+              "Total Employees": 270000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Unilever": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 65552258020.83334
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1745394.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 105149733.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 26.62599356143143,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 1604.0596643762
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 17000000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 259.3350788099044,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 99.04241
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 731000.0,
+              "Total Waste Recycled (tonnes)": 724000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 11.15140838882589
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 144.961,
+              "SOx Emissions (tonnes)": 150.855,
+              "VOC Emissions (tonnes)": 839.375
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 0.002211380727021327,
+              "SOx Intensity (tonnes per $M Revenue)": 0.002301293724345184,
+              "VOC Intensity (tonnes per $M Revenue)": 0.01280466951623903
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 14.5
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 37.0,
+              "Women Managers %": 54.5,
+              "Board Gender Diversity %": 44.4444444444444,
+              "Gender Pay Gap %": 149.0,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": 3.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 84.6153846153846
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 176701861113.645,
+              "Total Employees": 120040.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "PepsiCo": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 91854000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 5087192.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 49820000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 55.38345635464977,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 542.3824765388551
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": 102.0
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 73680810.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 802.151348879744,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 13.2597
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 2.4
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 28.0,
+              "Women Managers %": 44.59539,
+              "Board Gender Diversity %": 33.3333333333333,
+              "Gender Pay Gap %": 99.0,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 93.75
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 277745895136.24,
+              "Total Employees": 318000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Kraft Heinz": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 25846000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1004879.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 24332316.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 38.87947844927648,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 941.4344966339086
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": 19.0
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 30455000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 1178.325466223013,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 90257.0,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 3.492107095875571
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 37.0,
+              "Women Managers %": 43.0,
+              "Board Gender Diversity %": 33.3333333333333,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": 1.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": 6.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 91.6666666666667
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": 2000000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": 77.3814129846011
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 65585400904.12,
+              "Total Employees": 36000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Danone": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 29534711666.66667
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1379405.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 18984106.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 46.70453585490112,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 642.7726877532295
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 8.6
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": 57.0
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 59889.0,
+              "Water Pollutant Emissions (tonnes)": 3600.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 2.027749607848437,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": 0.1218904738475241
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 95.0
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 330000.0,
+              "Total Waste Recycled (tonnes)": 313000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 11.17329343602305
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 18.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 0.9
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 33.0,
+              "Women Managers %": 54.0,
+              "Board Gender Diversity %": 45.4545454545455,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": 13.5
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": 1.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": 17.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 72.7272727272727
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 58177471872.5078,
+              "Total Employees": 89528.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    }
+  },
+  "Mining": {
+    "Anglo American": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 27354000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 11600000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 170600000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 424.0696059077283,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 6236.747824815384
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 155748000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 5693.792498354903,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 72.91704
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 644346.0,
+              "Total Waste Recycled (tonnes)": 469838.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 23.5558236455363
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 30356.0,
+              "SOx Emissions (tonnes)": 9796.0,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 1.109746289390948,
+              "SOx Intensity (tonnes per $M Revenue)": 0.3581194706441471,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 7.6
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 1.06
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 26.0,
+              "Women Managers %": 35.0,
+              "Board Gender Diversity %": 40.0,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 70.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 65543042366.2204,
+              "Total Employees": 54000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 571420.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 20.88981501791329
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "BHP": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 55658000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 11800000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 377700000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 212.0090553020231,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 6786.086456574078
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": 2.0
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 387310000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 6958.748068561573,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 75298.0,
+              "SOx Emissions (tonnes)": 13888.0,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 1.352869308994215,
+              "SOx Intensity (tonnes per $M Revenue)": 0.2495238779690251,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": 2.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 13.1
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 37.1,
+              "Women Managers %": 39.5,
+              "Board Gender Diversity %": 40.0,
+              "Gender Pay Gap %": 84.03,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 91.6666666666667
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": 1.0,
+              "Greenwashing Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 236744230296.482,
+              "Total Employees": 39729.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 86850.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 1.560422580761077
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Rio Tinto": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 53658000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 25400000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 574600000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 473.3683700473368,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 10708.56163107086
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": 13.0
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 1230000000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 22922.95650229229,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 0.81036
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 979873000.0,
+              "Total Waste Recycled (tonnes)": 7940500.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 18261.45215997615
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 64900.0,
+              "SOx Emissions (tonnes)": 74300.0,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 1.209512095120951,
+              "SOx Intensity (tonnes per $M Revenue)": 1.38469566513847,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 8.4
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 1.15
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 25.2,
+              "Women Managers %": 35.5,
+              "Board Gender Diversity %": 30.7692307692308,
+              "Gender Pay Gap %": 99.0,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": 2.0,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 78.5714285714286
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 136920658260.0,
+              "Total Employees": 57174.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 987000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 18.39427485183943
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Teck": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 6601329004.460359
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1275000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 193.1429260893546,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 180652000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 27366.0046148189,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 0.01746
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 174045510.0,
+              "Total Waste Recycled (tonnes)": 30389.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 26365.22280322669
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": 1639.0,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": 0.2482833379297665,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 12.9
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 1.55
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 26.0,
+              "Women Managers %": 29.0,
+              "Board Gender Diversity %": 27.2727272727273,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 84.6153846153846
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 28337206983.6243,
+              "Total Employees": 7200.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Glencore": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 230944000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 26580000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 389318000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 115.0928363585978,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 1685.76797838437
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 845640000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 3661.666897602882,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 0.50495
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 2261334000.0,
+              "Total Waste Recycled (tonnes)": 11418560.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 9791.698420396286
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": 0.0,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": 0.0,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 62138.0,
+              "SOx Emissions (tonnes)": 336185.0,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 0.2690608978800055,
+              "SOx Intensity (tonnes per $M Revenue)": 1.45569921712623,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 8.7
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 0.71
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 19.0,
+              "Women Managers %": 23.0,
+              "Board Gender Diversity %": 37.5,
+              "Gender Pay Gap %": 75.8,
+              "Employees with Disabilities %": 0.53954
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": 3.0,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 66.6666666666667
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": 295000000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": 1277.36594152695
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": 1.0,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 87041845944.0836,
+              "Total Employees": 84146.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 7165972.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 31.02904600249411
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    }
+  },
+  "Construction Materials": {
+    "Heidelberg Materials": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 22824670291.66667
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 67830000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 16200000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 2971.784439084093,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 709.7583357387928
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 34.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 248400000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 10882.96114799482,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 53.2
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 694700.0,
+              "Total Waste Recycled (tonnes)": 369580.4
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 30.43636517516909
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 99602.0,
+              "SOx Emissions (tonnes)": 19732.0,
+              "VOC Emissions (tonnes)": 3178.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 4.363787021991064,
+              "SOx Intensity (tonnes per $M Revenue)": 0.8645031778270283,
+              "VOC Intensity (tonnes per $M Revenue)": 0.1392353080850545
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 15.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 16.0,
+              "Women Managers %": 18.0,
+              "Board Gender Diversity %": 42.8571428571429,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": 2.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 43.75
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": 1.0,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 32295543422.0479,
+              "Total Employees": 51129.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Holcim": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 18351575221.23894
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 75000000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 42000000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 4086.842633170792,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 2288.631874575643
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 3.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 228000000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 12424.00160483921,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 92.40711
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 12380000.0,
+              "Total Waste Recycled (tonnes)": 11440000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 674.6014906487254
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 100861.0,
+              "SOx Emissions (tonnes)": 20500.0,
+              "VOC Emissions (tonnes)": 3353.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 5.49604046432319,
+              "SOx Intensity (tonnes per $M Revenue)": 1.11707031973335,
+              "VOC Intensity (tonnes per $M Revenue)": 0.1827091113202889
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": 1.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 18.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 0.39
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 18.0,
+              "Women Managers %": 27.0,
+              "Board Gender Diversity %": 45.4545454545455,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": 1.2
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": 1.0,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 90.9090909090909
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 70164125132.9806,
+              "Total Employees": 63665.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 1246017.699
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 67.89704338611428
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Cemex": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 15979641587.6907
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 29400000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 13400000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 1839.84101512309,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 838.5669932873948
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 19.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 50100000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 3135.239280873021,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 848000.0,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 53.06752315729184
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 38674.0,
+              "SOx Emissions (tonnes)": 9262.0,
+              "VOC Emissions (tonnes)": 1162.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 2.420204470029605,
+              "SOx Intensity (tonnes per $M Revenue)": 0.579612499390138,
+              "VOC Intensity (tonnes per $M Revenue)": 0.07271752583581736
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 22.7
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 16.0,
+              "Women Managers %": 24.0,
+              "Board Gender Diversity %": 15.3846153846154,
+              "Gender Pay Gap %": 101.0,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 76.9230769230769
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": null,
+              "Total Employees": 44660.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 20000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 1.251592527294619
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "CRH": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 35572000000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 29400000.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 17400000.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 826.4927471044642,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 489.1487686944788
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 49.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": 104800000.0,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": 2946.137411447206,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": 82.0
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": 2543000.0,
+              "Total Waste Recycled (tonnes)": 2085260.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": 71.48881142471608
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": 0.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": 0.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": 38459.0,
+              "SOx Emissions (tonnes)": 7344.0,
+              "VOC Emissions (tonnes)": 2123.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": 1.081159338805802,
+              "SOx Intensity (tonnes per $M Revenue)": 0.206454514786911,
+              "VOC Intensity (tonnes per $M Revenue)": 0.05968177218036658
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": true,
+              "Biodiversity Impact Reduction": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 23.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": 1.1
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 16.0,
+              "Women Managers %": 20.0,
+              "Board Gender Diversity %": 38.4615384615385,
+              "Gender Pay Gap %": 100.0,
+              "Employees with Disabilities %": 2.6015
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 84.6153846153846
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 77914827227.36,
+              "Total Employees": 79800.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": 222000.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": 6.24086360058473
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    }
+  },
+  "PE": {
+    "CVC": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 1189285679.166667
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1188.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 16032.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 0.9989189484165254,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 13.48036075842907
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": null,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": null,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": false,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 35.0,
+              "Women Managers %": 25.0,
+              "Board Gender Diversity %": 33.3333333333333,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 50.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 25300612099.5109,
+              "Total Employees": 1258.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "EQT": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 2861768562.5
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 1302.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 22899.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 0.4549634156518204,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 8.001695280346416
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": 99
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": null,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": null,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 13.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 46.0,
+              "Women Managers %": null,
+              "Board Gender Diversity %": 42.8571428571429,
+              "Gender Pay Gap %": 53.0,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 66.6666666666667
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": true
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 35009683630.6068,
+              "Total Employees": 1941.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": true,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "Blackstone": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 13320052000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 13140.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": 19722.0
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 0.9864826353530752,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": 1.480624850413497
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": null,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": null,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": false,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": null,
+              "Women Managers %": null,
+              "Board Gender Diversity %": 25.0,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 70.0
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 232816864441.54,
+              "Total Employees": 4895.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    },
+    "KKR": {
+      "Financial": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Total Revenue ($)": 26408140000.0
+            }
+          }
+        }
+      },
+      "GHG Emissions": {
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 1+2 Emissions (tCO2e)": 8279.0
+            }
+          },
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Scope 3 Emissions (tCO2e)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)": 0.3135018217867673,
+              "Scope 3 Emissions Intensity (tCO2e per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Low-Carbon Revenue (%)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Water Stewardship": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Water Stressed Sites": null
+            },
+            "Non-Plot": {
+              "Water Withdrawal Total (m3)": null,
+              "Water Pollutant Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Water Withdrawal Intensity (m3 per $M Revenue)": null,
+              "Water Pollutant Emissions (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Material use, waste & circularity": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Waste Recycling Ratio": null
+            },
+            "Non-Plot": {
+              "Total Waste (tonnes)": null,
+              "Total Waste Recycled (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Total Waste Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Hazardous substances": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Accidental Spills (KBLs)": null,
+              "Ozone-Depleting Substances (tonnes CFC-11 eq.)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Spill Intensity (KBLs per $M Revenue)": null,
+              "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Toxic Chemical Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Air quality": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "NOx Emissions (tonnes)": null,
+              "SOx Emissions (tonnes)": null,
+              "VOC Emissions (tonnes)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "NOx Intensity (tonnes per $M Revenue)": null,
+              "SOx Intensity (tonnes per $M Revenue)": null,
+              "VOC Intensity (tonnes per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Land and ocean use": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Deforestation Controversies": null,
+              "Water & Marine Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Biodiversity & ecological welfare": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Risk Assessment": false,
+              "Biodiversity Impact Reduction": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Biodiversity Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Human rights": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Policy (Contractors)": true,
+              "Human Rights Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Labor Practices": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Employee Turnover %": 7.0
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lost Time Injury Rate Total (per million hours)": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Strike Incidents": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Diversity, equity & inclusion": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Women Employees %": 46.0,
+              "Women Managers %": null,
+              "Board Gender Diversity %": 30.7692307692308,
+              "Gender Pay Gap %": null,
+              "Employees with Disabilities %": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer health and wellness": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Product Recall": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Customer Health & Safety": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Revenues from Healthy Food or Products (% of total revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Customer safety and engagement": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Customer Satisfaction": null,
+              "Recent Customer Health & Safety Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Digital rights and responsibilities": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Controversies Privacy": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Community partnership": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Business Ethics Controversies": null,
+              "Community Lending and Investments": null,
+              "Recent Human Rights Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Governance foundation": {
+        "Percentage": {
+          "Reported": {
+            "Plot": {
+              "Independent Board Members %": 76.4705882352941
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Business ethics": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Bribery, Corruption and Fraud Controversies": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses ($)": null
+            }
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {},
+            "Non-Plot": {
+              "Litigation Expenses Intensity ($ per $M Revenue)": null
+            }
+          }
+        }
+      },
+      "Transparency & risk management": {
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Social Supply Risk Assessment": false
+            },
+            "Non-Plot": {}
+          }
+        },
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Wages & Working Conditions Controversies": null,
+              "Greenwashing Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Third-party relationships": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Supply Risk Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Supplier ESG Training": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Tax Practices": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Tax Fraud Controversies": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "Indirect economic impacts": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {},
+            "Non-Plot": {
+              "Enterprise Value": 156283098413.9,
+              "Total Employees": 4490.0
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "Local Sourcing Policy": false
+            },
+            "Non-Plot": {}
+          }
+        }
+      },
+      "National and International policy": {
+        "Numbers": {
+          "Reported": {
+            "Plot": {
+              "Lobbying Controversies": null
+            },
+            "Non-Plot": {
+              "Environmental Fines ($)": null
+            }
+          }
+        },
+        "True/false": {
+          "Reported": {
+            "Plot": {
+              "UN Global Compact Signatory": true,
+              "OECD Guidelines Compliance": false,
+              "Whistleblower Protection Policy": true
+            },
+            "Non-Plot": {}
+          }
+        },
+        "intensity": {
+          "Calculated": {
+            "Plot": {
+              "Environmental Fines Intensity ($ per $M Revenue)": null
+            },
+            "Non-Plot": {}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,367 @@
+[
+  {
+    "new_kpi": "Total Revenue ($)",
+    "lseg_title": "Revenue from Business Activities - Total",
+    "description": "Revenue from LSEG Converted to $"
+  },
+  {
+    "new_kpi": "Scope 1 Emissions (tCO2e)",
+    "lseg_title": "CO2 Equivalent Emissions Direct, Scope 1",
+    "description": "Direct of CO2 and CO2 equivalents emission in tonnes.\n- direct emissions from sources that are owned or controlled by the company (scope 1 emissions)\n- following gases are relevant : carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), hydrofluorocarbons (HFCS), perfluorinated compound (PFCS), sulfur hexafluoride (SF6), nitrogen trifluoride (NF3)\n- we follow green house gas (GHG) protocol for all our emission classifications by type\n"
+  },
+  {
+    "new_kpi": "Scope 2 Emissions (tCO2e)",
+    "lseg_title": "CO2 Equivalent Emissions InDirect, Scope 2",
+    "description": "Indirect of CO2 and CO2 equivalents emission in tonnes.\n- indirect emissions from consumption of purchased electricity, heat or steam which occur at the facility where electricity, steam or heat is generated (scope 2 emissions)\n- following gases are relevant : carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), hydrofluorocarbons (HFCS), perfluorinated compound (PFCS), sulfur hexafluoride (SF6), nitrogen trifluoride (NF3)\n- we follow green house gas (GHG) protocol for all our emission classifications by type"
+  },
+  {
+    "new_kpi": "Scope 3 Emissions (tCO2e)",
+    "lseg_title": "CO2 Equivalent Emissions Indirect, Scope 3",
+    "description": "Total CO2 and CO2 Scope Three equivalent emission in tonnes.\n- scope 3 includes emissions from contractor-owned vehicles, employee business travel (by rail or air), waste disposal, outsourced activities\n- emissions from product use by customers, emission from the production of purchased materials, emissions from electricity purchased for resale\n- following gases are relevant : carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), hydrofluorocarbons (HFCs), perfluorinated compound (PFC), sulfur hexafluoride (SF6), nitrogen trifluoride (NF3)\n- we follow green house gas (GHG) protocol for all our emission classifications by type\n"
+  },
+  {
+    "new_kpi": "Scope 1+2 Emissions (tCO2e)",
+    "lseg_title": "CO2 Equivalent Emissions Direct, Scope 1+2",
+    "description": "Direct of CO2 and CO2 equivalents emission in tonnes+Indirect of CO2 and CO2 equivalents emission in tonnes"
+  },
+  {
+    "new_kpi": "Scope 1+2 Emissions Intensity (tCO2e per $M Revenue)",
+    "lseg_title": "CO2 Equivalent Emissions Direct, Scope 1+2 To Revenues USD in million",
+    "description": "Direct of CO2 and CO2 equivalents emission in tonnes+Indirect of CO2 and CO2 equivalents emission in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "Scope 3 Emissions Intensity (tCO2e per $M Revenue)",
+    "lseg_title": "CO2 Equivalent Emissions Indirect, Scope 3 To Revenues USD in million",
+    "description": "Total CO2 and CO2 Scope Three equivalent emission in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "Low-Carbon Revenue (%)",
+    "lseg_title": "Revenue from low-carbon products/services (% of total revenue)",
+    "description": "Percent of revenue generated from low carbon products to total revenue"
+  },
+  {
+    "new_kpi": "Water Withdrawal Total (m3)",
+    "lseg_title": "Water Withdrawal Total",
+    "description": "Total water withdrawal in cubic meters.\n- the total volume of water withdrawn from any water source that was either withdrawn directly by the reporting organization or through intermediaries such as water utilities\n- different sources of water like well, town/utility/municipal water, river water, surface water, etc. are considered "
+  },
+  {
+    "new_kpi": "Water Withdrawal Intensity (m3 per $M Revenue)",
+    "lseg_title": "Water Use To Revenues USD in million",
+    "description": "Total water withdrawal in cubic meters divided by net sales or revenue in US dollars in million."
+  },
+  {
+    "new_kpi": "Water Stressed Sites",
+    "lseg_title": "Water Stressed Sites",
+    "description": "Water stressed sites represents the number of sites of the company operating in water-stressed regions.\n- Considered if number and/or proportion of facilities, assets, production, revenue in water-stressed regions reported by the company.\n- Considered if the company stated that they did not operate in any water stress region."
+  },
+  {
+    "new_kpi": "Water Pollutant Emissions (tonnes)",
+    "lseg_title": "Water Pollutant Emissions",
+    "description": "Total weight of water pollutant emissions in tonnes.\n- substances discharged into water system like PRTR (pollutant release and transfer registers) substances, BOD(biochemical oxygen demand), COD (chemical oxygen demand) or TSS (total suspended solids)\n"
+  },
+  {
+    "new_kpi": "Water Pollutant Emissions (tonnes per $M Revenue)",
+    "lseg_title": "Water Pollutant Emissions To Revenues USD in million",
+    "description": "Total weight of water pollutant emissions in tonnes divided by net sales or revenue in US dollars in million."
+  },
+  {
+    "new_kpi": "Total Waste (tonnes)",
+    "lseg_title": "Waste Total",
+    "description": "Total amount of waste produced in tonnes.\n- total waste = non-hazardous waste + hazardous waste\n- only solid waste is taken into consideration, exceptionally if liquid waste reported in ‘ton’ then we do the summation to derive total including liquid waste\n- for sector like mining, oil & gas, waste generation like tailings, waste rock, coal and fly ash, etc. are also considered\n"
+  },
+  {
+    "new_kpi": "Total Waste Intensity (tonnes per $M Revenue)",
+    "lseg_title": "Total Waste To Revenues USD in million",
+    "description": "Total amount of waste produced in tonnes divided by net sales or revenue in US dollars in million."
+  },
+  {
+    "new_kpi": "Total Waste Recycled (tonnes)",
+    "lseg_title": "Waste Recycled Total",
+    "description": "Total recycled and reused waste produced in tonnes.\n- waste used through incineration to generate energy, waste used for composting is also considered as waste recycled\n- wastes recycled include both hazardous and non-hazardous waste\n\n"
+  },
+  {
+    "new_kpi": "Waste Recycling Ratio",
+    "lseg_title": "Waste Recycling Ratio",
+    "description": "The waste recycling ratio as reported by the company.\n- waste recycling ratio = waste recycled/total waste*100\n- waste to energy or waste incinerated with energy recovery are considered as waste recycled\n- waste recovered by the way of composting is considered as recycled waste\n"
+  },
+  {
+    "new_kpi": "Environmental Revenue",
+    "lseg_title": "Revenue from Environmental Products",
+    "description": "Percentage of revenue from environmental products and services offered by the company."
+  },
+  {
+    "new_kpi": "Accidental Spills (KBLs)",
+    "lseg_title": "Accidental Spills",
+    "description": "Direct and accidental oil and other hydrocarbon spills in thousands of barrels (kbls).\n- relevant to companies operating in the oil and gas, marine transportation, utilities and chemicals sector"
+  },
+  {
+    "new_kpi": "Spill Intensity (KBLs per $M Revenue)",
+    "lseg_title": "Accidental Spills To Revenues USD in million",
+    "description": "Direct and accidental oil and other hydrocarbon spills in thousands of barrels (kbls) divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "Ozone-Depleting Substances (tonnes CFC-11 eq.)",
+    "lseg_title": "Ozone-Depleting Substances",
+    "description": "Total amount of ozone depleting (CFC-11 equivalents) substances emitted in tonnes.\n- ozone-depleting substances (ODS) include following: chlorofluorocarbons (CFCS),hydrochlorofluorocarbons (HFCS),halons, methyl bromide, carbon tetrachloride, methyl chloroform"
+  },
+  {
+    "new_kpi": "Ozone-Depleting Substances Intensity (tonnes CFC-11 eq. per $M Revenue)",
+    "lseg_title": "Ozone-Depleting Substances To Revenues USD in million",
+    "description": "Total amount of ozone depleting (CFC-11 equivalents) substances emitted in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "Toxic Chemical Reduction",
+    "lseg_title": "Toxic Chemicals Reduction",
+    "description": "Does the company report on initiatives to reduce, reuse, substitute or phase out toxic chemicals or substances?\n- in scope, the data includes chemicals, toxic materials, hazardous, PBT (persistent bio-accumulative toxic) and PVC (polyvinyl chloride)"
+  },
+  {
+    "new_kpi": "NOx Emissions (tonnes)",
+    "lseg_title": "NOx Emissions",
+    "description": "Total amount of NOx emissions emitted in tonnes.\n- following gases are relevant : NOx (nitrogen oxide),NO (nitric oxide), NO2 (nitrogen dioxide)\n- these emissions contribute to eutrophication, acidification and the formation of ground-level ozone\n- we follow green house gas (GHG) protocol for all our emission classifications by type"
+  },
+  {
+    "new_kpi": "NOx Intensity (tonnes per $M Revenue)",
+    "lseg_title": "NOx Emissions To Revenues USD in million",
+    "description": "Total amount of NOx emissions emitted in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "SOx Emissions (tonnes)",
+    "lseg_title": "SOx Emissions",
+    "description": "Total amount of SOx emissions emitted in tonnes.\n- following gases are relevant: SO2 (sulfur dioxide), SOx (sulfur oxide), SO (sulfur monoxide), SO3 (sulfur trioxide)\n- we follow green house gas (GHG) protocol for all our emission classifications by type"
+  },
+  {
+    "new_kpi": "SOx Intensity (tonnes per $M Revenue)",
+    "lseg_title": "SOx Emissions To Revenues USD in million",
+    "description": "Total amount of SOx emissions emitted in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "VOC Emissions (tonnes)",
+    "lseg_title": "VOC Emissions",
+    "description": "Total amount of volatile organic compounds (VOC) emissions in tonnes.\n- VOC (volatile organic compounds) emissions includes hydrocarbon emissions (THC), or unburned hydrocarbons (UHC) excluding methane and ethane\n- we follow green house gas (GHG) protocol for all our emission classifications by type"
+  },
+  {
+    "new_kpi": "VOC Intensity (tonnes per $M Revenue)",
+    "lseg_title": "VOC Emissions To Revenues USD in million",
+    "description": "Total amount of volatile organic compounds (VOC) emissions in tonnes divided by net sales or revenue US dollars in million."
+  },
+  {
+    "new_kpi": "Deforestation Controversies",
+    "lseg_title": "Deforestation Controversies Count",
+    "description": "Is the company under the spotlight of the media linked to Extensive cattle ranching, logging for materials and development displacement or impact of indigenous communities, extensive single crop plantation, Forest Fires etc, occurred from a company's operations."
+  },
+  {
+    "new_kpi": "Water and Marine Resource Controversies",
+    "lseg_title": "Water and Marine Resource Controversies Count",
+    "description": "Is the company under the spotlight of the media because of a controversy linked to Marine Engineering and Oil Drilling also spillages, Unsustainable Aquaculture or Overexploitation of Fishing Resources, Dredging, Pollution and Trash causing plastic debris or micro plastic (Tyres, Synthetic Textiles, Marine Coatings, Road Markings, Personal Care Products, Plastic Pellets) "
+  },
+  {
+    "new_kpi": "Biodiversity Risk Assessment",
+    "lseg_title": "Biodiversity Risk Assessment",
+    "description": "Does the company have a biodiversity-related risk assessment for existing operations or projects?\nRisk assessment on biodiversity represents a systematic evaluation process that is carried out by the company to detect potential biodiversity risk within its existing operations.\n- Considered if there is an actual practice of carrying out biodiversity risk assessment on its own existing operation.\n"
+  },
+  {
+    "new_kpi": "Biodiversity Impact Reduction",
+    "lseg_title": "Biodiversity Impact Reduction",
+    "description": "Does the company report on its impact on biodiversity or on activities to reduce its impact on the native ecosystems and species, as well as the biodiversity of protected and sensitive areas?\n"
+  },
+  {
+    "new_kpi": "Biodiversity Controversies",
+    "lseg_title": "Biodiversity and Ecosystem Controversies Count",
+    "description": "Is the company under the spotlight of the media because of a controversy linked to companies’ action leading to BIODIVERSITY and ecosystem degradation and the exploitation of sensitive ecosystems. Action such as rights of indigenous people have allegedly been infringed, negative impact on the forest ecosystem and endangered species."
+  },
+  {
+    "new_kpi": "Human Rights Policy (Contractors)",
+    "lseg_title": "Human Rights Contractor",
+    "description": "Does the company report or show to use human rights criteria in the selection or monitoring process of its suppliers or sourcing partners?"
+  },
+  {
+    "new_kpi": "Human Rights Policy",
+    "lseg_title": "Human Rights Policy",
+    "description": "Does the company have a policy for the exclusion of child, forced or compulsory labour, or to guarantee the freedom of association universally applied independent of local laws?"
+  },
+  {
+    "new_kpi": "Human Rights Controversies",
+    "lseg_title": "Human Rights Controversies",
+    "description": "Number of controversies published in the media linked to human rights issues.\n- controversies of suppliers and contractors relating to human rights breach\n- human rights abuses/violations are considered"
+  },
+  {
+    "new_kpi": "Employee Turnover %",
+    "lseg_title": "Turnover of Employees",
+    "description": "Percentage of employee turnover.\n- include employees who left the company for any reason (voluntary or involuntary) such as resignations, retirement, natural departure/death, medical incapacitation, redundancy, layoffs, restructuring, dismissal, retrenchment or end of a fixed-term contract\n- employees turnover rate= (employees leaving/average number of employees)*100\n- where the average number of employee = (employees at the end of the current year + employees at the end of the previous year)/2\n- employees at the end of the current fiscal year = employees at the end of the previous fiscal year + new employees - employees leaving\n"
+  },
+  {
+    "new_kpi": "Lost Time Injury Rate Total (per million hours)",
+    "lseg_title": "Lost Time Injury Rate Total",
+    "description": "Total number of injuries that caused the employees and contractors to lose at least a working day relative to one million hours worked.\n- total lost time injury (LTI) rate= total number of lost time injuries/total working hours*/1,000,000\n- total working hours= total number of (employees + contractors)* 2,000\n- include major injuries, serious injuries, RIDDOR (reporting of injuries, diseases, and dangerous occurrences regulations), lost time accidents, accidents resulting in one or three days of absence, restricted work cases \n- total lost time injury rate ≠ employees rate + contractors rate\n- lost time injury does not include fatalities. However, when the company reports a figure for LTI inclusive of fatalities, the value is considered\n- includes both employees and contractors lost time injuries \n- if the company doesn’t report on contractors health and safety, then the lost time injury rate employees are equal to the total lost time injury rate\n- lost time injury rate cannot be greater than the total injury rate\n- for UK companies, consider RIDDOR as lost time injuries\n- DART (days away/restricted or transfer rate) is considered as lost time injury. It takes into account the number of incidents that had one or more lost days, one or more restricted days or that resulted in a worker transferring to a different job within the company\n"
+  },
+  {
+    "new_kpi": "Strike Incidents",
+    "lseg_title": "Strikes",
+    "description": "Has there has been a strike or an industrial dispute that led to lost working days? "
+  },
+  {
+    "new_kpi": "Women Employees %",
+    "lseg_title": "Women Employees",
+    "description": "Percentage of women employees.\n- percentage of women employees to the total number of employees of the company\n- percentage of women employees = number of women/total number of employees*100\n"
+  },
+  {
+    "new_kpi": "Women Managers %",
+    "lseg_title": "Women Managers",
+    "description": "Percentage of women managers.\n- percentage of women managers among total managers of the company\n- if there is a breakdown by category in percentage such as top, senior, middle, junior management, then we consider the percentage of middle woman managers\n- percentage of women managers= number of women managers/total number of managers*100\n"
+  },
+  {
+    "new_kpi": "Board Gender Diversity %",
+    "lseg_title": "Board Gender Diversity, Percent",
+    "description": "Percentage of female  on the board."
+  },
+  {
+    "new_kpi": "Gender Pay Gap %",
+    "lseg_title": "Gender Pay Gap Percentage",
+    "description": "Percentage of remuneration of women to men, often for doing the same work."
+  },
+  {
+    "new_kpi": "Employees with Disabilities %",
+    "lseg_title": "Employees With Disabilities",
+    "description": "Percentage of employees with disabilities or special needs.\n- percentage of disabled employees or special needs to the total employees of the company \n- percentage of disabled employees=number of disabled employees/total number of employees*100\n"
+  },
+  {
+    "new_kpi": "Product Recall",
+    "lseg_title": "Product Recall",
+    "description": "Has the company announced a mass recall of products or has completely withdrawn a product due to defects or safety reasons? "
+  },
+  {
+    "new_kpi": "Controversies Customer Health & Safety",
+    "lseg_title": "Controversies Customer Health & Safety",
+    "description": "Number of controversies published in the media linked to customer health & safety.\n- instances where safety of the customers is harmed\n- lawsuits against a company relating to consumers health "
+  },
+  {
+    "new_kpi": "Revenues from Healthy Food or Products (% of total revenue)",
+    "lseg_title": "Revenues from Healthy Food or Products",
+    "description": "Percentage of revenue from sale of products and services that foster specific health and safety benefits for the consumers (healthy, organic or nutritional food, safe cars, etc.)?\n- when the company reports revenue from healthy food and products, percentage will be derived using below formula\n- percentage of revenue from healthy food and products= revenue from healthy food and products *100/total net revenue\n- mostly relevant for companies engaged in the production or retailing of goods and services\n- information is not considered for pharmaceutical companies on drugs alone as it is their business"
+  },
+  {
+    "new_kpi": "Customer Satisfaction",
+    "lseg_title": "Customer Satisfaction",
+    "description": "The percentage of customer satisfaction as reported by the company.\n- the overall percentage of customers who are satisfied\n- includes customer engagement rate and customer satisfaction index\n- if the base or index is available then customer satisfaction percentage = customer satisfaction unit/base value * 100\n"
+  },
+  {
+    "new_kpi": "Recent Customer Health & Safety Controversies",
+    "lseg_title": "Recent Customer Health & Safety Controversies",
+    "description": "Number of controversies linked to the elements driving product quality and responsibility published since the last fiscal year company update.\n- instances where safety of the customers is harmed\n- lawsuits against a company relating to consumers health "
+  },
+  {
+    "new_kpi": "Controversies Privacy",
+    "lseg_title": "Controversies Privacy",
+    "description": "Number of controversies published in the media linked to employee or customer privacy and integrity.\n- consider information where a breach of data has occurred\n- information relating to clients, employees, suppliers are considered"
+  },
+  {
+    "new_kpi": "Business Ethics Controversies",
+    "lseg_title": "Business Ethics Controversies",
+    "description": "Number of controversies published in the media linked to business ethics in general, political contributions or bribery and corruption.\n- consider class actions filed against a company for not following the general ethics\n- investigations made against a company regarding a suit are considered\n- any other allegations made against the company\n"
+  },
+  {
+    "new_kpi": "Community Lending and Investments",
+    "lseg_title": "Community Lending and Investments",
+    "description": "Total community lending, financing and investments which are not considered donations.\n- amount of community investments if the company receives any return for the same \n- usually provided to low-income individuals or minorities, small businesses, and communities for special-needs housing, economic development, community-based facilities, etc.\n- includes direct micro-financing, affordable housing, business or personal lending, consumer credit and community development loans\n- mainly relevant for financial sector companies\n"
+  },
+  {
+    "new_kpi": "Recent Human Rights Controversies",
+    "lseg_title": "Recent Human Rights Controversies",
+    "description": "Number of controversies linked to human rights issues published since the last fiscal year company update.\n- controversies of suppliers and contractors relating to human rights breach\n- human rights abuses/violations are considered"
+  },
+  {
+    "new_kpi": "Independent Board Members %",
+    "lseg_title": "Independent Board Members",
+    "description": "Percentage of independent board members as reported by the company."
+  },
+  {
+    "new_kpi": "Bribery, Corruption and Fraud Controversies",
+    "lseg_title": "Bribery, Corruption and Fraud Controversies",
+    "description": "Is the company under the spotlight of the media because of a controversy linked to bribery and corruption, political contributions, improper lobbying, money laundering, parallel imports or any tax fraud?"
+  },
+  {
+    "new_kpi": "Litigation Expenses ($)",
+    "lseg_title": "Litigation Expenses",
+    "description": "Total of all litigation expenses incurred as reported by the company. "
+  },
+  {
+    "new_kpi": "Litigation Expenses Intensity ($ per $M Revenue)",
+    "lseg_title": "Litigation Expenses To Revenues in million",
+    "description": "Total of all litigation expenses incurred as reported by the company divided by net sales or revenue in million."
+  },
+  {
+    "new_kpi": "Social Supply Risk Assessment",
+    "lseg_title": "Social Supply Risk Assessment",
+    "description": "Has a risk assessment regarding social issues in the supply chain been carried out?\nSocial supply risk assessment represents a systematic evaluation process that carried out by the company to detect potential social risk within its supply chain that classified as high risk.\n- Considered if there is actual practice of carrying out social risk assessment on its supply chain."
+  },
+  {
+    "new_kpi": "Wages & Working Conditions Controversies",
+    "lseg_title": "Wages Working Condition Controversies Count",
+    "description": "Number of controversies published in the media linked to the company's relations with employees or relating to wages or wage disputes.\n- consider any issues relating to employees wages \n- forcing the employees to work under unhealthy working conditions\n- delayed salaries paid is considered\n"
+  },
+  {
+    "new_kpi": "Greenwashing Controversies",
+    "lseg_title": "Greenwashing Fines Controversies Count",
+    "description": "Is the company under the spotlight of the media because of a controversy linked to companies’ action of Greenwashing and Greenwashing process of conveying a false impression, misleading information or untrue action about how a company’s products or service are environmentally sound."
+  },
+  {
+    "new_kpi": "Supply Risk Controversies",
+    "lseg_title": "Exposure To Supply Risk ControversiesCount",
+    "description": "Is the company under the spotlight of the media because of a controversy linked exposure to (geo-political) supply risk like supply chain geopolitical risk is the possibility that your supply chain is disrupted by global political, cultural, or socioeconomic events. Revolution, war, trade regulation, and tariff conflicts increase costs and reduce supply chain efficiency and Also doing business in critical countries. "
+  },
+  {
+    "new_kpi": "Supplier ESG Training",
+    "lseg_title": "Supplier ESG training",
+    "description": "Does the company provide training in environmental, social or governance factors for its suppliers?\n- consider training, programs or any other collaboration with suppliers to improve their ESG (environmental, social and governance) performance\n- audits leading to collaboration with suppliers on ESG issues are considered \n- consider information from industry code such as the Electronic Industry Citizenship Coalition (EICC) code of conduct and Pharmaceutical Industry Principles (PSCI). However, the Company has to describe its own actions/programs and Initiatives related to the specific principles stipulated in the codes\n"
+  },
+  {
+    "new_kpi": "Tax Fraud Controversies",
+    "lseg_title": "Tax Fraud Controversies",
+    "description": "Number of controversies published in the media linked to tax fraud, parallel imports or money laundering.\n- any fraudulent activities where the company tries to escape from paying taxes\n- companies sued for not following tax laws of that particular country"
+  },
+  {
+    "new_kpi": "Enterprise Value",
+    "lseg_title": "Enterprise Value including Cash and Short Term Investments in USD",
+    "description": "Market Capitalization at fiscal year end date plus Preferred Stock plus Minority Interest plus Total Debt including Cash & Short Term Investments in USD."
+  },
+  {
+    "new_kpi": "Total Employees",
+    "lseg_title": "Number of Employees",
+    "description": "Number of full- and part-time employees."
+  },
+  {
+    "new_kpi": "Local Sourcing Policy",
+    "lseg_title": "Policy Local Sourcing",
+    "description": "Does the company have a commitment to local employment and/or sourcing?\nPolicy local sourcing represent the policy on prioritizing the hiring of local workers or procuring goods and services from local suppliers.\n-Considered if the company is committed to hiring/sourcing locally."
+  },
+  {
+    "new_kpi": "Lobbying Controversies",
+    "lseg_title": "Lobbying Controversies",
+    "description": "Is the company under the spotlight of the media because of a controversy linked to lobbying activities? Wherein Many individuals or interest groups use lobbying to influence laws, government decisions, and political outcomes leading to ethics and morals involving bribing or influence peddling. "
+  },
+  {
+    "new_kpi": "UN Global Compact Signatory",
+    "lseg_title": "Global Compact Signatory",
+    "description": "Has the company signed the UN Global Compact?\n- has the company singed the 'United Nations Global Compact' which is a non-binding united nations pact to encourage businesses worldwide to adopt sustainable and socially responsible policies, and to report on their implementation"
+  },
+  {
+    "new_kpi": "OECD Guidelines Compliance",
+    "lseg_title": "OECD Guidelines for Multinational Enterprises",
+    "description": "Does the company claim to follow the OECD Guidelines for Multinational Enterprises?\n- general information on OECD is not considered such as OECD guidelines for chemical testing\n\n"
+  },
+  {
+    "new_kpi": "Environmental Fines ($)",
+    "lseg_title": "Self-Reported Environmental Fines",
+    "description": "Environmental fines as reported by the company.\n- the amount of fines paid in relation to the violation of environmental regulations during the fiscal year"
+  },
+  {
+    "new_kpi": "Environmental Fines Intensity ($ per $M Revenue)",
+    "lseg_title": "Self-Reported Environmental Fines To Revenues in million",
+    "description": "Environmental fines as reported by the company divided by net sales or revenue in million."
+  },
+  {
+    "new_kpi": "Whistleblower Protection Policy",
+    "lseg_title": "Whistleblower Protection",
+    "description": "Does the company have a provision or comply with regulations protecting whistleblowers?\n- practice to be on the protection of whistleblowers against any retaliation or reprisal \n- information on protecting employees reporting about breaches on illegal activity\n"
+  }
+]

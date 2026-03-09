@@ -45,6 +45,14 @@ COMPANY_ALIASES = {
     "kraft-heinz": "kraftheinz",
     "nestle": "nestle",
     "nestlé": "nestle",
+    "nestl": "nestle",
+}
+
+SECTOR_ESG_KPI_KEY_MAP = {
+    "Consumer Products": "CP",
+    "Private Equity": "PE",
+    "Mining": "Mining",
+    "Construction Materials": "Construction Materials",
 }
 
 BUCKET_BASE = {
@@ -633,6 +641,32 @@ def load_investment_rationals_dataset():
     return []
 
 
+def load_esg_kpi_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "ESG_KPI.json")
+    if not os.path.exists(data_path):
+        return {}
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, dict):
+        return parsed
+    return {}
+
+
+def load_kpi_description_dataset():
+    data_path = os.path.join(BASE_DIR, "data", "KPI_Description.json")
+    if not os.path.exists(data_path):
+        return []
+
+    with open(data_path, "r", encoding="utf-8") as data_file:
+        parsed = json.load(data_file)
+
+    if isinstance(parsed, list):
+        return parsed
+    return []
+
+
 def normalize_company_name(company_name):
     text_value = unicodedata.normalize("NFKD", (company_name or ""))
     ascii_value = "".join(character for character in text_value if not unicodedata.combining(character))
@@ -678,6 +712,25 @@ def parse_numeric_value(raw_value):
         return float(filtered)
     except ValueError:
         return None
+
+
+def parse_numeric_or_boolean_value(raw_value):
+    if isinstance(raw_value, bool):
+        return 1.0 if raw_value else 0.0
+
+    if raw_value is None:
+        return None
+
+    if isinstance(raw_value, (int, float)):
+        try:
+            numeric_value = float(raw_value)
+        except (TypeError, ValueError):
+            return None
+        if numeric_value != numeric_value:
+            return None
+        return numeric_value
+
+    return parse_numeric_value(raw_value)
 
 
 def parse_flexible_date(raw_value):
@@ -2563,6 +2616,292 @@ def build_commitment_summary(sector_name, selected_company, sector_companies, sc
     }
 
 
+def resolve_esg_sector_key(sector_name, dataset):
+    mapped_key = SECTOR_ESG_KPI_KEY_MAP.get(sector_name)
+    if mapped_key and mapped_key in dataset:
+        return mapped_key
+
+    if sector_name in dataset:
+        return sector_name
+
+    normalized_requested = normalize_text_token(sector_name)
+    for available_key in dataset.keys():
+        if normalize_text_token(available_key) == normalized_requested:
+            return available_key
+    return None
+
+
+def normalize_kpi_type_group(raw_type_name):
+    normalized = normalize_text_token(raw_type_name)
+    if normalized == "numbers":
+        return "numbers"
+    if normalized == "intensity":
+        return "intensity"
+    if normalized == "percentage":
+        return "percentage"
+    if normalized in {"truefalse", "boolean"}:
+        return "boolean"
+    return "other"
+
+
+def collect_plot_kpis_for_company(company_payload):
+    if not isinstance(company_payload, dict):
+        return {}
+
+    kpi_map = {}
+    for theme_name, theme_payload in company_payload.items():
+        if not isinstance(theme_payload, dict):
+            continue
+
+        for raw_type_name, type_payload in theme_payload.items():
+            if not isinstance(type_payload, dict):
+                continue
+
+            type_group = normalize_kpi_type_group(raw_type_name)
+            if type_group == "other":
+                continue
+
+            for source_name, source_payload in type_payload.items():
+                if not isinstance(source_payload, dict):
+                    continue
+
+                plot_payload = source_payload.get("Plot") or {}
+                if not isinstance(plot_payload, dict):
+                    continue
+
+                for kpi_name, raw_value in plot_payload.items():
+                    clean_kpi_name = str(kpi_name or "").strip()
+                    if not clean_kpi_name:
+                        continue
+                    kpi_map[clean_kpi_name] = {
+                        "kpi": clean_kpi_name,
+                        "theme": str(theme_name or "").strip() or "Other",
+                        "typeGroup": type_group,
+                        "source": str(source_name or "").strip() or "Reported",
+                        "rawValue": raw_value,
+                    }
+
+    return kpi_map
+
+
+def build_kpi_description_lookup():
+    lookup = {}
+    for row in load_kpi_description_dataset():
+        if not isinstance(row, dict):
+            continue
+        kpi_name = str(row.get("new_kpi") or "").strip()
+        if not kpi_name:
+            continue
+        lookup[normalize_text_token(kpi_name)] = str(row.get("description") or "").strip()
+    return lookup
+
+
+def compute_percentile_rank(value, peer_values):
+    values = [float(value)]
+    values.extend(float(item) for item in peer_values)
+    if not values:
+        return 50.0
+
+    lower_count = sum(1 for item in values if item < value)
+    equal_count = sum(1 for item in values if item == value)
+    percentile = ((lower_count + (0.5 * equal_count)) / len(values)) * 100
+    return round(percentile, 1)
+
+
+def build_kpi_momentum_context(sector_name, selected_company, sector_companies):
+    dataset = load_esg_kpi_dataset()
+    if not dataset:
+        return None
+
+    sector_key = resolve_esg_sector_key(sector_name, dataset)
+    if not sector_key:
+        return None
+
+    sector_payload = dataset.get(sector_key)
+    if not isinstance(sector_payload, dict) or not sector_payload:
+        return None
+
+    available_company_names = list(sector_payload.keys())
+    matched_selected_company = find_matching_company_name(selected_company, available_company_names)
+    if not matched_selected_company:
+        return None
+
+    peer_company_names = []
+    for company_name in sector_companies:
+        if normalize_company_name(company_name) == normalize_company_name(selected_company):
+            continue
+        matched_peer_name = find_matching_company_name(company_name, available_company_names)
+        if matched_peer_name:
+            peer_company_names.append(matched_peer_name)
+
+    selected_kpis = collect_plot_kpis_for_company(sector_payload.get(matched_selected_company, {}))
+    if not selected_kpis:
+        return None
+
+    peer_kpis_by_company = {
+        company_name: collect_plot_kpis_for_company(sector_payload.get(company_name, {}))
+        for company_name in peer_company_names
+    }
+
+    kpi_descriptions = build_kpi_description_lookup()
+
+    benchmark_rows = []
+    for kpi_name, selected_entry in selected_kpis.items():
+        selected_numeric = parse_numeric_or_boolean_value(selected_entry.get("rawValue"))
+        if selected_numeric is None:
+            continue
+
+        peer_values = []
+        peer_flags = []
+        for peer_name in peer_company_names:
+            peer_entry = peer_kpis_by_company.get(peer_name, {}).get(kpi_name)
+            if not isinstance(peer_entry, dict):
+                continue
+            peer_numeric = parse_numeric_or_boolean_value(peer_entry.get("rawValue"))
+            if peer_numeric is None:
+                continue
+            peer_values.append(peer_numeric)
+            peer_flags.append(
+                {
+                    "company": peer_name,
+                    "value": peer_numeric,
+                    "rawValue": peer_entry.get("rawValue"),
+                }
+            )
+
+        peer_average = round(sum(peer_values) / len(peer_values), 4) if peer_values else None
+        peer_median = None
+        if peer_values:
+            sorted_values = sorted(peer_values)
+            middle_index = len(sorted_values) // 2
+            if len(sorted_values) % 2 == 1:
+                peer_median = sorted_values[middle_index]
+            else:
+                peer_median = (sorted_values[middle_index - 1] + sorted_values[middle_index]) / 2
+
+        benchmark_rows.append(
+            {
+                "kpi": kpi_name,
+                "theme": selected_entry.get("theme"),
+                "typeGroup": selected_entry.get("typeGroup"),
+                "source": selected_entry.get("source"),
+                "selectedValue": selected_numeric,
+                "selectedRawValue": selected_entry.get("rawValue"),
+                "peerAverage": peer_average,
+                "peerMedian": peer_median,
+                "peerValues": peer_flags,
+                "peerCoverage": len(peer_values),
+                "peerCompanyCount": len(peer_company_names),
+                "percentileRank": compute_percentile_rank(selected_numeric, peer_values) if peer_values else 50.0,
+                "deltaVsPeerMedian": round(selected_numeric - peer_median, 4) if peer_median is not None else None,
+                "description": kpi_descriptions.get(normalize_text_token(kpi_name), ""),
+            }
+        )
+
+    if not benchmark_rows:
+        return None
+
+    grouped_rows = {
+        "numbers": [],
+        "intensity": [],
+        "percentage": [],
+        "boolean": [],
+    }
+    for row in benchmark_rows:
+        group_name = row.get("typeGroup")
+        if group_name in grouped_rows:
+            grouped_rows[group_name].append(row)
+
+    for group_name in grouped_rows:
+        grouped_rows[group_name].sort(
+            key=lambda row: (
+                -float(row.get("peerCoverage") or 0),
+                row.get("kpi", "").lower(),
+            )
+        )
+
+    type_benchmark_rows = []
+    for type_group in ["numbers", "intensity", "percentage", "boolean"]:
+        rows = grouped_rows.get(type_group, [])
+        benchmarkable_rows = [row for row in rows if row.get("peerCoverage", 0) > 0]
+        avg_percentile = round(
+            sum(row.get("percentileRank", 50.0) for row in benchmarkable_rows) / len(benchmarkable_rows),
+            1,
+        ) if benchmarkable_rows else 50.0
+        type_benchmark_rows.append(
+            {
+                "typeGroup": type_group,
+                "avgPercentile": avg_percentile,
+                "kpiCount": len(rows),
+                "benchmarkableCount": len(benchmarkable_rows),
+            }
+        )
+
+    boolean_benchmark_rows = []
+    for row in grouped_rows.get("boolean", []):
+        peer_values = [item.get("value") for item in row.get("peerValues", [])]
+        peer_true_rate = round((sum(1 for value in peer_values if value >= 0.5) / len(peer_values)) * 100, 1) if peer_values else 0.0
+        boolean_benchmark_rows.append(
+            {
+                "kpi": row.get("kpi"),
+                "theme": row.get("theme"),
+                "selectedFlag": 100 if row.get("selectedValue", 0) >= 0.5 else 0,
+                "peerTrueRate": peer_true_rate,
+                "description": row.get("description") or "",
+            }
+        )
+
+    numeric_spotlight_rows = [
+        row for row in benchmark_rows
+        if row.get("typeGroup") in {"numbers", "intensity", "percentage"}
+    ]
+    numeric_spotlight_rows.sort(
+        key=lambda row: (
+            -float(row.get("peerCoverage") or 0),
+            -abs(float(row.get("deltaVsPeerMedian") or 0.0)),
+        )
+    )
+
+    benchmarkable_count = sum(1 for row in benchmark_rows if row.get("peerCoverage", 0) > 0)
+    numeric_higher_than_peer_median = sum(
+        1
+        for row in benchmark_rows
+        if row.get("typeGroup") in {"numbers", "intensity", "percentage"}
+        and row.get("peerMedian") is not None
+        and float(row.get("selectedValue") or 0.0) > float(row.get("peerMedian") or 0.0)
+    )
+    boolean_true_count = sum(
+        1
+        for row in grouped_rows.get("boolean", [])
+        if float(row.get("selectedValue") or 0.0) >= 0.5
+    )
+
+    return {
+        "sector": sector_name,
+        "selectedCompany": matched_selected_company,
+        "peerCompanies": peer_company_names,
+        "summary": {
+            "plotKpiCount": len(benchmark_rows),
+            "benchmarkableCount": benchmarkable_count,
+            "peerCompanyCount": len(peer_company_names),
+            "numericHigherThanPeerMedian": numeric_higher_than_peer_median,
+            "booleanTrueCount": boolean_true_count,
+            "booleanTotalCount": len(grouped_rows.get("boolean", [])),
+        },
+        "charts": {
+            "typeBenchmark": type_benchmark_rows,
+            "booleanBenchmark": boolean_benchmark_rows[:12],
+            "spotlightRows": numeric_spotlight_rows[:10],
+        },
+        "groups": {
+            "numbers": grouped_rows.get("numbers", []),
+            "intensity": grouped_rows.get("intensity", []),
+            "percentage": grouped_rows.get("percentage", []),
+            "boolean": grouped_rows.get("boolean", []),
+        },
+    }
+
+
 @app.route("/api/auth/login", methods=["POST"])
 def login():
     payload = request.get_json(silent=True) or {}
@@ -2876,6 +3215,26 @@ def investment_insights():
 
     insights = build_investment_insights(sector_name, matched_company, sector_companies)
     return jsonify(insights)
+
+
+@app.route("/api/kpi-momentum", methods=["GET"])
+def kpi_momentum():
+    user = get_current_user()
+    if not user:
+        return jsonify({"message": "Unauthorized."}), 401
+
+    sector_name = (request.args.get("sector") or "").strip()
+    selected_company = (request.args.get("company") or "").strip()
+
+    sector_companies, matched_company, error = resolve_sector_and_company_or_error(user, sector_name, selected_company)
+    if error:
+        return error
+
+    context = build_kpi_momentum_context(sector_name, matched_company, sector_companies)
+    if not context:
+        return jsonify({"message": "KPI momentum data not available for selected company."}), 404
+
+    return jsonify(context)
 
 
 @app.route("/api/version", methods=["GET"])

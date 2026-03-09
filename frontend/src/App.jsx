@@ -62,30 +62,40 @@ function toRgbCss(rgb) {
   return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
 }
 
-function hashString(value) {
-  let hash = 0
-  for (let index = 0; index < value.length; index += 1) {
-    hash = (hash << 5) - hash + value.charCodeAt(index)
-    hash |= 0
-  }
-  return Math.abs(hash)
+const KPI_TYPE_LABELS = {
+  numbers: 'Reported Numbers',
+  intensity: 'Intensity',
+  percentage: 'Percentages',
+  boolean: 'True / False',
 }
 
-function buildDummyKpiInsights(sectorName, selectedCompany) {
-  const key = `${sectorName || ''}-${selectedCompany || ''}-kpi`
+function formatKpiTypeLabel(typeGroup) {
+  return KPI_TYPE_LABELS[typeGroup] || String(typeGroup || 'Other')
+}
 
-  return {
-    metrics: [
-      { label: 'Decarbonization Velocity', value: `${4 + (hashString(`${key}-carbon`) % 7)}% YoY`, trend: 'Improving' },
-      { label: 'Sustainability Capex Yield', value: `${11 + (hashString(`${key}-capex`) % 12)}%`, trend: 'Stable' },
-      { label: 'Narrative Credibility Index', value: `${63 + (hashString(`${key}-narrative`) % 28)}/100`, trend: 'At risk' },
-    ],
-    moves: [
-      'Prioritize 2–3 high-visibility KPI commitments with CFO-backed accountability.',
-      'Strengthen external narrative with quantified progress and near-term milestones.',
-      'Align KPI governance cadence with board and investor communication windows.',
-    ],
+function formatKpiDisplayValue(value, typeGroup) {
+  if (value === null || value === undefined) {
+    return 'NA'
   }
+
+  if (typeGroup === 'boolean') {
+    return Number(value) >= 0.5 ? 'True' : 'False'
+  }
+
+  const numericValue = Number(value)
+  if (!Number.isFinite(numericValue)) {
+    return 'NA'
+  }
+
+  if (typeGroup === 'percentage') {
+    return `${numericValue.toFixed(1)}%`
+  }
+
+  if (Math.abs(numericValue) >= 1000) {
+    return numericValue.toLocaleString(undefined, { maximumFractionDigits: 1 })
+  }
+
+  return numericValue.toFixed(2)
 }
 
 function formatPct(value) {
@@ -939,6 +949,70 @@ function formatIndustryLabel(value) {
   return text
 }
 
+function KpiTypeBenchmarkChart({ data }) {
+  if (!data?.length) {
+    return <p className="commitment-section-message">No benchmark chart data available.</p>
+  }
+
+  const chartData = data.map((item) => ({
+    type: formatKpiTypeLabel(item.typeGroup),
+    percentile: Number(item.avgPercentile || 0),
+    benchmarkableCount: Number(item.benchmarkableCount || 0),
+  }))
+
+  return (
+    <div className="kpi-chart-wrap">
+      <ResponsiveContainer width="100%" height={250}>
+        <BarChart data={chartData} margin={{ top: 10, right: 12, left: 0, bottom: 30 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
+          <XAxis dataKey="type" tick={{ fontSize: 11, fill: '#46506f' }} angle={-15} textAnchor="end" interval={0} height={56} />
+          <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: '#2f3554' }} tickFormatter={(value) => `${value}%`} />
+          <Tooltip
+            formatter={(value, key, payload) => {
+              if (key === 'percentile') return [`${Number(value).toFixed(1)}%`, 'Avg percentile rank']
+              return [value, key]
+            }}
+            labelFormatter={(label) => `Type: ${label}`}
+          />
+          <Bar dataKey="percentile" name="Avg percentile rank" fill="rgba(104, 70, 218, 0.72)" radius={[8, 8, 0, 0]}>
+            <LabelList dataKey="benchmarkableCount" position="top" formatter={(value) => `${Number(value)} KPIs`} />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+function KpiBooleanBenchmarkChart({ data }) {
+  if (!data?.length) {
+    return <p className="commitment-section-message">No true/false KPI coverage for this company.</p>
+  }
+
+  const chartData = data.map((item) => ({
+    kpi: item.kpi,
+    selected: Number(item.selectedFlag || 0),
+    peerTrueRate: Number(item.peerTrueRate || 0),
+  }))
+
+  const chartHeight = Math.max(250, chartData.length * 34)
+
+  return (
+    <div className="kpi-chart-wrap">
+      <ResponsiveContainer width="100%" height={chartHeight}>
+        <BarChart data={chartData} layout="vertical" margin={{ top: 8, right: 20, left: 20, bottom: 8 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 11, fill: '#3f4769' }} />
+          <YAxis type="category" dataKey="kpi" width={210} tick={{ fontSize: 11, fill: '#3f4769' }} />
+          <Tooltip formatter={(value) => `${Number(value).toFixed(1)}%`} />
+          <Legend />
+          <Bar dataKey="selected" name="Client" fill="rgba(104, 70, 218, 0.8)" radius={[0, 4, 4, 0]} />
+          <Bar dataKey="peerTrueRate" name="Peer true-rate" fill="rgba(122, 184, 0, 0.72)" radius={[0, 4, 4, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -962,6 +1036,8 @@ function App() {
   const [isScorecardLoading, setIsScorecardLoading] = useState(false)
   const [investmentInsights, setInvestmentInsights] = useState(null)
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
+  const [kpiMomentumData, setKpiMomentumData] = useState(null)
+  const [isKpiMomentumLoading, setIsKpiMomentumLoading] = useState(false)
   const [activeModal, setActiveModal] = useState(null)
   const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
@@ -993,23 +1069,19 @@ function App() {
   const userMenuRef = useRef(null)
   const greeting = useMemo(() => getGreeting(), [])
   const companies = selectedSector ? sectorCompanyMap[selectedSector] || [] : []
-  const kpiInsights = useMemo(
-    () => buildDummyKpiInsights(selectedSector, selectedCompany),
-    [selectedSector, selectedCompany],
-  )
-  const kpiTrendSummary = useMemo(() => {
-    const metrics = kpiInsights?.metrics || []
-    const improvingCount = metrics.filter((metric) => metric.trend?.toLowerCase() === 'improving').length
-    const stableCount = metrics.filter((metric) => metric.trend?.toLowerCase() === 'stable').length
-    const riskCount = metrics.filter((metric) => metric.trend?.toLowerCase() === 'at risk').length
-
+  const kpiSummary = useMemo(() => {
+    const summary = kpiMomentumData?.summary || {}
     return {
-      total: metrics.length,
-      improvingCount,
-      stableCount,
-      riskCount,
+      total: Number(summary.plotKpiCount || 0),
+      benchmarkable: Number(summary.benchmarkableCount || 0),
+      numericAbovePeerMedian: Number(summary.numericHigherThanPeerMedian || 0),
+      booleanTrueCount: Number(summary.booleanTrueCount || 0),
+      booleanTotalCount: Number(summary.booleanTotalCount || 0),
     }
-  }, [kpiInsights])
+  }, [kpiMomentumData])
+  const kpiSpotlightRows = useMemo(() => kpiMomentumData?.charts?.spotlightRows || [], [kpiMomentumData])
+  const kpiTypeBenchmarkRows = useMemo(() => kpiMomentumData?.charts?.typeBenchmark || [], [kpiMomentumData])
+  const kpiBooleanBenchmarkRows = useMemo(() => kpiMomentumData?.charts?.booleanBenchmark || [], [kpiMomentumData])
   const investmentTrendData = useMemo(() => {
     const trendRows = investmentInsights?.sustainabilityTrend || []
     if (trendRows.length) {
@@ -1185,6 +1257,8 @@ function App() {
       setSelectedThemeRationale(null)
       setInvestmentInsights(null)
       setIsInvestmentInsightsLoading(false)
+      setKpiMomentumData(null)
+      setIsKpiMomentumLoading(false)
       return
     }
 
@@ -1196,6 +1270,7 @@ function App() {
     loadCommitmentOverview(selectedSector, selectedCompany)
     loadScorecard(selectedSector, selectedCompany)
     loadInvestmentInsights(selectedSector, selectedCompany)
+    loadKpiMomentum(selectedSector, selectedCompany)
   }, [user, selectedSector, selectedCompany])
 
   const clearAlerts = () => {
@@ -1357,6 +1432,27 @@ function App() {
     }
   }
 
+  const loadKpiMomentum = async (sectorName, companyName) => {
+    setIsKpiMomentumLoading(true)
+
+    try {
+      const query = new URLSearchParams({ sector: sectorName, company: companyName })
+      const res = await fetch(`/api/kpi-momentum?${query.toString()}`, { credentials: 'include' })
+
+      if (!res.ok) {
+        setKpiMomentumData(null)
+        return
+      }
+
+      const data = await res.json()
+      setKpiMomentumData(data)
+    } catch {
+      setKpiMomentumData(null)
+    } finally {
+      setIsKpiMomentumLoading(false)
+    }
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault()
     clearAlerts()
@@ -1403,6 +1499,7 @@ function App() {
     setCommitmentOverview(null)
     setScorecardData(null)
     setInvestmentInsights(null)
+    setKpiMomentumData(null)
     setUsers([])
     setAllSectors([])
     resetAdminForm()
@@ -1969,9 +2066,9 @@ function App() {
               </article>
             </div>
 
-            <div className="home-card-grid-one">
+            <div className="home-card-grid-two kpi-half-row">
               <article
-                className="card home-insight-card interactive-card"
+                className="card home-insight-card interactive-card kpi-half-card"
                 role="button"
                 tabIndex={0}
                 onClick={() => setActiveModal('kpi')}
@@ -1986,125 +2083,284 @@ function App() {
                   <h3>KPI Momentum</h3>
                   <span className="card-see-more">See More</span>
                 </div>
-                <p className="card-subtitle">Performance signal strength across sustainability KPIs</p>
+                <p className="card-subtitle">Plot KPIs for client vs peers, grouped by data type</p>
                 <div className="gradient-line" />
 
-                <div className="kpi-infographic-layout">
-                  <section className="kpi-hero-section">
-                    <div className="kpi-hero-main">
-                      <strong>{kpiTrendSummary.improvingCount}/{kpiTrendSummary.total || 0}</strong>
-                      <span>KPIs improving</span>
-                    </div>
-                    <div className="kpi-signal-row">
-                      <span className="kpi-signal-chip improving">↑ Improving {kpiTrendSummary.improvingCount}</span>
-                      <span className="kpi-signal-chip stable">→ Stable {kpiTrendSummary.stableCount}</span>
-                      <span className="kpi-signal-chip risk">↓ At Risk {kpiTrendSummary.riskCount}</span>
-                    </div>
-                  </section>
+                {isKpiMomentumLoading && <p className="commitment-section-message">Loading KPI momentum...</p>}
 
-                  <div className="kpi-infographic-grid">
-                    {kpiInsights.metrics.map((metric) => {
-                      const trend = (metric.trend || '').toLowerCase()
-                      const trendClass = trend === 'improving' ? 'improving' : trend === 'stable' ? 'stable' : 'risk'
-                      return (
-                        <article key={metric.label} className={`kpi-infographic-item ${trendClass}`}>
-                          <div className="kpi-item-header">
-                            <p>{metric.label}</p>
-                            <em className={`kpi-trend-tag ${trendClass}`}>{metric.trend}</em>
-                          </div>
-                          <strong>{metric.value}</strong>
-                        </article>
-                      )
-                    })}
+                {!isKpiMomentumLoading && kpiMomentumData && (
+                  <div className="kpi-infographic-layout kpi-momentum-layout">
+                    <section className="kpi-hero-section kpi-hero-grid">
+                      <article className="kpi-hero-tile">
+                        <strong>{kpiSummary.benchmarkable}/{kpiSummary.total}</strong>
+                        <span>Benchmarkable KPIs</span>
+                      </article>
+                      <article className="kpi-hero-tile">
+                        <strong>{kpiSummary.numericAbovePeerMedian}</strong>
+                        <span>Numeric KPIs above peer median</span>
+                      </article>
+                      <article className="kpi-hero-tile">
+                        <strong>{kpiSummary.booleanTrueCount}/{kpiSummary.booleanTotalCount}</strong>
+                        <span>True/False KPIs flagged True</span>
+                      </article>
+                    </section>
+
+                    <section className="kpi-card-pane">
+                      <h4>Type Benchmark (Percentile)</h4>
+                      <KpiTypeBenchmarkChart data={kpiTypeBenchmarkRows} />
+                    </section>
+
+                    <section className="kpi-card-pane">
+                      <h4>KPI Spotlight</h4>
+                      <div className="table-wrap kpi-spotlight-wrap">
+                        <table className="kpi-spotlight-table">
+                          <thead>
+                            <tr>
+                              <th>KPI</th>
+                              <th>Client</th>
+                              <th>Peer Avg</th>
+                              <th>Type</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {kpiSpotlightRows.slice(0, 5).map((row) => (
+                              <tr key={`spotlight-${row.kpi}`}>
+                                <td>{row.kpi}</td>
+                                <td>{formatKpiDisplayValue(row.selectedValue, row.typeGroup)}</td>
+                                <td>{formatKpiDisplayValue(row.peerAverage, row.typeGroup)}</td>
+                                <td>{formatKpiTypeLabel(row.typeGroup)}</td>
+                              </tr>
+                            ))}
+                            {!kpiSpotlightRows.length && (
+                              <tr>
+                                <td colSpan={4}>No spotlight KPIs available.</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
                   </div>
-                </div>
+                )}
+
+                {!isKpiMomentumLoading && !kpiMomentumData && (
+                  <p className="commitment-section-message">No KPI momentum data available for this selection.</p>
+                )}
               </article>
             </div>
           </section>
         )}
 
         {activeView === 'scorecard' && (
-          <section className="scorecard-page">
-            <div className="settings-header">
-              <h2>Commitment Scorecard</h2>
-              <button type="button" className="btn-ghost" onClick={() => setActiveView('home')}>Back to Dashboard</button>
-            </div>
-            <p className="body-subtitle">Achieved + On-track distribution across sector players</p>
-
-            <section className="card scorecard-chart-card">
-              <h3 className="scorecard-chart-title">Commitment Progress benchmark</h3>
-              <div className="scorecard-thin-divider" />
-              {isCommitmentOverviewLoading && <p>Loading score distribution...</p>}
-              {!isCommitmentOverviewLoading && !!(commitmentOverview?.ranking || []).length && (
-                <div className="score-vertical-layout">
-                  <CommitmentProgressChart ranking={commitmentOverview?.ranking || []} />
-
-                  <aside className="score-segment-legend">
-                    <h4>Legend</h4>
-                    <div><i className="legend-block achieved" /> Achieved</div>
-                    <div><i className="legend-block ontrack" /> On-Track</div>
-                    <div><i className="legend-block offtrack" /> Off-Track</div>
-                    <div><i className="legend-block noreporting" /> Not Reporting</div>
-                    <div><i className="legend-block others" /> No-target</div>
-                  </aside>
-                </div>
-              )}
-
-              {!isCommitmentOverviewLoading && !(commitmentOverview?.ranking || []).length && <p>No score distribution data available.</p>}
-            </section>
-
-            <section className="card scorecard-table-card">
-              <div className="scorecard-table-head">
-                <h3>Scorecard</h3>
-                <button type="button" className="btn-ghost" onClick={() => setActiveModal('methodology')}>Methodology</button>
+            <section className="scorecard-page">
+              <div className="settings-header">
+                <h2>Commitment Scorecard</h2>
+                <button type="button" className="btn-ghost" onClick={() => setActiveView('home')}>Back to Dashboard</button>
               </div>
-              <div className="gradient-line" />
+              <p className="body-subtitle">Achieved + On-track distribution across sector players</p>
 
-              <div className="score-scale-legend">
-                <div className="score-scale-legend-track">
-                  <div className="status-scale-gradient" />
-                  <div className="score-scale-legend-labels">
-                    <span>X (No Commitments)</span>
-                    <span>A (Active)</span>
-                    <span>P (Proactive)</span>
-                    <span>L (Leading)</span>
-                    <span>D (Distinctive)</span>
+              <section className="card scorecard-chart-card">
+                <h3 className="scorecard-chart-title">Commitment Progress benchmark</h3>
+                <div className="scorecard-thin-divider" />
+                {isCommitmentOverviewLoading && <p>Loading score distribution...</p>}
+                {!isCommitmentOverviewLoading && !!(commitmentOverview?.ranking || []).length && (
+                  <div className="score-vertical-layout">
+                    <CommitmentProgressChart ranking={commitmentOverview?.ranking || []} />
+
+                    <aside className="score-segment-legend">
+                      <h4>Legend</h4>
+                      <div><i className="legend-block achieved" /> Achieved</div>
+                      <div><i className="legend-block ontrack" /> On-Track</div>
+                      <div><i className="legend-block offtrack" /> Off-Track</div>
+                      <div><i className="legend-block noreporting" /> Not Reporting</div>
+                      <div><i className="legend-block others" /> No-target</div>
+                    </aside>
+                  </div>
+                )}
+
+                {!isCommitmentOverviewLoading && !(commitmentOverview?.ranking || []).length && <p>No score distribution data available.</p>}
+              </section>
+
+              <section className="card scorecard-table-card">
+                <div className="scorecard-table-head">
+                  <h3>Scorecard</h3>
+                  <button type="button" className="btn-ghost" onClick={() => setActiveModal('methodology')}>Methodology</button>
+                </div>
+                <div className="gradient-line" />
+
+                <div className="score-scale-legend">
+                  <div className="score-scale-legend-track">
+                    <div className="status-scale-gradient" />
+                    <div className="score-scale-legend-labels">
+                      <span>X (No Commitments)</span>
+                      <span>A (Active)</span>
+                      <span>P (Proactive)</span>
+                      <span>L (Leading)</span>
+                      <span>D (Distinctive)</span>
+                    </div>
+                  </div>
+                  <div className="score-scale-meta">
+                    <span className="scale-marker-legend-item company"><i className="scale-marker-legend-line" />C = Client</span>
+                    <span className="scale-marker-legend-item peer"><i className="scale-marker-legend-triangle up" />P = Peer Avg</span>
+                    <span className="scale-marker-legend-item best"><i className="scale-marker-legend-triangle up" />B = Best</span>
                   </div>
                 </div>
-                <div className="score-scale-meta">
-                  <span className="scale-marker-legend-item company"><i className="scale-marker-legend-line" />C = Client</span>
-                  <span className="scale-marker-legend-item peer"><i className="scale-marker-legend-triangle up" />P = Peer Avg</span>
-                  <span className="scale-marker-legend-item best"><i className="scale-marker-legend-triangle up" />B = Best</span>
-                </div>
-              </div>
 
-              {isScorecardLoading && <p>Loading scorecard table...</p>}
+                {isScorecardLoading && <p>Loading scorecard table...</p>}
 
-              {!isScorecardLoading && scorecardData && (
-                <div className="table-wrap scorecard-table-wrap">
-                  <table className="scorecard-main-table">
-                    <colgroup>
-                      <col style={{ width: '20%' }} />
-                      <col style={{ width: '30%' }} />
-                      <col style={{ width: '20%' }} />
-                      <col style={{ width: '30%' }} />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th>Theme</th>
-                        <th>Overall Status</th>
-                        <th>Progress</th>
-                        <th>Best Practices</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(scorecardData.rows || []).map((row) => {
-                        const isExpanded = !!expandedScorecardThemes[row.theme]
-                        const commitments = row.commitments || []
+                {!isScorecardLoading && scorecardData && (
+                  <div className="table-wrap scorecard-table-wrap">
+                    <table className="scorecard-main-table">
+                      <colgroup>
+                        <col style={{ width: '20%' }} />
+                        <col style={{ width: '30%' }} />
+                        <col style={{ width: '20%' }} />
+                        <col style={{ width: '30%' }} />
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>Theme</th>
+                          <th>Overall Status</th>
+                          <th>Progress</th>
+                          <th>Best Practices</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(scorecardData.rows || []).map((row) => {
+                          const isExpanded = !!expandedScorecardThemes[row.theme]
+                          const commitments = row.commitments || []
 
-                        return (
-                          <Fragment key={row.theme}>
-                            <tr
+                          return (
+                            <Fragment key={row.theme}>
+                              <tr
+                                className={`scorecard-theme-row ${isExpanded ? 'expanded' : ''}`}
+                                onClick={() => toggleScorecardThemeExpansion(row.theme)}
+                              >
+                                <td>
+                                  <div className="scorecard-theme-cell">
+                                    <strong>{row.theme}</strong>
+                                    <span className="theme-commitment-count">({row.commitmentCount || commitments.length} commitments)</span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="score-scale-cell-head">
+                                    <button
+                                      type="button"
+                                      className="score-info-button"
+                                      aria-label={`Open score rationale for ${row.theme}`}
+                                      onClick={(event) => {
+                                        event.stopPropagation()
+                                        setSelectedThemeRationale(row)
+                                      }}
+                                    >
+                                      i
+                                    </button>
+                                  </div>
+                                  <StatusScaleCell
+                                    overallStatus={row.overallStatus}
+                                    peerAverage={row.peerAverage}
+                                    bestScore={row.bestScore}
+                                  />
+                                </td>
+                                <td>
+                                  <div className="scorecard-progress-cell">
+                                    {(() => {
+                                      const progressText = String(row.progress || 'Pending logic')
+                                      const match = progressText.match(/^(\d+)\/(\d+)\s+(.*)$/)
+
+                                      if (!match) {
+                                        return <span>{progressText}</span>
+                                      }
+
+                                      const [, achievedCount, totalCount, suffix] = match
+                                      return (
+                                        <span className="progress-summary-text">
+                                          <strong className="progress-ratio">
+                                            <span>{achievedCount}</span>
+                                            <span className="progress-ratio-slash"> / </span>
+                                            <span>{totalCount}</span>
+                                          </strong>{' '}
+                                          <span>{suffix}</span>
+                                        </span>
+                                      )
+                                    })()}
+                                    {!!row.progressLabel && (
+                                      <span className={`progress-pill ${getProgressLabelClass(row.progressLabel)}`}>
+                                        {row.progressLabel}
+                                      </span>
+                                    )}
+                                  </div>
+                                </td>
+                                <td>
+                                  <strong>{row.bestPlayer}</strong>
+                                  <p className="best-practice-text">{row.bestPractice}</p>
+                                </td>
+                              </tr>
+
+                              {isExpanded && (
+                                <tr className="scorecard-commitments-row">
+                                  <td colSpan={4}>
+                                    <div className="scorecard-commitments-wrap">
+                                      <table className="scorecard-commitments-table">
+                                        <thead>
+                                          <tr>
+                                            <th>Commitment Name</th>
+                                            <th>Status</th>
+                                            <th>Peer numbers</th>
+                                            <th>Description</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {commitments.map((commitment) => (
+                                            <tr key={`${row.theme}-${commitment.name}`}>
+                                              <td>{commitment.name}</td>
+                                              <td>
+                                                <span className={`commitment-status-pill ${getCommitmentStatusClass(commitment.status)}`}>
+                                                  {formatCommitmentStatus(commitment.status)}
+                                                </span>
+                                              </td>
+                                              <td>{commitment.peerStatusSummary || 'No peer commitments mapped'}</td>
+                                              <td>
+                                                {!!(commitment.descriptionPoints || []).length && (
+                                                  <ul className="commitment-description-list">
+                                                    {(commitment.descriptionPoints || []).map((point) => (
+                                                      <li key={`${commitment.name}-${point}`}>{point}</li>
+                                                    ))}
+                                                  </ul>
+                                                )}
+                                                {!(commitment.descriptionPoints || []).length && (
+                                                  <span className="commitment-description-empty">No additional details disclosed.</span>
+                                                )}
+                                              </td>
+                                            </tr>
+                                          ))}
+                                          {!commitments.length && (
+                                            <tr>
+                                              <td colSpan={4}>No commitments available for this theme.</td>
+                                            </tr>
+                                          )}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </Fragment>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {!isScorecardLoading && !scorecardData && (
+                  <div className="scorecard-placeholder">
+                    No scorecard data available for this sector/company.
+                  </div>
+                )}
+              </section>
+            </section>
+          )}
                               className={`scorecard-theme-row ${isExpanded ? 'expanded' : ''}`}
                               onClick={() => toggleScorecardThemeExpansion(row.theme)}
                             >
@@ -2634,40 +2890,74 @@ function App() {
 
             <section className="modal-kpi-hero">
               <div className="modal-kpi-hero-main">
-                <strong>{kpiTrendSummary.improvingCount}/{kpiTrendSummary.total || 0}</strong>
-                <span>KPIs improving</span>
+                <strong>{kpiSummary.benchmarkable}/{kpiSummary.total}</strong>
+                <span>KPIs with peer benchmarks</span>
               </div>
               <div className="kpi-signal-row">
-                <span className="kpi-signal-chip improving">↑ Improving {kpiTrendSummary.improvingCount}</span>
-                <span className="kpi-signal-chip stable">→ Stable {kpiTrendSummary.stableCount}</span>
-                <span className="kpi-signal-chip risk">↓ At Risk {kpiTrendSummary.riskCount}</span>
+                <span className="kpi-signal-chip stable">Peer set: {kpiMomentumData?.summary?.peerCompanyCount || 0}</span>
+                <span className="kpi-signal-chip improving">Numeric above median: {kpiSummary.numericAbovePeerMedian}</span>
+                <span className="kpi-signal-chip risk">Boolean True: {kpiSummary.booleanTrueCount}/{kpiSummary.booleanTotalCount}</span>
               </div>
             </section>
 
-            <div className="modal-kpi-grid">
-              {kpiInsights.metrics.map((metric) => {
-                const trend = (metric.trend || '').toLowerCase()
-                const trendClass = trend === 'improving' ? 'improving' : trend === 'stable' ? 'stable' : 'risk'
-                return (
-                  <article key={metric.label} className={`modal-kpi-item ${trendClass}`}>
-                    <div className="modal-kpi-item-head">
-                      <span>{metric.label}</span>
-                      <em className={`kpi-trend-tag ${trendClass}`}>{metric.trend}</em>
-                    </div>
-                    <strong>{metric.value}</strong>
-                  </article>
-                )
-              })}
-            </div>
+            {isKpiMomentumLoading && <p className="commitment-section-message">Loading KPI deep dive...</p>}
 
-            <section className="modal-pane">
-              <h4>Suggested Focus Areas</h4>
-              <ul className="modal-priority-list">
-                {kpiInsights.moves.map((move) => (
-                  <li key={move}>{move}</li>
-                ))}
-              </ul>
-            </section>
+            {!isKpiMomentumLoading && kpiMomentumData && (
+              <>
+                <div className="modal-two-column">
+                  <section className="modal-pane">
+                    <h4>Benchmark Position by KPI Type</h4>
+                    <KpiTypeBenchmarkChart data={kpiTypeBenchmarkRows} />
+                  </section>
+
+                  <section className="modal-pane">
+                    <h4>True/False KPI Benchmark</h4>
+                    <KpiBooleanBenchmarkChart data={kpiBooleanBenchmarkRows} />
+                  </section>
+                </div>
+
+                <section className="modal-pane">
+                  <h4>Deep Dive - KPI Benchmark Table</h4>
+                  <div className="table-wrap kpi-deepdive-table-wrap">
+                    <table className="kpi-deepdive-table">
+                      <thead>
+                        <tr>
+                          <th>Theme</th>
+                          <th>KPI</th>
+                          <th>Type</th>
+                          <th>Client</th>
+                          <th>Peer Avg</th>
+                          <th>Peer Coverage</th>
+                          <th>Percentile</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[...
+                          (kpiMomentumData?.groups?.numbers || []),
+                          ...(kpiMomentumData?.groups?.intensity || []),
+                          ...(kpiMomentumData?.groups?.percentage || []),
+                          ...(kpiMomentumData?.groups?.boolean || []),
+                        ].map((row) => (
+                          <tr key={`deepdive-${row.kpi}-${row.typeGroup}`}>
+                            <td>{row.theme}</td>
+                            <td>{row.kpi}</td>
+                            <td>{formatKpiTypeLabel(row.typeGroup)}</td>
+                            <td>{formatKpiDisplayValue(row.selectedValue, row.typeGroup)}</td>
+                            <td>{formatKpiDisplayValue(row.peerAverage, row.typeGroup)}</td>
+                            <td>{row.peerCoverage}/{row.peerCompanyCount}</td>
+                            <td>{Number(row.percentileRank || 0).toFixed(1)}%</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </>
+            )}
+
+            {!isKpiMomentumLoading && !kpiMomentumData && (
+              <p className="commitment-section-message">No KPI momentum data available for this company.</p>
+            )}
           </div>
         </div>
       )}
