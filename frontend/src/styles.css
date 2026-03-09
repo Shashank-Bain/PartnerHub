@@ -4,16 +4,16 @@
   --surface: rgba(255, 255, 255, 0.75);
   --surface-solid: #ffffff;
   --border: rgba(104, 70, 218, 0.2);
-  --panel-bg: rgba(255, 255, 255, 0.82);
-  --panel-border: rgba(104, 70, 218, 0.18);
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(104, 70, 218, 0.22);
   --chip-bg: rgba(104, 70, 218, 0.1);
   --chip-border: rgba(104, 70, 218, 0.24);
   --chip-text: #4f3f95;
-  --radius-card: 18px;
-  --radius-pane: 12px;
-  --shadow-card: 0 12px 40px rgba(104, 70, 218, 0.14);
-  --shadow-card-hover: 0 20px 45px rgba(104, 70, 218, 0.2);
-  --shadow-modal: 0 26px 52px rgba(32, 24, 78, 0.22);
+  --radius-card: 14px;
+  --radius-pane: 14px;
+  --shadow-card: 0 10px 28px rgba(104, 70, 218, 0.16);
+  --shadow-card-hover: 0 16px 34px rgba(104, 70, 218, 0.22);
+  --shadow-modal: 0 18px 38px rgba(32, 24, 78, 0.22);
   --bain-red: rgb(185, 11, 22);
   --kpi-peer-yellow: rgb(247, 148, 30);
   --gradient: linear-gradient(90deg, rgb(185, 11, 22), rgb(160, 44, 100), rgb(129, 58, 163), rgb(104, 70, 218));
@@ -51,6 +51,18 @@ h1, h2, p {
   backdrop-filter: blur(8px);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.home-insight-card,
+.investment-stat-tile,
+.investment-strategy-block,
+.modal-pane,
+.timeline-event-card,
+.methodology-scale-table-wrap {
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-pane);
+  background: var(--panel-bg);
   box-shadow: var(--shadow-card);
 }
 
