@@ -990,6 +990,11 @@ button {
   min-height: 260px;
 }
 
+.kpi-modal-benchmark-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
 .kpi-spotlight-wrap {
   max-height: 300px;
   overflow: auto;
