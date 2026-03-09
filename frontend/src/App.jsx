@@ -965,14 +965,15 @@ function formatIndustryLabel(value) {
 }
 
 function KpiPeerAverageMarker(props) {
-  const { cx, cy } = props
+  const { cx, cy, barWidth = 32 } = props
   const centerX = Number(cx)
   const centerY = Number(cy)
   if (!Number.isFinite(centerX) || !Number.isFinite(centerY)) {
     return null
   }
 
-  const halfWidth = 17
+  const markerWidth = Math.max(8, Number(barWidth) * 0.9)
+  const halfWidth = markerWidth / 2
   return (
     <line
       x1={centerX - halfWidth}
@@ -980,7 +981,7 @@ function KpiPeerAverageMarker(props) {
       x2={centerX + halfWidth}
       y2={centerY}
       stroke="var(--kpi-peer-yellow, #F5C400)"
-      strokeWidth={2.8}
+      strokeWidth={3}
       strokeLinecap="round"
     />
   )
@@ -991,31 +992,39 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
     return <p className="commitment-section-message">{emptyMessage}</p>
   }
 
+  const parseChartNumber = (value) => {
+    if (typeof value === 'number') {
+      return Number.isFinite(value) ? value : 0
+    }
+    const normalized = String(value ?? '').replace(/,/g, '').trim()
+    const parsed = Number(normalized)
+    return Number.isFinite(parsed) ? parsed : 0
+  }
+
   const chartData = data.map((item) => ({
     kpi: item.kpi,
-    clientValue: Number(item.selectedValue || 0),
-    peerAverage: Number(item.peerAverage || 0),
+    clientValue: parseChartNumber(item.selectedValue),
+    peerAverage: parseChartNumber(item.peerAverage),
     typeGroup: item.typeGroup,
   }))
 
-  const allValues = chartData.flatMap((item) => [Number(item.clientValue), Number(item.peerAverage)]).filter(Number.isFinite)
-  const rawMin = allValues.length ? Math.min(...allValues) : 0
-  const rawMax = allValues.length ? Math.max(...allValues) : 1
-  const range = Math.max(rawMax - rawMin, 1)
-  const padding = Math.max(range * 0.18, 1)
-  const yAxisMin = rawMin >= 0 ? 0 : rawMin - padding
-  const yAxisMax = rawMax + padding
+  const clientValues = chartData.map((item) => item.clientValue).filter(Number.isFinite)
+  const peerValues = chartData.map((item) => item.peerAverage).filter(Number.isFinite)
+  const maxValue = Math.max(0, ...clientValues, ...peerValues)
+  const yAxisMin = 0
+  const yAxisMax = maxValue > 0 ? maxValue * 1.1 : 1
 
-  const chartHeight = Math.max(280, Math.min(480, chartData.length * 78))
-  const chartWidth = Math.max(680, chartData.length * 120)
+  const barWidth = 34
+  const chartHeight = Math.max(340, Math.min(520, chartData.length * 82))
+  const chartWidth = Math.max(620, chartData.length * 130)
 
   return (
     <div className="kpi-chart-wrap kpi-chart-scroll">
       <div style={{ width: `${chartWidth}px`, minWidth: '100%' }}>
         <ResponsiveContainer width="100%" height={chartHeight}>
-          <ComposedChart data={chartData} margin={{ top: 8, right: 20, left: 0, bottom: 72 }}>
+          <ComposedChart data={chartData} barCategoryGap="30%" margin={{ top: 10, right: 18, left: 2, bottom: 66 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
-            <XAxis dataKey="kpi" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-18} textAnchor="end" interval={0} height={66} />
+            <XAxis dataKey="kpi" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-15} textAnchor="end" interval={0} height={62} />
             <YAxis domain={[yAxisMin, yAxisMax]} tick={{ fontSize: 11, fill: '#3f4769' }} width={64} />
             <Tooltip
               formatter={(value, key, payload) => {
@@ -1030,17 +1039,21 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
               }}
             />
             <Legend
+              verticalAlign="top"
+              align="right"
+              height={32}
+              wrapperStyle={{ paddingBottom: 8 }}
               payload={[
                 { value: 'Client', type: 'square', color: 'var(--bain-red, #CC0000)' },
                 { value: 'Peer Avg', type: 'line', color: 'var(--kpi-peer-yellow, #F5C400)' },
               ]}
             />
-            <Bar dataKey="clientValue" name="Client" fill="var(--bain-red, #CC0000)" radius={[6, 6, 0, 0]} barSize={34} />
+            <Bar dataKey="clientValue" name="Client" fill="var(--bain-red, #CC0000)" radius={[6, 6, 0, 0]} barSize={barWidth} />
             <Scatter
               data={chartData}
               dataKey="peerAverage"
               name="Peer Avg"
-              shape={KpiPeerAverageMarker}
+              shape={(markerProps) => <KpiPeerAverageMarker {...markerProps} barWidth={barWidth} />}
               fill="var(--kpi-peer-yellow, #F5C400)"
               isAnimationActive={false}
             />
