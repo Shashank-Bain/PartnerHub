@@ -964,6 +964,53 @@ function formatIndustryLabel(value) {
   return text
 }
 
+function parseKpiChartNumber(value) {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? value : 0
+  }
+  const normalized = String(value ?? '').replace(/,/g, '').trim()
+  const parsed = Number(normalized)
+  return Number.isFinite(parsed) ? parsed : 0
+}
+
+function KpiModalSignalPanel({ rows, emptyMessage }) {
+  if (!rows?.length) {
+    return <p className="commitment-section-message">{emptyMessage}</p>
+  }
+
+  return (
+    <div className="kpi-modal-kpi-grid">
+      {rows.map((row) => {
+        const clientValue = parseKpiChartNumber(row?.selectedValue)
+        const peerValue = parseKpiChartNumber(row?.peerAverage)
+        const localMax = Math.max(clientValue, peerValue, 1) * 1.1
+        const clientPct = Math.max(0, Math.min(100, (clientValue / localMax) * 100))
+        const peerPct = Math.max(0, Math.min(100, (peerValue / localMax) * 100))
+
+        return (
+          <article key={`kpi-modal-card-${row.kpi}`} className="kpi-modal-kpi-card">
+            <h5>{row.kpi}</h5>
+
+            <div className="kpi-modal-mini-plot">
+              <span className="kpi-modal-y-max">{formatKpiDisplayValue(localMax, row.typeGroup)}</span>
+              <div className="kpi-modal-mini-track">
+                <span className="kpi-modal-peer-line" style={{ bottom: `${peerPct}%` }} />
+                <span className="kpi-modal-client-bar" style={{ height: `${clientPct}%` }} />
+              </div>
+              <span className="kpi-modal-y-min">0</span>
+            </div>
+
+            <div className="kpi-modal-value-row">
+              <span><i className="kpi-modal-client-dot" />Client: {formatKpiDisplayValue(clientValue, row.typeGroup)}</span>
+              <span><i className="kpi-modal-peer-dot" />Peer Avg: {formatKpiDisplayValue(peerValue, row.typeGroup)}</span>
+            </div>
+          </article>
+        )
+      })}
+    </div>
+  )
+}
+
 function KpiPeerAverageMarker(props) {
   const { cx, cy, barWidth = 32 } = props
   const centerX = Number(cx)
@@ -992,19 +1039,10 @@ function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available
     return <p className="commitment-section-message">{emptyMessage}</p>
   }
 
-  const parseChartNumber = (value) => {
-    if (typeof value === 'number') {
-      return Number.isFinite(value) ? value : 0
-    }
-    const normalized = String(value ?? '').replace(/,/g, '').trim()
-    const parsed = Number(normalized)
-    return Number.isFinite(parsed) ? parsed : 0
-  }
-
   const chartData = data.map((item) => ({
     kpi: item.kpi,
-    clientValue: parseChartNumber(item.selectedValue),
-    peerAverage: parseChartNumber(item.peerAverage),
+    clientValue: parseKpiChartNumber(item.selectedValue),
+    peerAverage: parseKpiChartNumber(item.peerAverage),
     typeGroup: item.typeGroup,
   }))
 
@@ -2955,6 +2993,7 @@ function App() {
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
                 <section className="modal-kpi-hero">
+                  <p className="kpi-modal-tagline">Client position vs peer average on highest-impact KPI signals</p>
                   <div className="kpi-signal-row">
                     <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
                     <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
@@ -2962,19 +3001,19 @@ function App() {
                   </div>
                 </section>
 
-                <div className="modal-two-column">
-                  <section className="modal-pane">
+                <div className="modal-two-column kpi-modal-panel-grid">
+                  <section className="modal-pane kpi-modal-panel leading">
                     <h4>Top Leading KPIs</h4>
-                    <KpiPeerBarLineChart
-                      data={topLeadingChartRows}
+                    <KpiModalSignalPanel
+                      rows={topLeadingChartRows}
                       emptyMessage="No top leading reported KPIs available."
                     />
                   </section>
 
-                  <section className="modal-pane">
+                  <section className="modal-pane kpi-modal-panel lagging">
                     <h4>Top Lagging KPIs</h4>
-                    <KpiPeerBarLineChart
-                      data={topLaggingChartRows}
+                    <KpiModalSignalPanel
+                      rows={topLaggingChartRows}
                       emptyMessage="No top lagging reported KPIs available."
                     />
                   </section>
