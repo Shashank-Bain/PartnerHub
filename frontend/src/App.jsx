@@ -109,6 +109,22 @@ function formatPct(value) {
 }
 
 function getKpiMomentumStatus(row) {
+  const selectedValue = parseKpiChartNumber(row?.selectedValue)
+  const peerValue = parseKpiChartNumber(row?.peerMedian ?? row?.peerAverage)
+  if (Number.isFinite(selectedValue) && Number.isFinite(peerValue)) {
+    const direction = inferKpiDirection(row)
+    const baseline = Math.max(1, Math.abs(peerValue))
+    const signedGap = direction === 'lower' ? (peerValue - selectedValue) / baseline : (selectedValue - peerValue) / baseline
+
+    if (signedGap >= 0.05) {
+      return 'Leading'
+    }
+    if (signedGap <= -0.05) {
+      return 'Lagging'
+    }
+    return 'At-Par'
+  }
+
   const percentileRank = Number(row?.percentileRank)
   if (!Number.isFinite(percentileRank)) {
     return 'At-Par'
@@ -120,6 +136,55 @@ function getKpiMomentumStatus(row) {
     return 'Lagging'
   }
   return 'At-Par'
+}
+
+function inferKpiDirection(row) {
+  const haystack = `${row?.kpi || ''} ${row?.theme || ''}`.toLowerCase()
+
+  const higherIsBetterHints = [
+    'low-carbon revenue',
+    'renewable',
+    'recycling ratio',
+    'women',
+    'independent board',
+    'satisfaction',
+    'healthy food',
+    'board gender diversity',
+    'employees with disabilities',
+  ]
+
+  const lowerIsBetterHints = [
+    'emissions',
+    'intensity',
+    'controvers',
+    'injury',
+    'turnover',
+    'pay gap',
+    'spills',
+    'fines',
+    'waste',
+    'withdrawal',
+    'pollutant',
+    'nox',
+    'sox',
+    'voc',
+    'litigation',
+    'fraud',
+    'deforestation',
+  ]
+
+  if (higherIsBetterHints.some((hint) => haystack.includes(hint))) {
+    return 'higher'
+  }
+  if (lowerIsBetterHints.some((hint) => haystack.includes(hint))) {
+    return 'lower'
+  }
+
+  if (String(row?.typeGroup || '').toLowerCase() === 'percentage') {
+    return 'higher'
+  }
+
+  return 'lower'
 }
 
 function resolveEsgSectionForKpi(row) {
@@ -1316,6 +1381,14 @@ function App() {
     () => benchmarkableKpiRows
       .filter((row) => row.typeGroup !== 'boolean')
       .sort((first, second) => {
+        const sectionOrder = { environment: 0, social: 1, governance: 2 }
+        const firstSection = resolveEsgSectionForKpi(first)
+        const secondSection = resolveEsgSectionForKpi(second)
+        const sectionCompare = (sectionOrder[firstSection] ?? 99) - (sectionOrder[secondSection] ?? 99)
+        if (sectionCompare !== 0) {
+          return sectionCompare
+        }
+
         const themeCompare = String(first?.theme || '').localeCompare(String(second?.theme || ''))
         if (themeCompare !== 0) {
           return themeCompare
@@ -2813,7 +2886,7 @@ function App() {
               <>
                 <section className="card scorecard-table-card">
                   <div className="scorecard-table-head">
-                    <h3>Plottable KPI Benchmark Charts</h3>
+                    <h3>Key Sustainability KPIs</h3>
                   </div>
                   <div className="gradient-line" />
                   <div className="kpi-individual-grid">
