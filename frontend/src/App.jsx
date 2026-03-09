@@ -121,6 +121,28 @@ function getKpiMomentumStatus(row) {
   return 'At-Par'
 }
 
+function resolveEsgSectionForKpi(row) {
+  const haystack = `${row?.theme || ''} ${row?.kpi || ''}`.toLowerCase()
+
+  if (
+    /govern|board|audit|ethic|compliance|anti.?corruption|whistle|risk|cyber|privacy|tax|transparen|conduct/.test(haystack)
+  ) {
+    return 'governance'
+  }
+
+  if (
+    /social|employee|people|workforce|labor|human rights|community|training|divers|inclusion|gender|safety|health|wellbeing|engagement/.test(haystack)
+  ) {
+    return 'social'
+  }
+
+  return 'environment'
+}
+
+function normalizeCompanyLabel(value) {
+  return String(value || '').trim().toLowerCase()
+}
+
 function normalizeStatusKey(status) {
   return String(status || '')
     .toLowerCase()
@@ -1221,6 +1243,48 @@ function App() {
     () => benchmarkableReportedRows.filter((row) => row.typeGroup === 'boolean'),
     [benchmarkableReportedRows],
   )
+  const kpiPeerColumns = useMemo(
+    () => (kpiMomentumData?.peerCompanies || []).map((company) => String(company || '').trim()).filter(Boolean),
+    [kpiMomentumData],
+  )
+  const esgKpiSections = useMemo(() => {
+    const base = {
+      environment: { numbersIntensity: [], percentages: [], booleans: [] },
+      social: { numbersIntensity: [], percentages: [], booleans: [] },
+      governance: { numbersIntensity: [], percentages: [], booleans: [] },
+    }
+
+    benchmarkableReportedRows
+      .filter((row) => row.typeGroup !== 'boolean')
+      .forEach((row) => {
+        const sectionKey = resolveEsgSectionForKpi(row)
+        if (row.typeGroup === 'percentage') {
+          base[sectionKey].percentages.push(row)
+        } else {
+          base[sectionKey].numbersIntensity.push(row)
+        }
+      })
+
+    reportedKpiRows
+      .filter((row) => row.typeGroup === 'boolean')
+      .forEach((row) => {
+        const sectionKey = resolveEsgSectionForKpi(row)
+        base[sectionKey].booleans.push(row)
+      })
+
+    const sortByName = (rows) => rows.sort((first, second) => String(first?.kpi || '').localeCompare(String(second?.kpi || '')))
+    for (const key of Object.keys(base)) {
+      sortByName(base[key].numbersIntensity)
+      sortByName(base[key].percentages)
+      sortByName(base[key].booleans)
+    }
+
+    return [
+      { key: 'environment', title: 'Environment', ...base.environment },
+      { key: 'social', title: 'Social', ...base.social },
+      { key: 'governance', title: 'Governance', ...base.governance },
+    ]
+  }, [benchmarkableReportedRows, reportedKpiRows])
   const investmentTrendData = useMemo(() => {
     const trendRows = investmentInsights?.sustainabilityTrend || []
     if (trendRows.length) {
@@ -2660,70 +2724,78 @@ function App() {
 
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
-                <div className="investment-chart-grid investment-chart-grid-two">
-                  <section className="modal-pane">
-                    <h4>Top Leading KPIs</h4>
-                    <KpiPeerBarLineChart
-                      data={topLeadingChartRows}
-                      emptyMessage="No top leading reported KPIs available."
-                    />
-                  </section>
+                {esgKpiSections.map((section) => (
+                  <section className="card scorecard-table-card kpi-esg-section" key={`esg-section-${section.key}`}>
+                    <div className="scorecard-table-head">
+                      <h3>{section.title}</h3>
+                    </div>
+                    <div className="gradient-line" />
 
-                  <section className="modal-pane">
-                    <h4>Top Lagging KPIs</h4>
-                    <KpiPeerBarLineChart
-                      data={topLaggingChartRows}
-                      emptyMessage="No top lagging reported KPIs available."
-                    />
-                  </section>
-                </div>
+                    <div className="investment-chart-grid investment-chart-grid-two">
+                      <section className="modal-pane">
+                        <h4>Intensity / Number KPIs</h4>
+                        <KpiPeerBarLineChart
+                          data={section.numbersIntensity}
+                          emptyMessage={`No intensity/number KPIs available in ${section.title}.`}
+                        />
+                      </section>
 
-                <section className="card scorecard-chart-card">
-                  <h3 className="scorecard-chart-title">All Reported KPIs - Client vs Peer Avg</h3>
-                  <div className="scorecard-thin-divider" />
-                  <KpiPeerBarLineChart
-                    data={allReportedChartRows}
-                    emptyMessage="No reported benchmarkable numeric/intensity/percentage KPIs available."
-                  />
-                </section>
+                      <section className="modal-pane">
+                        <h4>Percentage KPIs</h4>
+                        <KpiPeerBarLineChart
+                          data={section.percentages}
+                          emptyMessage={`No percentage KPIs available in ${section.title}.`}
+                        />
+                      </section>
+                    </div>
 
-                <section className="card scorecard-table-card">
-                  <div className="scorecard-table-head">
-                    <h3>True / False KPI Table</h3>
-                  </div>
-                  <div className="gradient-line" />
-                  <div className="table-wrap kpi-deepdive-table-wrap">
-                    <table className="kpi-deepdive-table">
-                      <thead>
-                        <tr>
-                          <th>KPI</th>
-                          <th>Client</th>
-                          <th>Peer True Rate</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {allReportedBooleanRows.map((row) => {
-                          const clientTrue = Number(row?.selectedValue || 0) >= 0.5
-                          const peerRate = Number(row?.peerAverage || 0) * 100
-                          return (
-                            <tr key={`tf-page-${row.kpi}`}>
-                              <td>{row.kpi}</td>
-                              <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
-                              <td>{Number.isFinite(peerRate) ? `${peerRate.toFixed(1)}%` : 'NA'}</td>
-                              <td>{getKpiMomentumStatus(row)}</td>
+                    <section className="modal-pane">
+                      <h4>True / False KPI Matrix</h4>
+                      <div className="table-wrap kpi-deepdive-table-wrap">
+                        <table className="kpi-deepdive-table">
+                          <thead>
+                            <tr>
+                              <th>KPI</th>
+                              <th>Client</th>
+                              {kpiPeerColumns.map((peerCompany) => (
+                                <th key={`tf-col-${section.key}-${peerCompany}`}>{peerCompany}</th>
+                              ))}
                             </tr>
-                          )
-                        })}
-                        {!allReportedBooleanRows.length && (
-                          <tr>
-                            <td colSpan={4}>No reported true/false KPIs available.</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
+                          </thead>
+                          <tbody>
+                            {section.booleans.map((row) => {
+                              const peerValueMap = Object.fromEntries(
+                                (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), Number(item?.value)]),
+                              )
+                              const clientTrue = Number(row?.selectedValue || 0) >= 0.5
+
+                              return (
+                                <tr key={`tf-${section.key}-${row.kpi}`}>
+                                  <td>{row.kpi}</td>
+                                  <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
+                                  {kpiPeerColumns.map((peerCompany) => {
+                                    const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
+                                    const hasPeerValue = Number.isFinite(peerValue)
+                                    return (
+                                      <td className="kpi-tf-cell" key={`tf-${section.key}-${row.kpi}-${peerCompany}`}>
+                                        {hasPeerValue ? (peerValue >= 0.5 ? '✓' : '✕') : 'NA'}
+                                      </td>
+                                    )
+                                  })}
+                                </tr>
+                              )
+                            })}
+                            {!section.booleans.length && (
+                              <tr>
+                                <td colSpan={2 + kpiPeerColumns.length}>No true/false KPIs available in {section.title}.</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </section>
+                ))}
               </>
             )}
 

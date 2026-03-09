@@ -1002,6 +1002,26 @@ button {
   overflow: auto;
 }
 
+.kpi-esg-section {
+  display: grid;
+  gap: 12px;
+}
+
+.kpi-esg-section + .kpi-esg-section {
+  margin-top: 14px;
+}
+
+.kpi-esg-section .kpi-deepdive-table th,
+.kpi-esg-section .kpi-deepdive-table td {
+  text-align: center;
+}
+
+.kpi-esg-section .kpi-deepdive-table th:first-child,
+.kpi-esg-section .kpi-deepdive-table td:first-child {
+  text-align: left;
+  min-width: 240px;
+}
+
 .kpi-tf-cell {
   font-size: 16px;
   font-weight: 700;
