@@ -3,6 +3,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ComposedChart,
   LabelList,
   Legend,
@@ -1033,6 +1034,58 @@ function KpiModalSignalPanel({ rows, emptyMessage }) {
   )
 }
 
+function KpiSingleBenchmarkChart({ row, selectedCompany, peerCompanies }) {
+  if (!row) {
+    return null
+  }
+
+  const chartRows = []
+  const clientValue = parseKpiChartNumber(row?.selectedValue)
+  chartRows.push({ company: selectedCompany, value: clientValue, isClient: true })
+
+  const peerValueMap = Object.fromEntries(
+    (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), parseKpiChartNumber(item?.value)]),
+  )
+
+  for (const peerCompany of peerCompanies || []) {
+    const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
+    if (Number.isFinite(peerValue)) {
+      chartRows.push({ company: peerCompany, value: peerValue, isClient: false })
+    }
+  }
+
+  if (!chartRows.length) {
+    return <p className="commitment-section-message">No benchmark values available.</p>
+  }
+
+  const allValues = chartRows.map((item) => item.value).filter(Number.isFinite)
+  const yAxisMax = Math.max(1, ...allValues) * 1.1
+
+  return (
+    <div className="kpi-single-chart-wrap">
+      <ResponsiveContainer width="100%" height={280}>
+        <BarChart data={chartRows} margin={{ top: 10, right: 10, left: 0, bottom: 62 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
+          <XAxis dataKey="company" tick={{ fontSize: 11, fill: '#3f4769' }} angle={-15} textAnchor="end" interval={0} height={58} />
+          <YAxis domain={[0, yAxisMax]} tick={{ fontSize: 11, fill: '#3f4769' }} width={64} />
+          <Tooltip formatter={(value) => formatKpiDisplayValue(value, row?.typeGroup)} />
+          <Legend
+            payload={[
+              { value: 'Client', type: 'square', color: 'var(--bain-red, #CC0000)' },
+              { value: 'Peers', type: 'square', color: 'rgba(104, 70, 218, 0.5)' },
+            ]}
+          />
+          <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+            {chartRows.map((item) => (
+              <Cell key={`${row.kpi}-${item.company}`} fill={item.isClient ? 'var(--bain-red, #CC0000)' : 'rgba(104, 70, 218, 0.5)'} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
 function KpiPeerAverageMarker(props) {
   const { cx, cy, barWidth = 32 } = props
   const centerX = Number(cx)
@@ -1246,6 +1299,24 @@ function App() {
   const allReportedBooleanRows = useMemo(
     () => benchmarkableReportedRows.filter((row) => row.typeGroup === 'boolean'),
     [benchmarkableReportedRows],
+  )
+  const allPlottableBenchmarkRows = useMemo(
+    () => benchmarkableKpiRows
+      .filter((row) => row.typeGroup !== 'boolean')
+      .sort((first, second) => {
+        const themeCompare = String(first?.theme || '').localeCompare(String(second?.theme || ''))
+        if (themeCompare !== 0) {
+          return themeCompare
+        }
+        return String(first?.kpi || '').localeCompare(String(second?.kpi || ''))
+      }),
+    [benchmarkableKpiRows],
+  )
+  const booleanFlagRows = useMemo(
+    () => reportedKpiRows
+      .filter((row) => row.typeGroup === 'boolean')
+      .sort((first, second) => String(first?.kpi || '').localeCompare(String(second?.kpi || ''))),
+    [reportedKpiRows],
   )
   const kpiPeerColumns = useMemo(
     () => (kpiMomentumData?.peerCompanies || []).map((company) => String(company || '').trim()).filter(Boolean),
@@ -2728,78 +2799,80 @@ function App() {
 
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
-                {esgKpiSections.map((section) => (
-                  <section className="card scorecard-table-card kpi-esg-section" key={`esg-section-${section.key}`}>
-                    <div className="scorecard-table-head">
-                      <h3>{section.title}</h3>
-                    </div>
-                    <div className="gradient-line" />
-
-                    <div className="investment-chart-grid investment-chart-grid-two">
-                      <section className="modal-pane">
-                        <h4>Intensity / Number KPIs</h4>
-                        <KpiPeerBarLineChart
-                          data={section.numbersIntensity}
-                          emptyMessage={`No intensity/number KPIs available in ${section.title}.`}
+                <section className="card scorecard-table-card">
+                  <div className="scorecard-table-head">
+                    <h3>Plottable KPI Benchmark Charts</h3>
+                  </div>
+                  <div className="gradient-line" />
+                  <div className="kpi-individual-grid">
+                    {allPlottableBenchmarkRows.map((row) => (
+                      <section className="modal-pane kpi-individual-card" key={`single-kpi-${row.kpi}`}>
+                        <h4>{row.kpi}</h4>
+                        <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
+                        <KpiSingleBenchmarkChart
+                          row={row}
+                          selectedCompany={selectedCompany}
+                          peerCompanies={kpiPeerColumns}
                         />
                       </section>
+                    ))}
+                    {!allPlottableBenchmarkRows.length && (
+                      <p className="commitment-section-message">No plottable KPI benchmarks available for this company.</p>
+                    )}
+                  </div>
+                </section>
 
-                      <section className="modal-pane">
-                        <h4>Percentage KPIs</h4>
-                        <KpiPeerBarLineChart
-                          data={section.percentages}
-                          emptyMessage={`No percentage KPIs available in ${section.title}.`}
-                        />
-                      </section>
-                    </div>
+                <section className="card scorecard-table-card">
+                  <div className="scorecard-table-head">
+                    <h3>Binary KPI Disclosure Matrix</h3>
+                  </div>
+                  <div className="gradient-line" />
+                  <div className="table-wrap kpi-deepdive-table-wrap">
+                    <table className="kpi-deepdive-table">
+                      <thead>
+                        <tr>
+                          <th>KPI</th>
+                          <th>Client</th>
+                          {kpiPeerColumns.map((peerCompany) => (
+                            <th key={`tf-col-global-${peerCompany}`}>{peerCompany}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {booleanFlagRows.map((row) => {
+                          const peerValueMap = Object.fromEntries(
+                            (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), Number(item?.value)]),
+                          )
+                          const clientTrue = Number(row?.selectedValue || 0) >= 0.5
 
-                    <section className="modal-pane">
-                      <h4>True / False KPI Matrix</h4>
-                      <div className="table-wrap kpi-deepdive-table-wrap">
-                        <table className="kpi-deepdive-table">
-                          <thead>
-                            <tr>
-                              <th>KPI</th>
-                              <th>Client</th>
-                              {kpiPeerColumns.map((peerCompany) => (
-                                <th key={`tf-col-${section.key}-${peerCompany}`}>{peerCompany}</th>
-                              ))}
+                          return (
+                            <tr key={`tf-global-${row.kpi}`}>
+                              <td>{row.kpi}</td>
+                              <td className="kpi-tf-cell">{clientTrue ? <span className="kpi-flag-true">✓</span> : <span className="kpi-flag-false">✕</span>}</td>
+                              {kpiPeerColumns.map((peerCompany) => {
+                                const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
+                                const hasPeerValue = Number.isFinite(peerValue)
+                                return (
+                                  <td className="kpi-tf-cell" key={`tf-global-${row.kpi}-${peerCompany}`}>
+                                    {!hasPeerValue && 'NA'}
+                                    {hasPeerValue && (peerValue >= 0.5
+                                      ? <span className="kpi-flag-true">✓</span>
+                                      : <span className="kpi-flag-false">✕</span>)}
+                                  </td>
+                                )
+                              })}
                             </tr>
-                          </thead>
-                          <tbody>
-                            {section.booleans.map((row) => {
-                              const peerValueMap = Object.fromEntries(
-                                (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), Number(item?.value)]),
-                              )
-                              const clientTrue = Number(row?.selectedValue || 0) >= 0.5
-
-                              return (
-                                <tr key={`tf-${section.key}-${row.kpi}`}>
-                                  <td>{row.kpi}</td>
-                                  <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
-                                  {kpiPeerColumns.map((peerCompany) => {
-                                    const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
-                                    const hasPeerValue = Number.isFinite(peerValue)
-                                    return (
-                                      <td className="kpi-tf-cell" key={`tf-${section.key}-${row.kpi}-${peerCompany}`}>
-                                        {hasPeerValue ? (peerValue >= 0.5 ? '✓' : '✕') : 'NA'}
-                                      </td>
-                                    )
-                                  })}
-                                </tr>
-                              )
-                            })}
-                            {!section.booleans.length && (
-                              <tr>
-                                <td colSpan={2 + kpiPeerColumns.length}>No true/false KPIs available in {section.title}.</td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </section>
-                ))}
+                          )
+                        })}
+                        {!booleanFlagRows.length && (
+                          <tr>
+                            <td colSpan={2 + kpiPeerColumns.length}>No binary disclosure KPIs available.</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
               </>
             )}
 

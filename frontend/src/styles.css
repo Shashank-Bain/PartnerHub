@@ -968,6 +968,28 @@ button {
   overflow-x: auto;
 }
 
+.kpi-individual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.kpi-individual-card {
+  display: grid;
+  gap: 8px;
+}
+
+.kpi-individual-meta {
+  margin: 0;
+  font-size: 11px;
+  color: #5f6a8b;
+}
+
+.kpi-single-chart-wrap {
+  width: 100%;
+  min-height: 260px;
+}
+
 .kpi-spotlight-wrap {
   max-height: 300px;
   overflow: auto;
@@ -1025,6 +1047,14 @@ button {
 .kpi-tf-cell {
   font-size: 16px;
   font-weight: 700;
+}
+
+.kpi-flag-true {
+  color: #1f8b4c;
+}
+
+.kpi-flag-false {
+  color: #c00000;
 }
 
 .kpi-hero-section {
@@ -3335,6 +3365,10 @@ th {
   }
 
   .kpi-simple-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-individual-grid {
     grid-template-columns: 1fr;
   }
 
