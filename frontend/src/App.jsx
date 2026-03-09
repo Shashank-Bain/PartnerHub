@@ -1117,6 +1117,28 @@ function KpiModalSignalPanel({ rows, emptyMessage }) {
   )
 }
 
+function KpiModalBenchmarkPanel({ rows, selectedCompany, peerCompanies, emptyMessage }) {
+  if (!rows?.length) {
+    return <p className="commitment-section-message">{emptyMessage}</p>
+  }
+
+  return (
+    <div className="kpi-individual-grid kpi-modal-benchmark-grid">
+      {rows.map((row) => (
+        <section className="modal-pane kpi-individual-card" key={`kpi-modal-benchmark-${row.kpi}`}>
+          <h4>{row.kpi}</h4>
+          <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
+          <KpiSingleBenchmarkChart
+            row={row}
+            selectedCompany={selectedCompany}
+            peerCompanies={peerCompanies}
+          />
+        </section>
+      ))}
+    </div>
+  )
+}
+
 function KpiSingleBenchmarkChart({ row, selectedCompany, peerCompanies }) {
   if (!row) {
     return null
@@ -1130,12 +1152,16 @@ function KpiSingleBenchmarkChart({ row, selectedCompany, peerCompanies }) {
     (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), parseKpiChartNumber(item?.value)]),
   )
 
+  const peerRows = []
   for (const peerCompany of peerCompanies || []) {
     const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
     if (Number.isFinite(peerValue)) {
-      chartRows.push({ company: peerCompany, value: peerValue, isClient: false })
+      peerRows.push({ company: peerCompany, value: peerValue, isClient: false })
     }
   }
+
+  peerRows.sort((first, second) => Number(second.value || 0) - Number(first.value || 0))
+  chartRows.push(...peerRows)
 
   if (!chartRows.length) {
     return <p className="commitment-section-message">No benchmark values available.</p>
@@ -1362,11 +1388,11 @@ function App() {
     }
   }, [benchmarkableKpiRows])
   const topLeadingChartRows = useMemo(
-    () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 4),
+    () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 3),
     [kpiStatusSections],
   )
   const topLaggingChartRows = useMemo(
-    () => kpiStatusSections.lagging.filter((row) => row.typeGroup !== 'boolean').slice(0, 4),
+    () => kpiStatusSections.lagging.filter((row) => row.typeGroup !== 'boolean').slice(0, 3),
     [kpiStatusSections],
   )
   const allReportedChartRows = useMemo(
@@ -1400,7 +1426,22 @@ function App() {
   const booleanFlagRows = useMemo(
     () => reportedKpiRows
       .filter((row) => row.typeGroup === 'boolean')
-      .sort((first, second) => String(first?.kpi || '').localeCompare(String(second?.kpi || ''))),
+      .sort((first, second) => {
+        const countTrueValues = (candidate) => {
+          const clientTrue = Number(candidate?.selectedValue || 0) >= 0.5 ? 1 : 0
+          const peerTrueCount = (candidate?.peerValues || []).reduce((count, item) => {
+            return count + (Number(item?.value || 0) >= 0.5 ? 1 : 0)
+          }, 0)
+          return clientTrue + peerTrueCount
+        }
+
+        const scoreDelta = countTrueValues(second) - countTrueValues(first)
+        if (scoreDelta !== 0) {
+          return scoreDelta
+        }
+
+        return String(first?.kpi || '').localeCompare(String(second?.kpi || ''))
+      }),
     [reportedKpiRows],
   )
   const kpiPeerColumns = useMemo(
@@ -2872,7 +2913,7 @@ function App() {
               <h2>ESG KPI Deep Dive</h2>
               <button type="button" className="btn-ghost" onClick={() => setActiveView('home')}>Back to Dashboard</button>
             </div>
-            <p className="body-subtitle">Reported KPI benchmarking with client bars and peer-average line markers</p>
+            <p className="body-subtitle">Sustainability KPI positioning to guide partner priorities and strategic client conversations</p>
 
             {isKpiMomentumLoading && (
               <section className="card scorecard-chart-card">
@@ -2912,7 +2953,7 @@ function App() {
                     <h3>Binary KPI Disclosure Matrix</h3>
                   </div>
                   <div className="gradient-line" />
-                  <div className="table-wrap kpi-deepdive-table-wrap">
+                  <div className="table-wrap">
                     <table className="kpi-deepdive-table">
                       <thead>
                         <tr>
@@ -3227,7 +3268,7 @@ function App() {
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
                 <section className="modal-kpi-hero">
-                  <p className="kpi-modal-tagline">Client position vs peer average on highest-impact KPI signals</p>
+                  <p className="kpi-modal-tagline">Priority sustainability signals to shape partner dialogue and value-creation focus</p>
                   <div className="kpi-signal-row">
                     <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
                     <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
@@ -3238,16 +3279,20 @@ function App() {
                 <div className="modal-two-column kpi-modal-panel-grid">
                   <section className="modal-pane kpi-modal-panel leading">
                     <h4>Top Leading KPIs</h4>
-                    <KpiModalSignalPanel
+                    <KpiModalBenchmarkPanel
                       rows={topLeadingChartRows}
+                      selectedCompany={selectedCompany}
+                      peerCompanies={kpiPeerColumns}
                       emptyMessage="No top leading reported KPIs available."
                     />
                   </section>
 
                   <section className="modal-pane kpi-modal-panel lagging">
                     <h4>Top Lagging KPIs</h4>
-                    <KpiModalSignalPanel
+                    <KpiModalBenchmarkPanel
                       rows={topLaggingChartRows}
+                      selectedCompany={selectedCompany}
+                      peerCompanies={kpiPeerColumns}
                       emptyMessage="No top lagging reported KPIs available."
                     />
                   </section>
