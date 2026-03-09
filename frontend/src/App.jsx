@@ -106,6 +106,20 @@ function formatPct(value) {
   return `${numericValue.toFixed(1)}%`
 }
 
+function getKpiMomentumStatus(row) {
+  const percentileRank = Number(row?.percentileRank)
+  if (!Number.isFinite(percentileRank)) {
+    return 'At-Par'
+  }
+  if (percentileRank >= 60) {
+    return 'Leading'
+  }
+  if (percentileRank <= 40) {
+    return 'Lagging'
+  }
+  return 'At-Par'
+}
+
 function normalizeStatusKey(status) {
   return String(status || '')
     .toLowerCase()
@@ -949,65 +963,43 @@ function formatIndustryLabel(value) {
   return text
 }
 
-function KpiTypeBenchmarkChart({ data }) {
+function KpiPeerBarLineChart({ data, emptyMessage = 'No KPI chart data available.' }) {
   if (!data?.length) {
-    return <p className="commitment-section-message">No benchmark chart data available.</p>
-  }
-
-  const chartData = data.map((item) => ({
-    type: formatKpiTypeLabel(item.typeGroup),
-    percentile: Number(item.avgPercentile || 0),
-    benchmarkableCount: Number(item.benchmarkableCount || 0),
-  }))
-
-  return (
-    <div className="kpi-chart-wrap">
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={chartData} margin={{ top: 10, right: 12, left: 0, bottom: 30 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.2)" />
-          <XAxis dataKey="type" tick={{ fontSize: 11, fill: '#46506f' }} angle={-15} textAnchor="end" interval={0} height={56} />
-          <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: '#2f3554' }} tickFormatter={(value) => `${value}%`} />
-          <Tooltip
-            formatter={(value, key, payload) => {
-              if (key === 'percentile') return [`${Number(value).toFixed(1)}%`, 'Avg percentile rank']
-              return [value, key]
-            }}
-            labelFormatter={(label) => `Type: ${label}`}
-          />
-          <Bar dataKey="percentile" name="Avg percentile rank" fill="rgba(104, 70, 218, 0.72)" radius={[8, 8, 0, 0]}>
-            <LabelList dataKey="benchmarkableCount" position="top" formatter={(value) => `${Number(value)} KPIs`} />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
-
-function KpiBooleanBenchmarkChart({ data }) {
-  if (!data?.length) {
-    return <p className="commitment-section-message">No true/false KPI coverage for this company.</p>
+    return <p className="commitment-section-message">{emptyMessage}</p>
   }
 
   const chartData = data.map((item) => ({
     kpi: item.kpi,
-    selected: Number(item.selectedFlag || 0),
-    peerTrueRate: Number(item.peerTrueRate || 0),
+    clientValue: Number(item.selectedValue || 0),
+    peerAverage: Number(item.peerAverage || 0),
+    typeGroup: item.typeGroup,
   }))
 
-  const chartHeight = Math.max(250, chartData.length * 34)
+  const chartHeight = Math.max(260, chartData.length * 48)
 
   return (
     <div className="kpi-chart-wrap">
       <ResponsiveContainer width="100%" height={chartHeight}>
-        <BarChart data={chartData} layout="vertical" margin={{ top: 8, right: 20, left: 20, bottom: 8 }}>
+        <ComposedChart data={chartData} layout="vertical" margin={{ top: 8, right: 28, left: 20, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(95, 104, 144, 0.18)" />
-          <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 11, fill: '#3f4769' }} />
-          <YAxis type="category" dataKey="kpi" width={210} tick={{ fontSize: 11, fill: '#3f4769' }} />
-          <Tooltip formatter={(value) => `${Number(value).toFixed(1)}%`} />
+          <XAxis type="number" tick={{ fontSize: 11, fill: '#3f4769' }} />
+          <YAxis type="category" dataKey="kpi" width={220} tick={{ fontSize: 11, fill: '#3f4769' }} />
+          <Tooltip
+            formatter={(value, key, payload) => {
+              const typeGroup = payload?.payload?.typeGroup
+              if (key === 'clientValue') {
+                return [formatKpiDisplayValue(value, typeGroup), 'Client']
+              }
+              if (key === 'peerAverage') {
+                return [formatKpiDisplayValue(value, typeGroup), 'Peer Avg']
+              }
+              return [value, key]
+            }}
+          />
           <Legend />
-          <Bar dataKey="selected" name="Client" fill="rgba(104, 70, 218, 0.8)" radius={[0, 4, 4, 0]} />
-          <Bar dataKey="peerTrueRate" name="Peer true-rate" fill="rgba(122, 184, 0, 0.72)" radius={[0, 4, 4, 0]} />
-        </BarChart>
+          <Bar dataKey="clientValue" name="Client" fill="rgba(104, 70, 218, 0.8)" radius={[0, 4, 4, 0]} />
+          <Line type="monotone" dataKey="peerAverage" name="Peer Avg" stroke="rgba(46, 125, 0, 0.95)" strokeWidth={2.2} dot={{ r: 2.5 }} />
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   )
@@ -1038,6 +1030,7 @@ function App() {
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
   const [kpiMomentumData, setKpiMomentumData] = useState(null)
   const [isKpiMomentumLoading, setIsKpiMomentumLoading] = useState(false)
+  const [kpiModalPage, setKpiModalPage] = useState('summary')
   const [activeModal, setActiveModal] = useState(null)
   const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
@@ -1069,19 +1062,69 @@ function App() {
   const userMenuRef = useRef(null)
   const greeting = useMemo(() => getGreeting(), [])
   const companies = selectedSector ? sectorCompanyMap[selectedSector] || [] : []
-  const kpiSummary = useMemo(() => {
-    const summary = kpiMomentumData?.summary || {}
-    return {
-      total: Number(summary.plotKpiCount || 0),
-      benchmarkable: Number(summary.benchmarkableCount || 0),
-      numericAbovePeerMedian: Number(summary.numericHigherThanPeerMedian || 0),
-      booleanTrueCount: Number(summary.booleanTrueCount || 0),
-      booleanTotalCount: Number(summary.booleanTotalCount || 0),
+  const allKpiRows = useMemo(() => ([
+    ...(kpiMomentumData?.groups?.numbers || []),
+    ...(kpiMomentumData?.groups?.intensity || []),
+    ...(kpiMomentumData?.groups?.percentage || []),
+    ...(kpiMomentumData?.groups?.boolean || []),
+  ]), [kpiMomentumData])
+  const reportedKpiRows = useMemo(
+    () => allKpiRows.filter((row) => String(row?.source || '').toLowerCase() === 'reported'),
+    [allKpiRows],
+  )
+  const benchmarkableReportedRows = useMemo(
+    () => reportedKpiRows.filter((row) => Number(row?.peerCoverage || 0) > 0),
+    [reportedKpiRows],
+  )
+  const kpiStatusSections = useMemo(() => {
+    const output = {
+      leading: [],
+      atPar: [],
+      lagging: [],
     }
-  }, [kpiMomentumData])
-  const kpiSpotlightRows = useMemo(() => kpiMomentumData?.charts?.spotlightRows || [], [kpiMomentumData])
-  const kpiTypeBenchmarkRows = useMemo(() => kpiMomentumData?.charts?.typeBenchmark || [], [kpiMomentumData])
-  const kpiBooleanBenchmarkRows = useMemo(() => kpiMomentumData?.charts?.booleanBenchmark || [], [kpiMomentumData])
+
+    benchmarkableReportedRows.forEach((row) => {
+      const status = getKpiMomentumStatus(row)
+      if (status === 'Leading') {
+        output.leading.push(row)
+      } else if (status === 'Lagging') {
+        output.lagging.push(row)
+      } else {
+        output.atPar.push(row)
+      }
+    })
+
+    const sortRows = (rows) => rows.sort((first, second) => {
+      const firstDelta = Math.abs(Number(first?.deltaVsPeerMedian || 0))
+      const secondDelta = Math.abs(Number(second?.deltaVsPeerMedian || 0))
+      if (secondDelta !== firstDelta) {
+        return secondDelta - firstDelta
+      }
+      return String(first?.kpi || '').localeCompare(String(second?.kpi || ''))
+    })
+
+    return {
+      leading: sortRows(output.leading),
+      atPar: sortRows(output.atPar),
+      lagging: sortRows(output.lagging),
+    }
+  }, [benchmarkableReportedRows])
+  const topLeadingChartRows = useMemo(
+    () => kpiStatusSections.leading.filter((row) => row.typeGroup !== 'boolean').slice(0, 5),
+    [kpiStatusSections],
+  )
+  const topLaggingChartRows = useMemo(
+    () => kpiStatusSections.lagging.filter((row) => row.typeGroup !== 'boolean').slice(0, 5),
+    [kpiStatusSections],
+  )
+  const allReportedChartRows = useMemo(
+    () => benchmarkableReportedRows.filter((row) => row.typeGroup !== 'boolean'),
+    [benchmarkableReportedRows],
+  )
+  const allReportedBooleanRows = useMemo(
+    () => benchmarkableReportedRows.filter((row) => row.typeGroup === 'boolean'),
+    [benchmarkableReportedRows],
+  )
   const investmentTrendData = useMemo(() => {
     const trendRows = investmentInsights?.sustainabilityTrend || []
     if (trendRows.length) {
@@ -2071,10 +2114,14 @@ function App() {
                 className="card home-insight-card interactive-card kpi-half-card"
                 role="button"
                 tabIndex={0}
-                onClick={() => setActiveModal('kpi')}
+                onClick={() => {
+                  setKpiModalPage('summary')
+                  setActiveModal('kpi')
+                }}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
+                    setKpiModalPage('summary')
                     setActiveModal('kpi')
                   }
                 }}
@@ -2083,62 +2130,50 @@ function App() {
                   <h3>KPI Momentum</h3>
                   <span className="card-see-more">See More</span>
                 </div>
-                <p className="card-subtitle">Plot KPIs for client vs peers, grouped by data type</p>
+                <p className="card-subtitle">Leading, At-Par and Lagging KPIs for reported metrics</p>
                 <div className="gradient-line" />
 
                 {isKpiMomentumLoading && <p className="commitment-section-message">Loading KPI momentum...</p>}
 
                 {!isKpiMomentumLoading && kpiMomentumData && (
-                  <div className="kpi-infographic-layout kpi-momentum-layout">
-                    <section className="kpi-hero-section kpi-hero-grid">
-                      <article className="kpi-hero-tile">
-                        <strong>{kpiSummary.benchmarkable}/{kpiSummary.total}</strong>
-                        <span>Benchmarkable KPIs</span>
-                      </article>
-                      <article className="kpi-hero-tile">
-                        <strong>{kpiSummary.numericAbovePeerMedian}</strong>
-                        <span>Numeric KPIs above peer median</span>
-                      </article>
-                      <article className="kpi-hero-tile">
-                        <strong>{kpiSummary.booleanTrueCount}/{kpiSummary.booleanTotalCount}</strong>
-                        <span>True/False KPIs flagged True</span>
-                      </article>
-                    </section>
-
-                    <section className="kpi-card-pane">
-                      <h4>Type Benchmark (Percentile)</h4>
-                      <KpiTypeBenchmarkChart data={kpiTypeBenchmarkRows} />
-                    </section>
-
-                    <section className="kpi-card-pane">
-                      <h4>KPI Spotlight</h4>
-                      <div className="table-wrap kpi-spotlight-wrap">
-                        <table className="kpi-spotlight-table">
-                          <thead>
-                            <tr>
-                              <th>KPI</th>
-                              <th>Client</th>
-                              <th>Peer Avg</th>
-                              <th>Type</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {kpiSpotlightRows.slice(0, 5).map((row) => (
-                              <tr key={`spotlight-${row.kpi}`}>
-                                <td>{row.kpi}</td>
-                                <td>{formatKpiDisplayValue(row.selectedValue, row.typeGroup)}</td>
-                                <td>{formatKpiDisplayValue(row.peerAverage, row.typeGroup)}</td>
-                                <td>{formatKpiTypeLabel(row.typeGroup)}</td>
-                              </tr>
-                            ))}
-                            {!kpiSpotlightRows.length && (
-                              <tr>
-                                <td colSpan={4}>No spotlight KPIs available.</td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
+                  <div className="kpi-simple-layout">
+                    <section className="kpi-status-section leading">
+                      <div className="kpi-status-head">
+                        <h4>Leading</h4>
+                        <span>{kpiStatusSections.leading.length}</span>
                       </div>
+                      <ul>
+                        {kpiStatusSections.leading.slice(0, 5).map((row) => (
+                          <li key={`leading-${row.kpi}`}>{row.kpi}</li>
+                        ))}
+                        {!kpiStatusSections.leading.length && <li className="kpi-empty">No leading KPIs</li>}
+                      </ul>
+                    </section>
+
+                    <section className="kpi-status-section atpar">
+                      <div className="kpi-status-head">
+                        <h4>At-Par</h4>
+                        <span>{kpiStatusSections.atPar.length}</span>
+                      </div>
+                      <ul>
+                        {kpiStatusSections.atPar.slice(0, 5).map((row) => (
+                          <li key={`atpar-${row.kpi}`}>{row.kpi}</li>
+                        ))}
+                        {!kpiStatusSections.atPar.length && <li className="kpi-empty">No at-par KPIs</li>}
+                      </ul>
+                    </section>
+
+                    <section className="kpi-status-section lagging">
+                      <div className="kpi-status-head">
+                        <h4>Lagging</h4>
+                        <span>{kpiStatusSections.lagging.length}</span>
+                      </div>
+                      <ul>
+                        {kpiStatusSections.lagging.slice(0, 5).map((row) => (
+                          <li key={`lagging-${row.kpi}`}>{row.kpi}</li>
+                        ))}
+                        {!kpiStatusSections.lagging.length && <li className="kpi-empty">No lagging KPIs</li>}
+                      </ul>
                     </section>
                   </div>
                 )}
@@ -2756,74 +2791,119 @@ function App() {
         <div className="modal-backdrop" onClick={() => setActiveModal(null)}>
           <div className="modal-card kpi-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
-              <h3>KPI Momentum - {selectedCompany}</h3>
-              <button type="button" className="btn-ghost" onClick={() => setActiveModal(null)}>Close</button>
+              <h3>{kpiModalPage === 'summary' ? 'KPI Momentum' : 'KPI Momentum Deep Dive'} - {selectedCompany}</h3>
+              <button
+                type="button"
+                className="btn-ghost"
+                onClick={() => {
+                  setKpiModalPage('summary')
+                  setActiveModal(null)
+                }}
+              >
+                Close
+              </button>
             </div>
-
-            <section className="modal-kpi-hero">
-              <div className="modal-kpi-hero-main">
-                <strong>{kpiSummary.benchmarkable}/{kpiSummary.total}</strong>
-                <span>KPIs with peer benchmarks</span>
-              </div>
-              <div className="kpi-signal-row">
-                <span className="kpi-signal-chip stable">Peer set: {kpiMomentumData?.summary?.peerCompanyCount || 0}</span>
-                <span className="kpi-signal-chip improving">Numeric above median: {kpiSummary.numericAbovePeerMedian}</span>
-                <span className="kpi-signal-chip risk">Boolean True: {kpiSummary.booleanTrueCount}/{kpiSummary.booleanTotalCount}</span>
-              </div>
-            </section>
 
             {isKpiMomentumLoading && <p className="commitment-section-message">Loading KPI deep dive...</p>}
 
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
-                <div className="modal-two-column">
-                  <section className="modal-pane">
-                    <h4>Benchmark Position by KPI Type</h4>
-                    <KpiTypeBenchmarkChart data={kpiTypeBenchmarkRows} />
-                  </section>
+                {kpiModalPage === 'summary' && (
+                  <>
+                    <section className="modal-kpi-hero">
+                      <div className="kpi-signal-row">
+                        <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
+                        <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
+                        <span className="kpi-signal-chip risk">Lagging: {kpiStatusSections.lagging.length}</span>
+                      </div>
+                    </section>
 
-                  <section className="modal-pane">
-                    <h4>True/False KPI Benchmark</h4>
-                    <KpiBooleanBenchmarkChart data={kpiBooleanBenchmarkRows} />
-                  </section>
-                </div>
+                    <div className="modal-two-column">
+                      <section className="modal-pane">
+                        <h4>Top Leading KPIs</h4>
+                        <KpiPeerBarLineChart
+                          data={topLeadingChartRows}
+                          emptyMessage="No top leading reported KPIs available."
+                        />
+                      </section>
 
-                <section className="modal-pane">
-                  <h4>Deep Dive - KPI Benchmark Table</h4>
-                  <div className="table-wrap kpi-deepdive-table-wrap">
-                    <table className="kpi-deepdive-table">
-                      <thead>
-                        <tr>
-                          <th>Theme</th>
-                          <th>KPI</th>
-                          <th>Type</th>
-                          <th>Client</th>
-                          <th>Peer Avg</th>
-                          <th>Peer Coverage</th>
-                          <th>Percentile</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[...
-                          (kpiMomentumData?.groups?.numbers || []),
-                          ...(kpiMomentumData?.groups?.intensity || []),
-                          ...(kpiMomentumData?.groups?.percentage || []),
-                          ...(kpiMomentumData?.groups?.boolean || []),
-                        ].map((row) => (
-                          <tr key={`deepdive-${row.kpi}-${row.typeGroup}`}>
-                            <td>{row.theme}</td>
-                            <td>{row.kpi}</td>
-                            <td>{formatKpiTypeLabel(row.typeGroup)}</td>
-                            <td>{formatKpiDisplayValue(row.selectedValue, row.typeGroup)}</td>
-                            <td>{formatKpiDisplayValue(row.peerAverage, row.typeGroup)}</td>
-                            <td>{row.peerCoverage}/{row.peerCompanyCount}</td>
-                            <td>{Number(row.percentileRank || 0).toFixed(1)}%</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
+                      <section className="modal-pane">
+                        <h4>Top Lagging KPIs</h4>
+                        <KpiPeerBarLineChart
+                          data={topLaggingChartRows}
+                          emptyMessage="No top lagging reported KPIs available."
+                        />
+                      </section>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn-primary"
+                        onClick={() => setKpiModalPage('deepdive')}
+                      >
+                        Open Deep Dive
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {kpiModalPage === 'deepdive' && (
+                  <>
+                    <div className="modal-footer kpi-deepdive-header-actions">
+                      <button
+                        type="button"
+                        className="btn-ghost"
+                        onClick={() => setKpiModalPage('summary')}
+                      >
+                        Back to KPI Summary
+                      </button>
+                    </div>
+
+                    <section className="modal-pane">
+                      <h4>All Reported KPIs - Client vs Peer Avg</h4>
+                      <KpiPeerBarLineChart
+                        data={allReportedChartRows}
+                        emptyMessage="No reported benchmarkable numeric/intensity/percentage KPIs available."
+                      />
+                    </section>
+
+                    <section className="modal-pane">
+                      <h4>True / False KPI Table</h4>
+                      <div className="table-wrap kpi-deepdive-table-wrap">
+                        <table className="kpi-deepdive-table">
+                          <thead>
+                            <tr>
+                              <th>KPI</th>
+                              <th>Client</th>
+                              <th>Peer True Rate</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {allReportedBooleanRows.map((row) => {
+                              const clientTrue = Number(row?.selectedValue || 0) >= 0.5
+                              const peerRate = Number(row?.peerAverage || 0) * 100
+                              return (
+                                <tr key={`tf-${row.kpi}`}>
+                                  <td>{row.kpi}</td>
+                                  <td className="kpi-tf-cell">{clientTrue ? '✓' : '✕'}</td>
+                                  <td>{Number.isFinite(peerRate) ? `${peerRate.toFixed(1)}%` : 'NA'}</td>
+                                  <td>{getKpiMomentumStatus(row)}</td>
+                                </tr>
+                              )
+                            })}
+                            {!allReportedBooleanRows.length && (
+                              <tr>
+                                <td colSpan={4}>No reported true/false KPIs available.</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </>
+                )}
               </>
             )}
 
