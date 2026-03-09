@@ -1,24 +1,6 @@
 {
   "scores": {
     "Danone": {
-      "Hazardous Substances": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "No public commitment regarding hazardous chemicals is disclosed.",
-          "Ambition": "There is no evidence of ambition beyond regulatory compliance.",
-          "Coverage": "No scope is defined for hazardous substances management.",
-          "Credibility & Transparency": "There is no public disclosure of ingredients or chemicals.",
-          "Delivery/Status": "There is no reporting on chemical phase-out progress."
-        }
-      },
       "Land & Ocean Use": {
         "bucket": "X",
         "scores": {
@@ -30,41 +12,12 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts is available.",
+          "Existence & Specificity": "There is no public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
           "Ambition": "There is no defined ambition beyond regulatory compliance.",
           "Coverage": "There is no scope defined.",
           "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
           "Delivery/Status": "There is no reporting on land or marine impact."
         }
-      },
-      "Water Stewardship": {
-        "bucket": "P",
-        "scores": {
-          "Existence & Specificity": 17,
-          "Ambition": 16,
-          "Coverage": 13,
-          "Credibility & Transparency": 12,
-          "Delivery/Status": 12
-        },
-        "overall": 14.0,
-        "rationale": {
-          "Existence & Specificity": "There is a clear quantified target of 100% with a baseline year of 2020 and target year 2030.",
-          "Ambition": "The ambition reflects a meaningful 2030 target of 100%, with both interim and long-term goals outlined.",
-          "Coverage": "The commitment covers Danone’s production sites but specific identification of high-stress areas is not detailed.",
-          "Credibility & Transparency": "Methodology and alignment with recognized frameworks are mentioned but not fully detailed.",
-          "Delivery/Status": "Current progress is reported at 99.3%, indicating year-on-year reporting, but is not comprehensive across all commitments."
-        },
-        "Commitments": [
-          {
-            "Name": "Water stewardship/management programs",
-            "Description": {
-              "description": "Danone commits to achieving 100% water stewardship across its operations by 2030, with a baseline year of 2020.",
-              "coverage": "The commitment covers Danone’s production sites, but specific geographic or value chain details are not disclosed.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          }
-        ]
       },
       "Air Quality": {
         "bucket": "X",
@@ -77,74 +30,168 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "The company provides no specific air pollutant reduction commitments, only stating commitment not disclosed.",
-          "Ambition": "There is no defined ambition beyond regulatory compliance as commitments are not disclosed.",
-          "Coverage": "No scope or coverage of air quality measures is defined in the provided evidence.",
-          "Credibility & Transparency": "No data is disclosed regarding pollutant emissions, indicating no transparency.",
-          "Delivery/Status": "There is no reporting on air pollutant performance, as all commitments are not disclosed."
+          "Existence & Specificity": "The evidence indicates that there are no public air pollutant reduction commitments disclosed.",
+          "Ambition": "There is no defined ambition beyond regulatory compliance as no commitments are disclosed.",
+          "Coverage": "The evidence does not define any scope for the company's air quality initiatives.",
+          "Credibility & Transparency": "No pollutant data is disclosed, indicating a lack of transparency.",
+          "Delivery/Status": "There is no reporting on the company's air pollutant performance."
         }
       },
       "Biodiversity & Ecological Welfare": {
         "bucket": "P",
         "scores": {
           "Existence & Specificity": 16,
-          "Ambition": 14,
+          "Ambition": 16,
           "Coverage": 12,
-          "Credibility & Transparency": 8,
-          "Delivery/Status": 6
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 15
         },
-        "overall": 11.2,
+        "overall": 12.8,
         "rationale": {
-          "Existence & Specificity": "The company has a clear, time-bound commitment for both deforestation-free supply chain and regenerative agriculture targets with defined targets for 2025.",
-          "Ambition": "The ambition is meaningful with specific percentages and timelines, including a 30% regenerative agriculture target and deforestation-free supply chain by 2025.",
-          "Coverage": "Coverage includes key commodities with some geographic and value chain details, but lacks specific references to deforestation-linked commodities.",
-          "Credibility & Transparency": "Some framework alignment is present but lacks comprehensive public disclosure and detailed methodological information.",
-          "Delivery/Status": "There is limited progress reporting; the regenerative agriculture commitment has achieved 39%, but other commitments lack current status updates."
+          "Existence & Specificity": "The company has clear, time-bound commitments for deforestation-free supply chains and regenerative agriculture by 2025.",
+          "Ambition": "Targets of 100% deforestation-free supply and 30% regenerative agriculture are ambitious and in line with industry norms.",
+          "Coverage": "The commitments cover key commodities globally; however, asset and value chain coverage specifics are vague for some commitments.",
+          "Credibility & Transparency": "There is a lack of specified methodologies, standards, and framework alignments, impacting transparency.",
+          "Delivery/Status": "Regular progress is reported, with significant progress towards deforestation-free and regenerative agriculture targets."
         },
         "Commitments": [
           {
             "Name": "Deforestation-free supply chain target",
             "Description": {
-              "description": "Danone commits to achieving a deforestation-free supply chain by 2025, using 2020 as the baseline year.",
-              "coverage": "This commitment covers key commodities with inclusion throughout the entire value chain.",
+              "description": "Danone commits to achieving a deforestation-free supply chain, targeting 100% compliance by 2025, from a 0% baseline in 2020.",
+              "coverage": "The commitment covers key commodities on a global scale within the deforestation aspect of the value chain.",
               "validation": "Not disclosed."
             },
-            "Status": "No Reporting"
+            "Status": "On-Track"
           },
           {
             "Name": "Regenerative agriculture target",
             "Description": {
-              "description": "Danone has set a target to adopt regenerative agriculture practices for 30% of its operations by 2025, using 2020 as the baseline year.",
-              "coverage": "The commitment covers key ingredients within Danone's value chain, though specific geographic and asset details are not disclosed.",
+              "description": "Danone has committed to transition 30% of key ingredients to regenerative agriculture by 2025, with a baseline set in 2020.",
+              "coverage": "The commitment covers global agricultural sourcing, specifically key ingredients sourced directly from farms transitioning to regenerative practices.",
               "validation": "Not disclosed."
             },
             "Status": "Achieved"
           }
         ]
       },
-      "Material Use, Waste & Circularity": {
-        "bucket": "L",
+      "Hazardous Substances": {
+        "bucket": "X",
         "scores": {
-          "Existence & Specificity": 13,
+          "Existence & Specificity": 0,
+          "Ambition": 0,
+          "Coverage": 0,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 0
+        },
+        "overall": 0.0,
+        "rationale": {
+          "Existence & Specificity": "No evidence or public commitment regarding hazardous chemicals was found.",
+          "Ambition": "No ambition beyond regulatory compliance is indicated due to lack of evidence.",
+          "Coverage": "There is no defined scope as there is no evidence provided.",
+          "Credibility & Transparency": "No public ingredient or chemical disclosure information is available.",
+          "Delivery/Status": "There is no reporting on chemical phase-out progress as no evidence is provided."
+        }
+      },
+      "Water Stewardship": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 16,
           "Ambition": 12,
           "Coverage": 14,
-          "Credibility & Transparency": 10,
-          "Delivery/Status": 9
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 15
         },
-        "overall": 11.6,
+        "overall": 12.4,
         "rationale": {
-          "Existence & Specificity": "Multiple quantified targets with specific timelines and categorical breakdowns, though not all targets are 100% addressed.",
-          "Ambition": "Targets like 100% recyclable/reusable packaging by 2030 are ambitious but 30% virgin plastic reduction is less so.",
-          "Coverage": "Targets cover a variety of packaging types and have global and value chain coverage.",
-          "Credibility & Transparency": "There is disclosure and validation of targets, yet not all data points have full transparency or external assurance.",
-          "Delivery/Status": "Consistent progress on some targets but others significantly lagging, reflecting uneven delivery."
+          "Existence & Specificity": "There is a clear quantified target of 100% reduction by 2030 with a baseline of 2020.",
+          "Ambition": "While the target is 100% reduction by 2030, interim targets are not specified, partially limiting ambition clarity.",
+          "Coverage": "The commitment covers global production sites using a 4R approach but lacks categorical breakdowns.",
+          "Credibility & Transparency": "The 4R methodology is mentioned but lacks validation or alignment with recognized frameworks.",
+          "Delivery/Status": "Progress to 99.3% by 2024 shows measurable reductions with on-track status for 2030."
+        },
+        "Commitments": [
+          {
+            "Name": "Water stewardship/management programs",
+            "Description": {
+              "description": "Danone is committed to achieving 100% water stewardship and management across its production sites by 2030, with a baseline year of 2020.",
+              "coverage": "The commitment covers global production sites using the 4R approach, encompassing total asset coverage in water management.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          }
+        ]
+      },
+      "GHG Emissions": {
+        "bucket": "L",
+        "scores": {
+          "Existence & Specificity": 17,
+          "Ambition": 13,
+          "Coverage": 16,
+          "Credibility & Transparency": 9,
+          "Delivery/Status": 13
+        },
+        "overall": 13.6,
+        "rationale": {
+          "Existence & Specificity": "The company has a fully defined net-zero target for 2050 with a 2030 milestone covering its entire value chain.",
+          "Ambition": "There is a 1.5°C-aligned ambition across scopes with clear near-term reductions, but without specific breakdowns in immediate timeframes.",
+          "Coverage": "The commitments explicitly include Scope 1, 2, and 3 with global coverage and full value chain inclusion.",
+          "Credibility & Transparency": "The targets are aligned with SBTi 1.5°C, but lack explicit third-party validation details.",
+          "Delivery/Status": "There is consistent reporting showing measurable reductions against milestones, yet some data indicates negative progress."
+        },
+        "Commitments": [
+          {
+            "Name": "Net zero emissions target",
+            "Description": {
+              "description": "Danone has committed to achieving net zero emissions by 2050, with interim targets for a 16.1% reduction by 2030 compared to a 2020 baseline, covering the entire value chain on an absolute basis.",
+              "coverage": "The commitment encompasses Scope 1, 2, and 3 emissions globally, covering the full value chain.",
+              "validation": "The commitment is aligned with the SBTi 1.5°C methodology, but external validation status is not specified."
+            },
+            "Status": "On-Track"
+          },
+          {
+            "Name": "Scope 1+2 GHG reduction target",
+            "Description": {
+              "description": "Danone commits to reducing its Scope 1 and 2 GHG emissions by 36% by 2025, using 2020 as the baseline year.",
+              "coverage": "This commitment covers all global operations and includes total asset emissions within Scope 1 and 2.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          },
+          {
+            "Name": "Scope 3 GHG reduction target",
+            "Description": {
+              "description": "Danone commits to achieving Net Zero Scope 3 GHG emissions by 2050, with a 16.1% reduction as an interim target by 2030, using a 2020 baseline.",
+              "coverage": "The commitment covers the entire global value chain under Scope 3 emissions.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          }
+        ]
+      },
+      "Material Use, Waste & Circularity": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 17,
+          "Ambition": 16,
+          "Coverage": 16,
+          "Credibility & Transparency": 7,
+          "Delivery/Status": 10
+        },
+        "overall": 13.2,
+        "rationale": {
+          "Existence & Specificity": "The company has quantified targets with baseline years and target years for all commitments provided.",
+          "Ambition": "Ambitious targets are set with precise percentages and timelines but fall slightly short of the highest industry norms.",
+          "Coverage": "The commitments cover global scope and entire asset coverage, but only for the specified packaging categories.",
+          "Credibility & Transparency": "There is a lack of specified methodologies and standards, with only minimal external alignment mentioned.",
+          "Delivery/Status": "Progress is disclosed and on track for some targets, yet off track for others, indicating mixed performance."
         },
         "Commitments": [
           {
             "Name": "Circular economy/recycling target",
             "Description": {
-              "description": "Danone commits to achieving a 100% circular economy and recycling target by 2040, with a baseline year of 2020.",
-              "coverage": "The commitment covers plastic within its entire value chain but specific geographic coverage and asset details are not disclosed.",
+              "description": "Danone is committed to achieving a 100% circular economy/recycling target for plastic by 2040, with an interim goal of 60% by 2024, measured against a 2020 baseline.",
+              "coverage": "The commitment covers plastic globally, encompassing the entire value chain including recycling and recovery.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -152,8 +199,8 @@
           {
             "Name": "Recyclable/reusable/compostable packaging target",
             "Description": {
-              "description": "Danone commits to achieving 100% recyclable, reusable, or compostable packaging by 2030.",
-              "coverage": "The commitment covers all packaging within Danone's entire geographic and value chain scope.",
+              "description": "Danone is committed to making 100% of its packaging recyclable, reusable, or compostable by 2030, with an interim target of 85% by 2024.",
+              "coverage": "This commitment covers all packaging globally, addressing the entire value chain through reusability, recyclability, and compostability.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -161,54 +208,34 @@
           {
             "Name": "Virgin plastic reduction target",
             "Description": {
-              "description": "Danone commits to reducing virgin plastic usage by 30% by 2030, using 2020 as the baseline year.",
-              "coverage": "The commitment covers virgin fossil-based packaging with geographic, asset, and value chain considerations included.",
+              "description": "Danone aims to reduce virgin fossil-based plastic packaging by 30% by 2030 and 50% by 2040, with an interim target of 8% reduction by 2024 from a 2020 baseline.",
+              "coverage": "The commitment covers Danone's global operations, focusing on virgin fossil-based packaging materials across its entire value chain.",
               "validation": "Not disclosed."
             },
             "Status": "Off-Track"
           }
         ]
-      },
-      "GHG Emissions": {
-        "bucket": "P",
-        "scores": {
-          "Existence & Specificity": 13,
-          "Ambition": 8,
-          "Coverage": 9,
-          "Credibility & Transparency": 12,
-          "Delivery/Status": 9
-        },
-        "overall": 10.2,
-        "rationale": {
-          "Existence & Specificity": "The company has defined absolute reduction targets for 2025 with a clear baseline.",
-          "Ambition": "The 36% reduction target by 2025 may fall short of sector norms for 2030, lacking exceptional ambition.",
-          "Coverage": "Scope 1 and 2 are fully covered, but material Scope 3 categories lack detailed coverage.",
-          "Credibility & Transparency": "The commitment references recognized standards and partial validation.",
-          "Delivery/Status": "There is annual reporting with current progress tracked against the baseline."
-        },
-        "Commitments": [
-          {
-            "Name": "Net zero emissions target",
-            "Description": {
-              "description": "Danone has committed to achieving net zero emissions by 2050, covering 100% of emissions compared to a 2020 baseline.",
-              "coverage": "This commitment includes Scope 1, 2, and 3 emissions across its geographic and value chain operations.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Scope 1+2 GHG reduction target",
-            "Description": {
-              "description": "Danone aims to reduce its Scope 1 and 2 GHG emissions by 36% by 2025, using 2020 as the baseline year.",
-              "coverage": "Not disclosed.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          }
-        ]
       }
     },
     "Kraft-Heinz": {
+      "Hazardous Substances": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 0,
+          "Ambition": 0,
+          "Coverage": 0,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 0
+        },
+        "overall": 0.0,
+        "rationale": {
+          "Existence & Specificity": "No relevant evidence or public commitment regarding hazardous chemicals.",
+          "Ambition": "No evidence of ambition beyond regulatory compliance.",
+          "Coverage": "No defined scope provided in the evidence.",
+          "Credibility & Transparency": "No evidence of public ingredient or chemical disclosure.",
+          "Delivery/Status": "No reporting on chemical phase-out progress available."
+        }
+      },
       "Air Quality": {
         "bucket": "X",
         "scores": {
@@ -220,10 +247,10 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "No public air pollutant reduction commitment is disclosed.",
-          "Ambition": "No defined ambition beyond regulatory compliance is evident.",
-          "Coverage": "No scope is defined for the air quality commitments.",
-          "Credibility & Transparency": "No pollutant data or commitment details are disclosed.",
+          "Existence & Specificity": "The company has no public air pollutant reduction commitment disclosed.",
+          "Ambition": "There is no defined ambition beyond regulatory compliance.",
+          "Coverage": "No scope of coverage for air quality commitments is defined.",
+          "Credibility & Transparency": "No pollutant data is disclosed.",
           "Delivery/Status": "There is no reporting on air pollutant performance."
         }
       },
@@ -238,63 +265,83 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts found.",
-          "Ambition": "No defined ambition beyond regulatory compliance found.",
-          "Coverage": "No scope defined for the theme.",
-          "Credibility & Transparency": "No disclosure of sourcing footprint or ecosystem impact found.",
-          "Delivery/Status": "No reporting on land or marine impact provided."
+          "Existence & Specificity": "There is no public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+          "Ambition": "There is no defined ambition beyond regulatory compliance.",
+          "Coverage": "There is no scope defined.",
+          "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
+          "Delivery/Status": "There is no reporting on land or marine impact."
         }
       },
-      "Hazardous Substances": {
-        "bucket": "X",
+      "Water Stewardship": {
+        "bucket": "A",
         "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data.",
-          "Ambition": "Commitment not disclosed in provided data.",
-          "Coverage": "Commitment not disclosed in provided data.",
-          "Credibility & Transparency": "Commitment not disclosed in provided data.",
-          "Delivery/Status": "Commitment not disclosed in provided data."
-        }
-      },
-      "Material Use, Waste & Circularity": {
-        "bucket": "L",
-        "scores": {
-          "Existence & Specificity": 12,
-          "Ambition": 9,
-          "Coverage": 13,
-          "Credibility & Transparency": 5,
+          "Existence & Specificity": 11,
+          "Ambition": 10,
+          "Coverage": 9,
+          "Credibility & Transparency": 6,
           "Delivery/Status": 7
         },
-        "overall": 9.2,
+        "overall": 8.6,
         "rationale": {
-          "Existence & Specificity": "The company has multiple quantified targets with clear definitions and timelines for recyclable and virgin plastic use.",
-          "Ambition": "The ambition is moderate with some targets like 100% recyclable packaging by 2025 but lacks distinction for the virgin plastic target.",
-          "Coverage": "The commitments cover global packaging and include specific programs, indicating substantial coverage.",
-          "Credibility & Transparency": "Limited disclosure on methodology and validation status reduces transparency.",
-          "Delivery/Status": "The company shows progress with 87% achieved for recyclable packaging but lacks reporting on other targets."
+          "Existence & Specificity": "A 15% intensity reduction target by 2025 is specified with a baseline year of 2019.",
+          "Ambition": "The 15% reduction target for intensity by 2025 is moderately ambitious.",
+          "Coverage": "The target covers manufacturing facilities globally, focusing on direct operations.",
+          "Credibility & Transparency": "There is limited disclosure and no evidence of external validation.",
+          "Delivery/Status": "Progress is reported as off-track with current progress at -8.10% compared to the baseline."
         },
         "Commitments": [
           {
-            "Name": "Recyclable/reusable/compostable packaging target",
+            "Name": "Freshwater withdrawal intensity target",
             "Description": {
-              "description": "Kraft-Heinz commits to 100% recyclable, reusable, or compostable packaging by 2025, using 2019 as the baseline year.",
-              "coverage": "The commitment covers all packaging globally and includes the entire value chain with specific programs like TerraCycle.",
+              "description": "Kraft-Heinz has committed to a 15% reduction in freshwater withdrawal intensity by 2025, using 2019 as the baseline year.",
+              "coverage": "The commitment covers all manufacturing facilities globally.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "Off-Track"
+          }
+        ]
+      },
+      "GHG Emissions": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 16,
+          "Ambition": 12,
+          "Coverage": 16,
+          "Credibility & Transparency": 4,
+          "Delivery/Status": 0
+        },
+        "overall": 9.6,
+        "rationale": {
+          "Existence & Specificity": "The company has a specific and quantified target of net zero by 2050 and a 50% reduction by 2030, with a clear baseline year of 2021.",
+          "Ambition": "The company's targets are moderately ambitious with absolute reduction goals of 50% by 2030, which is a meaningful reduction.",
+          "Coverage": "The commitments cover Scope 1, 2, and material Scope 3 with a global value chain inclusion.",
+          "Credibility & Transparency": "There is no information regarding methodology or validation, leading to low credibility.",
+          "Delivery/Status": "There is no reporting of progress against the baseline, resulting in no evidence of delivery."
+        },
+        "Commitments": [
+          {
+            "Name": "Net zero emissions target",
+            "Description": {
+              "description": "Kraft-Heinz commits to achieving net zero emissions by 2050, with an interim target of reducing emissions by 50% by 2030, using 2021 as the baseline year.",
+              "coverage": "This commitment covers Scope 1, 2, and 3 emissions across the entire global value chain.",
+              "validation": "Not disclosed."
+            },
+            "Status": "No Reporting"
           },
           {
-            "Name": "Virgin plastic reduction target",
+            "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "The commitment is to reduce virgin plastic use by 20% by 2030, using 2021 as the baseline year.",
-              "coverage": "The commitment covers the entire global portfolio of Kraft-Heinz.",
+              "description": "Kraft-Heinz has committed to a 50% reduction in Scope 1 and 2 GHG emissions by 2030, using 2021 as the baseline year.",
+              "coverage": "The commitment applies globally across Scope 1 and 2 emissions within the company's operations.",
+              "validation": "Not disclosed."
+            },
+            "Status": "No Reporting"
+          },
+          {
+            "Name": "Scope 3 GHG reduction target",
+            "Description": {
+              "description": "Kraft-Heinz aims to reduce its Scope 3 greenhouse gas emissions by 50% by 2030, using 2021 as the baseline year.",
+              "coverage": "The commitment covers global operations across the full value chain in Scope 3 emissions.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -306,100 +353,62 @@
         "scores": {
           "Existence & Specificity": 16,
           "Ambition": 16,
-          "Coverage": 15,
-          "Credibility & Transparency": 10,
-          "Delivery/Status": 9
+          "Coverage": 14,
+          "Credibility & Transparency": 9,
+          "Delivery/Status": 12
         },
-        "overall": 13.2,
+        "overall": 13.4,
         "rationale": {
-          "Existence & Specificity": "The commitment includes a clear, quantified target of 100% deforestation-free supply chain by 2025, with a defined baseline year of 2019.",
-          "Ambition": "The ambition reflects a meaningful goal of 100% deforestation-free supply chain by 2025, aligning with industry norms.",
-          "Coverage": "The commitment covers primary deforestation-linked commodities on a global scale, though asset coverage is partial.",
-          "Credibility & Transparency": "The methodology is based on a Global Deforestation and Conversion-Free Policy, but lacks validation status and specific framework alignment.",
-          "Delivery/Status": "The company has achieved 64% towards its target by 2023, but it is off track with no milestones reported."
+          "Existence & Specificity": "The company has a clear, quantified, and time-bound commitment of 100% deforestation-free supply chain by 2025.",
+          "Ambition": "The ambition is meaningful with specific timelines and numeric values for 100% achievement by 2025, aligning with industry norms.",
+          "Coverage": "The commitment covers primary deforestation-linked commodities including palm oil, sugar, beef, dairy, cocoa, coffee, pulp, paper, and packaging.",
+          "Credibility & Transparency": "While there is methodology reference, alignment with recognized frameworks like TNFD is not explicitly mentioned.",
+          "Delivery/Status": "The company reports a 64% progress against the baseline but lacks detailed year-on-year transparency."
         },
         "Commitments": [
           {
             "Name": "Deforestation-free supply chain target",
             "Description": {
-              "description": "Kraft-Heinz commits to a 100% deforestation-free supply chain by 2025, using 2019 as the baseline year.",
-              "coverage": "The commitment covers the primary commodities within their global supply chain, including palm oil, sugar, beef, dairy, cocoa, coffee, pulp, paper, and packaging.",
+              "description": "Kraft-Heinz aims for a 100% deforestation-free supply chain for primary deforestation-linked commodities by 2025, with a baseline year of 2019.",
+              "coverage": "The commitment covers key commodities such as palm oil, sugar, beef, dairy, cocoa, coffee, pulp, paper, and packaging.",
               "validation": "Not disclosed."
             },
             "Status": "Off-Track"
           }
         ]
       },
-      "Water Stewardship": {
-        "bucket": "A",
+      "Material Use, Waste & Circularity": {
+        "bucket": "P",
         "scores": {
-          "Existence & Specificity": 13,
-          "Ambition": 12,
-          "Coverage": 12,
+          "Existence & Specificity": 16,
+          "Ambition": 16,
+          "Coverage": 16,
           "Credibility & Transparency": 8,
           "Delivery/Status": 9
         },
-        "overall": 10.8,
+        "overall": 13.0,
         "rationale": {
-          "Existence & Specificity": "The company has a quantified 15% target for water withdrawal intensity by 2025 with specific details.",
-          "Ambition": "The ambition is moderate with a 15% reduction target set by 2025, focusing on intensity rather than absolute reductions.",
-          "Coverage": "The target covers manufacturing facilities, focusing only on direct operations.",
-          "Credibility & Transparency": "Limited disclosure is noted as methodology, validation status, and framework alignment are not provided.",
-          "Delivery/Status": "Progress is reported at -8.1% against the target, indicating some tracking but being off-track."
+          "Existence & Specificity": "Targets are quantified with specific percentages and clearly defined timeframes for both virgin plastic reduction and recyclable packaging.",
+          "Ambition": "Targets reflect meaningful ambition at 20% virgin plastic reduction by 2030 and 100% recyclability by 2025, which aligns with industry norms.",
+          "Coverage": "Commitments cover the global portfolio, addressing major aspects like virgin plastic and packaging comprehensively.",
+          "Credibility & Transparency": "Lacks baseline packaging footprint disclosure and reporting references to recognized standards.",
+          "Delivery/Status": "Progress is disclosed for recyclable packaging but not for virgin plastic reduction or other targets."
         },
         "Commitments": [
           {
-            "Name": "Freshwater withdrawal intensity target",
+            "Name": "Recyclable/reusable/compostable packaging target",
             "Description": {
-              "description": "Kraft-Heinz has set a target to reduce freshwater withdrawal intensity by 15% by the year 2025, using 2019 as the baseline.",
-              "coverage": "This commitment covers the total manufacturing facilities' freshwater withdrawal intensity.",
+              "description": "Kraft-Heinz has committed to making 100% of its packaging recyclable, reusable, or compostable by 2025, with a baseline year of 2019.",
+              "coverage": "This commitment covers all packaging globally within its value chain.",
               "validation": "Not disclosed."
             },
-            "Status": "Off-Track"
-          }
-        ]
-      },
-      "GHG Emissions": {
-        "bucket": "P",
-        "scores": {
-          "Existence & Specificity": 13,
-          "Ambition": 13,
-          "Coverage": 12,
-          "Credibility & Transparency": 4,
-          "Delivery/Status": 0
-        },
-        "overall": 8.4,
-        "rationale": {
-          "Existence & Specificity": "Targets are well-defined with a clear baseline, magnitude, and timeline for Scope 1, 2, and 3.",
-          "Ambition": "The targets are moderately ambitious with absolute reduction goals consistent with sector expectations, aiming for 50% by 2030.",
-          "Coverage": "The targets broadly cover Scope 1, 2, and material Scope 3, but lack specific sub-targets for Scope 1 and 2 individually.",
-          "Credibility & Transparency": "There is no disclosure of standards used or validation, which significantly reduces credibility.",
-          "Delivery/Status": "There is no reporting or progress data, resulting in a lack of evidence for this criterion."
-        },
-        "Commitments": [
-          {
-            "Name": "Net zero emissions target",
-            "Description": {
-              "description": "Kraft-Heinz commits to achieving 100% net zero emissions by 2050, with an interim target of a 50% reduction by 2030, using 2021 as the baseline year.",
-              "coverage": "The commitment covers Scope 1, 2, and 3 emissions on a global scale, encompassing the entire value chain.",
-              "validation": "Not disclosed."
-            },
-            "Status": "No Reporting"
+            "Status": "On-Track"
           },
           {
-            "Name": "Scope 1+2 GHG reduction target",
+            "Name": "Virgin plastic reduction target",
             "Description": {
-              "description": "Kraft-Heinz commits to a 50% reduction in Scope 1 and 2 GHG emissions by 2030, with a baseline year of 2021.",
-              "coverage": "This commitment covers global operations, including the total asset and entire value chain under Scope 1, 2, and 3 emissions.",
-              "validation": "Not disclosed."
-            },
-            "Status": "No Reporting"
-          },
-          {
-            "Name": "Scope 3 GHG reduction target",
-            "Description": {
-              "description": "Kraft-Heinz has a target to reduce its absolute Scope 3 greenhouse gas emissions by 50% by 2030 from a 2021 baseline.",
-              "coverage": "The commitment covers global operations across the entire value chain, including Scope 1, 2, and 3 emissions.",
+              "description": "Kraft-Heinz has committed to reducing virgin plastic use by 20% by 2030, using a 2021 baseline.",
+              "coverage": "This commitment covers its global portfolio and includes the entire value chain related to virgin plastic.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -419,29 +428,11 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data.",
-          "Ambition": "Commitment not disclosed in provided data.",
-          "Coverage": "Commitment not disclosed in provided data.",
-          "Credibility & Transparency": "Commitment not disclosed in provided data.",
-          "Delivery/Status": "No reporting on air pollutant performance."
-        }
-      },
-      "Land & Ocean Use": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data.",
-          "Ambition": "Commitment not disclosed in provided data.",
-          "Coverage": "Commitment not disclosed in provided data.",
-          "Credibility & Transparency": "Commitment not disclosed in provided data.",
-          "Delivery/Status": "Commitment not disclosed in provided data."
+          "Existence & Specificity": "There is no public air pollutant reduction commitment; only general statements like 'commitment not disclosed in provided data'.",
+          "Ambition": "There is no defined ambition beyond regulatory compliance as no specific targets or goals are disclosed.",
+          "Coverage": "No scope is defined since all commitments state 'commitment not disclosed in provided data'.",
+          "Credibility & Transparency": "No pollutant data is disclosed, as indicated by the lack of specific information in the details.",
+          "Delivery/Status": "No reporting is provided on air pollutant performance."
         }
       },
       "Hazardous Substances": {
@@ -462,32 +453,59 @@
           "Delivery/Status": "Commitment not disclosed in provided data."
         }
       },
-      "Water Stewardship": {
+      "Land & Ocean Use": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 0,
+          "Ambition": 0,
+          "Coverage": 0,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 0
+        },
+        "overall": 0.0,
+        "rationale": {
+          "Existence & Specificity": "No evidence provided for a public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+          "Ambition": "No evidence provided for any ambition beyond regulatory compliance.",
+          "Coverage": "No evidence provided for the scope definition.",
+          "Credibility & Transparency": "No evidence provided for disclosure of sourcing footprint or ecosystem impact.",
+          "Delivery/Status": "No evidence provided for reporting on land or marine impact."
+        }
+      },
+      "Biodiversity & Ecological Welfare": {
         "bucket": "P",
         "scores": {
-          "Existence & Specificity": 9,
-          "Ambition": 12,
-          "Coverage": 16,
-          "Credibility & Transparency": 8,
-          "Delivery/Status": 5
+          "Existence & Specificity": 16,
+          "Ambition": 16,
+          "Coverage": 13,
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 12
         },
-        "overall": 10.0,
+        "overall": 12.4,
         "rationale": {
-          "Existence & Specificity": "The company has a quantified target of 100% AWS certification by 2025 with a clear baseline year of 2018.",
-          "Ambition": "There is meaningful ambition with absolute targets and timelines set, though specifics are less detailed for 2030.",
-          "Coverage": "The coverage encompasses all Nestlé Waters sites and includes total geographic and asset coverage.",
-          "Credibility & Transparency": "The use of AWS methodology is mentioned but lacks specification on framework alignment and validation status.",
-          "Delivery/Status": "There is some measurable progress reported at 39.8%, yet the status is off-track and no other commitments have reporting."
+          "Existence & Specificity": "Clear targets with timelines for deforestation and regenerative agriculture are specified.",
+          "Ambition": "Targets are absolute and set at 100% deforestation-free by 2025, showing strong ambition.",
+          "Coverage": "The focus is on primary supply chains, covering key deforestation-linked commodities globally.",
+          "Credibility & Transparency": "Details on methodology or framework alignment are not specified, lacking transparency.",
+          "Delivery/Status": "Current deforestation-free progress is 93.5%, indicating measurable progress, but not fully reported."
         },
         "Commitments": [
           {
-            "Name": "Water stewardship/management programs",
+            "Name": "Deforestation-free supply chain target",
             "Description": {
-              "description": "Nestlé commits to achieving 100% AWS certification for its water stewardship/management programs by 2025.",
-              "coverage": "This commitment covers all Nestlé Waters sites with total geographic and asset coverage across the entire value chain.",
+              "description": "Nestle aims to achieve a deforestation-free supply chain with a target of 100% by 2025, covering raw materials like meat, palm oil, pulp and paper, soy, sugar, cocoa, and coffee, with a baseline year of 2018.",
+              "coverage": "The commitment covers the primary supply chains on a global scale, but the specific asset coverage is not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "Off-Track"
+            "Status": "No Reporting"
+          },
+          {
+            "Name": "Regenerative agriculture target",
+            "Description": {
+              "description": "Nestlé aims to achieve 20% regenerative agriculture by 2025 and 50% by 2030, using 2018 as the baseline year.",
+              "coverage": "The commitment covers key ingredients globally, but specific assets and the value chain are not included.",
+              "validation": "Not disclosed."
+            },
+            "Status": "Achieved"
           }
         ]
       },
@@ -495,44 +513,73 @@
         "bucket": "L",
         "scores": {
           "Existence & Specificity": 16,
-          "Ambition": 14,
+          "Ambition": 12,
           "Coverage": 16,
-          "Credibility & Transparency": 17,
-          "Delivery/Status": 10
+          "Credibility & Transparency": 12,
+          "Delivery/Status": 8
         },
-        "overall": 14.6,
+        "overall": 12.8,
         "rationale": {
-          "Existence & Specificity": "The company has fully defined net-zero targets and clear 2030 milestones for multiple scopes.",
-          "Ambition": "The targets reflect a 1.5°C alignment with substantial near-term reductions.",
-          "Coverage": "The commitments clearly cover Scope 1, 2, and 3 with detailed scope and category coverage.",
-          "Credibility & Transparency": "The targets are validated by SBTi, showing strong credibility and transparency.",
-          "Delivery/Status": "There is some reporting against milestones, but gaps remain for Scope 3 and insufficient data for full assessment."
+          "Existence & Specificity": "The company has a fully defined net-zero target for 2050 with clear 2030 milestones covering all scopes.",
+          "Ambition": "The targets align with 1.5°C scenarios, but lack substantial detail on interim reductions and numeric specifics.",
+          "Coverage": "Scopes 1, 2, and 3 are included with comprehensive global coverage across all activities.",
+          "Credibility & Transparency": "Targets are approved by the SBTi, but there is a lack of detailed baseline recalculation methodology.",
+          "Delivery/Status": "Interim progress is reported as on track, but there is a lack of specific milestone reporting and detailed progress data."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Nestle commits to achieving net zero emissions by 2050, with a baseline year of 2018 and an absolute reduction target covering 100% of its emissions.",
-              "coverage": "The commitment includes Scope 1, 2, and 3 emissions with total geographic, asset, and value chain coverage.",
-              "validation": "The commitment is validated and approved by the Science Based Targets initiative (SBTi)."
+              "description": "Nestle commits to achieving a 100% reduction in net zero emissions by 2050, using 2018 as the baseline year.",
+              "coverage": "This commitment covers all scopes (1, 2, and 3) globally, including all activities throughout the value chain.",
+              "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           },
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "Nestle aims to reduce its Scope 1 and 2 GHG emissions by 90% by 2050, with interim targets of 50% by 2030, using 2018 as the baseline year.",
-              "coverage": "The commitment covers all global operations, assets, and the entire value chain, including Scope 1, 2, and 3 emissions.",
-              "validation": "The target has been approved and validated by the Science Based Targets initiative (SBTi)."
+              "description": "Nestle aims to reduce its combined Scope 1 and 2 GHG emissions by 50% by 2030 and 90% by 2050, based on a 2018 baseline.",
+              "coverage": "This commitment covers all scopes globally across Nestle's energy and industry assets, including the entire value chain.",
+              "validation": "The commitment is externally validated and approved by the Science Based Targets initiative."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "Nestle commits to reducing its Scope 3 GHG emissions by 75% by the year 2050, with a baseline of 2018.",
-              "coverage": "This commitment covers the entire scope, geography, and value chain of the company.",
-              "validation": "The commitment is validated and approved by the Science Based Targets initiative (SBTi)."
+              "description": "The commitment is to reduce Scope 3 GHG emissions by 50% by 2030 and 75% by 2050, using a 2018 baseline.",
+              "coverage": "The commitment covers global operations, specifically focusing on forests, land, and agriculture within the Scope 3 value chain.",
+              "validation": "The commitment is validated by the Science Based Targets initiative and aligned with the Net Zero Roadmap."
+            },
+            "Status": "No Reporting"
+          }
+        ]
+      },
+      "Water Stewardship": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 8,
+          "Ambition": 9,
+          "Coverage": 12,
+          "Credibility & Transparency": 11,
+          "Delivery/Status": 7
+        },
+        "overall": 9.4,
+        "rationale": {
+          "Existence & Specificity": "The target is to achieve 100% AWS certification by 2025 but lacks baseline year and specific value details.",
+          "Ambition": "The ambition is to achieve 100% certification by 2025, which is meaningful, but there are no interim or long-term targets.",
+          "Coverage": "Covers all Nestlé Waters sites globally, although there are no specifics on value chain inclusion beyond certification.",
+          "Credibility & Transparency": "The methodology aligns with the Alliance for Water Stewardship framework, but there is no validation status.",
+          "Delivery/Status": "Current progress is 39.8% as of 2024, with trajectory off track and missing intermediate milestones."
+        },
+        "Commitments": [
+          {
+            "Name": "Water stewardship/management programs",
+            "Description": {
+              "description": "The commitment is to achieve 100% AWS certification for Nestlé Waters sites by 2025.",
+              "coverage": "This commitment covers all Nestlé Waters sites globally, focusing on site certification.",
+              "validation": "The commitment is aligned with the AWS certification, but external validation status is not specified."
             },
             "Status": "No Reporting"
           }
@@ -541,76 +588,38 @@
       "Material Use, Waste & Circularity": {
         "bucket": "L",
         "scores": {
-          "Existence & Specificity": 12,
-          "Ambition": 11,
-          "Coverage": 13,
+          "Existence & Specificity": 13,
+          "Ambition": 12,
+          "Coverage": 9,
           "Credibility & Transparency": 5,
-          "Delivery/Status": 8
+          "Delivery/Status": 9
         },
-        "overall": 9.8,
+        "overall": 9.6,
         "rationale": {
-          "Existence & Specificity": "There are quantified targets with clear timelines, but not across all possible dimensions of material use.",
-          "Ambition": "The targets have specific percentages and timelines, but the ambition is partially met due to off-track status in virgin plastic reduction.",
-          "Coverage": "There is total geographic and asset coverage for plastic packaging, but lack of disclosure on circular targets is a gap.",
-          "Credibility & Transparency": "There is limited transparency and no external validation or detailed methodologies are specified.",
-          "Delivery/Status": "Progress is noted for some targets like packaging recyclability, but others are off-track or lack data."
+          "Existence & Specificity": "Multiple quantified targets with clear definitions and timelines for virgin plastic and recyclable packaging are provided, although some details are missing.",
+          "Ambition": "The targets are ambitious with high percentages for virgin plastic reduction and recyclability, but lack interim and long-term targets.",
+          "Coverage": "Global geographical coverage is stated, but specific details on asset and value chain coverage are not provided.",
+          "Credibility & Transparency": "Disclosure lacks methodology, standards, and validation details, reducing transparency despite some framework alignment.",
+          "Delivery/Status": "Progress reports are provided with percentage achievements, but the trajectory is off track for virgin plastic reduction."
         },
         "Commitments": [
           {
             "Name": "Recyclable/reusable/compostable packaging target",
             "Description": {
-              "description": "Nestle aims to make 95% of its plastic packaging recyclable, reusable, or compostable by 2025, using a 2018 baseline.",
-              "coverage": "The commitment covers all plastic packaging globally across all assets and the entire value chain.",
+              "description": "Nestle commits to making 95% of its plastic packaging recyclable, reusable, or compostable by 2025, with a baseline year of 2018.",
+              "coverage": "The commitment covers plastic packaging on a global scale.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           },
           {
             "Name": "Virgin plastic reduction target",
             "Description": {
-              "description": "The commitment is to reduce virgin plastic use by 33% by 2025, using 2018 as the baseline year.",
-              "coverage": "The commitment covers virgin plastic reduction across Nestle's total geographic, asset, and value chain scope.",
-              "validation": "The commitment is not externally validated, certified, or assured."
+              "description": "Nestle commits to reducing virgin plastic usage by 33% by 2025, based on a 2018 baseline.",
+              "coverage": "The commitment covers virgin plastic globally; specific assets and value chain stages are not disclosed.",
+              "validation": "The commitment is not validated."
             },
-            "Status": "Off-Track"
-          }
-        ]
-      },
-      "Biodiversity & Ecological Welfare": {
-        "bucket": "P",
-        "scores": {
-          "Existence & Specificity": 17,
-          "Ambition": 16,
-          "Coverage": 18,
-          "Credibility & Transparency": 6,
-          "Delivery/Status": 16
-        },
-        "overall": 14.6,
-        "rationale": {
-          "Existence & Specificity": "The commitments include clear and time-bound targets for deforestation-free supply chains and regenerative agriculture with defined metrics and target years.",
-          "Ambition": "The ambitions are meaningful with absolute targets and specific percentages aligning with industry norms.",
-          "Coverage": "The coverage is comprehensive, addressing multiple commodities linked to deforestation, such as meat, palm oil, and soy, across primary supply chains.",
-          "Credibility & Transparency": "While there is public disclosure of significant commitments, there is a lack of specified methodologies, validations, or framework alignments.",
-          "Delivery/Status": "Progress is well-documented, with current reporting showing significant achievement towards 2025 targets, indicating on-track results."
-        },
-        "Commitments": [
-          {
-            "Name": "Deforestation-free supply chain target",
-            "Description": {
-              "description": "Nestle aims to achieve a 100% deforestation-free supply chain by 2025, using 2018 as the baseline year.",
-              "coverage": "The commitment covers primary supply chains globally, including meat, palm oil, pulp and paper, soy, sugar, cocoa, and coffee.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Regenerative agriculture target",
-            "Description": {
-              "description": "Nestle commits to achieving 20% regenerative agriculture for key ingredients by 2025 and 50% by 2030, based on a 2018 baseline.",
-              "coverage": "The commitment covers all key ingredients, with total geographic and asset coverage across the entire value chain.",
-              "validation": "Not disclosed."
-            },
-            "Status": "Achieved"
+            "Status": "No Reporting"
           }
         ]
       }
@@ -627,11 +636,11 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "The company provides no specific air pollutant reduction commitment details.",
-          "Ambition": "There is no defined ambition beyond regulatory compliance in the evidence.",
-          "Coverage": "No scope is defined for the air quality commitments.",
-          "Credibility & Transparency": "The company does not disclose any pollutant data.",
-          "Delivery/Status": "There is no reporting on air pollutant performance."
+          "Existence & Specificity": "There is no public air pollutant reduction commitment stated.",
+          "Ambition": "There is no ambition beyond regulatory compliance evident in the provided data.",
+          "Coverage": "No scope is defined for any emissions reduction.",
+          "Credibility & Transparency": "There is no disclosure of pollutant data.",
+          "Delivery/Status": "There is no reporting on air pollutant performance available."
         }
       },
       "Land & Ocean Use": {
@@ -645,11 +654,11 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts is provided.",
-          "Ambition": "There is no defined ambition beyond regulatory compliance based on the provided evidence.",
-          "Coverage": "The scope is not defined due to lack of data.",
-          "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
-          "Delivery/Status": "No reporting on land or marine impact is available."
+          "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+          "Ambition": "No defined ambition beyond regulatory compliance.",
+          "Coverage": "No scope defined.",
+          "Credibility & Transparency": "No disclosure of sourcing footprint or ecosystem impact.",
+          "Delivery/Status": "No reporting on land or marine impact."
         }
       },
       "Hazardous Substances": {
@@ -663,83 +672,36 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data.",
-          "Ambition": "Commitment not disclosed in provided data.",
-          "Coverage": "Commitment not disclosed in provided data.",
-          "Credibility & Transparency": "Commitment not disclosed in provided data.",
-          "Delivery/Status": "Commitment not disclosed in provided data."
+          "Existence & Specificity": "No public commitment regarding hazardous chemicals is available.",
+          "Ambition": "There is no evidence of ambition beyond regulatory compliance.",
+          "Coverage": "No scope is defined for hazardous substance management.",
+          "Credibility & Transparency": "There is no public ingredient or chemical disclosure.",
+          "Delivery/Status": "There is no reporting on chemical phase-out progress."
         }
-      },
-      "Material Use, Waste & Circularity": {
-        "bucket": "P",
-        "scores": {
-          "Existence & Specificity": 16,
-          "Ambition": 12,
-          "Coverage": 9,
-          "Credibility & Transparency": 4,
-          "Delivery/Status": 12
-        },
-        "overall": 10.6,
-        "rationale": {
-          "Existence & Specificity": "The company has clear, quantified targets with specified baseline and target years across multiple commitments.",
-          "Ambition": "Targets such as 97% recyclable packaging and 40% recycled content are ambitious but lack interim benchmarks for full marks.",
-          "Coverage": "Covers primary and secondary packaging in key markets, but lacks comprehensive geographic and value chain inclusion.",
-          "Credibility & Transparency": "There is no mention of methodology, standards, or framework alignment in their reporting.",
-          "Delivery/Status": "There are measurable year-on-year improvements reported for multiple targets, though some commitments are not reported."
-        },
-        "Commitments": [
-          {
-            "Name": "Circular economy/recycling target",
-            "Description": {
-              "description": "Pepsi targets 40% recycled content in its primary plastic packaging by 2035, using 2022 as the baseline year.",
-              "coverage": "The commitment covers primary plastic packaging in key markets, accounting for more than 80% of Pepsi's global footprint.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Recyclable/reusable/compostable packaging target",
-            "Description": {
-              "description": "Pepsi aims to have 97% of its packaging be recyclable, reusable, or compostable by 2030, using 2022 as the baseline year.",
-              "coverage": "This commitment covers primary and secondary packaging in key packaging markets, with no specific geographic or value chain details disclosed.",
-              "validation": "The commitment is not externally validated, certified, or assured."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Virgin plastic reduction target",
-            "Description": {
-              "description": "Pepsi has committed to a 2% year-over-year reduction in virgin plastic use in primary plastic packaging, with a target year of 2030 and a baseline year of 2022.",
-              "coverage": "The commitment covers primary plastic packaging in key packaging markets, representing more than 80% of Pepsi's global footprint.",
-              "validation": "Not disclosed."
-            },
-            "Status": "Achieved"
-          }
-        ]
       },
       "GHG Emissions": {
         "bucket": "P",
         "scores": {
-          "Existence & Specificity": 13,
-          "Ambition": 11,
-          "Coverage": 10,
-          "Credibility & Transparency": 5,
-          "Delivery/Status": 12
+          "Existence & Specificity": 14,
+          "Ambition": 10,
+          "Coverage": 12,
+          "Credibility & Transparency": 4,
+          "Delivery/Status": 11
         },
         "overall": 10.2,
         "rationale": {
-          "Existence & Specificity": "The company has a quantified, timebound target with a baseline and target year, but lacks interim milestones.",
-          "Ambition": "The targets are absolute and reasonably ambitious for 2030, but without detailed interim milestones.",
-          "Coverage": "Scope 1 and 2 are fully covered; Scope 3 includes key categories but is not comprehensive.",
-          "Credibility & Transparency": "There is no mention of recognized standards or methodologies being used.",
-          "Delivery/Status": "Annual reporting is noted with significant progress in some areas but others are off track."
+          "Existence & Specificity": "The company outlines absolute reduction targets with a baseline year and target year specified, but lacks interim milestones.",
+          "Ambition": "The 2050 target and 2030 goals are absolute but alignment with sector norms is not clearly demonstrated.",
+          "Coverage": "The targets include Scope 1, 2, and specific categories of Scope 3, but lack comprehensive geographic and value chain breakdowns.",
+          "Credibility & Transparency": "There is no mention of recognized standards, methodologies, or validation, leading to low transparency.",
+          "Delivery/Status": "Some progress has been reported with 18% towards Scope 1+2 and partial progress in Scope 3, but milestones are not specified."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Pepsi has committed to achieving net zero emissions by 2050, targeting 100% reduction from a 2022 baseline across Scope 1, 2, and 3 emissions.",
-              "coverage": "The commitment covers all Pepsi's operations but does not specify geographic scope or value chain inclusion.",
+              "description": "Pepsi commits to achieving 100% net zero emissions across Scope 1, 2, and 3 by 2050, using 2022 as the baseline year.",
+              "coverage": "The commitment covers all Scope 1, 2, and 3 emissions with unspecified geographic coverage.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -747,17 +709,17 @@
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "Pepsi has committed to a 50% reduction in Scope 1 and 2 greenhouse gas emissions by the year 2030, using 2022 as the baseline.",
-              "coverage": "The commitment covers their total assets, but the geographic coverage and value chain inclusion are not specified.",
-              "validation": "Not disclosed."
+              "description": "Pepsi aims to achieve a 50% reduction in Scope 1 and 2 GHG emissions by 2030, using 2022 as the baseline year.",
+              "coverage": "The commitment covers total asset Scope 1 and 2 emissions, but geographic and value chain details are not specified.",
+              "validation": "The commitment is not externally validated or assured."
             },
             "Status": "On-Track"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "Pepsi commits to reducing its Scope 3 greenhouse gas emissions by 42% and 30% by 2030, using 2022 as the baseline year.",
-              "coverage": "This commitment covers the total asset scope but does not specify geographic coverage or value chain inclusion.",
+              "description": "Pepsi has committed to reducing its Scope 3 GHG emissions by 42% in Energy & Industry and 30% in Forest, Land, and Agriculture by 2030, using 2022 as the baseline year.",
+              "coverage": "The commitment covers total asset Scope 3 emissions across Energy & Industry and FLAG categories, with geographic coverage not specified.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -765,66 +727,104 @@
         ]
       },
       "Water Stewardship": {
-        "bucket": "A",
+        "bucket": "P",
         "scores": {
-          "Existence & Specificity": 9,
-          "Ambition": 10,
-          "Coverage": 9,
-          "Credibility & Transparency": 5,
-          "Delivery/Status": 8
+          "Existence & Specificity": 17,
+          "Ambition": 12,
+          "Coverage": 8,
+          "Credibility & Transparency": 7,
+          "Delivery/Status": 13
         },
-        "overall": 8.2,
+        "overall": 11.4,
         "rationale": {
-          "Existence & Specificity": "There is a quantified target for facilities adopting AWS Standard with a clear timeline, though the magnitude and specific metrics are unclear.",
-          "Ambition": "Targets are absolute but lack specified numeric values or interim timelines, indicating moderate ambition.",
-          "Coverage": "The coverage includes high water-risk facilities, but lacks geographic and comprehensive value chain coverage.",
-          "Credibility & Transparency": "The methodology mentions AWS Standard but lacks external validation or clear disclosures.",
-          "Delivery/Status": "There is data showing progress in 27 facilities, but lacks detailed tracking against the target."
+          "Existence & Specificity": "The company has a clear quantified target with baseline and target year specified.",
+          "Ambition": "The company has a meaningful target for 2025 but lacks interim and longer-term targets.",
+          "Coverage": "The commitment covers high water-risk facilities but lacks comprehensive geographic and asset coverage.",
+          "Credibility & Transparency": "There is a use of the AWS Standard without detailed framework alignment or validation status.",
+          "Delivery/Status": "There is measurable progress with 86% achieved and a trajectory described as 'On Track'."
         },
         "Commitments": [
           {
             "Name": "Water stewardship/management programs",
             "Description": {
-              "description": "The commitment is for facilities to adopt the AWS Standard by 2025, starting from a baseline of zero facilities in 2022.",
-              "coverage": "This commitment specifically targets high water-risk facilities, with no specific geographic scope or value chain inclusion disclosed.",
-              "validation": "The commitment is based on the AWS Standard, but external validation is not specified."
+              "description": "Pepsi aims for 100% water replenishment in high water-risk manufacturing facilities by 2025, starting from a 2022 baseline.",
+              "coverage": "The commitment covers company-owned high water-risk facilities, but geographic specifics are not disclosed.",
+              "validation": "The commitment follows the AWS Standard, but external validation is not specified."
             },
-            "Status": "No Reporting"
+            "Status": "On-Track"
+          }
+        ]
+      },
+      "Material Use, Waste & Circularity": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 16,
+          "Ambition": 12,
+          "Coverage": 12,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 13
+        },
+        "overall": 10.6,
+        "rationale": {
+          "Existence & Specificity": "The company has defined quantified targets with baselines and target years for primary and secondary packaging.",
+          "Ambition": "The ambition of reducing virgin plastic and increasing recyclable packaging is moderately aligned with industry norms, but lacks interim targets.",
+          "Coverage": "The commitment covers primary and secondary packaging in key markets but lacks detail on asset and value chain coverage.",
+          "Credibility & Transparency": "There is no evidence of methodology, validation, or framework alignment provided.",
+          "Delivery/Status": "Progress is measurable with an achieved trajectory, notably 5% reduction in virgin plastic and 93% recyclable packaging."
+        },
+        "Commitments": [
+          {
+            "Name": "Recyclable/reusable/compostable packaging target",
+            "Description": {
+              "description": "Pepsi has committed to achieving 97% recyclable, reusable, or compostable packaging by 2030, using a 2022 baseline of 0%.",
+              "coverage": "This commitment covers primary and secondary packaging in key packaging markets.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          },
+          {
+            "Name": "Virgin plastic reduction target",
+            "Description": {
+              "description": "Pepsi aims to reduce virgin plastic in primary plastic packaging by 2% year-over-year through 2030, using 2022 as the baseline year.",
+              "coverage": "The commitment covers primary plastic packaging in key packaging markets; asset coverage and value chain inclusion are not specified.",
+              "validation": "Not disclosed."
+            },
+            "Status": "Achieved"
           }
         ]
       },
       "Biodiversity & Ecological Welfare": {
         "bucket": "P",
         "scores": {
-          "Existence & Specificity": 13,
-          "Ambition": 11,
-          "Coverage": 6,
+          "Existence & Specificity": 16,
+          "Ambition": 13,
+          "Coverage": 8,
           "Credibility & Transparency": 5,
           "Delivery/Status": 9
         },
-        "overall": 8.8,
+        "overall": 10.2,
         "rationale": {
-          "Existence & Specificity": "The deforestation-free supply chain target is clear and time-bound with a specific target for 2025.",
-          "Ambition": "The ambition includes a target of 100% deforestation-free supply chain and 90% regenerative agriculture by 2030, but lacks interim targets.",
-          "Coverage": "Coverage is limited to high-risk commodities in company-owned activities with no geographic specifics.",
-          "Credibility & Transparency": "The company refers to its Stewardship of Forests and Natural Ecosystems Policy but lacks validation and framework alignment details.",
-          "Delivery/Status": "There is evidence of progress with 90% of the deforestation-free target achieved, but the trajectory is off-track."
+          "Existence & Specificity": "There are clear, time-bound commitments with quantified targets for some activities.",
+          "Ambition": "The ambition aligns with industry norms, particularly with absolute targets for 2025 and 2030.",
+          "Coverage": "Coverage includes high-risk commodities but lacks geographic specificity and value chain inclusion details.",
+          "Credibility & Transparency": "The policy refers to a stewardship framework, but lacks reporting on validation or framework alignment.",
+          "Delivery/Status": "Progress is reported above 90% for deforestation-free targets and ~66% for regenerative agriculture, but is marked as off-track in some areas."
         },
         "Commitments": [
           {
             "Name": "Deforestation-free supply chain target",
             "Description": {
-              "description": "Pepsi commits to achieving a deforestation-free supply chain for high-risk commodities by 2025, with a target covering 100% of company-owned and -operated activities, using a 2022 baseline.",
-              "coverage": "The commitment focuses on high-risk commodities within company-owned and -operated activities, but does not specify geographic or full value chain coverage.",
-              "validation": "Not disclosed."
+              "description": "Pepsi aims for a 100% deforestation-free supply chain for high-risk commodities by 2025, using 2022 as a baseline.",
+              "coverage": "The commitment covers high-risk commodities in company-owned and -operated activities, with no specific geographic or value chain details disclosed.",
+              "validation": "The commitment is based on the Stewardship of Forests and Natural Ecosystems Policy, but validation status is not reported."
             },
             "Status": "Off-Track"
           },
           {
             "Name": "Regenerative agriculture target",
             "Description": {
-              "description": "Pepsi aims to achieve a 90% regenerative agriculture target by 2030, with a baseline year of 2022.",
-              "coverage": "The commitment covers land supporting the growth of key crops and ingredients, but the geographic and value chain inclusion are not specified.",
+              "description": "Pepsi aims to implement regenerative agriculture on 10 million acres by 2030, starting from a baseline of 0 acres in 2022.",
+              "coverage": "The commitment covers land for key crops and ingredients, though geographic and asset specifics are not disclosed.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -833,6 +833,24 @@
       }
     },
     "Unilever": {
+      "Land & Ocean Use": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 0,
+          "Ambition": 0,
+          "Coverage": 0,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 0
+        },
+        "overall": 0.0,
+        "rationale": {
+          "Existence & Specificity": "No public commitment related to land use, marine ecosystems, or sustainable sourcing impacts.",
+          "Ambition": "No defined ambition beyond regulatory compliance.",
+          "Coverage": "No scope defined.",
+          "Credibility & Transparency": "No disclosure of sourcing footprint or ecosystem impact.",
+          "Delivery/Status": "No reporting on land or marine impact."
+        }
+      },
       "Air Quality": {
         "bucket": "X",
         "scores": {
@@ -844,11 +862,11 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data, no evidence of specific air pollutant reduction commitment.",
-          "Ambition": "No ambition beyond regulatory compliance; commitment not disclosed.",
-          "Coverage": "No scope defined for air quality commitments.",
-          "Credibility & Transparency": "No pollutant data disclosed in the provided data.",
-          "Delivery/Status": "No reporting on air pollutant performance is provided."
+          "Existence & Specificity": "No public air pollutant reduction commitments are disclosed in the provided data.",
+          "Ambition": "There is no defined ambition beyond regulatory compliance.",
+          "Coverage": "No scope regarding air pollutant reduction is defined.",
+          "Credibility & Transparency": "No pollutant data is disclosed.",
+          "Delivery/Status": "There is no reporting on air pollutant performance."
         }
       },
       "Hazardous Substances": {
@@ -862,130 +880,36 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "Commitment not disclosed in provided data.",
-          "Ambition": "Commitment not disclosed in provided data.",
-          "Coverage": "Commitment not disclosed in provided data.",
-          "Credibility & Transparency": "Commitment not disclosed in provided data.",
-          "Delivery/Status": "Commitment not disclosed in provided data."
+          "Existence & Specificity": "No public commitment regarding hazardous chemicals is evident.",
+          "Ambition": "There is no indication of any ambition beyond regulatory compliance.",
+          "Coverage": "No scope is defined due to the lack of evidence.",
+          "Credibility & Transparency": "There is no public ingredient or chemical disclosure.",
+          "Delivery/Status": "There is no reporting on chemical phase-out progress."
         }
       },
-      "Land & Ocean Use": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "No public commitment related to land use or marine ecosystems is disclosed.",
-          "Ambition": "No ambition beyond regulatory compliance is defined.",
-          "Coverage": "No scope related to land or ocean use is defined.",
-          "Credibility & Transparency": "There is no disclosure of sourcing footprint or ecosystem impact.",
-          "Delivery/Status": "There is no reporting on land or marine impact."
-        }
-      },
-      "Material Use, Waste & Circularity": {
+      "GHG Emissions": {
         "bucket": "L",
         "scores": {
           "Existence & Specificity": 16,
-          "Ambition": 13,
-          "Coverage": 9,
-          "Credibility & Transparency": 5,
-          "Delivery/Status": 9
-        },
-        "overall": 10.4,
-        "rationale": {
-          "Existence & Specificity": "Targets are well-defined and time-bound for recyclable packaging, virgin plastic reduction, and circular economy initiatives.",
-          "Ambition": "The ambition shows significant targets but does not exceed industry norms enough for a higher score.",
-          "Coverage": "While there is notable coverage, the limited country scope and incomplete categorical breakdowns leave gaps.",
-          "Credibility & Transparency": "Disclosure lacks methodological, validation, and framework alignment specifics, impacting transparency.",
-          "Delivery/Status": "Mixed delivery performance with some targets on track and others off track or not reported."
-        },
-        "Commitments": [
-          {
-            "Name": "Circular economy/recycling target",
-            "Description": {
-              "description": "Unilever commits to collect and process more plastic packaging than it sells by 2025, using 2019 as the baseline year.",
-              "coverage": "The commitment covers plastic packaging across 26 countries, accounting for approximately 82% of sales and includes the entire value chain.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Recyclable/reusable/compostable packaging target",
-            "Description": {
-              "description": "Unilever aims to achieve 100% recyclable, reusable, or compostable packaging for rigids by 2030 and flexibles by 2035, from a 2019 baseline.",
-              "coverage": "The commitment covers plastic packaging in 26 countries, including both rigids and flexibles, with a focus on the full value chain.",
-              "validation": "Not disclosed."
-            },
-            "Status": "On-Track"
-          },
-          {
-            "Name": "Virgin plastic reduction target",
-            "Description": {
-              "description": "Unilever aims to reduce virgin plastic use by 30% by 2026 and 40% by 2028, using 2019 as the baseline year.",
-              "coverage": "The commitment covers plastic packaging across 26 countries, representing approximately 82% of sales and includes the value chain.",
-              "validation": "Not disclosed."
-            },
-            "Status": "Off-Track"
-          }
-        ]
-      },
-      "Water Stewardship": {
-        "bucket": "A",
-        "scores": {
-          "Existence & Specificity": 13,
           "Ambition": 12,
-          "Coverage": 9,
-          "Credibility & Transparency": 5,
-          "Delivery/Status": 10
-        },
-        "overall": 9.8,
-        "rationale": {
-          "Existence & Specificity": "The target is quantified and time-bound but lacks clarity on baseline metric details.",
-          "Ambition": "The ambition is set as absolute with a significant target, but lacks interim targets or specific ambition levels.",
-          "Coverage": "The coverage is limited to water-stressed areas and manufacturing sites, not the entire value chain.",
-          "Credibility & Transparency": "Disclosure lacks specified methodologies, validation, and external frameworks.",
-          "Delivery/Status": "There is some disclosed progress data, but it remains limited in detail and lacks clear tracking."
-        },
-        "Commitments": [
-          {
-            "Name": "Water stewardship/management programs",
-            "Description": {
-              "description": "Unilever commits to implementing water stewardship programs in 100 locations by 2030, focusing on water-stressed areas, with a baseline year of 2021.",
-              "coverage": "This commitment applies to manufacturing sites located in water-stressed areas, without specific value chain inclusion.",
-              "validation": "Not disclosed."
-            },
-            "Status": "No Reporting"
-          }
-        ]
-      },
-      "GHG Emissions": {
-        "bucket": "A",
-        "scores": {
-          "Existence & Specificity": 9,
-          "Ambition": 11,
-          "Coverage": 5,
-          "Credibility & Transparency": 8,
+          "Coverage": 8,
+          "Credibility & Transparency": 0,
           "Delivery/Status": 5
         },
-        "overall": 7.6,
+        "overall": 8.2,
         "rationale": {
-          "Existence & Specificity": "The targets are specified with some details like percentage reductions and timelines but lack overall clarity, especially for Scope 1+2.",
-          "Ambition": "The target has a long-term ambition with specified percentages but lacks interim targets.",
-          "Coverage": "The targets primarily focus on Scope 3, with Scope 1+2 not detailed, leading to a lack of comprehensive coverage.",
-          "Credibility & Transparency": "Baseline years are mentioned, but there's limited methodological clarity and no external validation.",
-          "Delivery/Status": "There is some progress reported for 2024, but overall tracking against the targets is limited."
+          "Existence & Specificity": "Net-zero target for 2039 is fully defined with clear 2030 milestones and detailed categorization.",
+          "Ambition": "Targets indicate ambition but lack specific alignment to the 1.5°C scenario, although interim and long-term targets are set.",
+          "Coverage": "Scope 1 and 2 details are not disclosed, and while some Scope 3 coverage is indicated, it's lacking comprehensiveness.",
+          "Credibility & Transparency": "No validation by third-party or detailed recalculation policy is disclosed.",
+          "Delivery/Status": "There is some progress data, but reporting is inconsistent and lacking comprehensiveness."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Unilever commits to achieving net zero emissions by 2039, using 2021 as the baseline year, with an absolute target of 100%.",
-              "coverage": "The commitment covers all direct and indirect emissions, but the geographic and asset specifics are not disclosed.",
+              "description": "Unilever has committed to achieving net zero emissions by 2039, with baseline year set at 2021.",
+              "coverage": "Not disclosed.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -993,11 +917,40 @@
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "Unilever aims to reduce its Scope 3 GHG emissions by 42% and 30.3% by the year 2030, using a 2021 baseline.",
-              "coverage": "The commitment includes the value chain, with no specified geographic or asset coverage.",
+              "description": "Unilever commits to reducing its Scope 3 GHG emissions by 42% by 2030, using a baseline year of 2021.",
+              "coverage": "The commitment covers energy and industrial emissions within its Scope 3 category, encompassing the entire value chain.",
               "validation": "Not disclosed."
             },
             "Status": "Off-Track"
+          }
+        ]
+      },
+      "Water Stewardship": {
+        "bucket": "P",
+        "scores": {
+          "Existence & Specificity": 13,
+          "Ambition": 14,
+          "Coverage": 12,
+          "Credibility & Transparency": 11,
+          "Delivery/Status": 9
+        },
+        "overall": 11.8,
+        "rationale": {
+          "Existence & Specificity": "The company has a clear quantified target for reaching 100 locations in water-stressed areas by 2030 with a specified baseline year.",
+          "Ambition": "The targets are meaningful and include specific percentages, timelines, and both interim and long-term goals.",
+          "Coverage": "The programs cover water-stressed areas but lack detail on scope related to all owned manufacturing sites.",
+          "Credibility & Transparency": "There is some mention of methodology or framework alignment, but insufficient detail is provided.",
+          "Delivery/Status": "There is year-on-year reporting with a 21% progress reported towards the 2030 target."
+        },
+        "Commitments": [
+          {
+            "Name": "Water stewardship/management programs",
+            "Description": {
+              "description": "Unilever aims to implement water stewardship programs in 100 locations in water-stressed areas by 2030, with a baseline starting at zero in 2021.",
+              "coverage": "The commitment covers water-stressed areas specifically and focuses on implementing programs within these regions.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
           }
         ]
       },
@@ -1006,33 +959,33 @@
         "scores": {
           "Existence & Specificity": 16,
           "Ambition": 12,
-          "Coverage": 8,
-          "Credibility & Transparency": 5,
-          "Delivery/Status": 12
+          "Coverage": 12,
+          "Credibility & Transparency": 8,
+          "Delivery/Status": 13
         },
-        "overall": 10.6,
+        "overall": 12.2,
         "rationale": {
-          "Existence & Specificity": "The commitments are quantified and time-bound with clear target years and some categorical distinctions outlined.",
-          "Ambition": "Ambitious targets exist but full alignment with global biodiversity frameworks is not demonstrated; specific interim targets are missing for regenerative agriculture.",
-          "Coverage": "Scope is defined for specific commodities and regions but lacks comprehensive geographic and asset coverage details.",
-          "Credibility & Transparency": "There is limited transparency with no specified methodologies or third-party validations, but some supporting programs are mentioned.",
-          "Delivery/Status": "Progress is shown with positive trajectories in achieving targets, though full outcomes and milestones are not fully detailed."
+          "Existence & Specificity": "Multiple quantified targets with clear definitions but missing time boundaries for the deforestation-free target.",
+          "Ambition": "Targets show alignment with global frameworks but lack comprehensive coverage with exact percentages across all commodities.",
+          "Coverage": "Covers primary deforestation-linked commodities and agricultural land but appears limited in full global scope representation.",
+          "Credibility & Transparency": "Some methodological details and validation are mentioned but lack regular, transparent updates for all targets.",
+          "Delivery/Status": "Demonstrates a multi-year reduction in exposure, especially with the habitat protection target achieved, but not all targets have current reporting."
         },
         "Commitments": [
           {
             "Name": "Deforestation-free supply chain target",
             "Description": {
-              "description": "Unilever has committed to maintaining a deforestation-free supply chain with an ongoing target starting from the baseline year 2021.",
-              "coverage": "The commitment covers primary deforestation-linked commodities within the company's value chain, but geographic and asset coverage are not specified.",
+              "description": "The commitment is to achieve a 97% deforestation-free supply chain for primary deforestation-linked commodities, with ongoing targets and a baseline year of 2021.",
+              "coverage": "The commitment covers primary deforestation-linked commodities, though specific geographic or asset-focused details are not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "No Reporting"
+            "Status": "On-Track"
           },
           {
             "Name": "Habitat protection/regeneration target",
             "Description": {
-              "description": "Unilever commits to protecting and regenerating 900,000 hectares by 2026 and 1 million hectares by 2030, starting from a 2021 baseline of zero.",
-              "coverage": "The commitment covers land, forests, and oceans on a global scale and includes the value chain, with partial exclusion for the Ice Cream category.",
+              "description": "Unilever commits to protecting and regenerating 1.5 million hectares of land, forests, and oceans by 2027, starting from a baseline of 0 hectares in 2021.",
+              "coverage": "The commitment covers Unilever programmes with specific scope definitions including geographic and categorical breakdowns.",
               "validation": "Not disclosed."
             },
             "Status": "Achieved"
@@ -1040,107 +993,165 @@
           {
             "Name": "Regenerative agriculture target",
             "Description": {
-              "description": "Unilever commits to convert 1 million hectares of agricultural land to regenerative practices by 2030, using 2021 as the baseline.",
-              "coverage": "The commitment covers hectares of agricultural land with inclusion in the value chain, but geographic specifics are not disclosed.",
+              "description": "Unilever commits to implementing regenerative agriculture on 1 million hectares by 2030, with a baseline year of 2021 starting at 0 hectares.",
+              "coverage": "The commitment covers agricultural land with specific geographic and asset coverage details not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "No Reporting"
+            "Status": "On-Track"
+          }
+        ]
+      },
+      "Material Use, Waste & Circularity": {
+        "bucket": "L",
+        "scores": {
+          "Existence & Specificity": 16,
+          "Ambition": 12,
+          "Coverage": 9,
+          "Credibility & Transparency": 8,
+          "Delivery/Status": 10
+        },
+        "overall": 11.0,
+        "rationale": {
+          "Existence & Specificity": "Multiple quantified targets exist with clear definitions and timelines, including a 100% recyclability and various virgin plastic reduction targets.",
+          "Ambition": "While targets are specific with timelines, they reflect industry norms rather than exceeding them significantly.",
+          "Coverage": "The commitments cover plastic packaging in 26 countries, but do not include all brands or formats globally.",
+          "Credibility & Transparency": "Quantitative targets and progress are disclosed, but external assurance and detailed methodology documentation are lacking.",
+          "Delivery/Status": "Progress is reported with some targets on track, but others are off-track or lack reporting, showing inconsistent delivery against targets."
+        },
+        "Commitments": [
+          {
+            "Name": "Circular economy/recycling target",
+            "Description": {
+              "description": "Unilever commits to collect and process more plastic packaging than it sells by 2025, with a baseline year of 2019.",
+              "coverage": "The commitment covers plastic packaging in 26 countries.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          },
+          {
+            "Name": "Recyclable/reusable/compostable packaging target",
+            "Description": {
+              "description": "Unilever commits to making 100% of its plastic packaging recyclable, reusable, or compostable by 2030, with a baseline year of 2019.",
+              "coverage": "The commitment covers plastic packaging across 26 countries.",
+              "validation": "Not disclosed."
+            },
+            "Status": "On-Track"
+          },
+          {
+            "Name": "Virgin plastic reduction target",
+            "Description": {
+              "description": "The commitment is to reduce virgin plastic usage by 30% by 2026 and 40% by 2028 using 2019 as the baseline.",
+              "coverage": "The commitment covers plastic packaging in 26 countries.",
+              "validation": "Not disclosed."
+            },
+            "Status": "Off-Track"
           }
         ]
       }
     },
     "Anglo-American": {
-      "Material Use, Waste & Circularity": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "No public commitment is disclosed regarding waste rock, tailings reduction, or material efficiency.",
-          "Ambition": "There is no ambition beyond regulatory compliance, with no specific targets outlined.",
-          "Coverage": "No scope is defined in the provided data.",
-          "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
-          "Delivery/Status": "There is no reporting on waste or material efficiency performance."
-        }
-      },
       "Water Stewardship": {
         "bucket": "P",
         "scores": {
-          "Existence & Specificity": 16,
-          "Ambition": 10,
-          "Coverage": 10,
+          "Existence & Specificity": 13,
+          "Ambition": 13,
+          "Coverage": 9,
           "Credibility & Transparency": 5,
-          "Delivery/Status": 8
+          "Delivery/Status": 12
         },
-        "overall": 9.8,
+        "overall": 10.4,
         "rationale": {
-          "Existence & Specificity": "The company has a quantified target with a 50% reduction by 2030 against a defined baseline year of 2015.",
-          "Ambition": "The operational ambition includes a 50% reduction by 2030, but lacks interim targets and sector alignment details.",
-          "Coverage": "The target covers water-scarce areas but only partially addresses asset coverage, lacking a categorical breakdown.",
-          "Credibility & Transparency": "The commitment references a Sustainability-Linked Financing Framework but lacks validation status and alignment with recognized standards.",
-          "Delivery/Status": "There is reporting on progress with a current achievement of 27% against the baseline, but no milestones or consistent updates."
+          "Existence & Specificity": "A quantified water reduction target exists, specifying a 50% reduction by 2030 with a defined baseline year of 2015.",
+          "Ambition": "The ambition aligns with sector norms, targeting a 50% reduction by 2030 in absolute terms.",
+          "Coverage": "Covers part of the operations, specifically 19 target sites within water-scarce areas, lacking full asset coverage.",
+          "Credibility & Transparency": "Limited disclosure; no alignment with recognized standards or detailed methodology is provided.",
+          "Delivery/Status": "There is a 27% reduction from baseline, but the trajectory is off track, showing some measurable progress."
         },
         "Commitments": [
           {
             "Name": "Freshwater withdrawal reduction target",
             "Description": {
-              "description": "Anglo-American has committed to a 50% reduction in freshwater withdrawal by 2030 from a 2015 baseline of 48,666 megalitres.",
-              "coverage": "The commitment covers freshwater abstraction specifically in water scarce areas with partial asset coverage and no value chain inclusion.",
-              "validation": "The commitment is not externally validated."
+              "description": "Anglo-American commits to a 50% reduction in freshwater withdrawal by 2030, based on a 2015 baseline of 48,666 ML.",
+              "coverage": "The commitment covers freshwater abstraction in water-scarce areas, specifically targeting 19 sites.",
+              "validation": "Not disclosed."
             },
             "Status": "Off-Track"
           }
         ]
       },
       "GHG Emissions": {
-        "bucket": "P",
+        "bucket": "A",
         "scores": {
-          "Existence & Specificity": 16,
+          "Existence & Specificity": 12,
           "Ambition": 12,
-          "Coverage": 16,
-          "Credibility & Transparency": 12,
-          "Delivery/Status": 5
+          "Coverage": 12,
+          "Credibility & Transparency": 9,
+          "Delivery/Status": 8
         },
-        "overall": 12.2,
+        "overall": 10.6,
         "rationale": {
-          "Existence & Specificity": "The company has a quantified absolute reduction target with a defined baseline year of 2016, target year of 2030, and an interim milestone.",
-          "Ambition": "The absolute reduction targets (30% by 2030 for Scope 1+2 and 50% by 2040 for Scope 3) are aligned with sector pathways but lack interim milestones.",
-          "Coverage": "Scope 1 and 2 are fully covered across operated assets with total geographic coverage; however, Scope 3 lacks value chain inclusion.",
-          "Credibility & Transparency": "Reporting is aligned with the Sustainability-Linked Financing Framework and validated with a 1.5°C trajectory but lacks other supporting standards.",
-          "Delivery/Status": "The current reduction progress is off track with only 14% vs baseline and no reporting on interim milestones."
+          "Existence & Specificity": "The company has quantified targets but lacks defined baseline and interim targets for some commitments.",
+          "Ambition": "The targets are absolute with clear percentages and timelines, demonstrating moderate ambition.",
+          "Coverage": "Most targets cover Scope 1, 2, or 3 emissions fully but lack detailed value chain inclusion.",
+          "Credibility & Transparency": "Baseline for most targets is mentioned, but there is limited methodological clarity and external validation.",
+          "Delivery/Status": "Some progress data is disclosed but tracking against the target is limited and off-track."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "The commitment is to achieve net zero emissions by 2040, with a 100% absolute reduction target from a 2020 baseline.",
-              "coverage": "The commitment covers Scope 1 and 2 emissions with total geographic and asset coverage, excluding the value chain.",
-              "validation": "The commitment is third-party verified and aligned with a 1.5°C trajectory."
+              "description": "Anglo-American has committed to achieving net zero emissions by 2040, based on a baseline year of 2020 with absolute targets.",
+              "coverage": "The commitment covers Scope 1 and 2 emissions globally for all assets, but does not provide specific details on the value chain.",
+              "validation": "This commitment is third-party verified and aligned with a 1.5°C trajectory."
             },
             "Status": "Off-Track"
           },
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "Anglo-American has committed to a 30% reduction in Scope 1 and 2 greenhouse gas emissions by 2030, with a baseline of 13.41 Mt CO2e in 2016.",
-              "coverage": "This commitment covers all geographic locations and assets under the company's Scope 1 and 2 emissions, but does not include the value chain.",
-              "validation": "The commitment is not externally validated."
+              "description": "The commitment is to achieve a 30% absolute reduction in Scope 1 and 2 greenhouse gas emissions by 2030, using 2016 as the baseline year with a baseline value of 13.41 Mt CO2e.",
+              "coverage": "The commitment covers all geographic and asset areas under the company's operations, but does not include details about the value chain.",
+              "validation": "Not disclosed."
             },
             "Status": "Off-Track"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "The company commits to a 50% reduction in Scope 3 GHG emissions by 2040, using 2020 levels of 165.1 Mt CO2e as a baseline.",
-              "coverage": "The commitment covers total geographic and asset scope but does not include the value chain.",
+              "description": "Anglo-American commits to a 50% reduction in Scope 3 GHG emissions by 2040 from a 2020 baseline of 165.1 Mt CO2e.",
+              "coverage": "The commitment covers all geographic areas and assets but does not detail the value chain inclusion.",
               "validation": "Not disclosed."
             },
             "Status": "Off-Track"
+          }
+        ]
+      },
+      "Material Use, Waste & Circularity": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 5,
+          "Ambition": 6,
+          "Coverage": 7,
+          "Credibility & Transparency": 6,
+          "Delivery/Status": 1
+        },
+        "overall": 5.0,
+        "rationale": {
+          "Existence & Specificity": "Minimal specificity is provided for tailings management conformance, but most commitments lack any detail.",
+          "Ambition": "There is a partial demonstration of ambition with a 100% conformance target, yet no ambition beyond regulatory compliance is evident.",
+          "Coverage": "Coverage is partially addressed with the inclusion of the tailings facilities, but scope is limited.",
+          "Credibility & Transparency": "There is reference to frameworks such as GISTM, but there is no disclosure of actual waste data.",
+          "Delivery/Status": "There is no reporting on progress or status for any commitments."
+        },
+        "Commitments": [
+          {
+            "Name": "Tailings management conformance target",
+            "Description": {
+              "description": "Anglo-American commits to achieving 100% conformance in tailings management by the year 2025.",
+              "coverage": "This commitment covers tailings facilities in total but only applies to lower consequence categories, with no specific geographic limit disclosed.",
+              "validation": "The commitment is aligned with the GISTM and ICMM frameworks, but it is not externally validated."
+            },
+            "Status": "No Reporting"
           }
         ]
       },
@@ -1149,22 +1160,9 @@
           {
             "Name": "Habitat protection/regeneration target",
             "Description": {
-              "description": "The commitment is to achieve a Net Positive Impact on habitat protection and regeneration by 2030, using 2018 as the baseline year.",
-              "coverage": "This commitment covers biodiversity within the company's managed operations but does not include the value chain.",
-              "validation": "The commitment is not externally validated."
-            },
-            "Status": "No Reporting"
-          }
-        ]
-      },
-      "Air Quality": {
-        "Commitments": [
-          {
-            "Name": "Air quality emissions reduction target",
-            "Description": {
-              "description": "Anglo-American has committed to a 150% reduction in air quality emissions by 2024, using 2018 as the baseline.",
-              "coverage": "The commitment focuses on dust and particulate-matter pollution in the Santiago Metropolitan Region, Chile, and pertains to part of the Los Bronces Integrated Project.",
-              "validation": "The commitment is not externally validated."
+              "description": "Anglo-American has set a timebound target to achieve a net positive impact on habitat protection and regeneration by 2030, with the baseline year being 2018.",
+              "coverage": "The commitment covers biodiversity initiatives within their managed operations, but details regarding asset and value chain inclusion are not specified.",
+              "validation": "The commitment uses the mitigation hierarchy and aligns with biodiversity stewardship frameworks, but external validation is not detailed."
             },
             "Status": "No Reporting"
           }
@@ -1183,55 +1181,37 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "All commitments mention 'Commitment not disclosed in provided data', indicating no public commitment for the specified criteria.",
-          "Ambition": "The evidence shows no ambition beyond regulatory compliance as no targets or plans are disclosed.",
-          "Coverage": "There is no information provided on the scope of initiatives, resulting in no defined coverage.",
-          "Credibility & Transparency": "The lack of disclosed data on waste volumes or tailings indicates no credibility or transparency.",
-          "Delivery/Status": "The company provides no reporting on waste or material efficiency performance."
+          "Existence & Specificity": "Commitment not disclosed in provided data, indicating no public commitment.",
+          "Ambition": "No ambition beyond regulatory compliance, as no commitments are disclosed.",
+          "Coverage": "No scope is defined as commitments are not disclosed.",
+          "Credibility & Transparency": "No disclosure of waste volumes or tailings data is evidenced.",
+          "Delivery/Status": "There is no reporting on waste or material efficiency performance."
         }
       },
       "Water Stewardship": {
         "bucket": "P",
         "scores": {
           "Existence & Specificity": 13,
-          "Ambition": 12,
-          "Coverage": 10,
+          "Ambition": 10,
+          "Coverage": 9,
           "Credibility & Transparency": 5,
-          "Delivery/Status": 6
+          "Delivery/Status": 9
         },
         "overall": 9.2,
         "rationale": {
-          "Existence & Specificity": "Quantified water reduction targets with baseline and target years are provided, substantially satisfying the criterion.",
-          "Ambition": "Targets align with specific timelines and percentages, indicating moderate ambition but with some incompleteness due to lack of details.",
-          "Coverage": "The coverage includes global asset coverage for some operations, but lacks high-level identification of water-stressed regions.",
-          "Credibility & Transparency": "Limited methodological standards and framework alignment result in partial satisfaction of credibility and transparency.",
-          "Delivery/Status": "The evidence shows progress reporting and target percentages, but there are gaps in trajectory and milestone details."
+          "Existence & Specificity": "The company has a quantified water efficiency target with a defined baseline year and target year, albeit with limited scope.",
+          "Ambition": "The ambition includes a meaningful percentage target and timelines, but lacks clarity on alignment with sector norms.",
+          "Coverage": "The coverage is limited to two mining operations in Chile, with no mention of global operations or water-stressed regions.",
+          "Credibility & Transparency": "There is a lack of alignment with recognized standards and minimal disclosure on methodology or validation.",
+          "Delivery/Status": "Progress is reported with a trajectory mentioned, but lacks year-on-year detail for all operations."
         },
         "Commitments": [
           {
-            "Name": "Freshwater withdrawal intensity target",
-            "Description": {
-              "description": "BHP has set a target to reduce freshwater withdrawal intensity by 20% by 2030, based on a 2022 baseline.",
-              "coverage": "The commitment covers cementitious operations globally but does not include the value chain.",
-              "validation": "The commitment is not validated despite being aligned with SBTi standards."
-            },
-            "Status": "No Reporting"
-          },
-          {
-            "Name": "Freshwater withdrawal reduction target",
-            "Description": {
-              "description": "BHP commits to a 20% reduction in freshwater withdrawal intensity by 2030 from a 2022 baseline.",
-              "coverage": "This commitment applies globally to BHP's cementitious operations.",
-              "validation": "The commitment is not validated by any external entity."
-            },
-            "Status": "No Reporting"
-          },
-          {
             "Name": "Water efficiency improvement target",
             "Description": {
-              "description": "BHP aims to achieve a 10% improvement in water efficiency by 2030, based on a 2022 baseline.",
-              "coverage": "The commitment covers mining operations at Escondida and Pampa Norte with a focus on water efficiency.",
-              "validation": "Not disclosed."
+              "description": "BHP commits to a 10% improvement in water efficiency in its mining operations by 2030, using 2022 as the baseline year.",
+              "coverage": "The commitment covers mining operations specifically at Escondida and Pampa Norte in Chile.",
+              "validation": "The commitment is not externally validated, certified, or assured."
             },
             "Status": "No Reporting"
           }
@@ -1242,45 +1222,45 @@
         "scores": {
           "Existence & Specificity": 16,
           "Ambition": 12,
-          "Coverage": 10,
-          "Credibility & Transparency": 4,
-          "Delivery/Status": 11
+          "Coverage": 12,
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 16
         },
-        "overall": 10.6,
+        "overall": 12.2,
         "rationale": {
-          "Existence & Specificity": "There is a quantified absolute reduction target for Scope 1+2 with a defined baseline year, target year, and interim milestone for 2030, which is substantially detailed.",
-          "Ambition": "The Scope 1+2 target aligns to some degree with sector pathways, aiming for a meaningful reduction, but does not fully elaborate on all entities involved.",
-          "Coverage": "Scope 1+2 targets are globally covered across operated assets but material Scope 3 categories are only partially considered.",
-          "Credibility & Transparency": "There is no alignment with recognized standards or disclosed methodologies, reflecting minimal transparency.",
-          "Delivery/Status": "The reporting indicates a measurable 36% reduction in operational emissions surpassing the interim target, but lacks detailed annual documentation."
+          "Existence & Specificity": "The company has a quantified absolute reduction target of 30% by 2030 with a clear baseline year of 2020.",
+          "Ambition": "The targets set (30% by 2030) align with sector pathways but are not the most ambitious possible.",
+          "Coverage": "Scope 1 and 2 GHG are fully covered, but Scope 3 is only partially addressed, focusing on specific operations.",
+          "Credibility & Transparency": "There is no mention of alignment with recognized standards like the GHG Protocol.",
+          "Delivery/Status": "A 36% reduction has already been achieved, exceeding the 2030 target, demonstrating strong delivery."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "BHP commits to achieving net zero emissions by 2050 for its operated assets, targeting a 100% reduction in absolute Scope 1 and 2 emissions from a 2020 baseline of 13.6 units.",
-              "coverage": "The commitment covers BHP's operated assets globally, with a focus on Scope 1 and 2 emissions.",
-              "validation": "The commitment is not externally validated, certified, or assured by any methodology or standard."
+              "description": "BHP has committed to achieving net zero emissions by 2050, targeting a 100% reduction in absolute emissions from a 2020 baseline of 13.6 Mt.",
+              "coverage": "The commitment covers global Scope 1 and 2 emissions from operated assets.",
+              "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           },
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "The commitment is to reduce Scope 1 and 2 GHG emissions by 30% by 2030, using 2020 as the baseline year with an absolute target.",
-              "coverage": "The commitment covers global operated assets but does not include the value chain.",
-              "validation": "The commitment is not externally validated, certified, or assured."
+              "description": "BHP has committed to a 30% reduction in Scope 1 and 2 greenhouse gas emissions by 2030, using 2020 as the baseline year with an initial value of 13.6 million tonnes.",
+              "coverage": "This commitment covers BHP's operated assets globally and does not include the value chain.",
+              "validation": "Not disclosed."
             },
             "Status": "Achieved"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "BHP commits to achieving net zero Scope 3 greenhouse gas emissions by 2050, with a baseline year of 2020 at 352.0 MtCO2-e.",
-              "coverage": "The commitment covers the global value chain, including steelmaking.",
-              "validation": "The commitment is not externally validated."
+              "description": "BHP commits to achieving net zero Scope 3 GHG emissions by 2050, using 2020's 352 MtCO2-e as a baseline.",
+              "coverage": "The commitment covers all global operations and involves customers in steelmaking.",
+              "validation": "Not disclosed."
             },
-            "Status": "Off-Track"
+            "Status": "No Reporting"
           }
         ]
       },
@@ -1289,20 +1269,20 @@
           {
             "Name": "Habitat protection/regeneration target",
             "Description": {
-              "description": "BHP has committed to reforest 50,000 hectares in the Doce River basin by 2031, with a baseline of 0.0 hectares in 2020.",
-              "coverage": "The commitment covers the Doce River basin focusing on reforestation and springs restoration, including protected areas but not the value chain.",
-              "validation": "The commitment is not externally validated, certified, or assured."
+              "description": "The commitment is to conserve 30% of areas under conservation by 2030, with a baseline year of 2020 and an absolute target magnitude.",
+              "coverage": "The commitment covers areas of highest ecosystem value, specifically focusing on land and water stewarded, without value chain inclusion.",
+              "validation": "The commitment's validation status is not disclosed."
             },
             "Status": "No Reporting"
           },
           {
             "Name": "Protected areas respect commitment",
             "Description": {
-              "description": "The commitment aims to respect protected areas, specifically excluding operations in World Heritage sites, on an ongoing basis without a defined target year.",
-              "coverage": "The commitment covers protected areas globally, with a specific focus on World Heritage sites, and does not include the value chain.",
+              "description": "BHP's commitment involves respecting protected areas with an ongoing and non-timebound approach, without specific quantified targets.",
+              "coverage": "This commitment covers BHP's operated assets globally, without inclusion of the broader value chain.",
               "validation": "Not disclosed."
             },
-            "Status": "No Reporting"
+            "Status": "Achieved"
           }
         ]
       },
@@ -1311,17 +1291,17 @@
           {
             "Name": "NOx emissions reduction",
             "Description": {
-              "description": "The commitment is to reduce NOx emissions intensity by 47% by 2030 from a 2005 baseline.",
-              "coverage": "The commitment covers global cement operations but does not include the value chain.",
-              "validation": "The commitment is not validated."
+              "description": "BHP commits to reducing NOx emissions by 47% by 2030, using 2005 as the baseline year.",
+              "coverage": "This commitment covers NOx emissions from BHP's global cement manufacturing operations.",
+              "validation": "Not disclosed."
             },
             "Status": "No Reporting"
           },
           {
             "Name": "SOx emissions reduction",
             "Description": {
-              "description": "The commitment is to reduce SOx emissions by 67% by 2030 compared to a 2005 baseline within global cement operations.",
-              "coverage": "This commitment covers SOx emissions on a global scale, specifically targeting cement operations without including the broader value chain.",
+              "description": "The company commits to a 67% reduction in SOx emissions intensity by 2030, using 2005 as the baseline year.",
+              "coverage": "This commitment covers SOx emissions from global cement manufacturing operations, excluding the value chain.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1330,6 +1310,24 @@
       }
     },
     "Glencore": {
+      "Water Stewardship": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 0,
+          "Ambition": 0,
+          "Coverage": 0,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 0
+        },
+        "overall": 0.0,
+        "rationale": {
+          "Existence & Specificity": "There is no public water-related commitment, only unreported intentions.",
+          "Ambition": "The company shows no ambition beyond compliance with permits.",
+          "Coverage": "There is no defined scope for their water-related activities.",
+          "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data.",
+          "Delivery/Status": "There is no reporting on water performance."
+        }
+      },
       "Material Use, Waste & Circularity": {
         "bucket": "X",
         "scores": {
@@ -1341,75 +1339,57 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "The company only provides regulatory compliance statements without specific commitments regarding waste rock, tailings reduction, or material efficiency.",
-          "Ambition": "There is no evidence of ambitions beyond regulatory compliance.",
-          "Coverage": "The scope is not defined in any of the commitments provided.",
-          "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data.",
-          "Delivery/Status": "The company does not report on waste or material efficiency performance."
-        }
-      },
-      "Water Stewardship": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "The company has not disclosed any specific public water-related commitments.",
-          "Ambition": "There is no evidence of ambition beyond compliance due to lack of disclosed commitments.",
-          "Coverage": "No defined scope for water-related activities is present in the evidence provided.",
-          "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data.",
-          "Delivery/Status": "The company does not report on any water performance metrics."
+          "Existence & Specificity": "No public commitment regarding waste rock or material efficiency exists; only regulatory compliance statements are mentioned.",
+          "Ambition": "The evidence indicates no ambition beyond regulatory compliance in terms of waste management or material efficiency.",
+          "Coverage": "No scope is defined within the provided evidence.",
+          "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data present in the evidence.",
+          "Delivery/Status": "The company provides no reporting on waste or material efficiency performance."
         }
       },
       "GHG Emissions": {
         "bucket": "P",
         "scores": {
           "Existence & Specificity": 16,
-          "Ambition": 15,
-          "Coverage": 10,
+          "Ambition": 16,
+          "Coverage": 9,
           "Credibility & Transparency": 5,
-          "Delivery/Status": 13
+          "Delivery/Status": 12
         },
-        "overall": 11.8,
+        "overall": 11.6,
         "rationale": {
-          "Existence & Specificity": "The company has quantified absolute reduction targets with a defined baseline year and target year, including interim milestones.",
-          "Ambition": "The targets show meaningful ambition with specific percentages and timelines for Scope 1, 2, and 3 reductions.",
-          "Coverage": "Scope 1 and 2 are covered, but there is a lack of specificity in geographic and value chain coverage.",
-          "Credibility & Transparency": "There is no specified methodology or alignment with recognized standards, indicating a lack of transparency.",
-          "Delivery/Status": "The company shows measurable reductions in operational emissions with clearly reported progress."
+          "Existence & Specificity": "The company has quantified targets with a baseline year and multiple target years, including interim milestones.",
+          "Ambition": "The targets indicate meaningful reductions with specific percentages and timelines, aligned with long-term and interim goals.",
+          "Coverage": "Scope 1, 2, and 3 are mentioned, but geographic coverage and detailed value chain inclusion are not specified.",
+          "Credibility & Transparency": "Lack of detail in methodology, validation status, or alignment with frameworks reduces transparency.",
+          "Delivery/Status": "There is observable progress against the baseline with a reported reduction, but milestone details are lacking."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Glencore aims to achieve net zero emissions by 2050, with a quantified target of 100% reduction from a 2019 baseline covering industrial emissions.",
-              "coverage": "The commitment includes Scope 1, 2, and 3 emissions combined, but the specific geographic and value chain coverage are unspecified.",
+              "description": "Glencore commits to achieving net zero emissions by 2050, using a 2019 baseline.",
+              "coverage": "The commitment covers combined Scope 1, 2, and 3 emissions with industrial asset focus; geographic and value chain specifics are not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "Off-Track"
+            "Status": "On-Track"
           },
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "Glencore commits to reducing Scope 1 and 2 GHG emissions by 15% by 2026, 25% by 2030, and 50% by 2035, based on a 2019 baseline of 546.5 million tonnes CO2e.",
-              "coverage": "This commitment covers industrial emissions, with an unspecified geographic scope and value chain inclusion.",
+              "description": "Glencore aims to reduce Scope 1 and 2 GHG emissions by 15% by 2026, 25% by 2030, and 50% by 2035, using 2019 as the baseline year.",
+              "coverage": "The commitment covers Scope 1, 2, and 3 emissions from industrial assets, but does not specify geographic or value chain inclusion.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "Achieved"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "Glencore aims to reduce Scope 3 GHG emissions by 15% by 2026, 25% by 2030, and 50% by 2035 from a 2019 baseline of 546.5 million tonnes CO2e.",
-              "coverage": "The commitment covers Scope 1, 2, and 3 emissions specifically related to industrial operations, with no specified geographic or complete value chain coverage.",
+              "description": "Glencore commits to reducing Scope 3 GHG emissions by 15% by 2026, 25% by 2030, and 50% by 2035 from a 2019 baseline of 546.5 million tonnes of CO2 equivalent.",
+              "coverage": "The commitment covers combined Scope 1, 2, and 3 emissions related to Glencore's industrial operations, with specific geographic and value chain coverage not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "Achieved"
           }
         ]
       },
@@ -1418,11 +1398,11 @@
           {
             "Name": "Protected areas respect commitment",
             "Description": {
-              "description": "The commitment is to respect protected areas including UNESCO World Heritage sites and IUCN I-IV protected areas, with no specific targets, metrics, or timeline provided.",
-              "coverage": "This commitment has a global geographic coverage focusing on protected areas, without including the value chain.",
-              "validation": "The commitment is aligned with ICMM member commitments, but external validation status is not specified."
+              "description": "Glencore has committed to respecting protected areas by ensuring no exploration or mining occurs in UNESCO World Heritage and IUCN I-IV areas, with a target year of 2024.",
+              "coverage": "This commitment covers UNESCO World Heritage areas and IUCN I-IV globally, but does not specify asset or value chain coverage.",
+              "validation": "Not disclosed."
             },
-            "Status": "Achieved"
+            "Status": "No Reporting"
           }
         ]
       }
@@ -1439,72 +1419,83 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "The evidence shows no public water-related commitment and only mentions 'Commitment not disclosed in provided data'.",
-          "Ambition": "There is no indication of ambition beyond compliance, with all evidence stating 'Commitment not disclosed in provided data'.",
-          "Coverage": "The scope is undefined as no specific data or targets are disclosed.",
-          "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data, as commitments are not disclosed.",
-          "Delivery/Status": "There is no reporting on water performance, with all details stating 'Commitment not disclosed in provided data'."
-        }
-      },
-      "Material Use, Waste & Circularity": {
-        "bucket": "X",
-        "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
-        },
-        "overall": 0.0,
-        "rationale": {
-          "Existence & Specificity": "No public commitment is disclosed regarding waste rock, tailings reduction, or material efficiency; evidence shows only regulatory compliance statements.",
-          "Ambition": "No ambition beyond regulatory compliance is disclosed in the evidence.",
-          "Coverage": "No scope is defined in the evidence provided.",
-          "Credibility & Transparency": "There is no disclosure of waste volumes or tailings data in the evidence.",
-          "Delivery/Status": "The evidence shows no reporting on waste or material efficiency performance."
+          "Existence & Specificity": "The evidence shows no public water-related commitment; all details are not disclosed.",
+          "Ambition": "There is no evidence of ambition beyond compliance as no commitments are disclosed.",
+          "Coverage": "No scope is defined since all commitments are undisclosed.",
+          "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data.",
+          "Delivery/Status": "There is no reporting on water performance provided."
         }
       },
       "GHG Emissions": {
         "bucket": "P",
         "scores": {
-          "Existence & Specificity": 15,
-          "Ambition": 14,
-          "Coverage": 11,
-          "Credibility & Transparency": 10,
+          "Existence & Specificity": 17,
+          "Ambition": 16,
+          "Coverage": 13,
+          "Credibility & Transparency": 13,
           "Delivery/Status": 10
         },
-        "overall": 12.0,
+        "overall": 13.8,
         "rationale": {
-          "Existence & Specificity": "The company has specified quantified targets and baseline years for Scope 1+2 and Scope 3 emissions.",
-          "Ambition": "The targets reflect a 50% reduction by 2030, showing substantial ambition aligned with sector pathways.",
-          "Coverage": "Scope 1 & 2 are covered, but detailed information on material Scope 3 categories is lacking.",
-          "Credibility & Transparency": "There is alignment with recognized standards, but specific methodologies and validation status are unclear.",
-          "Delivery/Status": "There is evidence of progress, but the company is off-track with no recent comprehensive reporting."
+          "Existence & Specificity": "The company has quantified absolute targets with defined baseline and target years, including interim milestones.",
+          "Ambition": "Targets are aligned with sector pathways, with interim and long-term goals showing meaningful reduction ambitions.",
+          "Coverage": "Scope 1 and 2 emissions are fully covered, with specific Scope 3 categories identified.",
+          "Credibility & Transparency": "Reporting is aligned with recognized standards and frameworks, but some details on recalculation are unclear.",
+          "Delivery/Status": "Annual reporting shows progress but indicates off-track status with significant gaps in current achievements."
         },
         "Commitments": [
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Rio-Tinto aims to achieve net zero emissions by 2050, with a 50% reduction by 2030 from a 2018 baseline of 35.7 Mt CO2e.",
-              "coverage": "The commitment covers their full asset and value chain on a global scale.",
-              "validation": "The commitment is aligned with the 1.5°C framework, but external validation is not disclosed."
+              "description": "Rio-Tinto has committed to achieving net zero emissions by 2050, with interim targets of a 15% reduction by 2025 and a 50% reduction by 2030, based on a 2018 baseline of 35.7 Mt CO2e.",
+              "coverage": "The commitment covers Scope 1 and 2 emissions globally within its assets and operations.",
+              "validation": "The commitment aligns with 1.5°C pathways but is not stated to be externally validated."
             },
             "Status": "Off-Track"
           },
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "Rio Tinto commits to reducing its Scope 1 and 2 greenhouse gas emissions by 50% by 2030, using a 2018 baseline of 35.7 million tonnes of CO2e.",
-              "coverage": "Not disclosed.",
-              "validation": "Not disclosed."
+              "description": "Rio-Tinto aims to reduce its Scope 1 and 2 GHG emissions by 50% by 2030, using a 2018 baseline of 35.7 Mt CO2e.",
+              "coverage": "The target covers both Scope 1 and 2 emissions but does not specify geographic or asset-specific coverage.",
+              "validation": "The commitment is aligned with 1.5°C pathways, but external validation or certification is not disclosed."
             },
             "Status": "Off-Track"
           },
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "Rio Tinto has set a Scope 3 GHG reduction target of 50% by 2035, with a baseline year of 2022.",
-              "coverage": "The commitment covers Scope 3 emissions, focusing on high-grade ores, but geographic and asset specifics are not disclosed.",
+              "description": "Rio-Tinto commits to a 50% reduction in Scope 3 GHG emissions by 2035, using 2022 as the baseline year.",
+              "coverage": "The commitment specifically covers IOC high-grade ores within the Scope 3 emissions category, but geographic and asset coverage are not disclosed.",
+              "validation": "Not disclosed."
+            },
+            "Status": "No Reporting"
+          }
+        ]
+      },
+      "Material Use, Waste & Circularity": {
+        "bucket": "X",
+        "scores": {
+          "Existence & Specificity": 5,
+          "Ambition": 5,
+          "Coverage": 5,
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 5
+        },
+        "overall": 5.0,
+        "rationale": {
+          "Existence & Specificity": "Evidence of a quantified target exists only for tailings management, limited to specific facilities.",
+          "Ambition": "The ambition is demonstrated only for tailings management, with no further ambition beyond compliance evident.",
+          "Coverage": "The scope is limited to facilities with 'Very High' or 'Extreme' consequence classification in tailings management.",
+          "Credibility & Transparency": "Credibility is tied to GISTM alignment, but broader waste volume disclosure is lacking.",
+          "Delivery/Status": "There is progress reporting only on tailings management for specific facilities."
+        },
+        "Commitments": [
+          {
+            "Name": "Tailings management conformance target",
+            "Description": {
+              "description": "Rio-Tinto aims for 100% conformance with the Global Industry Standard on Tailings Management (GISTM) by 2025, with baseline set in 2018.",
+              "coverage": "The commitment specifically targets facilities classified as having 'Very High' or 'Extreme' consequences.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1514,10 +1505,19 @@
       "Biodiversity & Ecological Welfare": {
         "Commitments": [
           {
+            "Name": "Habitat protection/regeneration target",
+            "Description": {
+              "description": "Rio-Tinto aims to halt and reverse biodiversity loss by 2030, with a full recovery targeted by 2050.",
+              "coverage": "This commitment has a global scope as part of a nature-positive goal.",
+              "validation": "Not disclosed."
+            },
+            "Status": "No Reporting"
+          },
+          {
             "Name": "Protected areas respect commitment",
             "Description": {
-              "description": "Rio-Tinto has committed to respecting legally designated protected areas without setting a quantified target or timeline.",
-              "coverage": "The commitment is limited to legally designated protected areas without specified geographic, asset, or value chain coverage.",
+              "description": "The commitment involves respecting legally designated protected areas without a quantified target or specific timeline.",
+              "coverage": "The commitment specifically covers legally designated protected areas within the company's mining operations.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1527,19 +1527,10 @@
       "Air Quality": {
         "Commitments": [
           {
-            "Name": "Air quality emissions reduction target",
-            "Description": {
-              "description": "Rio-Tinto has committed to reducing air quality emissions, including dust, NOx, SO2, and CO, but has not set specific targets, magnitudes, or timelines for these reductions.",
-              "coverage": "The commitment covers the operations of the Iron Ore Company of Canada (IOC), but does not specify geographic or value-chain inclusion.",
-              "validation": "Not disclosed."
-            },
-            "Status": "No Reporting"
-          },
-          {
             "Name": "NOx emissions reduction",
             "Description": {
-              "description": "The commitment involves reducing NOx emissions without a quantified target, timeline, or baseline year.",
-              "coverage": "This target covers the Iron Ore Company of Canada (IOC) operations specifically.",
+              "description": "The commitment is to reduce NOx emissions with a baseline year of 2018, but it does not provide a quantified target or timeframe.",
+              "coverage": "The commitment covers the Iron Ore Company of Canada.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1547,8 +1538,8 @@
           {
             "Name": "SOx emissions reduction",
             "Description": {
-              "description": "The commitment involves reducing SOx emissions, but no specific targets or timelines have been quantified.",
-              "coverage": "The commitment covers the operations of the Iron Ore Company of Canada (IOC).",
+              "description": "The commitment aims to reduce SOx emissions with a baseline year of 2018, but it lacks a quantified target, defined magnitude, or set timeline.",
+              "coverage": "The commitment specifically covers the Iron Ore Company of Canada.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1568,54 +1559,65 @@
         },
         "overall": 0.0,
         "rationale": {
-          "Existence & Specificity": "Evidence indicates no specific public water-related commitments beyond regulatory compliance.",
-          "Ambition": "Evidence shows no ambition beyond compliance with regulatory permits.",
-          "Coverage": "Evidence does not define any scope for water-related commitments.",
-          "Credibility & Transparency": "Evidence reveals no disclosure of water withdrawal, consumption, or discharge data.",
-          "Delivery/Status": "Evidence indicates no reporting on water performance."
+          "Existence & Specificity": "The evidence shows no disclosed commitments and only regulatory compliance statements.",
+          "Ambition": "There is no indication of ambitions beyond compliance with permits.",
+          "Coverage": "No scope is defined as per the provided evidence.",
+          "Credibility & Transparency": "There is no disclosure of water withdrawal, consumption, or discharge data.",
+          "Delivery/Status": "There is no reporting on water performance."
         }
       },
       "Material Use, Waste & Circularity": {
         "bucket": "X",
         "scores": {
-          "Existence & Specificity": 0,
-          "Ambition": 0,
-          "Coverage": 0,
-          "Credibility & Transparency": 0,
-          "Delivery/Status": 0
+          "Existence & Specificity": 4,
+          "Ambition": 6,
+          "Coverage": 5,
+          "Credibility & Transparency": 5,
+          "Delivery/Status": 4
         },
-        "overall": 0.0,
+        "overall": 4.8,
         "rationale": {
-          "Existence & Specificity": "The company has no public commitment regarding waste rock, tailings reduction, or material efficiency.",
-          "Ambition": "There is no evidence of ambition beyond regulatory compliance.",
-          "Coverage": "No scope of commitments is defined in the evidence provided.",
-          "Credibility & Transparency": "No disclosure of waste volumes or tailings data is provided.",
-          "Delivery/Status": "There is no reporting on waste or material efficiency performance."
-        }
+          "Existence & Specificity": "There is minimal evidence of a public commitment to waste rock or tailings reduction, with only compliance statements present.",
+          "Ambition": "The ambition is vaguely indicated, focusing on a zero industrial waste disposal target without clear evidence beyond regulatory compliance.",
+          "Coverage": "The scope of the commitments is poorly defined with minimal details on geographic or asset coverage.",
+          "Credibility & Transparency": "There is no transparency regarding waste volumes or tailings data, with methodology and validation details missing.",
+          "Delivery/Status": "No progress is reported on the commitments, lacking data on current status or achievements."
+        },
+        "Commitments": [
+          {
+            "Name": "Zero industrial waste disposal target",
+            "Description": {
+              "description": "The commitment aims for zero industrial waste disposal by the year 2040, using 2020 as the baseline year.",
+              "coverage": "Not disclosed.",
+              "validation": "Not disclosed."
+            },
+            "Status": "No Reporting"
+          }
+        ]
       },
       "GHG Emissions": {
-        "bucket": "A",
+        "bucket": "L",
         "scores": {
           "Existence & Specificity": 13,
-          "Ambition": 13,
-          "Coverage": 12,
-          "Credibility & Transparency": 6,
-          "Delivery/Status": 8
+          "Ambition": 9,
+          "Coverage": 9,
+          "Credibility & Transparency": 0,
+          "Delivery/Status": 5
         },
-        "overall": 10.4,
+        "overall": 7.2,
         "rationale": {
-          "Existence & Specificity": "High-level targets are present with scope and timelines, but baseline specifics are often not disclosed.",
-          "Ambition": "The targets aim for net-zero by 2050, which shows moderate ambition aligned with incremental reductions.",
-          "Coverage": "Scope 1, 2, and 3 are addressed, but asset and value chain coverage details are not entirely clear.",
-          "Credibility & Transparency": "Methodologies and validation are not disclosed, reducing transparency and credibility.",
-          "Delivery/Status": "Limited progress is reported with some data showing on-track status for Scope 1 and 2 but lacking detailed tracking against targets."
+          "Existence & Specificity": "The company has a specified net-zero target for 2050 with a 2030 milestone.",
+          "Ambition": "The company has defined specific targets and timelines, but alignment to 1.5°C is not explicit.",
+          "Coverage": "Scope 1, 2, and 3 are addressed, but JV treatment and full global coverage are unclear.",
+          "Credibility & Transparency": "There is no evidence of third-party target validation or transparency in method disclosure.",
+          "Delivery/Status": "Some progress noted, but reporting is inconsistent across commitments."
         },
         "Commitments": [
           {
             "Name": "GHG emissions intensity target",
             "Description": {
-              "description": "Teck is committed to reducing its GHG emissions intensity by 33% by 2030, using 2020 as the baseline year.",
-              "coverage": "The commitment covers all operational emissions across all of Teck's operations and is focused on internal operations.",
+              "description": "Teck commits to a 33% reduction in greenhouse gas emissions intensity by 2030, using 2020 as the baseline year.",
+              "coverage": "Not disclosed.",
               "validation": "Not disclosed."
             },
             "Status": "No Reporting"
@@ -1623,8 +1625,8 @@
           {
             "Name": "Net zero emissions target",
             "Description": {
-              "description": "Teck is committed to achieving a 100% reduction in Scope 1 and 2 emissions by 2050, using 2020 as the baseline year.",
-              "coverage": "The commitment covers all operations within the company's internal operations, including total asset coverage, but does not extend beyond Scope 1 and 2.",
+              "description": "Teck has committed to achieving net-zero emissions by 2050 with a baseline year of 2020.",
+              "coverage": "Not disclosed.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -1632,8 +1634,8 @@
           {
             "Name": "Scope 1+2 GHG reduction target",
             "Description": {
-              "description": "The company commits to achieving net-zero Scope 1 and 2 greenhouse gas emissions by 2050 with a 2020 baseline.",
-              "coverage": "The commitment covers all operations with total asset coverage and only includes internal operations.",
+              "description": "Teck commits to achieving net-zero Scope 1 and 2 greenhouse gas emissions by 2050, using 2020 as the baseline year.",
+              "coverage": "The commitment covers Scope 1 and 2 emissions across all geographical and asset areas relevant to Teck's operations.",
               "validation": "Not disclosed."
             },
             "Status": "On-Track"
@@ -1641,11 +1643,11 @@
           {
             "Name": "Scope 3 GHG reduction target",
             "Description": {
-              "description": "The commitment is to achieve net-zero Scope 3 GHG emissions by 2050, using 2020 as the baseline year.",
-              "coverage": "This commitment covers all operations, assets, and includes the downstream value chain.",
+              "description": "Teck is committed to achieving net-zero Scope 3 GHG emissions by 2050, using 2020 as the baseline year.",
+              "coverage": "The commitment covers Scope 3 emissions with geographic, asset, and value chain inclusion not disclosed.",
               "validation": "Not disclosed."
             },
-            "Status": "No Reporting"
+            "Status": "On-Track"
           }
         ]
       },
@@ -1654,20 +1656,20 @@
           {
             "Name": "Habitat protection/regeneration target",
             "Description": {
-              "description": "Teck is committed to a 3:1 conservation or rehabilitation target by 2030 for every hectare affected, using a baseline year of 2020.",
-              "coverage": "This commitment covers all of Teck's mining operations and is applicable to internal operations.",
+              "description": "Teck commits to a target of conserving or rehabilitating 3 hectares for every hectare disturbed, with a target year of 2030 and a baseline of 2020.",
+              "coverage": "The commitment covers all mining activities within the company.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           },
           {
             "Name": "Protected areas respect commitment",
             "Description": {
-              "description": "The commitment involves respecting protected areas, specifically targeting World Heritage and IUCN areas, without a quantified target or timeline.",
-              "coverage": "It covers Teck's exploration and mining activities globally in World Heritage sites and IUCN protected areas, focusing on internal operations.",
+              "description": "Not disclosed.",
+              "coverage": "The commitment covers exploration and mining activities.",
               "validation": "Not disclosed."
             },
-            "Status": "On-Track"
+            "Status": "No Reporting"
           }
         ]
       }
@@ -1679,22 +1681,22 @@
       "Themes": [
         {
           "Theme": "Biodiversity & Ecological Welfare",
-          "Practice": "Commits to 100% deforestation-free supply chains by 2025, covering all primary commodities globally, with 93.5% already achieved and on track for completion.",
-          "Company": "Nestle"
+          "Practice": "Unilever commits to a 95% reduction of deforestation-linked commodities and the protection of 1 million hectares of agricultural land by 2030, with progress aligned to independently validated frameworks.",
+          "Company": "Unilever"
         },
         {
           "Theme": "GHG Emissions",
-          "Practice": "Nestle's commitment is backed by SBTi-approved targets with clear interim and long-term goals across Scope 1, 2, and 3, demonstrating strong credibility and on-track progress towards a 90% reduction by 2050.",
-          "Company": "Nestle"
+          "Practice": "Danone targets net zero emissions for its entire value chain by 2050, with interim targets and a 16.1% reduction by 2030, aligning with SBTi 1.5°C and disclosed in its Climate Transition Plan.",
+          "Company": "Danone"
         },
         {
           "Theme": "Material Use, Waste & Circularity",
-          "Practice": "Commitment to 100% recyclable, reusable, and compostable packaging by 2025 with 87% progress achieved, showcasing high ambition, specificity, and on-track delivery globally.",
-          "Company": "Kraft-Heinz"
+          "Practice": "Unilever targets reducing plastic packaging by 30% by 2026 and 40% by 2028, achieving 100% recyclable rigids by 2030, and committing to collect and process more plastic than they sell by 2025, with scope covering 26 countries and alignment validated by internal frameworks.",
+          "Company": "Unilever"
         },
         {
           "Theme": "Water Stewardship",
-          "Practice": "Danone's commitment is best-in-class due to its quantified target of 100% by 2030, clear baseline, strong trajectory with 99.3% achieved, and comprehensive scope and coverage of production sites.",
+          "Practice": "Danone targets a 100% implementation of the 4R water stewardship approach across global production sites by 2030, starting from a 2020 baseline, with progress disclosed as 99.3% by 2024.",
           "Company": "Danone"
         }
       ]
@@ -1703,24 +1705,305 @@
       "Sector": "Mining",
       "Themes": [
         {
-          "Theme": "Air Quality",
-          "Practice": "The commitment to offset 150% of dust and particulate-matter pollution by 2024 in a specific geographic area, supported by replacing wood-burners with electric heating, shows strong specificity and ambition despite lacking validation.",
-          "Company": "Anglo-American"
-        },
-        {
-          "Theme": "Biodiversity & Ecological Welfare",
-          "Practice": "Reforesting 50,000 ha by 2031, with 40,500 ha already ongoing, demonstrating significant progress and specific targets.",
-          "Company": "BHP"
-        },
-        {
           "Theme": "GHG Emissions",
-          "Practice": "Commitment to carbon neutrality by 2040 for Scope 1 and 2 emissions, third-party verified and aligned with a 1.5°C trajectory.",
+          "Practice": "Teck targets net-zero GHG emissions across Scope 1, 2, and 3 by 2050, with a 33% intensity reduction by 2030 from a 2020 baseline, using a validated framework aligned with SBTi.",
+          "Company": "Teck"
+        },
+        {
+          "Theme": "Material Use, Waste & Circularity",
+          "Practice": "Anglo-American targets 100% conformance with lower consequence tailings facilities by 2025, aligning with ICMM and using the GISTM framework.",
           "Company": "Anglo-American"
         },
         {
           "Theme": "Water Stewardship",
-          "Practice": "SBTi validated target for 20% reduction in freshwater withdrawal intensity by 2030 covering global operations, evidencing strong external validation and ambition.",
-          "Company": "BHP"
+          "Practice": "Anglo-American targets a 50% reduction in fresh water abstraction by 2030 from a 2015 baseline of 48,666 ML in water scarce areas, with current status and validation framework not disclosed.",
+          "Company": "Anglo-American"
+        }
+      ]
+    }
+  ],
+  "action_priorities": [
+    {
+      "sector": "Consumer Products",
+      "companies": [
+        {
+          "company_name": "Danone",
+          "themes": [
+            {
+              "theme_name": "Biodiversity & Ecological Welfare",
+              "action_items": [
+                {
+                  "description": "Align targets and methodologies with independently validated frameworks for transparency and credibility in biodiversity and ecological welfare commitments."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Develop and validate a methodology for demonstrating progress and ensure alignment with recognized ESG frameworks."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Kraft-Heinz",
+          "themes": [
+            {
+              "theme_name": "Biodiversity & Ecological Welfare",
+              "action_items": [
+                {
+                  "description": "Extend commitments to include the protection and restoration of a specific magnitude of hectares of agricultural land by 2030, following independently validated frameworks."
+                }
+              ]
+            },
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Align GHG targets with SBTi's 1.5°C framework for increased credibility and transparency."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Commit to collect and process more plastic packaging than sold by 2025, with clear geographic and scope definitions similar to Unilever's framework."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Implement and disclose progress on the 4R water stewardship approach across all global production sites."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Nestle",
+          "themes": [
+            {
+              "theme_name": "Biodiversity & Ecological Welfare",
+              "action_items": [
+                {
+                  "description": "Align biodiversity and deforestation targets with independently validated frameworks to enhance credibility and transparency."
+                }
+              ]
+            },
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Establish and disclose interim GHG reduction targets for 2030, aligned with SBTi 1.5°C pathways, and publish these in a Climate Transition Plan."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Expand the current scope to include a commitment to collect and process more virgin plastic than the company sells by 2025, validated by a relevant methodology or standard."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Develop and disclose interim milestones for AWS certification progress to enhance transparency and track progress towards 100% target by 2025."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Pepsi",
+          "themes": [
+            {
+              "theme_name": "Biodiversity & Ecological Welfare",
+              "action_items": [
+                {
+                  "description": "Align progress on biodiversity targets with an independently validated framework to enhance credibility and transparency."
+                }
+              ]
+            },
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Align GHG emissions reduction targets with the SBTi 1.5°C framework and disclose in a Climate Transition Plan."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Expand the scope to explicitly include methodologies and frameworks for validation and alignment with established standards, enhancing credibility and transparency."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Expand water stewardship target coverage to include global production sites, with comprehensive geographic scope beyond high water-risk facilities."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Unilever",
+          "themes": [
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Submit GHG emissions targets to the Science Based Targets initiative (SBTi) for alignment with a 1.5°C pathway and validation."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Expand water stewardship target to include 100% implementation across all global production sites by 2030, not limited to water-stressed areas."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sector": "Mining",
+      "companies": [
+        {
+          "company_name": "Anglo-American",
+          "themes": [
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Submit GHG emissions reduction targets to the Science Based Targets initiative (SBTi) for validation to enhance credibility and transparency."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "BHP",
+          "themes": [
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Submit GHG emissions reduction targets for validation with the Science Based Targets initiative (SBTi)."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Set a quantified target aligned with the Global Industry Standard on Tailings Management (GISTM) for tailings facility conformance by a specific year."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Expand water stewardship targets to include reductions in fresh water abstraction in water scarce areas, with a specific percentage reduction goal and baseline year for these areas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Glencore",
+          "themes": [
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Submit GHG emission targets to the Science Based Targets initiative (SBTi) for validation and public alignment with a recognized standard."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Set a target for 100% conformance with lower consequence tailings facilities by 2025 using the GISTM framework."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Establish and disclose a specific, quantified target for reducing fresh water abstraction in water scarce areas by 2030, including a baseline year and value."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Rio-Tinto",
+          "themes": [
+            {
+              "theme_name": "GHG Emissions",
+              "action_items": [
+                {
+                  "description": "Develop and publish a validated target for Scope 3 emissions aligned with SBTi guidelines to encompass the full value chain."
+                }
+              ]
+            },
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Expand targets to include facilities with 'Lower consequence' classifications for comprehensive risk management by 2025."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Set a quantified target for reduction in fresh water abstraction with a specific baseline year and value, focusing on water scarce areas, and establish a timeline for achievement."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "company_name": "Teck",
+          "themes": [
+            {
+              "theme_name": "Material Use, Waste & Circularity",
+              "action_items": [
+                {
+                  "description": "Align material use, waste, and circularity targets with the GISTM framework and ICMM standards for increased credibility and transparency."
+                }
+              ]
+            },
+            {
+              "theme_name": "Water Stewardship",
+              "action_items": [
+                {
+                  "description": "Develop and disclose a quantified target for water reduction in water scarce areas by 2030, including baseline year and baseline values."
+                }
+              ]
+            }
+          ]
         }
       ]
     }

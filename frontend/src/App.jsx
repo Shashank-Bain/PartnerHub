@@ -2595,7 +2595,7 @@ function App() {
               </section>
 
               <section className="modal-pane commitment-pane-actions">
-                <h4>Action Priorities</h4>
+                <h4>Priority Moves</h4>
                 <ul className="modal-priority-list">
                   {(scorecardData?.priorityMoves || []).map((move) => (
                     <li key={move}>{move}</li>

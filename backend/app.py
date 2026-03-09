@@ -420,6 +420,78 @@ def load_scorecard_best_practices_dataset():
     return []
 
 
+def load_scorecard_action_priorities_dataset():
+    payload = load_scorecard_payload()
+    action_priorities = payload.get("action_priorities") if isinstance(payload, dict) else None
+    if isinstance(action_priorities, list):
+        return action_priorities
+    return []
+
+
+def build_action_priority_moves(sector_name, selected_company, lagging_themes):
+    if not lagging_themes:
+        return []
+
+    action_priorities_dataset = load_scorecard_action_priorities_dataset()
+    selected_sector_token = normalize_text_token(sector_name)
+    selected_company_token = normalize_company_name(selected_company)
+    lagging_theme_tokens = {normalize_text_token(theme_name) for theme_name in (lagging_themes or [])}
+
+    matched_sector_item = next(
+        (
+            item
+            for item in action_priorities_dataset
+            if isinstance(item, dict)
+            and normalize_text_token(item.get("sector") or "") == selected_sector_token
+        ),
+        None,
+    )
+    if not isinstance(matched_sector_item, dict):
+        return []
+
+    matched_company_item = next(
+        (
+            item
+            for item in (matched_sector_item.get("companies") or [])
+            if isinstance(item, dict)
+            and normalize_company_name(item.get("company_name") or "") == selected_company_token
+        ),
+        None,
+    )
+    if not isinstance(matched_company_item, dict):
+        return []
+
+    priority_moves = []
+    seen_moves = set()
+    for theme_item in matched_company_item.get("themes") or []:
+        if not isinstance(theme_item, dict):
+            continue
+
+        theme_name = str(theme_item.get("theme_name") or "").strip()
+        if not theme_name:
+            continue
+
+        if normalize_text_token(theme_name) not in lagging_theme_tokens:
+            continue
+
+        for action_item in theme_item.get("action_items") or []:
+            if not isinstance(action_item, dict):
+                continue
+
+            description = str(action_item.get("description") or "").strip()
+            if not description:
+                continue
+
+            description_token = normalize_text_token(description)
+            if description_token in seen_moves:
+                continue
+
+            seen_moves.add(description_token)
+            priority_moves.append(description)
+
+    return priority_moves
+
+
 @lru_cache(maxsize=1)
 def load_commitment_scale_dataset():
     data_path = os.path.join(BASE_DIR, "data", "Commitment_Scale.xlsx")
@@ -2260,7 +2332,11 @@ def build_scorecard_context(sector_name, selected_company, sector_companies):
 
     rows.sort(key=lambda item: item.get("overallStatus", {}).get("finalScore", 0), reverse=True)
 
-    lagging_themes = [item["theme"] for item in sorted_by_gap_ascending[:3]]
+    lagging_themes = [
+        item["theme"]
+        for item in sorted_by_gap_ascending
+        if item.get("gap", 0) < -0.01
+    ][:3]
     leading_themes = []
     for item in sorted_by_gap_descending:
         theme_name = item["theme"]
@@ -2745,10 +2821,9 @@ def scorecard():
     if not scorecard_context:
         return jsonify({"message": "Scorecard data not available for selected company."}), 404
 
-    ai_insights = generate_openai_insights(
-        matched_company,
+    priority_moves = build_action_priority_moves(
         sector_name,
-        scorecard_context["rows"],
+        matched_company,
         scorecard_context.get("laggingThemes", []),
     )
 
@@ -2777,7 +2852,7 @@ def scorecard():
         {
             "sector": sector_name,
             "selectedCompany": matched_company,
-            "priorityMoves": ai_insights.get("priorityMoves", []),
+            "priorityMoves": priority_moves,
             "radarThemes": scorecard_context["radarThemes"],
             "bucketLegend": scorecard_context.get("bucketLegend", []),
             "industryScaleExample": scorecard_context.get("industryScaleExample"),
