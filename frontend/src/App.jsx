@@ -1255,7 +1255,14 @@ function KpiMomentumStackedChart({ rows }) {
           <Legend wrapperStyle={{ fontSize: 12 }} />
           <Bar dataKey="laggingPct" stackId="status" name="Lagging" fill="rgba(198, 55, 68, 0.85)" />
           <Bar dataKey="atParPct" stackId="status" name="At-Par" fill="rgba(247, 148, 30, 0.88)" />
-          <Bar dataKey="leadingPct" stackId="status" name="Leading" fill="rgba(46, 125, 0, 0.85)" />
+          <Bar dataKey="leadingPct" stackId="status" name="Leading" fill="rgba(46, 125, 0, 0.85)">
+            <LabelList
+              dataKey="totalCount"
+              position="top"
+              formatter={(value) => `${Number(value || 0)}`}
+              style={{ fontSize: 12, fill: 'rgb(68, 94, 114)', fontWeight: 700 }}
+            />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
