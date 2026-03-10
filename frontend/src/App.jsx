@@ -3110,9 +3110,9 @@ function App() {
                     </div>
                   </div>
                   <div className="gradient-line" />
-                  <div className="kpi-deepdive-esg-grid">
+                  <div className="kpi-deepdive-esg-sections">
                     {kpiDeepDiveColumns.map((column) => (
-                      <section key={`kpi-deepdive-${column.key}`} className="modal-pane kpi-deepdive-esg-column">
+                      <section key={`kpi-deepdive-${column.key}`} className="modal-pane kpi-deepdive-esg-section">
                         <div className="kpi-deepdive-esg-head">
                           <h4>{column.title}</h4>
                           <span className={`progress-pill ${kpiDeepDiveStatusFilter === 'all' ? 'atpar' : KPI_STATUS_META[kpiDeepDiveStatusFilter].className}`}>
@@ -3120,27 +3120,32 @@ function App() {
                           </span>
                         </div>
 
-                        <div className="kpi-deepdive-chart-list">
-                          {column.rows.map((row) => (
-                            <article className="kpi-deepdive-chart-card" key={`single-kpi-${column.key}-${row.kpi}`}>
-                              <div className="kpi-deepdive-chart-head">
-                                <div>
-                                  <h5>{row.kpi}</h5>
-                                  <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
-                                </div>
-                                <span className={`progress-pill ${KPI_STATUS_META[row.statusKey].className}`}>{row.statusLabel}</span>
-                              </div>
-                              <KpiSingleBenchmarkChart
-                                row={row}
-                                selectedCompany={selectedCompany}
-                                peerCompanies={kpiPeerColumns}
-                              />
-                            </article>
-                          ))}
-                          {!column.rows.length && (
-                            <p className="commitment-section-message">No KPI charts in this ESG bucket for current status filter.</p>
-                          )}
-                        </div>
+                        {!!column.rows.length && (
+                          <div className="kpi-deepdive-row-scroll">
+                            <div className="kpi-deepdive-row-track">
+                              {column.rows.map((row) => (
+                                <article className="kpi-deepdive-chart-card" key={`single-kpi-${column.key}-${row.kpi}`}>
+                                  <div className="kpi-deepdive-chart-head">
+                                    <div>
+                                      <h5>{row.kpi}</h5>
+                                      <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
+                                    </div>
+                                    <span className={`progress-pill ${KPI_STATUS_META[row.statusKey].className}`}>{row.statusLabel}</span>
+                                  </div>
+                                  <KpiSingleBenchmarkChart
+                                    row={row}
+                                    selectedCompany={selectedCompany}
+                                    peerCompanies={kpiPeerColumns}
+                                  />
+                                </article>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {!column.rows.length && (
+                          <p className="commitment-section-message">No KPI charts in this ESG bucket for current status filter.</p>
+                        )}
                       </section>
                     ))}
                   </div>

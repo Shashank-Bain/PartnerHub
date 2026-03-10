@@ -875,6 +875,7 @@ button {
 
 .kpi-stacked-chart-wrap {
   min-height: 250px;
+  margin-top: 8px;
 }
 
 .kpi-status-section {
@@ -3110,6 +3111,16 @@ button {
   gap: 10px;
 }
 
+.kpi-deepdive-esg-sections {
+  display: grid;
+  gap: 10px;
+}
+
+.kpi-deepdive-esg-section {
+  display: grid;
+  gap: 10px;
+}
+
 .kpi-deepdive-esg-column {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -3131,6 +3142,20 @@ button {
   display: grid;
   align-content: start;
   gap: 10px;
+}
+
+.kpi-deepdive-row-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+
+.kpi-deepdive-row-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(340px, 420px);
+  gap: 10px;
+  align-items: start;
 }
 
 .kpi-deepdive-chart-card {
