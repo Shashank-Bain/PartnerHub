@@ -1,7 +1,7 @@
 [
   {
     "Sector": "Mining",
-    "Company": "Anglo-American",
+    "Company": "Anglo American",
     "Material Topics": [
       "Human rights",
       "Labor practices",
@@ -141,7 +141,7 @@
   },
   {
     "Sector": "Construction Materials",
-    "Company": "Heidelberg-Materials",
+    "Company": "Heidelberg Materials",
     "Material Topics": [
       "Human rights",
       "Labor practices",
@@ -187,7 +187,7 @@
   },
   {
     "Sector": "Consumer Products",
-    "Company": "Kraft-Heinz",
+    "Company": "Kraft Heinz",
     "Material Topics": [
       "Customer safety and engagement",
       "Transparency & risk management",
@@ -203,7 +203,7 @@
   },
   {
     "Sector": "Consumer Products",
-    "Company": "Nestle",
+    "Company": "Nestlé",
     "Material Topics": [
       "Human rights",
       "Water stewardship",
@@ -228,7 +228,7 @@
   },
   {
     "Sector": "Mining",
-    "Company": "Rio-Tinto",
+    "Company": "Rio Tinto",
     "Material Topics": [
       "Community partnership",
       "Labor practices",
