@@ -2496,6 +2496,8 @@ def collect_plot_kpis_for_company(company_payload):
         if not isinstance(theme_payload, dict):
             continue
 
+        theme_bucket = str(theme_payload.get("Bucket") or "").strip()
+
         for raw_type_name, type_payload in theme_payload.items():
             if not isinstance(type_payload, dict):
                 continue
@@ -2519,6 +2521,7 @@ def collect_plot_kpis_for_company(company_payload):
                     kpi_map[clean_kpi_name] = {
                         "kpi": clean_kpi_name,
                         "theme": str(theme_name or "").strip() or "Other",
+                        "themeBucket": theme_bucket,
                         "typeGroup": type_group,
                         "source": str(source_name or "").strip() or "Reported",
                         "rawValue": raw_value,
@@ -2626,6 +2629,7 @@ def build_kpi_momentum_context(sector_name, selected_company, sector_companies):
             {
                 "kpi": kpi_name,
                 "theme": selected_entry.get("theme"),
+                "themeBucket": selected_entry.get("themeBucket"),
                 "typeGroup": selected_entry.get("typeGroup"),
                 "source": selected_entry.get("source"),
                 "selectedValue": selected_numeric,

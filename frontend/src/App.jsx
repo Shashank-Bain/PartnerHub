@@ -188,6 +188,20 @@ function inferKpiDirection(row) {
 }
 
 function resolveEsgSectionForKpi(row) {
+  const bucket = String(row?.themeBucket || '')
+    .trim()
+    .toLowerCase()
+
+  if (bucket === 'e' || bucket === 'environment' || bucket === 'environmental') {
+    return 'environment'
+  }
+  if (bucket === 's' || bucket === 'social') {
+    return 'social'
+  }
+  if (bucket === 'g' || bucket === 'governance') {
+    return 'governance'
+  }
+
   const haystack = `${row?.theme || ''} ${row?.kpi || ''}`.toLowerCase()
 
   if (
@@ -203,6 +217,26 @@ function resolveEsgSectionForKpi(row) {
   }
 
   return 'environment'
+}
+
+const KPI_STATUS_META = {
+  leading: { key: 'leading', label: 'Leading', className: 'leading' },
+  atPar: { key: 'atPar', label: 'At-Par', className: 'atpar' },
+  lagging: { key: 'lagging', label: 'Lagging', className: 'lagging' },
+}
+
+const KPI_STATUS_ORDER = ['leading', 'atPar', 'lagging']
+const KPI_ESG_ORDER = ['environment', 'social', 'governance']
+const KPI_ESG_LABELS = {
+  environment: 'Environment',
+  social: 'Social',
+  governance: 'Governance',
+}
+
+function getKpiStatusKey(statusLabel) {
+  if (statusLabel === 'Leading') return 'leading'
+  if (statusLabel === 'Lagging') return 'lagging'
+  return 'atPar'
 }
 
 function normalizeCompanyLabel(value) {
@@ -1189,6 +1223,45 @@ function KpiSingleBenchmarkChart({ row, selectedCompany, peerCompanies }) {
   )
 }
 
+function KpiMomentumStackedTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) {
+    return null
+  }
+
+  const row = payload[0]?.payload || {}
+  return (
+    <div className="commitment-tooltip">
+      <strong>{label}</strong>
+      <p>Leading: {row.leadingCount || 0} ({formatPct(row.leadingPct || 0)})</p>
+      <p>At-Par: {row.atParCount || 0} ({formatPct(row.atParPct || 0)})</p>
+      <p>Lagging: {row.laggingCount || 0} ({formatPct(row.laggingPct || 0)})</p>
+    </div>
+  )
+}
+
+function KpiMomentumStackedChart({ rows }) {
+  if (!rows?.length) {
+    return <p className="commitment-section-message">No KPI momentum data available for this selection.</p>
+  }
+
+  return (
+    <div className="kpi-stacked-chart-wrap">
+      <ResponsiveContainer width="100%" height={250}>
+        <BarChart data={rows} margin={{ top: 12, right: 14, left: 6, bottom: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
+          <XAxis dataKey="esg" tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
+          <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
+          <Tooltip content={<KpiMomentumStackedTooltip />} />
+          <Legend wrapperStyle={{ fontSize: 12 }} />
+          <Bar dataKey="laggingPct" stackId="status" name="Lagging" fill="rgba(198, 55, 68, 0.85)" />
+          <Bar dataKey="atParPct" stackId="status" name="At-Par" fill="rgba(247, 148, 30, 0.88)" />
+          <Bar dataKey="leadingPct" stackId="status" name="Leading" fill="rgba(46, 125, 0, 0.85)" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
 function KpiPeerAverageMarker(props) {
   const { cx, cy, barWidth = 32 } = props
   const centerX = Number(cx)
@@ -1305,6 +1378,7 @@ function App() {
   const [isInvestmentInsightsLoading, setIsInvestmentInsightsLoading] = useState(false)
   const [kpiMomentumData, setKpiMomentumData] = useState(null)
   const [isKpiMomentumLoading, setIsKpiMomentumLoading] = useState(false)
+  const [kpiDeepDiveStatusFilter, setKpiDeepDiveStatusFilter] = useState('all')
   const [activeModal, setActiveModal] = useState(null)
   const [selectedThemeRationale, setSelectedThemeRationale] = useState(null)
   const [selectedTimelineEvent, setSelectedTimelineEvent] = useState(null)
@@ -1362,13 +1436,15 @@ function App() {
     }
 
     benchmarkableKpiRows.forEach((row) => {
-      const status = getKpiMomentumStatus(row)
-      if (status === 'Leading') {
-        output.leading.push(row)
-      } else if (status === 'Lagging') {
-        output.lagging.push(row)
+      const statusLabel = getKpiMomentumStatus(row)
+      const statusKey = getKpiStatusKey(statusLabel)
+      const normalizedRow = { ...row, statusLabel, statusKey }
+      if (statusKey === 'leading') {
+        output.leading.push(normalizedRow)
+      } else if (statusKey === 'lagging') {
+        output.lagging.push(normalizedRow)
       } else {
-        output.atPar.push(row)
+        output.atPar.push(normalizedRow)
       }
     })
 
@@ -1448,6 +1524,83 @@ function App() {
     () => (kpiMomentumData?.peerCompanies || []).map((company) => String(company || '').trim()).filter(Boolean),
     [kpiMomentumData],
   )
+  const kpiRowsByEsgAndStatus = useMemo(() => {
+    const output = {
+      environment: { leading: [], atPar: [], lagging: [] },
+      social: { leading: [], atPar: [], lagging: [] },
+      governance: { leading: [], atPar: [], lagging: [] },
+    }
+
+    benchmarkableKpiRows
+      .filter((row) => row.typeGroup !== 'boolean')
+      .forEach((row) => {
+        const esgKey = resolveEsgSectionForKpi(row)
+        const statusLabel = getKpiMomentumStatus(row)
+        const statusKey = getKpiStatusKey(statusLabel)
+        output[esgKey][statusKey].push({ ...row, statusKey, statusLabel, esgKey })
+      })
+
+    const sortRows = (rows) => rows.sort((first, second) => {
+      const firstDelta = Math.abs(Number(first?.deltaVsPeerMedian || 0))
+      const secondDelta = Math.abs(Number(second?.deltaVsPeerMedian || 0))
+      if (secondDelta !== firstDelta) {
+        return secondDelta - firstDelta
+      }
+      return String(first?.kpi || '').localeCompare(String(second?.kpi || ''))
+    })
+
+    KPI_ESG_ORDER.forEach((esgKey) => {
+      KPI_STATUS_ORDER.forEach((statusKey) => {
+        sortRows(output[esgKey][statusKey])
+      })
+    })
+
+    return output
+  }, [benchmarkableKpiRows])
+  const kpiDashboardStackedRows = useMemo(() => {
+    return KPI_ESG_ORDER.map((esgKey) => {
+      const leadingCount = kpiRowsByEsgAndStatus[esgKey].leading.length
+      const atParCount = kpiRowsByEsgAndStatus[esgKey].atPar.length
+      const laggingCount = kpiRowsByEsgAndStatus[esgKey].lagging.length
+      const totalCount = leadingCount + atParCount + laggingCount
+      const denominator = totalCount || 1
+
+      return {
+        esg: KPI_ESG_LABELS[esgKey],
+        leadingCount,
+        atParCount,
+        laggingCount,
+        totalCount,
+        leadingPct: (leadingCount / denominator) * 100,
+        atParPct: (atParCount / denominator) * 100,
+        laggingPct: (laggingCount / denominator) * 100,
+      }
+    })
+  }, [kpiRowsByEsgAndStatus])
+  const kpiDeepDiveColumns = useMemo(() => {
+    const activeStatusKeys = kpiDeepDiveStatusFilter === 'all'
+      ? KPI_STATUS_ORDER
+      : [kpiDeepDiveStatusFilter]
+
+    return KPI_ESG_ORDER.map((esgKey) => {
+      const rows = activeStatusKeys.flatMap((statusKey) => kpiRowsByEsgAndStatus[esgKey][statusKey])
+      return {
+        key: esgKey,
+        title: KPI_ESG_LABELS[esgKey],
+        rows,
+      }
+    })
+  }, [kpiRowsByEsgAndStatus, kpiDeepDiveStatusFilter])
+  const kpiModalColumns = useMemo(() => {
+    return KPI_STATUS_ORDER.map((statusKey) => ({
+      ...KPI_STATUS_META[statusKey],
+      esgSections: KPI_ESG_ORDER.map((esgKey) => ({
+        key: esgKey,
+        title: KPI_ESG_LABELS[esgKey],
+        rows: kpiRowsByEsgAndStatus[esgKey][statusKey],
+      })),
+    }))
+  }, [kpiRowsByEsgAndStatus])
   const esgKpiSections = useMemo(() => {
     const base = {
       environment: { numbersIntensity: [], percentages: [], booleans: [] },
@@ -1646,6 +1799,10 @@ function App() {
       setSelectedCompany(companies[0] || '')
     }
   }, [companies, selectedCompany])
+
+  useEffect(() => {
+    setKpiDeepDiveStatusFilter('all')
+  }, [selectedSector, selectedCompany])
 
   useEffect(() => {
     if (!user || !selectedSector || !selectedCompany) {
@@ -2487,52 +2644,13 @@ function App() {
                   <h3>KPI Momentum</h3>
                   <span className="card-see-more">See More</span>
                 </div>
-                <p className="card-subtitle">Leading, At-Par and Lagging KPIs for reported metrics</p>
+                <p className="card-subtitle">ESG KPI status mix across Leading, At-Par and Lagging</p>
                 <div className="gradient-line" />
 
                 {isKpiMomentumLoading && <p className="commitment-section-message">Loading KPI momentum...</p>}
 
                 {!isKpiMomentumLoading && kpiMomentumData && (
-                  <div className="kpi-simple-layout">
-                    <section className="kpi-status-section leading">
-                      <div className="kpi-status-head">
-                        <h4>Leading</h4>
-                        <span>{kpiStatusSections.leading.length}</span>
-                      </div>
-                      <ul>
-                        {kpiStatusSections.leading.slice(0, 5).map((row) => (
-                          <li key={`leading-${row.kpi}`}>{row.kpi}</li>
-                        ))}
-                        {!kpiStatusSections.leading.length && <li className="kpi-empty">No leading KPIs</li>}
-                      </ul>
-                    </section>
-
-                    <section className="kpi-status-section atpar">
-                      <div className="kpi-status-head">
-                        <h4>At-Par</h4>
-                        <span>{kpiStatusSections.atPar.length}</span>
-                      </div>
-                      <ul>
-                        {kpiStatusSections.atPar.slice(0, 5).map((row) => (
-                          <li key={`atpar-${row.kpi}`}>{row.kpi}</li>
-                        ))}
-                        {!kpiStatusSections.atPar.length && <li className="kpi-empty">No at-par KPIs</li>}
-                      </ul>
-                    </section>
-
-                    <section className="kpi-status-section lagging">
-                      <div className="kpi-status-head">
-                        <h4>Lagging</h4>
-                        <span>{kpiStatusSections.lagging.length}</span>
-                      </div>
-                      <ul>
-                        {kpiStatusSections.lagging.slice(0, 5).map((row) => (
-                          <li key={`lagging-${row.kpi}`}>{row.kpi}</li>
-                        ))}
-                        {!kpiStatusSections.lagging.length && <li className="kpi-empty">No lagging KPIs</li>}
-                      </ul>
-                    </section>
-                  </div>
+                  <KpiMomentumStackedChart rows={kpiDashboardStackedRows} />
                 )}
 
                 {!isKpiMomentumLoading && !kpiMomentumData && (
@@ -2964,75 +3082,60 @@ function App() {
                 <section className="card scorecard-table-card">
                   <div className="scorecard-table-head">
                     <h3>Key Sustainability KPIs</h3>
+                    <div className="kpi-deepdive-filter-row">
+                      <button
+                        type="button"
+                        className={`kpi-filter-btn ${kpiDeepDiveStatusFilter === 'all' ? 'active all' : ''}`}
+                        onClick={() => setKpiDeepDiveStatusFilter('all')}
+                      >
+                        All
+                      </button>
+                      {KPI_STATUS_ORDER.map((statusKey) => (
+                        <button
+                          key={`kpi-filter-${statusKey}`}
+                          type="button"
+                          className={`kpi-filter-btn ${KPI_STATUS_META[statusKey].className} ${kpiDeepDiveStatusFilter === statusKey ? 'active' : ''}`}
+                          onClick={() => setKpiDeepDiveStatusFilter(statusKey)}
+                        >
+                          {KPI_STATUS_META[statusKey].label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                   <div className="gradient-line" />
-                  <div className="kpi-individual-grid">
-                    {allPlottableBenchmarkRows.map((row) => (
-                      <section className="modal-pane kpi-individual-card" key={`single-kpi-${row.kpi}`}>
-                        <h4>{row.kpi}</h4>
-                        <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
-                        <KpiSingleBenchmarkChart
-                          row={row}
-                          selectedCompany={selectedCompany}
-                          peerCompanies={kpiPeerColumns}
-                        />
+                  <div className="kpi-deepdive-esg-grid">
+                    {kpiDeepDiveColumns.map((column) => (
+                      <section key={`kpi-deepdive-${column.key}`} className="modal-pane kpi-deepdive-esg-column">
+                        <div className="kpi-deepdive-esg-head">
+                          <h4>{column.title}</h4>
+                          <span className={`progress-pill ${kpiDeepDiveStatusFilter === 'all' ? 'atpar' : KPI_STATUS_META[kpiDeepDiveStatusFilter].className}`}>
+                            {kpiDeepDiveStatusFilter === 'all' ? 'All Statuses' : KPI_STATUS_META[kpiDeepDiveStatusFilter].label}
+                          </span>
+                        </div>
+
+                        <div className="kpi-deepdive-chart-list">
+                          {column.rows.map((row) => (
+                            <article className="kpi-deepdive-chart-card" key={`single-kpi-${column.key}-${row.kpi}`}>
+                              <div className="kpi-deepdive-chart-head">
+                                <div>
+                                  <h5>{row.kpi}</h5>
+                                  <p className="kpi-individual-meta">{row.theme} · {formatKpiTypeLabel(row.typeGroup)}</p>
+                                </div>
+                                <span className={`progress-pill ${KPI_STATUS_META[row.statusKey].className}`}>{row.statusLabel}</span>
+                              </div>
+                              <KpiSingleBenchmarkChart
+                                row={row}
+                                selectedCompany={selectedCompany}
+                                peerCompanies={kpiPeerColumns}
+                              />
+                            </article>
+                          ))}
+                          {!column.rows.length && (
+                            <p className="commitment-section-message">No KPI charts in this ESG bucket for current status filter.</p>
+                          )}
+                        </div>
                       </section>
                     ))}
-                    {!allPlottableBenchmarkRows.length && (
-                      <p className="commitment-section-message">No plottable KPI benchmarks available for this company.</p>
-                    )}
-                  </div>
-                </section>
-
-                <section className="card scorecard-table-card">
-                  <div className="scorecard-table-head">
-                    <h3>Binary KPI Disclosure Matrix</h3>
-                  </div>
-                  <div className="gradient-line" />
-                  <div className="table-wrap">
-                    <table className="kpi-deepdive-table">
-                      <thead>
-                        <tr>
-                          <th>KPI</th>
-                          <th>{selectedCompany}</th>
-                          {kpiPeerColumns.map((peerCompany) => (
-                            <th key={`tf-col-global-${peerCompany}`}>{peerCompany}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {booleanFlagRows.map((row) => {
-                          const peerValueMap = Object.fromEntries(
-                            (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), Number(item?.value)]),
-                          )
-                          const clientTrue = Number(row?.selectedValue || 0) >= 0.5
-
-                          return (
-                            <tr key={`tf-global-${row.kpi}`}>
-                              <td>{row.kpi}</td>
-                              <td className="kpi-tf-cell">{clientTrue ? <span className="kpi-flag-true">✓</span> : <span className="kpi-flag-false">✕</span>}</td>
-                              {kpiPeerColumns.map((peerCompany) => {
-                                const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
-                                const hasPeerValue = Number.isFinite(peerValue)
-                                return (
-                                  <td className="kpi-tf-cell" key={`tf-global-${row.kpi}-${peerCompany}`}>
-                                    {!hasPeerValue && 'NA'}
-                                    {hasPeerValue && (peerValue >= 0.5
-                                      ? <span className="kpi-flag-true">✓</span>
-                                      : <span className="kpi-flag-false">✕</span>)}
-                                  </td>
-                                )
-                              })}
-                            </tr>
-                          )
-                        })}
-                        {!booleanFlagRows.length && (
-                          <tr>
-                            <td colSpan={2 + kpiPeerColumns.length}>No binary disclosure KPIs available.</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
                   </div>
                 </section>
               </>
@@ -3304,34 +3407,34 @@ function App() {
             {!isKpiMomentumLoading && kpiMomentumData && (
               <>
                 <section className="modal-kpi-hero">
-                  <p className="kpi-modal-tagline">Priority sustainability signals to shape partner dialogue and value-creation focus</p>
-                  <div className="kpi-signal-row">
-                    <span className="kpi-signal-chip improving">Leading: {kpiStatusSections.leading.length}</span>
-                    <span className="kpi-signal-chip stable">At-Par: {kpiStatusSections.atPar.length}</span>
-                    <span className="kpi-signal-chip risk">Lagging: {kpiStatusSections.lagging.length}</span>
-                  </div>
+                  <p className="kpi-modal-tagline">KPI cards grouped by status and ESG bucket to support focused discussion</p>
                 </section>
 
-                <div className="modal-two-column kpi-modal-panel-grid">
-                  <section className="modal-pane kpi-modal-panel leading">
-                    <h4>Top Leading KPIs</h4>
-                    <KpiModalBenchmarkPanel
-                      rows={topLeadingChartRows}
-                      selectedCompany={selectedCompany}
-                      peerCompanies={kpiPeerColumns}
-                      emptyMessage="No top leading reported KPIs available."
-                    />
-                  </section>
-
-                  <section className="modal-pane kpi-modal-panel lagging">
-                    <h4>Top Lagging KPIs</h4>
-                    <KpiModalBenchmarkPanel
-                      rows={topLaggingChartRows}
-                      selectedCompany={selectedCompany}
-                      peerCompanies={kpiPeerColumns}
-                      emptyMessage="No top lagging reported KPIs available."
-                    />
-                  </section>
+                <div className="kpi-modal-status-grid">
+                  {kpiModalColumns.map((column) => {
+                    const totalCount = column.esgSections.reduce((sum, section) => sum + section.rows.length, 0)
+                    return (
+                      <section key={`kpi-modal-${column.key}`} className={`modal-pane kpi-modal-status-column ${column.className}`}>
+                        <div className="kpi-status-head">
+                          <h4>{column.label}</h4>
+                          <span>{totalCount}</span>
+                        </div>
+                        <div className="kpi-modal-esg-grid">
+                          {column.esgSections.map((section) => (
+                            <article key={`kpi-modal-${column.key}-${section.key}`} className="kpi-modal-esg-card">
+                              <h5>{section.title}</h5>
+                              <ul>
+                                {section.rows.map((row) => (
+                                  <li key={`kpi-modal-${column.key}-${section.key}-${row.kpi}`}>{row.kpi}</li>
+                                ))}
+                                {!section.rows.length && <li className="kpi-empty">No KPIs</li>}
+                              </ul>
+                            </article>
+                          ))}
+                        </div>
+                      </section>
+                    )
+                  })}
                 </div>
 
                 <div className="modal-footer">

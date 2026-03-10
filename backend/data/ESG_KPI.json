@@ -12,6 +12,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -45,6 +46,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -67,6 +69,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -88,6 +91,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -116,6 +120,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -138,6 +143,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -149,6 +155,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -168,6 +175,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -187,6 +195,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -213,6 +222,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -227,6 +237,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -253,6 +264,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -264,6 +276,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -274,6 +287,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -286,6 +300,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -296,6 +311,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -322,6 +338,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -341,6 +358,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -359,6 +377,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -369,6 +388,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -388,6 +408,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -430,6 +451,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -463,6 +485,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -485,6 +508,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -506,6 +530,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -534,6 +559,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -556,6 +582,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -567,6 +594,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -586,6 +614,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -605,6 +634,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -631,6 +661,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -645,6 +676,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -671,6 +703,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -682,6 +715,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -692,6 +726,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -704,6 +739,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -714,6 +750,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -740,6 +777,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -759,6 +797,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -777,6 +816,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -787,6 +827,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -806,6 +847,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -848,6 +890,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -881,6 +924,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -903,6 +947,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -924,6 +969,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -952,6 +998,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -974,6 +1021,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -985,6 +1033,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1004,6 +1053,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1023,6 +1073,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1049,6 +1100,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1063,6 +1115,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1089,6 +1142,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1100,6 +1154,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1110,6 +1165,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1122,6 +1178,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1132,6 +1189,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1158,6 +1216,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1177,6 +1236,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1195,6 +1255,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1205,6 +1266,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1224,6 +1286,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1266,6 +1329,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -1299,6 +1363,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1321,6 +1386,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1342,6 +1408,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1370,6 +1437,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1392,6 +1460,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1403,6 +1472,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1422,6 +1492,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1441,6 +1512,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1467,6 +1539,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1481,6 +1554,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1507,6 +1581,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1518,6 +1593,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1528,6 +1604,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1540,6 +1617,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1550,6 +1628,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1576,6 +1655,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1595,6 +1675,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1613,6 +1694,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1623,6 +1705,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1642,6 +1725,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1684,6 +1768,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -1717,6 +1802,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1739,6 +1825,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1760,6 +1847,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1788,6 +1876,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -1810,6 +1899,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1821,6 +1911,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1840,6 +1931,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1859,6 +1951,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1885,6 +1978,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1899,6 +1993,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1925,6 +2020,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1936,6 +2032,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1946,6 +2043,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -1958,6 +2056,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -1968,6 +2067,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -1994,6 +2094,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2013,6 +2114,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2031,6 +2133,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2041,6 +2144,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2060,6 +2164,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2104,6 +2209,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -2137,6 +2243,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2159,6 +2266,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2180,6 +2288,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2208,6 +2317,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2230,6 +2340,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2241,6 +2352,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2260,6 +2372,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2279,6 +2392,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2305,6 +2419,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2319,6 +2434,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2345,6 +2461,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2356,6 +2473,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2366,6 +2484,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2378,6 +2497,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2388,6 +2508,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2414,6 +2535,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2433,6 +2555,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2451,6 +2574,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2461,6 +2585,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2480,6 +2605,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2522,6 +2648,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -2555,6 +2682,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2577,6 +2705,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2598,6 +2727,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2626,6 +2756,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2648,6 +2779,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2659,6 +2791,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2678,6 +2811,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2697,6 +2831,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2723,6 +2858,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2737,6 +2873,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2763,6 +2900,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2774,6 +2912,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2784,6 +2923,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2796,6 +2936,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -2806,6 +2947,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2832,6 +2974,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -2851,6 +2994,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2869,6 +3013,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2879,6 +3024,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -2898,6 +3044,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2940,6 +3087,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -2973,6 +3121,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -2995,6 +3144,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3016,6 +3166,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3044,6 +3195,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3066,6 +3218,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3077,6 +3230,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3096,6 +3250,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3115,6 +3270,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3141,6 +3297,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3155,6 +3312,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3181,6 +3339,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3192,6 +3351,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3202,6 +3362,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3214,6 +3375,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3224,6 +3386,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3250,6 +3413,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3269,6 +3433,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3287,6 +3452,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3297,6 +3463,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3316,6 +3483,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3358,6 +3526,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -3391,6 +3560,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3413,6 +3583,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3434,6 +3605,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3462,6 +3634,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3484,6 +3657,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3495,6 +3669,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3514,6 +3689,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3533,6 +3709,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3559,6 +3736,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3573,6 +3751,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3599,6 +3778,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3610,6 +3790,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3620,6 +3801,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3632,6 +3814,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3642,6 +3825,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3668,6 +3852,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3687,6 +3872,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3705,6 +3891,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3715,6 +3902,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3734,6 +3922,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3776,6 +3965,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -3809,6 +3999,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3831,6 +4022,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3852,6 +4044,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3880,6 +4073,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -3902,6 +4096,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -3913,6 +4108,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3932,6 +4128,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -3951,6 +4148,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3977,6 +4175,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -3991,6 +4190,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4017,6 +4217,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4028,6 +4229,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4038,6 +4240,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4050,6 +4253,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4060,6 +4264,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4086,6 +4291,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4105,6 +4311,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4123,6 +4330,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4133,6 +4341,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4152,6 +4361,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4196,6 +4406,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -4229,6 +4440,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4251,6 +4463,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4272,6 +4485,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4300,6 +4514,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4322,6 +4537,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4333,6 +4549,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4352,6 +4569,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4371,6 +4589,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4397,6 +4616,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4411,6 +4631,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4437,6 +4658,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4448,6 +4670,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4458,6 +4681,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4470,6 +4694,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4480,6 +4705,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4506,6 +4732,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4525,6 +4752,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4543,6 +4771,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4553,6 +4782,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4572,6 +4802,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4614,6 +4845,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -4647,6 +4879,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4669,6 +4902,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4690,6 +4924,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4718,6 +4953,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4740,6 +4976,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4751,6 +4988,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4770,6 +5008,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4789,6 +5028,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4815,6 +5055,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4829,6 +5070,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4855,6 +5097,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4866,6 +5109,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4876,6 +5120,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4888,6 +5133,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -4898,6 +5144,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4924,6 +5171,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -4943,6 +5191,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4961,6 +5210,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -4971,6 +5221,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -4990,6 +5241,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5032,6 +5284,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -5065,6 +5318,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5087,6 +5341,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5108,6 +5363,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5136,6 +5392,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5158,6 +5415,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5169,6 +5427,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5188,6 +5447,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5207,6 +5467,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5233,6 +5494,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5247,6 +5509,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5273,6 +5536,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5284,6 +5548,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5294,6 +5559,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5306,6 +5572,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5316,6 +5583,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5342,6 +5610,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5361,6 +5630,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5379,6 +5649,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5389,6 +5660,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5408,6 +5680,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5450,6 +5723,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -5483,6 +5757,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5505,6 +5780,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5526,6 +5802,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5554,6 +5831,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5576,6 +5854,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5587,6 +5866,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5606,6 +5886,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5625,6 +5906,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5651,6 +5933,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5665,6 +5948,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5691,6 +5975,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5702,6 +5987,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5712,6 +5998,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5724,6 +6011,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -5734,6 +6022,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5760,6 +6049,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -5779,6 +6069,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5797,6 +6088,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5807,6 +6099,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5826,6 +6119,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5870,6 +6164,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -5903,6 +6198,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5925,6 +6221,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -5946,6 +6243,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5974,6 +6272,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -5996,6 +6295,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6007,6 +6307,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6026,6 +6327,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6045,6 +6347,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6071,6 +6374,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6085,6 +6389,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6111,6 +6416,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6122,6 +6428,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6132,6 +6439,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6144,6 +6452,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6154,6 +6463,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6180,6 +6490,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6199,6 +6510,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6217,6 +6529,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6227,6 +6540,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6246,6 +6560,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6288,6 +6603,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -6321,6 +6637,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6343,6 +6660,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6364,6 +6682,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6392,6 +6711,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6414,6 +6734,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6425,6 +6746,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6444,6 +6766,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6463,6 +6786,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6489,6 +6813,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6503,6 +6828,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6529,6 +6855,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6540,6 +6867,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6550,6 +6878,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6562,6 +6891,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6572,6 +6902,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6598,6 +6929,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6617,6 +6949,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6635,6 +6968,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6645,6 +6979,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6664,6 +6999,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6706,6 +7042,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -6739,6 +7076,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6761,6 +7099,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6782,6 +7121,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6810,6 +7150,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -6832,6 +7173,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6843,6 +7185,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6862,6 +7205,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6881,6 +7225,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6907,6 +7252,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6921,6 +7267,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -6947,6 +7294,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6958,6 +7306,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6968,6 +7317,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -6980,6 +7330,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -6990,6 +7341,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7016,6 +7368,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7035,6 +7388,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7053,6 +7407,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7063,6 +7418,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -7082,6 +7438,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7124,6 +7481,7 @@
         }
       },
       "GHG Emissions": {
+        "Bucket": "Environment",
         "Numbers": {
           "Calculated": {
             "Plot": {},
@@ -7157,6 +7515,7 @@
         }
       },
       "Water Stewardship": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7179,6 +7538,7 @@
         }
       },
       "Material use, waste & circularity": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7200,6 +7560,7 @@
         }
       },
       "Hazardous substances": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -7228,6 +7589,7 @@
         }
       },
       "Air quality": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -7250,6 +7612,7 @@
         }
       },
       "Land and ocean use": {
+        "Bucket": "Environment",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7261,6 +7624,7 @@
         }
       },
       "Biodiversity & ecological welfare": {
+        "Bucket": "Environment",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7280,6 +7644,7 @@
         }
       },
       "Human rights": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7299,6 +7664,7 @@
         }
       },
       "Labor Practices": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -7325,6 +7691,7 @@
         }
       },
       "Diversity, equity & inclusion": {
+        "Bucket": "Social",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -7339,6 +7706,7 @@
         }
       },
       "Customer health and wellness": {
+        "Bucket": "Social",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7365,6 +7733,7 @@
         }
       },
       "Customer safety and engagement": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7376,6 +7745,7 @@
         }
       },
       "Digital rights and responsibilities": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7386,6 +7756,7 @@
         }
       },
       "Community partnership": {
+        "Bucket": "Social",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7398,6 +7769,7 @@
         }
       },
       "Governance foundation": {
+        "Bucket": "Governance",
         "Percentage": {
           "Reported": {
             "Plot": {
@@ -7408,6 +7780,7 @@
         }
       },
       "Business ethics": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7434,6 +7807,7 @@
         }
       },
       "Transparency & risk management": {
+        "Bucket": "Governance",
         "True/false": {
           "Reported": {
             "Plot": {
@@ -7453,6 +7827,7 @@
         }
       },
       "Third-party relationships": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7471,6 +7846,7 @@
         }
       },
       "Tax Practices": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {
@@ -7481,6 +7857,7 @@
         }
       },
       "Indirect economic impacts": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {},
@@ -7500,6 +7877,7 @@
         }
       },
       "National and International policy": {
+        "Bucket": "Governance",
         "Numbers": {
           "Reported": {
             "Plot": {

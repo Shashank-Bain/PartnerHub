@@ -873,6 +873,10 @@ button {
   gap: 10px;
 }
 
+.kpi-stacked-chart-wrap {
+  min-height: 250px;
+}
+
 .kpi-status-section {
   border: 1px solid rgba(129, 58, 163, 0.18);
   border-radius: 12px;
@@ -2893,6 +2897,61 @@ button {
   align-items: start;
 }
 
+.kpi-modal-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi-modal-status-column {
+  display: grid;
+  gap: 10px;
+}
+
+.kpi-modal-status-column.leading {
+  border-left: 4px solid rgba(30, 157, 85, 0.55);
+}
+
+.kpi-modal-status-column.atpar {
+  border-left: 4px solid rgba(247, 148, 30, 0.55);
+}
+
+.kpi-modal-status-column.lagging {
+  border-left: 4px solid rgba(198, 55, 68, 0.55);
+}
+
+.kpi-modal-esg-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.kpi-modal-esg-card {
+  border: 1px solid rgba(104, 70, 218, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.kpi-modal-esg-card h5 {
+  margin: 0;
+  font-size: 12px;
+  color: #27304f;
+}
+
+.kpi-modal-esg-card ul {
+  margin: 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.kpi-modal-esg-card li {
+  font-size: 12px;
+  color: #3f4769;
+}
+
 .kpi-modal-panel {
   display: grid;
   gap: 10px;
@@ -3005,6 +3064,93 @@ button {
 .kpi-deepdive-header-actions {
   justify-content: flex-start;
   margin-top: 0;
+}
+
+.kpi-deepdive-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kpi-filter-btn {
+  border: 1px solid var(--panel-border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kpi-filter-btn.active {
+  box-shadow: 0 0 0 2px rgba(60, 65, 92, 0.12);
+}
+
+.kpi-filter-btn.active.leading {
+  border-color: rgba(30, 157, 85, 0.5);
+  color: #1f7b46;
+}
+
+.kpi-filter-btn.active.atpar,
+.kpi-filter-btn.active.all {
+  border-color: rgba(247, 148, 30, 0.5);
+  color: #a75f0f;
+}
+
+.kpi-filter-btn.active.lagging {
+  border-color: rgba(198, 55, 68, 0.5);
+  color: #9d2433;
+}
+
+.kpi-deepdive-esg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi-deepdive-esg-column {
+  display: grid;
+  gap: 10px;
+}
+
+.kpi-deepdive-esg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kpi-deepdive-esg-head h4 {
+  margin: 0;
+}
+
+.kpi-deepdive-chart-list {
+  display: grid;
+  gap: 10px;
+}
+
+.kpi-deepdive-chart-card {
+  border: 1px solid rgba(104, 70, 218, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.kpi-deepdive-chart-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kpi-deepdive-chart-head h5 {
+  margin: 0;
+  font-size: 13px;
+  color: #27304f;
 }
 
 .modal-kpi-hero-main {
@@ -3382,6 +3528,15 @@ th {
 
   .kpi-simple-layout {
     grid-template-columns: 1fr;
+  }
+
+  .kpi-modal-status-grid,
+  .kpi-deepdive-esg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-deepdive-filter-row {
+    width: 100%;
   }
 
   .kpi-individual-grid {
