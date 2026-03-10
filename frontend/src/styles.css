@@ -874,8 +874,9 @@ button {
 }
 
 .kpi-stacked-chart-wrap {
-  min-height: 250px;
+  min-height: 278px;
   margin-top: 8px;
+  padding-top: 2px;
 }
 
 .kpi-status-section {
@@ -3156,6 +3157,16 @@ button {
   grid-auto-columns: minmax(340px, 420px);
   gap: 10px;
   align-items: start;
+}
+
+.kpi-deepdive-binary-sections {
+  display: grid;
+  gap: 10px;
+}
+
+.kpi-binary-esg-table-card {
+  display: grid;
+  gap: 10px;
 }
 
 .kpi-deepdive-chart-card {

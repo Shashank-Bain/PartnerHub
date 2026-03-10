@@ -1246,8 +1246,8 @@ function KpiMomentumStackedChart({ rows }) {
 
   return (
     <div className="kpi-stacked-chart-wrap">
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={rows} margin={{ top: 12, right: 14, left: 6, bottom: 10 }}>
+      <ResponsiveContainer width="100%" height={278}>
+        <BarChart data={rows} margin={{ top: 30, right: 14, left: 6, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(132, 151, 176, 0.28)" />
           <XAxis dataKey="esg" tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
           <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fontSize: 12, fill: 'rgb(68, 94, 114)' }} stroke="rgba(132, 151, 176, 0.5)" />
@@ -1259,6 +1259,7 @@ function KpiMomentumStackedChart({ rows }) {
             <LabelList
               dataKey="totalCount"
               position="top"
+              offset={8}
               formatter={(value) => `${Number(value || 0)}`}
               style={{ fontSize: 12, fill: 'rgb(68, 94, 114)', fontWeight: 700 }}
             />
@@ -1598,6 +1599,31 @@ function App() {
       }
     })
   }, [kpiRowsByEsgAndStatus, kpiDeepDiveStatusFilter])
+  const kpiBinaryRowsByEsg = useMemo(() => {
+    const output = {
+      environment: [],
+      social: [],
+      governance: [],
+    }
+
+    reportedKpiRows
+      .filter((row) => row.typeGroup === 'boolean')
+      .forEach((row) => {
+        const esgKey = resolveEsgSectionForKpi(row)
+        const statusLabel = getKpiMomentumStatus(row)
+        const statusKey = getKpiStatusKey(statusLabel)
+        if (kpiDeepDiveStatusFilter !== 'all' && statusKey !== kpiDeepDiveStatusFilter) {
+          return
+        }
+        output[esgKey].push({ ...row, statusLabel, statusKey })
+      })
+
+    KPI_ESG_ORDER.forEach((esgKey) => {
+      output[esgKey].sort((first, second) => String(first?.kpi || '').localeCompare(String(second?.kpi || '')))
+    })
+
+    return output
+  }, [reportedKpiRows, kpiDeepDiveStatusFilter])
   const kpiModalColumns = useMemo(() => {
     return KPI_STATUS_ORDER.map((statusKey) => ({
       ...KPI_STATUS_META[statusKey],
@@ -3148,6 +3174,72 @@ function App() {
                         )}
                       </section>
                     ))}
+                  </div>
+
+                  <div className="kpi-deepdive-binary-sections">
+                    <h3 className="scorecard-chart-title">Binary KPI Disclosure by ESG</h3>
+                    {KPI_ESG_ORDER.map((esgKey) => {
+                      const rows = kpiBinaryRowsByEsg[esgKey] || []
+                      return (
+                        <section key={`binary-${esgKey}`} className="modal-pane kpi-binary-esg-table-card">
+                          <div className="kpi-deepdive-esg-head">
+                            <h4>{KPI_ESG_LABELS[esgKey]}</h4>
+                            <span className={`progress-pill ${kpiDeepDiveStatusFilter === 'all' ? 'atpar' : KPI_STATUS_META[kpiDeepDiveStatusFilter].className}`}>
+                              {kpiDeepDiveStatusFilter === 'all' ? 'All Statuses' : KPI_STATUS_META[kpiDeepDiveStatusFilter].label}
+                            </span>
+                          </div>
+                          <div className="table-wrap">
+                            <table className="kpi-deepdive-table">
+                              <thead>
+                                <tr>
+                                  <th>KPI</th>
+                                  <th>{selectedCompany}</th>
+                                  {kpiPeerColumns.map((peerCompany) => (
+                                    <th key={`tf-${esgKey}-${peerCompany}`}>{peerCompany}</th>
+                                  ))}
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {rows.map((row) => {
+                                  const peerValueMap = Object.fromEntries(
+                                    (row?.peerValues || []).map((item) => [normalizeCompanyLabel(item?.company), Number(item?.value)]),
+                                  )
+                                  const clientTrue = Number(row?.selectedValue || 0) >= 0.5
+
+                                  return (
+                                    <tr key={`tf-${esgKey}-${row.kpi}`}>
+                                      <td>{row.kpi}</td>
+                                      <td className="kpi-tf-cell">{clientTrue ? <span className="kpi-flag-true">✓</span> : <span className="kpi-flag-false">✕</span>}</td>
+                                      {kpiPeerColumns.map((peerCompany) => {
+                                        const peerValue = peerValueMap[normalizeCompanyLabel(peerCompany)]
+                                        const hasPeerValue = Number.isFinite(peerValue)
+                                        return (
+                                          <td className="kpi-tf-cell" key={`tf-${esgKey}-${row.kpi}-${peerCompany}`}>
+                                            {!hasPeerValue && 'NA'}
+                                            {hasPeerValue && (peerValue >= 0.5
+                                              ? <span className="kpi-flag-true">✓</span>
+                                              : <span className="kpi-flag-false">✕</span>)}
+                                          </td>
+                                        )
+                                      })}
+                                      <td>
+                                        <span className={`progress-pill ${KPI_STATUS_META[row.statusKey].className}`}>{row.statusLabel}</span>
+                                      </td>
+                                    </tr>
+                                  )
+                                })}
+                                {!rows.length && (
+                                  <tr>
+                                    <td colSpan={3 + kpiPeerColumns.length}>No binary disclosure KPIs for this ESG section and status filter.</td>
+                                  </tr>
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
+                        </section>
+                      )
+                    })}
                   </div>
                 </section>
               </>
